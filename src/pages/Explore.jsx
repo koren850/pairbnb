@@ -1,11 +1,13 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-console.log("mashu katan");
+
+import { StayList } from "../cmps/StayList.jsx";
+
 export function Explore() {
 	return (
 		<main>
 			<div>Explore page</div>
-			{/* <StayList /> */}
+			<StayList />
 		</main>
 	);
 }
