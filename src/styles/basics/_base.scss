@@ -1,0 +1,46 @@
+:root {
+}
+
+* {
+	box-sizing: border-box;
+}
+
+::selection {
+	background-color: lighten($clr1, 20%);
+	color: $clr6;
+}
+
+html {
+	font-family: montserrat, sans-serif;
+	line-height: 2;
+}
+
+body {
+	margin: 0;
+	background-attachment: fixed;
+	background-size: 360px;
+}
+
+img {
+	width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	line-height: 1.2;
+	margin: 0 0 em(20px, 50px);
+	font-weight: 400;
+}
+
+h1 {
+	font-size: rem(50px);
+}
+
+p {
+	margin: 0 0 1em;
+	max-width: 50ch;
+}

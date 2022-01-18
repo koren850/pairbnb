@@ -1,0 +1,38 @@
+.main-container {
+    display: grid;
+    grid-template-columns: $layoutPadding 1fr $layoutPadding;
+
+    > * {
+        grid-column: 2;
+    }
+
+    > *.full {
+        grid-column: 1 / -1;
+    }
+
+    @include for-narrow-layout {
+        @include layoutGTC($break-narrow);
+    }
+    
+    @include for-normal-layout {
+        @include layoutGTC($break-normal);
+    }
+    
+    @include for-wide-layout {
+        @include layoutGTC($break-wide);
+    }
+}
+
+// Main Header Layout
+
+.card-grid {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+    // grid-auto-rows: 300px;
+
+    > * {
+        @include aspect-ratio(1, 1);
+    }
+}
