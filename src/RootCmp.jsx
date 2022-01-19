@@ -3,8 +3,9 @@ import { Route, Switch } from "react-router";
 
 import { AppHeader } from "./cmps/AppHeader";
 import { AppFooter } from "./cmps/AppFooter";
-import { Home } from "./pages/Home.jsx";
-import { Explore } from "./pages/Explore.jsx";
+import { Home } from "./pages/Home";
+import { Explore } from "./pages/Explore";
+import { StayDetails } from "./pages/StayDetails";
 
 export function RootCmp() {
 	return (
@@ -13,6 +14,7 @@ export function RootCmp() {
 			<main>
 				<Switch>
 					<Route component={Explore} path='/explore' />
+					<Route component={StayDetails} path='/details/:id' />
 					<Route component={Home} path='/' />
 				</Switch>
 			</main>
