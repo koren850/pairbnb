@@ -1,3 +1,4 @@
+import { SpecialButton } from "./SpacialButton";
 export function Checkout() {
 	return (
 		<main className='checkout-btn'>
@@ -28,114 +29,7 @@ export function Checkout() {
 						<input placeholder='2'></input>
 					</div>
 				</div>
-
-				<div class='btn-container'>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='cell'></div>
-					<div class='content'>
-						<button class='action-btn'>
-							<span>Check availability</span>
-						</button>
-					</div>
-				</div>
+				<SpecialButton text='Check availability' />
 			</section>
 			<p class='footer'>Report this listing</p>
 		</main>
