@@ -12,7 +12,6 @@ export function loadStays(filterBy) {
 }
 
 export function removeStay(stayId) {
-    console.log(stayId);
     return async (dispatch) => {
         await stayService.remove(stayId)
         console.log('Deleted Succesfully!');
@@ -48,25 +47,37 @@ export function updateStay(stay) {
 }
 
 export function setFilterBy(filterBy) {
+    // console.log(filterBy)
     return async (dispatch) => {
-        let sort;
-        if (filterBy) sort = filterBy.sortBy;
+        // let sort;
+        // if (filterBy) sort = filterBy.sortBy;
         try {
             const stays = await stayService.query(filterBy)
-            if (sort) {
-                stays.sort((a, b) => {
-                    const aSort = a[sort];
-                    const bSort = b[sort];
-                    if (aSort < bSort) return -1;
-                    else if (bSort < aSort) return 1;
-                    else return 0;
-                })
-            }
-            dispatch({ type: 'SET_FILTER_BY', filterBy });
-            dispatch({ type: 'SET_TOYS', stays });
+            // if (sort) {
+            //     stays.sort((a, b) => {
+            //         const aSort = a[sort];
+            //         const bSort = b[sort];
+            //         if (aSort < bSort) return -1;
+            //         else if (bSort < aSort) return 1;
+            //         else return 0;
+            //     })
+            // }
+            dispatch({ type: 'SET_FILTER', filterBy });
+            dispatch({ type: 'SET_STAYS', stays });
         }
         catch {
             console.log('cannot filter stays')
         }
     }
 }
+
+export function toggleDetails(set) {
+    return (dispatch) => {
+        try {
+            dispatch({ type: 'TOGGLE_HEADER_LAYOUT', set });
+        } catch {
+            console.log('could not toggle ');
+        }
+    };
+}
+
