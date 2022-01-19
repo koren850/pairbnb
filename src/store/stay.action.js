@@ -70,3 +70,14 @@ export function setFilterBy(filterBy) {
         }
     }
 }
+
+export function toggleDetails(set) {
+    return (dispatch) => {
+        try {
+            dispatch({ type: 'TOGGLE_HEADER_LAYOUT', set });
+        } catch {
+            console.log('could not toggle ');
+        }
+    };
+}
+

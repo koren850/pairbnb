@@ -1,9 +1,9 @@
 .details-img-container {
 	display: grid;
 	grid-template-columns: repeat(4, 272px);
-	grid-template-rows: repeat(2, 250px);
+	grid-template-rows: repeat(2, 240px);
 	min-height: 50vh;
-	gap: 10px;
+	gap: 9px;
 	margin: auto;
 }
 

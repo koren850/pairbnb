@@ -1,9 +1,10 @@
 const initialState = {
-    stays : [],
+    stays: [],
+    headerLayoutSmall: false
 };
 
 export function stayReducer(state = initialState, action) {
-	let newState = state;
+    let newState = state;
     switch (action.type) {
         case 'SET_STAYS':
             newState = { ...state, stays: [...action.stays] }
@@ -25,7 +26,10 @@ export function stayReducer(state = initialState, action) {
         case 'SET_FILTER':
             newState = { ...state, filterBy: { ...action.filterBy } }
             break;
-            default:
+        case 'TOGGLE_HEADER_LAYOUT':
+            newState = { ...state, headerLayoutSmall: action.set }
+            break;
+        default:
     }
-	return newState;
+    return newState;
 }
