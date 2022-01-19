@@ -1,7 +1,14 @@
-@import "setup/variables.scss";
+@import "setup/variables";
 // @import "setup/functions.scss";
-// @import "setup/mixins.scss";
 // @import "setup/typography.scss";
-@import "basics/base.scss";
-@import "basics/layout.scss";
-@import "components/App-header.scss";
+@import "basics/base";
+//setup
+@import "setup/mixins";
+
+//basics
+@import "basics/layout";
+@import "basics/helpers";
+
+//components
+@import "components/App-header";
+@import "components/Stay-Details";

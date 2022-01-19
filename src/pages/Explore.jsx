@@ -1,37 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { loadStays } from '../store/stay.action.js';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { loadStays } from "../store/stay.action.js";
+import { Filter } from "../cmps/Filter";
 
 // import { Link } from "react-router-dom";
 
 import { StayList } from "../cmps/StayList.jsx";
 
-export function _Explore({ }) {
+export function _Explore({ loadStays, stays }) {
+	const [currStays, setCurrStays] = useState(null);
 
-	const [stays, setStays] = useState(null)
+	useEffect(async () => {
+		// console.log(stays)
+		await loadStays()
+		// console.log(stays)
+		setCurrStays({ stays })
+		// console.log(currStays)
+	}, [])
 
-	useEffect(() =>{
-		const stay = loadStays()
-	})
 
+	if (!stays.length || !stays) return <div>Loading...</div>;
 
 	return (
-		// const { stays } = t
 		< main >
 			<div>Explore page</div>
-			<StayList />
+			<Filter />
+			<StayList stays={stays} />
 		</main >
-	)
-
+	);
 }
 
 function mapStateToProps({ stayModule }) {
 	return {
-		stays: stayModule.toys,
-	}
+		stays: stayModule.stays,
+	};
 }
 const mapDispatchToProps = {
 	loadStays,
 };
 
-export const Explore = connect(mapStateToProps, mapDispatchToProps)(_Explore)
+export const Explore = connect(mapStateToProps, mapDispatchToProps)(_Explore);
