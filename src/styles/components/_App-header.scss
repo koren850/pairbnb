@@ -1,8 +1,10 @@
 .app-header {
   position: fixed;
+  z-index: 10;
   width: 100%;
   background-color: $clr2;
   height: 80px;
+  box-shadow: 0px 2px 4px $clr5;
   & .middle-layout {
     display: flex;
     justify-content: space-between;

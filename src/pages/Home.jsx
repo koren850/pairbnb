@@ -1,8 +1,12 @@
 import React from "react";
-import heroImg from '../styles/img/home-page-hero.jpg'
 
 export function Home() {
 	return <main className="home main-layout">
-		<img className="middle-layout" src={heroImg}/>
+		<section className="middle-layout">
+			<article className="hero">
+		<img src='https://res.cloudinary.com/dqj9g5gso/image/upload/v1642610299/imgs/HD_wallpaper__brown_wooden_dock_and_cottages_Maldives_resort_artificial_lights_zxkna8.jpg'/>
+		<h1 className="hero-title">Not sure where to go? Perfect.</h1>
+			</article>
+		</section>
 	</main>;
 }

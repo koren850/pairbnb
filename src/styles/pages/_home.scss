@@ -1,4 +1,14 @@
 
 .home {
     height: 200px;
+    position: relative;
+    top: 80px;
+    & .hero-title{
+        color: $clr2;
+        font-size: 48px;
+        position: absolute;
+        top: 170%;
+        left: 50%;
+        transform: translate(-50%,50%);
+    }
 }
