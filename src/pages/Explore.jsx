@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { loadStays } from '../store/stay.action.js';
+import { Filter } from "../cmps/Filter";
+
 
 // import { Link } from "react-router-dom";
 
@@ -10,7 +12,7 @@ export function _Explore({ }) {
 
 	const [stays, setStays] = useState(null)
 
-	useEffect(() =>{
+	useEffect(() => {
 		const stay = loadStays()
 	})
 
@@ -19,6 +21,8 @@ export function _Explore({ }) {
 		// const { stays } = t
 		< main >
 			<div>Explore page</div>
+			<Filter />
+
 			<StayList />
 		</main >
 	)

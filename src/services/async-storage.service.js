@@ -26,9 +26,10 @@ function get(entityType, entityId) {
         .then(entities => entities.find(entity => entity._id === entityId))
 }
 function post(entityType, newEntity) {
-    newEntity._id = _makeId()
+    // newEntity._id = _makeId()
     return query(entityType)
         .then(entities => {
+            console.log(entities)
             entities.push(newEntity)
             _save(entityType, entities)
             return newEntity

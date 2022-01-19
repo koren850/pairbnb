@@ -64,9 +64,8 @@ window.addEventListener('storage', () => {
 })
 
 // TEST DATA
-storageService.post(STORAGE_KEY, [
-
-    {
+storageService.post(STORAGE_KEY,
+    [{
         "_id": "mongo001",
         "name": "Jaklino Riso",
         "type": "House",
@@ -538,7 +537,7 @@ storageService.post(STORAGE_KEY, [
             "Moris Boris"
         ]
     }
-]).then(x => console.log(x))
+    ]).then(x => console.log(x))
 
 
 
