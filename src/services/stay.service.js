@@ -17,8 +17,13 @@ export const stayService = {
 window.cs = stayService;
 
 
-function query() {
-    return storageService.query(STORAGE_KEY)
+async function query(filterBy) {
+    // console.log(filterBy)
+    const stays = await storageService.query(STORAGE_KEY)
+    // const { aircon, kitchen, pets, smoking, tv, wifi } = filterBy
+    // console.log(aircon)
+    // console.log(stays)
+    return stays
 }
 function getById(stayId) {
     return storageService.get(STORAGE_KEY, stayId)

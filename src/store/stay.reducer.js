@@ -1,5 +1,6 @@
 const initialState = {
     stays : [],
+    filterBy : null,
 };
 
 export function stayReducer(state = initialState, action) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { loadStays } from "../store/stay.action.js";
-import { Filter } from "../cmps/Filter";
+import { SortStay } from "../cmps/SortStay";
 
 // import { Link } from "react-router-dom";
 
@@ -24,7 +24,7 @@ export function _Explore({ loadStays, stays }) {
 	return (
 		< main className="main-layout">
 			<div >Explore page</div>
-			<Filter />
+			<SortStay />
 			<StayList stays={stays} />
 		</main >
 	);

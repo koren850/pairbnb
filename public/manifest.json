@@ -3,17 +3,17 @@
   "name": "Pair BNB",
   "icons": [
     {
-      "src": "../src/img/airbnb.png",
+      "src": "../src/styles/svg/air-logo.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "../src/img/airbnb.png",
+      "src": "../src/styles/svg/air-logo.svg",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "../src/img/airbnb.png",
+      "src": "../src/styles/svg/air-logo.svg",
       "type": "image/png",
       "sizes": "512x512"
     }
