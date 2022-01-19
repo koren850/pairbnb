@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Checkout } from "../cmps/Checkout";
 import { stayService } from "../services/stay.service";
 
 export function StayDetails({ match }) {
@@ -19,9 +20,37 @@ export function StayDetails({ match }) {
 				<div className='details-img-container'>
 					<img className='main-img' src={stay.imgUrls[0]} alt='' />
 					<img className='small-img' src={stay.imgUrls[1]} alt='' />
-					<img className='small-img' src={stay.imgUrls[2]} alt='' />
+					<img className='small-img corner-top' src={stay.imgUrls[2]} alt='' />
 					<img className='small-img' src={stay.imgUrls[4]} alt='' />
-					<img className='small-img' src={stay.imgUrls[5]} alt='' />
+					<img className='small-img corner-bottom' src={stay.imgUrls[5]} alt='' />
+				</div>
+				<div className='stay-info-container'>
+					<div className='stay-info'>
+						<h1>
+							{stay.type} hosted by {stay.host.inside}
+						</h1>
+						<ul className='stay-baths-beds flex'>
+							{stay.capacity} guests
+							<li>{stay.capacity - 1} beds</li>
+							<li>{parseInt(stay.capacity / 2)} baths</li>
+						</ul>
+						<ul>
+							<li>
+								<h3>Entire home</h3>
+								<span>You will have the houseboat to yourself.</span>
+							</li>
+							<li>
+								<h3>Enhanced Clean</h3>
+								<span>This Host committed to Airbnb's 5-step enhanced cleaning process.</span>
+							</li>
+							<li>
+								<h3>Self check-in</h3>
+								<span>Check yourself in with the lockbox.</span>
+							</li>
+						</ul>
+						<h2>{stay.summary}</h2>
+					</div>
+					<Checkout />
 				</div>
 			</div>
 		</main>

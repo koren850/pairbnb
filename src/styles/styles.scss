@@ -1,3 +1,5 @@
+//setup
+@import "setup/mixins";
 @import "setup/variables";
 // @import "setup/functions.scss";
 @import "setup/typography.scss";
@@ -8,8 +10,12 @@
 //basics
 @import "basics/layout";
 @import "basics/helpers";
+@import "basics/base";
 
 //components
 @import "components/App-header";
 @import "components/Stay-Details";
 @import "components/Search";
+@import "components/Stay-list.scss";
+@import "components/Stay-preview.scss";
+@import "components/Checkout";
