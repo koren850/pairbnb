@@ -23,6 +23,17 @@
     }
 }
 
+.main-layout {
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    &.middle-layout {
+        grid-columns: 2 / 3;
+    }
+    &.full-layout {
+        grid-column: 1 / 4;
+    }
+}
+
 // Main Header Layout
 
 .card-grid {
