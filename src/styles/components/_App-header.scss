@@ -1,4 +1,6 @@
 .app-header {
+  position: fixed;
+  width: 100%;
   background-color: $clr2;
   height: 80px;
   & .middle-layout {
