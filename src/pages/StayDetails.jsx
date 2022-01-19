@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
 import { Checkout } from "../cmps/Checkout";
 import { stayService } from "../services/stay.service";
 import { toggleDetails } from "../store/stay.action";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
-function _StayDetails({ match, toggleDetails }) {
+function _StayDetails({ toggleDetails }) {
+	const params = useParams();
 	const [stay, setStay] = useState(null);
 
-	useEffect(async () => {
-		const stayByid = await stayService.getById(match.params.id);
-		console.log(stayByid);
-		setStay(stayByid);
-		toggleDetails(true);
-		console.log("hello");
+	useEffect(() => {
+		test();
+		async function test() {
+			const stayByid = await stayService.getById(params.id);
+			console.log(stayByid);
+			setStay(stayByid);
+			toggleDetails(true);
+			console.log("hello");
+		}
 		return () => {
 			console.log("bye");
 			toggleDetails(false);
@@ -26,6 +31,7 @@ function _StayDetails({ match, toggleDetails }) {
 			<div className='middle-layout'>
 				<h1>{stay.name}</h1>
 				<h3>{stay.loc.address}</h3>
+				<Link to='/explore'>kjhgkjhg</Link>
 				<div className='details-img-container'>
 					<img className='main-img' src={stay.imgUrls[0]} alt='' />
 					<img className='small-img' src={stay.imgUrls[1]} alt='' />
@@ -57,7 +63,7 @@ function _StayDetails({ match, toggleDetails }) {
 								<span>Check yourself in with the lockbox.</span>
 							</li>
 						</ul>
-						<h2>{stay.summary}</h2>
+						<p>{stay.summary}</p>
 					</div>
 					<Checkout />
 				</div>
