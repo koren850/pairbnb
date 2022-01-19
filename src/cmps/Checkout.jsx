@@ -1,7 +1,7 @@
 import { SpecialButton } from "./SpacialButton";
 export function Checkout() {
 	return (
-		<main className='checkout-btn'>
+		<main className='spacial-btn'>
 			<section class='order-container'>
 				<div class='order-form-header'>
 					<p>
