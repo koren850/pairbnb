@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { loadStays } from '../store/stay.action.js';
+
 // import { Link } from "react-router-dom";
 
 import { StayList } from "../cmps/StayList.jsx";
 
-export function Explore() {
+export function _Explore({ }) {
+
+	const [stays, setStays] = useState(null)
+
+	useEffect(() =>{
+		const stay = loadStays()
+	})
+
+
 	return (
-		<main>
+		// const { stays } = t
+		< main >
 			<div>Explore page</div>
 			<StayList />
-		</main>
-	);
+		</main >
+	)
+
 }
+
+function mapStateToProps({ stayModule }) {
+	return {
+		stays: stayModule.toys,
+	}
+}
+const mapDispatchToProps = {
+	loadStays,
+};
+
+export const Explore = connect(mapStateToProps, mapDispatchToProps)(_Explore)

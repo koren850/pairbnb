@@ -1,4 +1,71 @@
-[
+
+import { storageService } from './async-storage.service.js'
+import { utilService } from './util.service.js'
+import { userService } from './user.service.js'
+
+const STORAGE_KEY = 'stay_db'
+const listeners = []
+
+export const stayService = {
+    query,
+    getById,
+    save,
+    remove,
+    subscribe
+
+}
+window.cs = stayService;
+
+
+function query() {
+    return storageService.query(STORAGE_KEY)
+}
+function getById(stayId) {
+    return storageService.get(STORAGE_KEY, stayId)
+}
+function remove(stayId) {
+    // return new Promise((resolve, reject) => {
+    //     setTimeout(reject, 2000)
+    // })
+    // return Promise.reject('Not now!');
+    return storageService.remove(STORAGE_KEY, stayId)
+}
+function save(stay) {
+    if (stay._id) {
+        return storageService.put(STORAGE_KEY, stay)
+    } else {
+        stay.owner = userService.getLoggedinUser()
+        return storageService.post(STORAGE_KEY, stay)
+    }
+}
+
+// function getEmptyStay() {
+//     return {
+//         vendor: 'Susita-' + (Date.now() % 1000),
+//         price: utilService.getRandomIntInclusive(1000, 9000),
+//     }
+// }
+
+function subscribe(listener) {
+    listeners.push(listener)
+}
+
+function _notifySubscribersStaysChanged(stays) {
+    console.log('Notifying Listeners');
+    listeners.forEach(listener => listener(stays))
+}
+
+window.addEventListener('storage', () => {
+    console.log('Storage Changed from another Browser!');
+    query()
+        .then(stays => {
+            _notifySubscribersStaysChanged(stays)
+        })
+})
+
+// TEST DATA
+storageService.post(STORAGE_KEY, [
+
     {
         "_id": "mongo001",
         "name": "Jaklino Riso",
@@ -17,9 +84,7 @@
         "summary": "Welcome to my city home. It is centrally located in NYC, just steps from Madison Square Garden and Penn Station to get you off to all your favorite destinations. This apartment makes for lovely weekend stay when I'm not in town - close to attractions, restaurants, nightlife and shopping. Thank you for considering. Please reach out with any questions and I will happily answer them.",
         "capacity": 6,
         "amenities": [],
-        "host": {
-            "inside": "userId,userImg,userFullName"
-        },
+        "host": { "inside": "userId,userImg,userFullName" },
         "loc": {
             "country": "New-York",
             "countryCode": "NY",
@@ -28,10 +93,8 @@
             "lng": -73.935242
         },
         "reviews": [],
-        "likedByUsers": [
-            "Mosh Ben Ari",
-            "Moris Boris"
-        ]
+        "likedByUsers": ["Mosh Ben Ari", "Moris Boris"]
+
     },
     {
         "_id": "mongo0015",
@@ -475,4 +538,8 @@
             "Moris Boris"
         ]
     }
-]
+]).then(x => console.log(x))
+
+
+
+
