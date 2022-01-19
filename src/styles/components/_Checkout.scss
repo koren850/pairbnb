@@ -3,9 +3,11 @@
 		border: 1px solid #00000030;
 		border-radius: 13px;
 		padding: 20px;
-		width: 300px;
+		width: 350px;
 		margin: 50px auto 10px;
 		box-shadow: 0 0 5px 5px #00000015;
+		position: sticky;
+		top: 15%;
 	}
 
 	.order-form-header {
