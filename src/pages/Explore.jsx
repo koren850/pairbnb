@@ -22,8 +22,8 @@ export function _Explore({ loadStays, stays }) {
 	if (!stays.length || !stays) return <div>Loading...</div>;
 
 	return (
-		< main >
-			<div>Explore page</div>
+		< main className="main-layout">
+			<div >Explore page</div>
 			<Filter />
 			<StayList stays={stays} />
 		</main >
