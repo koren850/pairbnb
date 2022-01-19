@@ -15,13 +15,10 @@ export function AppHeader() {
 					<Search/>
 					<article className="nav-link">
 				<Link to={`/explore`}> Explore</Link>
-				<Link className="s" to={`/explore`}> Become a Host</Link>
+				<Link className="become" to={`/explore`}> Become a Host</Link>
 				<button className="user-menu">
-
-					<img src={hamburgerSvg}/>
-					<div className="user-svg-container">
+					<img className="hamburger-svg" src={hamburgerSvg}/>
 					<img className="user-svg" src={userSvg}/>
-					</div>
 				</button>
 					</article>
 			</section>

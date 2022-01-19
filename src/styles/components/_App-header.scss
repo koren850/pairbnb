@@ -1,18 +1,16 @@
 .app-header {
-  background-color: #fff;
-  & a {
-      text-decoration: none;
-    }
-    & .middle-layout {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+  background-color: $clr2;
+  height: 80px;
+  & .middle-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
 .logo {
   color: $clr1;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-weight: 900;
   display: flex;
   align-items: center;
@@ -24,32 +22,46 @@
   padding: 0;
 }
 
-.nav-link{
+.nav-link {
+  display: flex;
+  width: inherit;
+  align-items: center;
+  justify-content: space-between;
+  a {
     display: flex;
-    width: 300px;
     align-items: center;
-    justify-content: space-between;
-
+    padding: 15px;
+    border-radius: 25px;
+    height: 42px;
+    &:hover {
+      background-color: $clr4;
+    }
+    &:last-of-type{
+    margin-inline-end: 5px;
+    }
+  }
 }
 
 .user-menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 45px;
-    width: 80px;
-}
-
-.search-svg {
-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 45px;
+  width: 80px;
+  padding: 0 6.5px;
+  transition: box-shadow,0.5s;
+  &:hover {
+    box-shadow: 0px 2px 4px $clr5;
+} 
 }
 
 .user-svg {
-  background-color: #717171;
+  width: 32px;
+  box-shadow: inset 0px 0px 0px 3px #717171;
   border-radius: 50%;
-  z-index: -1;
 }
 
-.user-svg-container {
-  z-index: 1;
+.hamburger-svg {
+  width: 30px;
+  height: 17px;
 }

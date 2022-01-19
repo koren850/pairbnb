@@ -1,6 +1,6 @@
 @import "setup/variables";
 // @import "setup/functions.scss";
-// @import "setup/typography.scss";
+@import "setup/typography.scss";
 @import "basics/base";
 //setup
 @import "setup/mixins";
@@ -12,3 +12,4 @@
 //components
 @import "components/App-header";
 @import "components/Stay-Details";
+@import "components/Search";
