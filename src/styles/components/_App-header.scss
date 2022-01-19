@@ -1,28 +1,55 @@
 .app-header {
   background-color: #fff;
   & a {
-    text-decoration: none;
+      text-decoration: none;
+    }
+    & .middle-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
   }
 }
 
 .logo {
-  color: #ff5a5f;
+  color: $clr1;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
   font-size: 40px;
-  font-family: monospace;
-  font-weight: bolder;
 }
 
 .air-logo {
-  max-height: 35px;
   margin: 0;
   padding: 0;
-  content: url("../../../public/favicon.ico");
 }
 
-hr {
-  border-color: #ff5a5f;
-  display: inline-block;
-  transform: rotate(90deg);
-  padding: 0;
-  width: 50px;
+.nav-link{
+    display: flex;
+    width: 300px;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 80px;
+}
+
+.search-svg {
+width: 30px;
+}
+
+.user-svg {
+  background-color: #717171;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.user-svg-container {
+  z-index: 1;
 }

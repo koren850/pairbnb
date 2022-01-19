@@ -1,4 +1,9 @@
+import searchSvg from '../styles/svg/search.svg';
+
 export function Search() {
 
-    return(<h1>I'm A Search !</h1>)
+    return (<section className="search">
+<img src={searchSvg} className="search-svg" alt=""/>
+
+    </section>)
 }

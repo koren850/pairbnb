@@ -1,9 +1,7 @@
+@import "setup/variables.scss";
+// @import "setup/functions.scss";
+// @import "setup/mixins.scss";
+// @import "setup/typography.scss";
+@import "basics/base.scss";
 @import "basics/layout.scss";
 @import "components/App-header.scss";
-
-
-body {
-	background-color: rgb(142, 208, 224);
-	margin: 0;
-	padding: 0;
-}
