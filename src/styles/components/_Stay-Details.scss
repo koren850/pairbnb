@@ -6,9 +6,7 @@
 	grid-template-rows: repeat(2, 1fr);
 	height: 50vh;
 	gap: 10px;
-	* {
-		@include aspect-ratio(1, 1);
-	}
+	@include aspect-ratio(15, 1);
 }
 
 .main-img {

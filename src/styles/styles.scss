@@ -1,13 +1,13 @@
+//setup
+@import "setup/mixins";
 @import "setup/variables";
 // @import "setup/functions.scss";
 // @import "setup/typography.scss";
-@import "basics/base";
-//setup
-@import "setup/mixins";
 
 //basics
 @import "basics/layout";
 @import "basics/helpers";
+@import "basics/base";
 
 //components
 @import "components/App-header";
