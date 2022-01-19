@@ -1,6 +1,13 @@
-@import "basics/layout.scss";
-@import "components/App-header.scss";
+//setup
+@import "setup/mixins";
 
+//basics
+@import "basics/layout.scss";
+@import "basics/helpers";
+
+//components
+@import "components/App-header.scss";
+@import "components/Stay-Details";
 
 body {
 	background-color: rgb(142, 208, 224);
