@@ -1,77 +1,72 @@
-import { stayService } from "../services/stay.service";
+import { stayService } from '../services/stay.service.js'
 
-export function loadStays() {
-    return (dispatch, getState) => {
-        // const { filterBy } = getState().stayModule
-        const filterBy = null
-        let sort;
-
-        if (filterBy) sort = filterBy.sortBy;
-        stayService.query(filterBy)
-            .then(stays => {
-                if (sort) {
-                    stays.sort((a, b) => {
-                        const aSort = a[sort];
-                        const bSort = b[sort];
-                        if (aSort < bSort) return -1;
-                        else if (bSort < aSort) return 1;
-                        else return 0;
-                    })
-                    if (filterBy.isSortReverese) stays.reverse()
-                }
-                const action = { type: 'SET_TOYS', stays };
-                dispatch(action)
-            })
-    }
+export function loadStays(filterBy) {
+    return async (dispatch) => {
+        try {
+            const stays = await stayService.query(filterBy)
+            dispatch({ type: 'SET_TOYS', stays });
+        } catch {
+            console.log('could not get stays ');
+        }
+    };
 }
-
-
 
 export function removeStay(stayId) {
-    return (dispatch) => {
-        return stayService.remove(stayId)
-            .then(() => {
-                console.log('Todo Deleted!')
-                const action = { type: 'REMOVE_TOY', stayId }
-                dispatch(action)
-                return Promise.resolve()
-            })
-            .catch(err => {
-                console.log('err:', err);
-            })
-    }
-}
-
-export function updateStayContent(stayToUpdate) {
-    return (dispatch) => {
-        return stayService.save(stayToUpdate)
-            .then(stayToUpdate => {
-                const action = { type: 'UPDATE_TOY', stayToUpdate }
-                console.log('stay updated!');
-                dispatch(action)
-                return Promise.resolve()
-            })
-            .catch(err => {
-                console.log('err:', err);
-            })
+    console.log(stayId);
+    return async (dispatch) => {
+        await stayService.remove(stayId)
+        console.log('Deleted Succesfully!');
+        dispatch({ type: 'REMOVE_TOY', stayId })
     }
 }
 
 export function addStay(stay) {
-    return (dispatch) => {
-        return stayService.save(stay)
-            .then(newTodo => {
-                const action = { type: 'ADD_TOY', newTodo };
-                dispatch(action)
-                return Promise.resolve()
-            })
+    return async (dispatch) => {
+        try {
+            const savedStay = await stayService.save(stay)
+            const action = { type: 'ADD_CAR', stay: savedStay }
+            dispatch(action)
+        }
+        catch {
+            console.error('canot add stay')
+        }
     }
 }
 
-export function setFilter(filterBy) {
-    return (dispatch) => {
-        const action = { type: 'SET_FILTER', filterBy };
-        dispatch(action)
-        return Promise.resolve()
+
+export function updateStay(stay) {
+    return async (dispatch) => {
+        try {
+            const savedStay = await stayService.save(stay)
+            console.log('Updated Stay:', savedStay);
+            dispatch({ type: 'UPDATE_CAR', stay: savedStay })
+        }
+        catch {
+            console.log('cannot update stay')
+        }
+    }
+}
+
+export function setFilterBy(filterBy) {
+    return async (dispatch) => {
+        let sort;
+        if (filterBy) sort = filterBy.sortBy;
+        try {
+            const stays = await stayService.query(filterBy)
+            if (sort) {
+                stays.sort((a, b) => {
+                    const aSort = a[sort];
+                    const bSort = b[sort];
+                    if (aSort < bSort) return -1;
+                    else if (bSort < aSort) return 1;
+                    else return 0;
+                })
+            }
+            dispatch({ type: 'SET_FILTER_BY', filterBy });
+            dispatch({ type: 'SET_TOYS', stays });
+        }
+        catch {
+            console.log('cannot filter stays')
+        }
     }
 }

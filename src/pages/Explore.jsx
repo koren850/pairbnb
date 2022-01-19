@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { loadStays } from '../store/stay.action.js';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { loadStays } from "../store/stay.action.js";
 import { Filter } from "../cmps/Filter";
-
 
 // import { Link } from "react-router-dom";
 
 import { StayList } from "../cmps/StayList.jsx";
 
-export function _Explore({ }) {
-
-	const [stays, setStays] = useState(null)
+export function _Explore({}) {
+	const [stays, setStays] = useState(null);
 
 	useEffect(() => {
 		const stays = loadStays()
@@ -21,23 +19,22 @@ export function _Explore({ }) {
 
 	return (
 		// const { stays } = t
-		< main >
+		<main>
 			<div>Explore page</div>
 			<Filter />
 
 			<StayList />
-		</main >
-	)
-
+		</main>
+	);
 }
 
 function mapStateToProps({ stayModule }) {
 	return {
 		stays: stayModule.toys,
-	}
+	};
 }
 const mapDispatchToProps = {
 	loadStays,
 };
 
-export const Explore = connect(mapStateToProps, mapDispatchToProps)(_Explore)
+export const Explore = connect(mapStateToProps, mapDispatchToProps)(_Explore);
