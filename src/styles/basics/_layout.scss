@@ -27,6 +27,16 @@
     display: grid;
     grid-template-columns: 80px 1fr 80px;
 }
+
+.detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 1020px 1fr;
+}
+
+.detail-middle-layout {
+    grid-column: 2 / 3;
+}
+
 .middle-layout {
     grid-column: 2 / 3;
 }
