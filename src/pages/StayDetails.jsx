@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Map } from "../cmps/Map";
 import { connect } from "react-redux";
 import { Checkout } from "../cmps/Checkout";
 import { stayService } from "../services/stay.service";
@@ -67,6 +68,7 @@ function _StayDetails({ toggleDetails }) {
 					</div>
 					<Checkout />
 				</div>
+				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>
 	);
