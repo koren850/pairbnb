@@ -2,7 +2,8 @@ import { stayService } from "../services/stay.service";
 
 export function loadStays() {
     return (dispatch, getState) => {
-        const { filterBy } = getState().stayModule
+        // const { filterBy } = getState().stayModule
+        const filterBy = null
         let sort;
 
         if (filterBy) sort = filterBy.sortBy;

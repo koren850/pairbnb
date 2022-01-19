@@ -13,8 +13,10 @@ export function _Explore({ }) {
 	const [stays, setStays] = useState(null)
 
 	useEffect(() => {
-		const stay = loadStays()
-	})
+		const stays = loadStays()
+		setStays(stays)
+		console.log(stays)
+	},[])
 
 
 	return (
