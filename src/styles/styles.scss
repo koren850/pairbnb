@@ -1,6 +1,12 @@
 @import "basics/layout.scss";
-@import "components/App-header.scss";
 
+// Components
+@import "components/App-header.scss";
+@import "components/Stay-list.scss";
+@import "components/Stay-preview.scss";
+
+// Setup
+@import "setup/functions.scss";
 
 body {
 	background-color: rgb(142, 208, 224);
