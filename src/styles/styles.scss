@@ -1,15 +1,16 @@
-@import "basics/layout.scss";
+@import "setup/variables";
+// @import "setup/functions.scss";
+// @import "setup/typography.scss";
+@import "basics/base";
+//setup
+@import "setup/mixins";
 
-// Components
-@import "components/App-header.scss";
+//basics
+@import "basics/layout";
+@import "basics/helpers";
+
+//components
+@import "components/App-header";
+@import "components/Stay-Details";
 @import "components/Stay-list.scss";
 @import "components/Stay-preview.scss";
-
-// Setup
-@import "setup/functions.scss";
-
-body {
-	background-color: rgb(142, 208, 224);
-	margin: 0;
-	padding: 0;
-}
