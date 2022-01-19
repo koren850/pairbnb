@@ -4,7 +4,7 @@ export function loadStays(filterBy) {
     return async (dispatch) => {
         try {
             const stays = await stayService.query(filterBy)
-            dispatch({ type: 'SET_TOYS', stays });
+            dispatch({ type: 'SET_STAYS', stays });
         } catch {
             console.log('could not get stays ');
         }
@@ -24,7 +24,7 @@ export function addStay(stay) {
     return async (dispatch) => {
         try {
             const savedStay = await stayService.save(stay)
-            const action = { type: 'ADD_CAR', stay: savedStay }
+            const action = { type: 'ADD_STAY', stay: savedStay }
             dispatch(action)
         }
         catch {
@@ -39,7 +39,7 @@ export function updateStay(stay) {
         try {
             const savedStay = await stayService.save(stay)
             console.log('Updated Stay:', savedStay);
-            dispatch({ type: 'UPDATE_CAR', stay: savedStay })
+            dispatch({ type: 'UPDATE_STAY', stay: savedStay })
         }
         catch {
             console.log('cannot update stay')

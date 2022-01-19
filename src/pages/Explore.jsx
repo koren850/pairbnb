@@ -7,30 +7,32 @@ import { Filter } from "../cmps/Filter";
 
 import { StayList } from "../cmps/StayList.jsx";
 
-export function _Explore({}) {
-	const [stays, setStays] = useState(null);
+export function _Explore({ loadStays, stays }) {
+	const [currStays, setCurrStays] = useState(null);
 
-	useEffect(() => {
-		const stays = loadStays()
-		setStays(stays)
-		console.log(stays)
-	},[])
+	useEffect(async () => {
+		// console.log(stays)
+		await loadStays()
+		// console.log(stays)
+		setCurrStays({ stays })
+		// console.log(currStays)
+	}, [])
 
+
+	if (!stays.length || !stays) return <div>Loading...</div>;
 
 	return (
-		// const { stays } = t
-		<main>
+		< main >
 			<div>Explore page</div>
 			<Filter />
-
-			<StayList />
-		</main>
+			<StayList stays={stays} />
+		</main >
 	);
 }
 
 function mapStateToProps({ stayModule }) {
 	return {
-		stays: stayModule.toys,
+		stays: stayModule.stays,
 	};
 }
 const mapDispatchToProps = {
