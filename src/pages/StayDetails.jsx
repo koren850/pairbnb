@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { Checkout } from "../cmps/Checkout";
 import { stayService } from "../services/stay.service";
+import { toggleDetails } from "../store/stay.action";
 
-export function StayDetails({ match }) {
+function _StayDetails({ match, toggleDetails }) {
 	const [stay, setStay] = useState(null);
 
 	useEffect(async () => {
 		const stayByid = await stayService.getById(match.params.id);
 		console.log(stayByid);
 		setStay(stayByid);
+		toggleDetails(true);
+		console.log("hello");
+		return () => {
+			console.log("bye");
+			toggleDetails(false);
+		};
 	}, []);
 
 	if (!stay) return <div>Loading...</div>;
 	return (
-		<main className='main-layout'>
+		<main className='detail-layout'>
 			<div className='middle-layout'>
 				<h1>{stay.name}</h1>
 				<h3>{stay.loc.address}</h3>
@@ -56,3 +65,12 @@ export function StayDetails({ match }) {
 		</main>
 	);
 }
+
+function mapStateToProps({}) {
+	return {};
+}
+const mapDispatchToProps = {
+	toggleDetails,
+};
+
+export const StayDetails = connect(mapStateToProps, mapDispatchToProps)(_StayDetails);

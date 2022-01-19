@@ -13,35 +13,31 @@
 //     @include for-narrow-layout {
 //         @include layoutGTC($break-narrow);
 //     }
-    
+
 //     @include for-normal-layout {
 //         @include layoutGTC($break-normal);
 //     }
-    
+
 //     @include for-wide-layout {
 //         @include layoutGTC($break-wide);
 //     }
 // }
 
 .main-layout {
-    display: grid;
-    grid-template-columns: 80px 1fr 80px;
+	display: grid;
+	grid-template-columns: 80px 1fr 80px;
 }
 
 .detail-layout {
-    display: grid;
-    grid-template-columns: 1fr 1020px 1fr;
-}
-
-.detail-middle-layout {
-    grid-column: 2 / 3;
+	display: grid;
+	grid-template-columns: 1fr 1120px 1fr;
 }
 
 .middle-layout {
-    grid-column: 2 / 3;
+	grid-column: 2 / 3;
 }
 .full-layout {
-    grid-column: 1 / 4;
+	grid-column: 1 / 4;
 }
 
 // Main Header Layout
