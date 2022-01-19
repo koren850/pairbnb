@@ -9,9 +9,9 @@ import { StayDetails } from "./pages/StayDetails";
 
 export function RootCmp() {
 	return (
-		<div>
+		<div className="app-layout">
 			<AppHeader />
-			<main>
+			<main className="main-app-layout">
 				<Switch>
 					<Route component={Explore} path='/explore' />
 					<Route component={StayDetails} path='/details/:id' />

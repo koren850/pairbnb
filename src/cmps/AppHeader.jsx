@@ -12,13 +12,12 @@ function _AppHeader({ toggleDetails, layout }) {
 	const location = useLocation();
 	useEffect(async () => {
 		if (location.pathname.includes("details")) {
-			console.log("hello");
 			toggleDetails(true);
 		} else toggleDetails(false);
 	}, [layout]);
 
 	return (
-		<header className={`app-header ${layout ? "detail-layout" : "main-layout"}`}>
+		<header className={`app-header  header-layout ${layout ? "detail-layout" : "main-layout"}`}>
 			<section className='middle-layout'>
 				<Link to={`/`}>
 					<span className='logo'>
