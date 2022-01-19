@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 
 export function AppHeader() {
 	return (
-			<header className="app-header">
-				<h1>PairBNB Project</h1>
+			<header className="app-header main-layout">
+				<section className="middle-layout">
 			<div className="nav-links">
-				<Link to={`/`}>Home</Link>
+				<Link to={`/`}><span className="logo">P<span className="air-logo"></span>ir<sub>B</sub>n<sub>B</sub></span></Link><hr/>
 				<Link to={`/explore`}> Explore</Link>
 			</div>
+				</section>
 			</header>
 	);
 }

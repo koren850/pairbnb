@@ -1,3 +1,28 @@
 .app-header {
-    background-color: #fff;
+  background-color: #fff;
+  & a {
+    text-decoration: none;
+  }
+}
+
+.logo {
+  color: #ff5a5f;
+  font-size: 40px;
+  font-family: monospace;
+  font-weight: bolder;
+}
+
+.air-logo {
+  max-height: 35px;
+  margin: 0;
+  padding: 0;
+  content: url("../../../public/favicon.ico");
+}
+
+hr {
+  border-color: #ff5a5f;
+  display: inline-block;
+  transform: rotate(90deg);
+  padding: 0;
+  width: 50px;
 }
