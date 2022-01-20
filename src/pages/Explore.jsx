@@ -22,9 +22,11 @@ export function _Explore({ loadStays, stays }) {
 	if (!stays.length || !stays) return <div>Loading...</div>;
 
 	return (
-		< main className="main-layout">
+		< main className="main-layout ">
+			<section className="middle-layout">
 			<SortStay />
 			<StayList stays={stays} />
+			</section>
 		</main >
 	);
 }
