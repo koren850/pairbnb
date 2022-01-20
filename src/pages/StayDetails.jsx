@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Map } from "../cmps/Map";
 import { connect } from "react-redux";
+import { Loader } from "../cmps/Loader";
 import { Checkout } from "../cmps/Checkout";
 import { Amenities } from "../cmps/Amenities";
 import { stayService } from "../services/stay.service";
@@ -26,7 +27,7 @@ function _StayDetails({ toggleDetails }) {
 		};
 	}, []);
 
-	if (!stay) return <div>Loading...</div>;
+	if (!stay) return <Loader />;
 	return (
 		<main className='detail-layout'>
 			<div className='middle-layout'>
