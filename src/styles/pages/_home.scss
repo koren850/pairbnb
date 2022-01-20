@@ -1,66 +1,124 @@
 .home {
-    display: grid;
-    grid-template-rows: repeat(autofill, 1fr);
-    .hero {
-        display: flex;
-        grid-rows:0 / 1;
-    }
-    position: relative;
-    & .hero-title{
-        color: $clr2;
-        font-size: 48px;
-        position: absolute;
-        top: 52vh;
-        left: 50%;
-        transform: translate(-50%,50%);
-    }
-    .popular-cities {
-        grid-row: 3 / 4;
-        display: grid;
-        grid-template-columns: repeat(4 ,1fr);
-        gap: 25px;
-        margin-top: 25px;
-        .city-container {
-            position: relative;
-            border-radius: 25px;
-            overflow: hidden;
-            height: 80%;
-            color: $clr5;
-            cursor: pointer;
-            text-shadow: 2px 2px 4px #000000;
-            &:hover img {
-                filter: grayscale(0%);
-            }
-            &:hover h1 {
-                font-size: 220%;
-                text-shadow: 2px 2px 50px 10px #000000;
-                top: 10%;
-                color: $clr2;
-            }
-            &:hover p {
-                color: $clr2;
-                font-size: 220%;
-                top: 10%;
-            }
-        }
-        & img {
-            height: 100%;
-            filter: grayscale(40%);
-            transition: 0.5s;
+  display: grid;
+  grid-template-rows: repeat(autofill, 1fr);
 
-        }
-        & p, h1 {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: 0.5s;
-        }
-        & p {
-            padding-top: 30px;
-            font-weight: 200;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-size: 16px;
-        }
+  .hero {
+    display: flex;
+    grid-row: 1 / 2;
+  }
+  position: relative;
+  & .hero-title {
+    color: $clr2;
+    font-size: 48px;
+    position: absolute;
+    top: 52vh;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
+  .popular-cities {
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 25px;
+    .city-container {
+      position: relative;
+      border-radius: 15px;
+      overflow: hidden;
+      height: 80%;
+      color: $clr5;
+      cursor: pointer;
+      text-shadow: 2px 2px 4px #000000;
+      &:hover img {
+        filter: grayscale(0%);
+      }
+      &:hover h1 {
+        font-size: 220%;
+        text-shadow: 2px 2px 50px 10px #000000;
+        top: 10%;
+        color: $clr2;
+      }
+      &:hover p {
+        color: $clr2;
+        font-size: 220%;
+        top: 10%;
+      }
     }
+    & img {
+      height: 100%;
+      filter: grayscale(40%);
+      transition: 0.5s;
+    }
+    & p,
+    h1 {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: 0.5s;
+    }
+    & p {
+      padding-top: 30px;
+      font-weight: 200;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-size: 16px;
+    }
+  }
+  .host {
+    grid-row: 3 / 4;
+    height: 70vh;
+    position: relative;
+    & img {
+      width: 100%;
+      height: 100%;
+      filter: grayscale(50%);
+      border-radius: 15px;
+    }
+
+    & h1 {
+      position: absolute;
+      font-size: 70px;
+      top: -17%;
+      color: $clr2;
+      font-weight: 100;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      left: 2%;
+      // transform: translateX(-50%);
+      text-shadow: 5px 5px 2px #000000;
+    }
+  }
+}
+
+.host-btn {
+  top: 85%;
+  left: 2%;
+}
+
+.hero-btn {
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.home-btn {
+  border: 1px solid $clr3;
+  background-color: #fff;
+  position: absolute;
+  height: 50px;
+  width: 200px;
+  transition: 0.5s;
+  &:hover span {
+    background: -webkit-linear-gradient(rgb(194, 63, 107), $clr1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;  }
+  & span {
+    font-size: 30px;
+    font-weight: 600;
+    background: -webkit-linear-gradient(#72019b, #ad0187, #e91f95);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }

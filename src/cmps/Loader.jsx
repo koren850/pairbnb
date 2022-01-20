@@ -1,10 +1,10 @@
 export function Loader() {
     return (
-        <div class="holder group middle-layout">
-            <div class="circle one"></div>
-            <div class="circle two"></div>
-            <div class="circle three"></div>
-            <div class="circle four"></div>
+        <div className="holder group middle-layout">
+            <div className="circle one"></div>
+            <div className="circle two"></div>
+            <div className="circle three"></div>
+            <div className="circle four"></div>
         </div>
     )
 }

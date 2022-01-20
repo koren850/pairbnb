@@ -3,7 +3,9 @@ import jerusalemImg from "../styles/img/jerusalem.jpg"
 import dubaiImg from "../styles/img/dubai.jpg"
 import vegasImg from "../styles/img/vegas.jpeg"
 import parisImg from "../styles/img/paris.jpg"
+import hostImg from "../styles/img/host.jpg"
 import { Loader } from "../cmps/Loader";
+import { Link } from "react-router-dom";
 
 export function Home() {
 	return <main className="home main-layout">
@@ -11,6 +13,7 @@ export function Home() {
 			<section className="hero full-layout">
 		<img src='https://res.cloudinary.com/dqj9g5gso/image/upload/v1642610299/imgs/HD_wallpaper__brown_wooden_dock_and_cottages_Maldives_resort_artificial_lights_zxkna8.jpg'/>
 		<h1 className="hero-title">Not sure where to go? Perfect.</h1>
+		<Link to={'/explore'}><button className="hero-btn home-btn"><span>Explore</span></button></Link>
 			</section>
 		<section className="popular-cities middle-layout">
 		<article className="city-container">
@@ -34,5 +37,10 @@ export function Home() {
 				{/* <p>U.S.A</p> */}
 			</article>
 		</section>
+		<section className="host middle-layout">
+		<img src={hostImg}/>
+		<h1 className="host-title">Become a host.</h1>
+		<Link to={'/host'}><button className="host-btn home-btn"><span>Start Here</span></button></Link>
+			</section>
 	</main>;
 }
