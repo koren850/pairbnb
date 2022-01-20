@@ -8,6 +8,10 @@ import { stayService } from "../services/stay.service";
 import { toggleDetails } from "../store/stay.action";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
+import home from "../styles/svg/entirehome.svg";
+import clean from "../styles/svg/clean.svg";
+import checkin from "../styles/svg/checkin.svg";
+
 function _StayDetails({ toggleDetails }) {
 	const params = useParams();
 	const [stay, setStay] = useState(null);
@@ -51,16 +55,19 @@ function _StayDetails({ toggleDetails }) {
 							<li>{parseInt(stay.capacity / 2)} baths</li>
 						</ul>
 						<hr></hr>
-						<ul>
+						<ul className='stay-main-amenities-list'>
 							<li>
+								<img className='stay-main-amenities' src={home} />
 								<h3>Entire home</h3>
 								<span>You will have the houseboat to yourself.</span>
 							</li>
 							<li>
+								<img className='stay-main-amenities' src={clean} />
 								<h3>Enhanced Clean</h3>
 								<span>This Host committed to Airbnb's 5-step enhanced cleaning process.</span>
 							</li>
 							<li>
+								<img className='stay-main-amenities' src={checkin} />
 								<h3>Self check-in</h3>
 								<span>Check yourself in with the lockbox.</span>
 							</li>

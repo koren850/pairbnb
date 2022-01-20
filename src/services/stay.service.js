@@ -175,15 +175,11 @@ async function addTestData() {
                 },
                 {
                     "Entertainment": [
-                        "TV with standard cable",
+                        "TV",
                         "Suitable for events"
                     ]
                 },
-                {
-                    "Family": [
-                        "Crib"
-                    ]
-                },
+
                 {
                     "Heating and cooling": [
                         "Air conditioning",
@@ -194,7 +190,7 @@ async function addTestData() {
                 {
                     "Home safety": [
                         "Fire extinguisher",
-                        "Smoke Alam"
+                        "Smoke Alarm"
                     ]
                 },
                 {
@@ -212,7 +208,6 @@ async function addTestData() {
                 {
                     "Outdoor": [
                         "Patio or balcony",
-                        "Backyard"
                     ]
                 },
                 {
@@ -230,7 +225,7 @@ async function addTestData() {
                 },
                 {
                     "Not included": [
-                        "Security cameras on property",
+                        "Security cameras",
                         "Hair dryer"
                     ]
                 }
@@ -282,11 +277,6 @@ async function addTestData() {
                     ]
                 },
                 {
-                    "Family": [
-                        "Fireplace guards"
-                    ]
-                },
-                {
                     "Heating and cooling": [
                         "Air conditioning",
                         "Heating"
@@ -322,15 +312,13 @@ async function addTestData() {
                 {
                     "Outdoor": [
                         "Patio or balcony",
-                        "Backyard"
                     ]
                 },
                 {
                     "Parking and facilities": [
                         "Free parking on premises",
                         "Pool",
-                        "Private hot tub",
-                        "Private sauna"
+
                     ]
                 },
                 {
@@ -341,7 +329,7 @@ async function addTestData() {
                 },
                 {
                     "Not included": [
-                        "Securirty cameras on property",
+                        "Security cameras",
                         "Washer"
                     ]
                 }
@@ -400,11 +388,7 @@ async function addTestData() {
                         "TV"
                     ]
                 },
-                {
-                    "Family": [
-                        "Crib"
-                    ]
-                },
+
                 {
                     "Heating and cooling": [
                         "Air conditioning",
@@ -427,7 +411,6 @@ async function addTestData() {
                     "Kitchen and dining": [
                         "Kitchen",
                         "Refrigerator",
-                        "Microwave",
                         "Dishes and silverware",
                         "Coffee maker"
                     ]
@@ -440,7 +423,6 @@ async function addTestData() {
                 {
                     "Outdoor": [
                         "Patio or balcony",
-                        "Backyard",
                         "BBQ grill"
                     ]
                 },
@@ -448,7 +430,7 @@ async function addTestData() {
                     "Parking and facilities": [
                         "Free parking on premises",
                         "Pool",
-                        "Hot tub"
+
                     ]
                 },
                 {
@@ -459,7 +441,7 @@ async function addTestData() {
                 {
                     "Not included": [
                         "Washer",
-                        "Securirty cameras on property",
+                        "Security cameras",
                         "Carbon monoxide alarm"
                     ]
                 }
@@ -547,7 +529,6 @@ async function addTestData() {
                 {
                     "Parking and facilities": [
                         "Free parking on premises",
-                        "Private hot tub"
                     ]
                 },
                 {
@@ -557,7 +538,7 @@ async function addTestData() {
                 },
                 {
                     "Not included": [
-                        "Securirty cameras on property",
+                        "Security cameras",
                         "Washer",
                         "Hair dryer",
                         "Carbon monoxide alarm"
