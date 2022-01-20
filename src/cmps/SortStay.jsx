@@ -8,11 +8,11 @@ import { setFilterBy } from "../store/stay.action.js";
 export function _SortStay({ setFilterBy }) {
 
     const [filterBy, setFilter] = useState({
-        wifi: false,
-        tv: false,
-        kitchen: false,
-        aircon: false,
-        smoking: false,
+        "Wifi": false,
+        "TV": false,
+        "Kitchen": false,
+        "Air conditioning": false,
+        "Smoking allowed": false,
         "Pets allowed": false
     })
 
@@ -25,12 +25,12 @@ export function _SortStay({ setFilterBy }) {
     return (<div className="middle-layout"><h1>Sort Stays</h1>
         <button>Price</button>
         <button>Type of place</button>
-        <button onClick={() => { setFilter({ ...filterBy, wifi: !filterBy.wifi }) }}>Wifi</button>
-        <button onClick={() => { setFilter({ ...filterBy, tv: !filterBy.tv }) }}>TV</button>
-        <button onClick={() => { setFilter({ ...filterBy, kitchen: !filterBy.kitchen }) }}>Kitchen</button>
-        <button onClick={() => { setFilter({ ...filterBy, aircon: !filterBy.aircon }) }}>AC</button>
-        <button onClick={() => { setFilter({ ...filterBy, smoking: !filterBy.smoking }) }}>Smoking Allowed</button>
-        <button onClick={() => { setFilter({ ...filterBy, pets: !filterBy.pets }) }}>Pets Allowed</button>
+        <button onClick={() => { setFilter({ ...filterBy, "Wifi": !filterBy["Wifi"] }) }}>Wifi</button>
+        <button onClick={() => { setFilter({ ...filterBy, "TV": !filterBy["TV"] }) }}>TV</button>
+        <button onClick={() => { setFilter({ ...filterBy, "Kitchen": !filterBy["Kitchen"] }) }}>Kitchen</button>
+        <button onClick={() => { setFilter({ ...filterBy, "Air conditioning": !filterBy["Air conditioning"] }) }}>AC</button>
+        <button onClick={() => { setFilter({ ...filterBy, "Smoking allowed": !filterBy["Smoking allowed"] }) }}>Smoking Allowed</button>
+        <button onClick={() => { setFilter({ ...filterBy, "Pets allowed": !filterBy["Pets allowed"] }) }}>Pets Allowed</button>
     </div>
     )
 

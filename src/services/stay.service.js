@@ -18,23 +18,41 @@ window.cs = stayService;
 
 
 async function query(filterBy = []) {
-    console.log(filterBy)
+    // console.log(filterBy)
     let filteredStays;
     const { aircon, kitchen, pets, smoking, tv, wifi } = filterBy || {}
     const trues = Object.keys(filterBy).filter(key => filterBy[key]);
     console.log(trues)
+    const stayAmenities = [];
     const stays = await storageService.query(STORAGE_KEY)
-    console.log(filterBy)
     if (filterBy.length === 0) return stays
-    console.log(stays)
-    stays.filter((stay) => {
-        let currStay = trues.every((amenity) => {
-            console.log(amenity)
-            return stay.amenities.includes(amenity);
-        });
-        if (currStay) filteredStays.push(stay);
-        return filteredStays
+    stays.map(stay => {
+        stay.amenities.forEach(amenity => {
+            // console.log(amenity)
+            const [values] = Object.values(amenity)
+            values.forEach((label) => stayAmenities.push(label));
+        })
+        console.log(stayAmenities)
+        console.log(trues)
+        // console.log(stayAmenities.every(trues))
+        // let currStay = trues.every(stayAmenities)
+        // console.log(currStay)
+        // if (currStay) filteredStays.push(stay);
+        // let currStay = trues.every((amenity) => {
+        //     console.log(amenity)
+        //     return stay.amenities.includes(amenity);
+        // });
+        // if (currStay) filteredStays.push(stay);
+        // console.log(filteredStays)
     })
+    // const labels = [];
+    // amenities.forEach((amenitie) => {
+    //     const [values] = Object.values(amenitie);
+    //     values.forEach((label) => labels.push(label));
+    // });
+
+
+    return filteredStays
 }
 
 function getById(stayId) {
