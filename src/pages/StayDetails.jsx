@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Checkout } from "../cmps/Checkout";
 import { stayService } from "../services/stay.service";
 import { toggleDetails } from "../store/stay.action";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 function _StayDetails({ toggleDetails }) {
@@ -32,7 +31,6 @@ function _StayDetails({ toggleDetails }) {
 			<div className='middle-layout'>
 				<h1>{stay.name}</h1>
 				<h3>{stay.loc.address}</h3>
-				<Link to='/explore'>kjhgkjhg</Link>
 				<div className='details-img-container'>
 					<img className='main-img' src={stay.imgUrls[0]} alt='' />
 					<img className='small-img' src={stay.imgUrls[1]} alt='' />
