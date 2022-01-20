@@ -17,14 +17,26 @@ export const stayService = {
 window.cs = stayService;
 
 
-async function query(filterBy) {
-    // console.log(filterBy)
+async function query(filterBy = []) {
+    console.log(filterBy)
+    let filteredStays;
+    const { aircon, kitchen, pets, smoking, tv, wifi } = filterBy || {}
+    const trues = Object.keys(filterBy).filter(key => filterBy[key]);
+    console.log(trues)
     const stays = await storageService.query(STORAGE_KEY)
-    // const { aircon, kitchen, pets, smoking, tv, wifi } = filterBy
-    // console.log(aircon)
-    // console.log(stays)
-    return stays
+    console.log(filterBy)
+    if (filterBy.length === 0) return stays
+    console.log(stays)
+    stays.filter((stay) => {
+        let currStay = trues.every((amenity) => {
+            console.log(amenity)
+            return stay.amenities.includes(amenity);
+        });
+        if (currStay) filteredStays.push(stay);
+        return filteredStays
+    })
 }
+
 function getById(stayId) {
     return storageService.get(STORAGE_KEY, stayId)
 }
