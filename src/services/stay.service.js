@@ -17,26 +17,61 @@ export const stayService = {
 window.cs = stayService;
 
 
-async function query(filterBy) {
+async function query(filterBy, stayType) {
     const stays = await storageService.query(STORAGE_KEY);
-    let truthy;
-    if (filterBy) truthy = Object.values(filterBy).some(value => value);
-    if (!filterBy || !truthy) return stays;
-    const labels = Object.keys(filterBy).filter(key => filterBy[key]);
-    let filteredStays = []
-    stays.filter(stay => {
-        const stayAmenities = [];
-        stay.amenities.forEach(amenity => {
-            const [values] = Object.values(amenity)
-            values.forEach((value) => stayAmenities.push(value));
+    let filterValues;
+    let stayTypeValues;
+    if (stayType) stayTypeValues = Object.values(stayType).some(value => value);
+    if (filterBy) filterValues = Object.values(filterBy).some(value => value);
+    if ((!filterBy || !filterValues) && (!stayType || !stayTypeValues)) return stays;
+    if (filterBy && !stayTypeValues) {
+        const labels = Object.keys(filterBy).filter(key => filterBy[key]);
+        let filteredStays = []
+        stays.filter(stay => {
+            const stayAmenities = [];
+            stay.amenities.forEach(amenity => {
+                const [values] = Object.values(amenity)
+                values.forEach((value) => stayAmenities.push(value));
+            })
+            let currStay = labels.every((label) => {
+                return stayAmenities.includes(label);
+            })
+            if (currStay) filteredStays.push(stay);
         })
-        let currStay = labels.every((label) => {
-            return stayAmenities.includes(label);
+        return filteredStays
+    }
+    else if (stayType && !filterValues) {
+        const types = Object.keys(stayType).filter(key => stayType[key]);
+        let filteredStays = []
+        stays.forEach(stay => {
+            let currStay = stay["type of place"].includes(types)
+            if (currStay) filteredStays.push(stay);
         })
-        if (currStay) filteredStays.push(stay);
-        console.log(filteredStays)
-    })
-    return filteredStays
+        return filteredStays
+    }
+    else if (stayType && filterBy) {
+        const labels = Object.keys(filterBy).filter(key => filterBy[key]);
+        let filteredStays = []
+        stays.filter(stay => {
+            const stayAmenities = [];
+            stay.amenities.forEach(amenity => {
+                const [values] = Object.values(amenity)
+                values.forEach((value) => stayAmenities.push(value));
+            })
+            let currStay = labels.every((label) => {
+                return stayAmenities.includes(label);
+            })
+            if (currStay) filteredStays.push(stay);
+            return filteredStays
+        })
+        const filterAndTypeStays = []
+        const types = Object.keys(stayType).filter(key => stayType[key]);
+        filteredStays.forEach(stay => {
+            let currStay = stay["type of place"].includes(types)
+            if (currStay) filterAndTypeStays.push(stay);
+        })
+        return filterAndTypeStays
+    }
 }
 
 
@@ -93,6 +128,7 @@ async function addTestData() {
             "_id": "mongo001",
             "name": "Jaklino Riso",
             "type": "House",
+            "type of place": "Entire place",
             "imgUrls": [
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z9_ly6miw.jpg",
@@ -136,6 +172,7 @@ async function addTestData() {
             "_id": "mongo0015",
             "name": "Magical Banna Cabana",
             "type": "Cabin",
+            "type of place": "Shared room",
             "imgUrls": [
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z9_ly6miw.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
@@ -175,15 +212,11 @@ async function addTestData() {
                 },
                 {
                     "Entertainment": [
-                        "TV with standard cable",
+                        "TV",
                         "Suitable for events"
                     ]
                 },
-                {
-                    "Family": [
-                        "Crib"
-                    ]
-                },
+
                 {
                     "Heating and cooling": [
                         "Air conditioning",
@@ -194,7 +227,7 @@ async function addTestData() {
                 {
                     "Home safety": [
                         "Fire extinguisher",
-                        "Smoke Alam"
+                        "Smoke Alarm"
                     ]
                 },
                 {
@@ -212,7 +245,6 @@ async function addTestData() {
                 {
                     "Outdoor": [
                         "Patio or balcony",
-                        "Backyard"
                     ]
                 },
                 {
@@ -230,7 +262,7 @@ async function addTestData() {
                 },
                 {
                     "Not included": [
-                        "Security cameras on property",
+                        "Security cameras",
                         "Hair dryer"
                     ]
                 }
@@ -246,6 +278,7 @@ async function addTestData() {
             "_id": "mongo002",
             "name": "Ella's cabin",
             "type": "Cabin",
+            "type of place": "Private room",
             "imgUrls": [
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
@@ -279,11 +312,6 @@ async function addTestData() {
                 {
                     "Entertainment": [
                         "Ethernet connection"
-                    ]
-                },
-                {
-                    "Family": [
-                        "Fireplace guards"
                     ]
                 },
                 {
@@ -322,15 +350,13 @@ async function addTestData() {
                 {
                     "Outdoor": [
                         "Patio or balcony",
-                        "Backyard"
                     ]
                 },
                 {
                     "Parking and facilities": [
                         "Free parking on premises",
                         "Pool",
-                        "Private hot tub",
-                        "Private sauna"
+
                     ]
                 },
                 {
@@ -341,7 +367,7 @@ async function addTestData() {
                 },
                 {
                     "Not included": [
-                        "Securirty cameras on property",
+                        "Security cameras",
                         "Washer"
                     ]
                 }
@@ -368,6 +394,8 @@ async function addTestData() {
             "_id": "mongo003",
             "name": "Sea of Galilee Panoramic View",
             "type": "Cabin",
+            "type of place": "Hotel room",
+
             "imgUrls": [
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z6_iwye5p.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
@@ -400,11 +428,7 @@ async function addTestData() {
                         "TV"
                     ]
                 },
-                {
-                    "Family": [
-                        "Crib"
-                    ]
-                },
+
                 {
                     "Heating and cooling": [
                         "Air conditioning",
@@ -427,7 +451,6 @@ async function addTestData() {
                     "Kitchen and dining": [
                         "Kitchen",
                         "Refrigerator",
-                        "Microwave",
                         "Dishes and silverware",
                         "Coffee maker"
                     ]
@@ -440,7 +463,6 @@ async function addTestData() {
                 {
                     "Outdoor": [
                         "Patio or balcony",
-                        "Backyard",
                         "BBQ grill"
                     ]
                 },
@@ -448,7 +470,7 @@ async function addTestData() {
                     "Parking and facilities": [
                         "Free parking on premises",
                         "Pool",
-                        "Hot tub"
+
                     ]
                 },
                 {
@@ -459,7 +481,7 @@ async function addTestData() {
                 {
                     "Not included": [
                         "Washer",
-                        "Securirty cameras on property",
+                        "Security cameras",
                         "Carbon monoxide alarm"
                     ]
                 }
@@ -486,6 +508,7 @@ async function addTestData() {
             "_id": "mongo004",
             "name": "Green Garden Cabin",
             "type": "Cabin",
+            "type of place": "Entire place",
             "imgUrls": [
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
@@ -547,7 +570,6 @@ async function addTestData() {
                 {
                     "Parking and facilities": [
                         "Free parking on premises",
-                        "Private hot tub"
                     ]
                 },
                 {
@@ -557,7 +579,7 @@ async function addTestData() {
                 },
                 {
                     "Not included": [
-                        "Securirty cameras on property",
+                        "Security cameras",
                         "Washer",
                         "Hair dryer",
                         "Carbon monoxide alarm"

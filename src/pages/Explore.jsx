@@ -12,20 +12,20 @@ export function _Explore({ loadStays, stays }) {
 	const [currStays, setCurrStays] = useState(null);
 
 	useEffect(async () => {
-		// console.log(stays)
 		await loadStays();
-		// console.log(stays)
 		setCurrStays({ stays });
-		// console.log(currStays)
 	}, []);
 
-	if (!stays.length || !stays) return <Loader />;
+	if (!stays) return <Loader />;
 
 	return (
 		<main className='main-layout '>
 			<section className='middle-layout'>
 				<SortStay />
-				<StayList stays={stays} />
+				{!stays.length ? <div className="empty-list"><h2>Nothing comes up here</h2>
+					<h3>Try adjusting some of your filters to explore more places to stay.</h3></div> :
+					<StayList stays={stays} />}
+
 			</section>
 		</main>
 	);
