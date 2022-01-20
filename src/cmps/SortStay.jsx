@@ -22,7 +22,7 @@ export function _SortStay({ setFilterBy }) {
 
 
 
-    return (<div><h1>Sort Stays</h1>
+    return (<div className='middle-layout'><h1>Sort Stays</h1>
         <button>Price</button>
         <button>Type of place</button>
         <button onClick={() => { setFilter({ ...filterBy, wifi: !filterBy.wifi }) }}>Wifi</button>
