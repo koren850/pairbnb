@@ -1,6 +1,6 @@
-export function SpecialButton({ text }) {
+export function SpecialButton({ text,size,isActive }) {
 	return (
-		<div className='btn-container'>
+		<div style={size && (isActive ? {width:120+'px',height:size.height} : {width:size.width,height:size.height})} className={'btn-container '+ (isActive && 'active-mode')}>
 			<div className='cell'></div>
 			<div className='cell'></div>
 			<div className='cell'></div>
@@ -103,7 +103,7 @@ export function SpecialButton({ text }) {
 			<div className='cell'></div>
 			<div className='content'>
 				<button className='action-btn'>
-					<span>{text}</span>
+					<span style={size && {transform:'translate(0,0)'}}>{text}{isActive && 'Search'}</span>
 				</button>
 			</div>
 		</div>
