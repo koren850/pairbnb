@@ -13,11 +13,14 @@
 @import "basics/base";
 
 //components
-@import "components/App-header";
-@import "components/App-footer";
-@import "components/Stay-Details";
-@import "components/Search";
-@import "components/Stay-list.scss";
-@import "components/Stay-preview.scss";
+@import "components/app-header";
+@import "components/app-footer";
+@import "components/stay-Details";
+@import "components/search";
+@import "components/stay-list.scss";
+@import "components/stay-preview.scss";
+@import "components/checkout";
+@import "components/loader";
+
+//pages
 @import "pages/home";
-@import "components/Checkout";
