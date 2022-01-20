@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Map } from "../cmps/Map";
 import { connect } from "react-redux";
 import { Checkout } from "../cmps/Checkout";
+import { Amenities } from "../cmps/Amenities";
 import { stayService } from "../services/stay.service";
 import { toggleDetails } from "../store/stay.action";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -11,8 +12,8 @@ function _StayDetails({ toggleDetails }) {
 	const [stay, setStay] = useState(null);
 
 	useEffect(() => {
-		test();
-		async function test() {
+		cdm();
+		async function cdm() {
 			const stayByid = await stayService.getById(params.id);
 			console.log(stayByid);
 			setStay(stayByid);
@@ -48,6 +49,7 @@ function _StayDetails({ toggleDetails }) {
 							<li>{stay.capacity - 1} beds</li>
 							<li>{parseInt(stay.capacity / 2)} baths</li>
 						</ul>
+						<hr></hr>
 						<ul>
 							<li>
 								<h3>Entire home</h3>
@@ -62,7 +64,10 @@ function _StayDetails({ toggleDetails }) {
 								<span>Check yourself in with the lockbox.</span>
 							</li>
 						</ul>
+						<hr></hr>
 						<p>{stay.summary}</p>
+						<hr></hr>
+						<Amenities amenities={stay.amenities} />
 					</div>
 					<Checkout />
 				</div>

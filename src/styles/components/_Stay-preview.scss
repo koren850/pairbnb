@@ -1,46 +1,42 @@
-.stay-preview{
-    cursor:pointer;
-        
-    img{
-    border-radius: 12px;
-    }
+.stay-preview {
+	cursor: pointer;
 
+	img {
+		border-radius: 12px;
+	}
 }
 
-.stay-reviews{
-        font-size: 14px;
-        img{
-         width: 15px;
-         transform: translateY(10%);
-        }     
+.stay-reviews {
+	font-size: 14px;
+	img {
+		width: 15px;
+		transform: translateY(10%);
+	}
 }
 
 .stay-preview-details {
-    line-height: 16px
+	line-height: 16px;
 }
 
-.stay-type-country{
-    padding-top: 6px
+.stay-type-country {
+	padding-top: 6px;
 }
 
-.stay-name{
-    padding-top: 2px
-
+.stay-name {
+	padding-top: 2px;
 }
 
-.stay-price-night{
-    display: flex
+.stay-price-night {
+	display: flex;
 }
 
-.stay-price{
-    display:flex;
-    padding-top: 4px;
-    font-weight: 600;
-
+.stay-price {
+	display: flex;
+	padding-top: 4px;
+	font-weight: 600;
 }
 
-.stay-night{
-    margin-left: 4px;
-    transform: translateY(15%);
-
+.stay-night {
+	margin-left: 4px;
+	transform: translateY(15%);
 }
