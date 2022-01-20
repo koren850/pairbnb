@@ -15,9 +15,12 @@
 //components
 @import "components/app-header";
 @import "components/app-footer";
-@import "pages/stay-Details";
 @import "components/search";
-@import "components/Stay-list.scss";
+@import "components/stay-list.scss";
 @import "components/stay-preview.scss";
 @import "components/checkout";
+@import "components/loader";
+
+//pages
 @import "pages/home";
+@import "pages/stay-Details";

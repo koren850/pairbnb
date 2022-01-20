@@ -6,7 +6,7 @@
 }
 
 .footer-content {
-	margin: 45px 0px;
+	padding: 45px 0px;
 	border-block-end: 1px solid $clr5;
 	display: flex;
 	justify-content: space-between;
@@ -24,4 +24,7 @@
 			height: 100%;
 		}
 	}
+}
+
+.footer-credits {
 }
