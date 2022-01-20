@@ -1,72 +1,72 @@
 .app-header {
-  position: fixed;
-  z-index: 10;
-  width: 100%;
-  background-color: $clr2;
-  height: 80px;
-  box-shadow: 0px 2px 4px $clr5;
-  & .middle-layout {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+	position: fixed;
+	z-index: 10;
+	width: 100%;
+	background-color: $clr2;
+	height: 80px;
+	box-shadow: 0px 2px 4px $clr5;
+	& .middle-layout {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 }
 
 .logo {
-  color: $clr1;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  font-size: 25px;
+	color: $clr1;
+	font-family: "Courier New", Courier, monospace;
+	font-weight: 900;
+	display: flex;
+	align-items: center;
+	font-size: 25px;
 }
 
 .air-logo {
-  margin: 0;
-  padding: 0;
-  transform: translateY(-15%);
+	margin: 0;
+	padding: 0;
+	transform: translateY(-15%);
 }
 
 .nav-link {
-  display: flex;
-  width: inherit;
-  align-items: center;
-  justify-content: space-between;
-  a {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-radius: 25px;
-    height: 42px;
-    &:hover {
-      background-color: $clr4;
-    }
-    &:last-of-type{
-    margin-inline-end: 5px;
-    }
-  }
+	display: flex;
+	width: inherit;
+	align-items: center;
+	justify-content: space-between;
+	a {
+		display: flex;
+		align-items: center;
+		padding: 15px;
+		border-radius: 25px;
+		height: 42px;
+		&:hover {
+			background-color: $clr4;
+		}
+		&:last-of-type {
+			margin-inline-end: 5px;
+		}
+	}
 }
 
 .user-menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 40px;
-  width: 80px;
-  padding: 0 6.5px;
-  transition: box-shadow,0.5s;
-  &:hover {
-    box-shadow: 0px 2px 4px $clr5;
-} 
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 40px;
+	width: 80px;
+	padding: 0 6.5px;
+	transition: box-shadow, 0.5s;
+	&:hover {
+		box-shadow: 0px 2px 4px $clr5;
+	}
 }
 
 .user-svg {
-  width: 31px;
-  box-shadow: inset 0px 0px 0px 3px #717171;
-  border-radius: 50%;
+	width: 31px;
+	box-shadow: inset 0px 0px 0px 3px #717171;
+	border-radius: 50%;
 }
 
 .hamburger-svg {
-  width: 30px;
-  height: 17px;
+	width: 30px;
+	height: 17px;
 }

@@ -3,6 +3,7 @@
 	grid-template-columns: repeat(4, 272px);
 	grid-template-rows: repeat(2, 240px);
 	min-height: 50vh;
+
 	gap: 9px;
 	margin: auto;
 }
@@ -37,6 +38,13 @@
 	display: grid;
 	grid-template-columns: 2fr 1fr;
 }
+
+.amenities-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	list-style: none;
+}
+
 .map-section {
 	margin: 15px auto;
 }
