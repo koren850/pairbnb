@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
+import {PlaceType} from "./PlaceType.jsx"
 
 import { setFilterBy } from "../store/stay.action.js";
 
@@ -24,7 +25,8 @@ export function _SortStay({ setFilterBy }) {
 
     return (<div className="middle-layout"><h1>Sort Stays</h1>
         <button>Price</button>
-        <button>Type of place</button>
+        <PlaceType/>
+        {/* <button>Type of place</button> */}
         <button onClick={() => { setFilter({ ...filterBy, "Wifi": !filterBy["Wifi"] }) }}>Wifi</button>
         <button onClick={() => { setFilter({ ...filterBy, "TV": !filterBy["TV"] }) }}>TV</button>
         <button onClick={() => { setFilter({ ...filterBy, "Kitchen": !filterBy["Kitchen"] }) }}>Kitchen</button>
@@ -39,6 +41,7 @@ export function _SortStay({ setFilterBy }) {
 function mapStateToProps({ stayModule }) {
     return {
         filterBy: stayModule.filterBy,
+        stays: stayModule.stays,
     };
 }
 const mapDispatchToProps = {

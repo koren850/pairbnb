@@ -47,21 +47,11 @@ export function updateStay(stay) {
 }
 
 export function setFilterBy(filterBy) {
-    // console.log(filterBy)
     return async (dispatch) => {
-        // let sort;
-        // if (filterBy) sort = filterBy.sortBy;
+
         try {
             const stays = await stayService.query(filterBy)
-            // if (sort) {
-            //     stays.sort((a, b) => {
-            //         const aSort = a[sort];
-            //         const bSort = b[sort];
-            //         if (aSort < bSort) return -1;
-            //         else if (bSort < aSort) return 1;
-            //         else return 0;
-            //     })
-            // }
+            console.log(stays)
             dispatch({ type: 'SET_FILTER', filterBy });
             dispatch({ type: 'SET_STAYS', stays });
         }

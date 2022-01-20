@@ -17,43 +17,30 @@ export const stayService = {
 window.cs = stayService;
 
 
-async function query(filterBy = []) {
-    // console.log(filterBy)
-    let filteredStays;
-    const { aircon, kitchen, pets, smoking, tv, wifi } = filterBy || {}
-    const trues = Object.keys(filterBy).filter(key => filterBy[key]);
-    console.log(trues)
-    const stayAmenities = [];
-    const stays = await storageService.query(STORAGE_KEY)
-    if (filterBy.length === 0) return stays
-    stays.map(stay => {
+async function query(filterBy) {
+    const stays = await storageService.query(STORAGE_KEY);
+    let truthy;
+    if (filterBy) truthy = Object.values(filterBy).some(value => value);
+    if (!filterBy || !truthy) return stays;
+    const labels = Object.keys(filterBy).filter(key => filterBy[key]);
+    let filteredStays = []
+    stays.filter(stay => {
+        const stayAmenities = [];
         stay.amenities.forEach(amenity => {
-            // console.log(amenity)
             const [values] = Object.values(amenity)
-            values.forEach((label) => stayAmenities.push(label));
+            values.forEach((value) => stayAmenities.push(value));
         })
-        console.log(stayAmenities)
-        console.log(trues)
-        // console.log(stayAmenities.every(trues))
-        // let currStay = trues.every(stayAmenities)
-        // console.log(currStay)
-        // if (currStay) filteredStays.push(stay);
-        // let currStay = trues.every((amenity) => {
-        //     console.log(amenity)
-        //     return stay.amenities.includes(amenity);
-        // });
-        // if (currStay) filteredStays.push(stay);
-        // console.log(filteredStays)
+        let currStay = labels.every((label) => {
+            return stayAmenities.includes(label);
+        })
+        if (currStay) filteredStays.push(stay);
+        console.log(filteredStays)
     })
-    // const labels = [];
-    // amenities.forEach((amenitie) => {
-    //     const [values] = Object.values(amenitie);
-    //     values.forEach((label) => labels.push(label));
-    // });
-
-
     return filteredStays
 }
+
+
+
 
 function getById(stayId) {
     return storageService.get(STORAGE_KEY, stayId)
@@ -119,7 +106,18 @@ async function addTestData() {
             "price": 380.0,
             "summary": "Welcome to my city home. It is centrally located in NYC, just steps from Madison Square Garden and Penn Station to get you off to all your favorite destinations. This apartment makes for lovely weekend stay when I'm not in town - close to attractions, restaurants, nightlife and shopping. Thank you for considering. Please reach out with any questions and I will happily answer them.",
             "capacity": 6,
-            "amenities": [],
+            "amenities": [{
+                "Bathroom": [
+                    "Shampoo",
+                    "Hot water"
+                ]
+            },
+            {
+                "Bedroom and laundry": [
+                    "Essentials",
+                    "Hangers"
+                ]
+            },],
             "host": { "inside": "userId,userImg,userFullName" },
             "loc": {
                 "country": "New-York",
