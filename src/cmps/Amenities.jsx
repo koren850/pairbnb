@@ -15,10 +15,14 @@ export function Amenities({ amenities }) {
 			<h1>What this place offers</h1>
 			<ul className='amenities-list'>
 				{labels.map((amenitie) => {
-					return <li>{amenitie}</li>;
+					return <li key={amenitie}>{amenitie}</li>;
 				})}
 				{NotIncluded.map((amenitie) => {
-					return <li className='not-included'>{amenitie}</li>;
+					return (
+						<li key={amenitie} className='not-included'>
+							{amenitie}
+						</li>
+					);
 				})}
 			</ul>
 		</div>
