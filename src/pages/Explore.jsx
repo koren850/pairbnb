@@ -23,7 +23,6 @@ export function _Explore({ loadStays, stays }) {
 
 	return (
 		< main className="main-layout">
-			<div >Explore page</div>
 			<SortStay />
 			<StayList stays={stays} />
 		</main >
