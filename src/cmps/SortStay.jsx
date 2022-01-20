@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
-import {PlaceType} from "./PlaceType.jsx"
+import { PlaceTypeFilter } from "./PlaceType.jsx"
 
 import { setFilterBy } from "../store/stay.action.js";
 
 // import React from 'react';
 
-export function _SortStay({ setFilterBy }) {
+export function _SortStay({ setFilterBy, stayType }) {
 
     const [filterBy, setFilter] = useState({
         "Wifi": false,
@@ -16,24 +16,28 @@ export function _SortStay({ setFilterBy }) {
         "Smoking allowed": false,
         "Pets allowed": false
     })
+    const [placeType, toggleTypeSearch] = useState()
 
     useEffect(async () => {
-        await setFilterBy(filterBy)
+        console.log(filterBy)
+        await setFilterBy(filterBy, stayType)
     }, [filterBy])
 
+    useEffect(() => {
+        console.log(placeType)
+    }, [placeType])
 
-
-    return (<div className="middle-layout"><h1>Sort Stays</h1>
-        <button>Price</button>
-        <PlaceType/>
-        {/* <button>Type of place</button> */}
-        <button onClick={() => { setFilter({ ...filterBy, "Wifi": !filterBy["Wifi"] }) }}>Wifi</button>
-        <button onClick={() => { setFilter({ ...filterBy, "TV": !filterBy["TV"] }) }}>TV</button>
-        <button onClick={() => { setFilter({ ...filterBy, "Kitchen": !filterBy["Kitchen"] }) }}>Kitchen</button>
-        <button onClick={() => { setFilter({ ...filterBy, "Air conditioning": !filterBy["Air conditioning"] }) }}>AC</button>
-        <button onClick={() => { setFilter({ ...filterBy, "Smoking allowed": !filterBy["Smoking allowed"] }) }}>Smoking Allowed</button>
-        <button onClick={() => { setFilter({ ...filterBy, "Pets allowed": !filterBy["Pets allowed"] }) }}>Pets Allowed</button>
-    </div>
+    return (<div className="filter-container middle-layout">
+        <button className="filter-btn">Price</button>
+        <button className="filter-btn" onClick={() => { toggleTypeSearch(!placeType) }}>{placeType? "Type of place ⇧" : "Type of place ⇩"}</button>
+        {placeType && <PlaceTypeFilter />}
+        <button className={filterBy["Wifi"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Wifi": !filterBy["Wifi"] }) }}>Wifi</button>
+        <button className={filterBy["TV"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "TV": !filterBy["TV"] }) }}>TV</button>
+        <button className={filterBy["Kitchen"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Kitchen": !filterBy["Kitchen"] }) }}>Kitchen</button>
+        <button className={filterBy["Air conditioning"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Air conditioning": !filterBy["Air conditioning"] }) }}>AC</button>
+        <button className={filterBy["Smoking allowed"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Smoking allowed": !filterBy["Smoking allowed"] }) }}>Smoking Allowed</button>
+        <button className={filterBy["Pets allowed"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Pets allowed": !filterBy["Pets allowed"] }) }}>Pets Allowed</button>
+    </div >
     )
 
 }
@@ -41,11 +45,11 @@ export function _SortStay({ setFilterBy }) {
 function mapStateToProps({ stayModule }) {
     return {
         filterBy: stayModule.filterBy,
+        stayType: stayModule.stayType,
         stays: stayModule.stays,
     };
 }
 const mapDispatchToProps = {
-    // loadStays,
     setFilterBy
 };
 
