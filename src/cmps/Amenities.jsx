@@ -5,6 +5,7 @@ export function Amenities({ amenities }) {
 		const [values] = Object.values(amenitie);
 		if (amenitie["Not included"]) {
 			values.forEach((label) => NotIncluded.push(label));
+			return;
 		}
 		values.forEach((label) => labels.push(label));
 	});
