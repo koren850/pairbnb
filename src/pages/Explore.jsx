@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { loadStays } from "../store/stay.action.js";
 import { SortStay } from "../cmps/SortStay";
+import { Loader } from "../cmps/Loader";
 
 // import { Link } from "react-router-dom";
 
@@ -12,22 +13,21 @@ export function _Explore({ loadStays, stays }) {
 
 	useEffect(async () => {
 		// console.log(stays)
-		await loadStays()
+		await loadStays();
 		// console.log(stays)
-		setCurrStays({ stays })
+		setCurrStays({ stays });
 		// console.log(currStays)
-	}, [])
+	}, []);
 
-
-	if (!stays.length || !stays) return <div>Loading...</div>;
+	if (!stays.length || !stays) return <Loader />;
 
 	return (
-		< main className="main-layout ">
-			<section className="middle-layout">
-			<SortStay />
-			<StayList stays={stays} />
+		<main className='main-layout '>
+			<section className='middle-layout'>
+				<SortStay />
+				<StayList stays={stays} />
 			</section>
-		</main >
+		</main>
 	);
 }
 
