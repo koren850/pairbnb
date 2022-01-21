@@ -18,19 +18,16 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
 	}
-
 	function resetHeaderModes() {
-		// if (!isActive) return
+		console.log(isExplore);
 		if (window.scrollY < 1) {
 			if (isExplore) {
-				console.log('isexpore',isExplore)
 				toggleHeaderIsActive(false);
 				toggleHeaderIsDark(false);
-				return
+			} else {
+				toggleHeaderIsActive(true);
+				toggleHeaderIsDark(true);
 			}
-			toggleHeaderIsActive(true);
-			toggleHeaderIsDark(true);
-			return;
 		}
 		else {
 			toggleHeaderIsActive(false);
@@ -39,16 +36,22 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 	}
 
 	useEffect(() => {
-		toggleIsExplore(false);
 		if (!location.pathname || location.pathname === '/') {
 			toggleHeaderIsActive(false);
 			toggleHeaderIsDark(false);
 		}
 		else if (location.pathname.includes("details")) {
+			console.log('dont')
 			toggleIsExplore(true)
 			toggleDetailsLayout(true);
+			toggleHeaderIsActive(false);
+			toggleHeaderIsDark(false);
 		} else {
+			console.log('mashu aher')
+			toggleIsExplore(true)
 			toggleDetailsLayout(false);
+			toggleHeaderIsActive(false);
+			toggleHeaderIsDark(false);
 		}
 		window.addEventListener('scroll', resetHeaderModes);
 		
@@ -75,7 +78,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 						<small>B</small>
 					</span>
 				</Link>
-				{!isActive && <Search onToggleIsActive={onToggleIsActive} />}
+				{(!isActive) && <Search onToggleIsActive={onToggleIsActive} />}
 				<article className='nav-link'>
 					<Link to={`/explore`}> Explore</Link>
 					<Link className='become' to={`/explore`}>

@@ -4,7 +4,7 @@ import { SpecialButton } from "./SpacialButton";
 import { connect } from "react-redux";
 import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from "../store/header.action";
 
- function _SearchBar({ onToggleIsActive,headerMode }) {
+ function _SearchBar({ toggleHeaderIsActive,headerMode }) {
   const [someActive, setSomeActive] = useState(null);
 
   function updateSomeActive(elName,ev) {
@@ -13,19 +13,24 @@ import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from ".
     (someActive === elName) ? setSomeActive(null) : setSomeActive(elName);
   }
 
-  function turnOffActive(ev) {
+  function turnOffSome() {
+    console.log('hello')
     if (!headerMode.isActive) return
     if (window.scrollY < 1) return setSomeActive(null);
-    (someActive) ? setSomeActive(null) : onToggleIsActive();
+    (someActive) ? setSomeActive(null) : toggleHeaderIsActive(false);
   }
+
+
   useEffect(() => {
-    window.addEventListener('scroll', turnOffActive);
-   window.addEventListener('click', turnOffActive);
+    window.addEventListener('click', turnOffSome);
+    window.addEventListener('scroll', turnOffSome);
     return () => {
-      window.removeEventListener('click', turnOffActive);
-      window.removeEventListener('scroll', turnOffActive);
+
+      console.log('bye')
+      window.removeEventListener('click', turnOffSome);
+      window.removeEventListener('scroll', turnOffSome);
     }
-   } , [someActive])
+   } , [])
 
   return (
     <div className={"bar origi " + (someActive && "active-search-bar")}>
