@@ -3,7 +3,7 @@ const initialState = {
         headerLayoutSmall: false,
         isDark: true,
         isActive: true,
-        isExplore: false,
+        isExplore: false
     }
 };
 
