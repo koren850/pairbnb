@@ -57,7 +57,7 @@ export function Checkout({ stay }) {
 				</div>
 				<SpecialButton args={null} onClick={reserveOrder} text='Check availability' />
 				{guests && (
-					<div className='guests'>
+					<div className='guests-checkout'>
 						<div className='guest-add flex'>
 							<div className='guest-type'>
 								<h3>Adults</h3>
