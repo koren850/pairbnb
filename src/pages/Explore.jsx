@@ -19,7 +19,7 @@ export function _Explore({ loadStays, stays }) {
 	if (!stays) return <Loader />;
 
 	return (
-		<main className='main-layout '>
+		<main className='main-layout main-container'>
 			<section className='middle-layout'>
 				<SortStay />
 				{!stays.length ? <div className="empty-list"><h2>Nothing comes up here</h2>

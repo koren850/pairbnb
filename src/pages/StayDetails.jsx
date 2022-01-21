@@ -5,14 +5,14 @@ import { Loader } from "../cmps/Loader";
 import { Checkout } from "../cmps/Checkout";
 import { Amenities } from "../cmps/Amenities";
 import { stayService } from "../services/stay.service";
-import { toggleDetails } from "../store/stay.action";
+import { toggleDetailsLayout } from "../store/header.action";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 import home from "../styles/svg/entirehome.svg";
 import clean from "../styles/svg/clean.svg";
 import checkin from "../styles/svg/checkin.svg";
 
-function _StayDetails({ toggleDetails }) {
+function _StayDetails({toggleDetailsLayout }) {
 	const params = useParams();
 	const [stay, setStay] = useState(null);
 
@@ -22,18 +22,18 @@ function _StayDetails({ toggleDetails }) {
 			const stayByid = await stayService.getById(params.id);
 			console.log(stayByid);
 			setStay(stayByid);
-			toggleDetails(true);
+			toggleDetailsLayout(true);
 			console.log("hello");
 		}
 		return () => {
 			console.log("bye");
-			toggleDetails(false);
+			toggleDetailsLayout(false);
 		};
 	}, []);
 
 	if (!stay) return <Loader />;
 	return (
-		<main className='detail-layout'>
+		<main className='detail-layout main-container'>
 			<div className='middle-layout'>
 				<h1>{stay.name}</h1>
 				<h3>{stay.loc.address}</h3>
@@ -89,7 +89,7 @@ function mapStateToProps({}) {
 	return {};
 }
 const mapDispatchToProps = {
-	toggleDetails,
+	toggleDetailsLayout,
 };
 
 export const StayDetails = connect(mapStateToProps, mapDispatchToProps)(_StayDetails);
