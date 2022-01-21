@@ -8,6 +8,7 @@ import { stayService } from "../services/stay.service";
 import { toggleDetailsLayout } from "../store/header.action";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
+import reviewStar from "../styles/svg/star.svg";
 import home from "../styles/svg/entirehome.svg";
 import clean from "../styles/svg/clean.svg";
 import checkin from "../styles/svg/checkin.svg";
@@ -36,7 +37,12 @@ function _StayDetails({toggleDetailsLayout }) {
 		<main className='detail-layout main-container'>
 			<div className='middle-layout'>
 				<h1>{stay.name}</h1>
-				<h3>{stay.loc.address}</h3>
+
+				<div className='stay-reviews'>
+					<span className='stay-name-details'>{stay.loc.address}</span>
+					<img className='stay-reviews' src={reviewStar} /> {stay.reviews}({stay.reviews.length} reviews)
+				</div>
+
 				<div className='details-img-container'>
 					<img className='main-img' src={stay.imgUrls[0]} alt='' />
 					<img className='small-img' src={stay.imgUrls[1]} alt='' />
@@ -59,7 +65,7 @@ function _StayDetails({toggleDetailsLayout }) {
 							<li>
 								<img className='stay-main-amenities' src={home} />
 								<h3>Entire home</h3>
-								<span>You will have the houseboat to yourself.</span>
+								<span>You will have the {stay.type.toLowerCase()} to yourself.</span>
 							</li>
 							<li>
 								<img className='stay-main-amenities' src={clean} />
@@ -77,7 +83,7 @@ function _StayDetails({toggleDetailsLayout }) {
 						<hr></hr>
 						<Amenities amenities={stay.amenities} />
 					</div>
-					<Checkout />
+					<Checkout stay={stay} />
 				</div>
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
