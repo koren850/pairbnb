@@ -13,6 +13,7 @@ export function Home() {
 		<h1 className="hero-title">Not sure where to go? Perfect.</h1>
 		<Link to={'/explore'}><button className="hero-btn home-btn"><span>Explore</span></button></Link>
 			</section>
+			<h1 className="middle-layout cities-title">Most popular cities around the word.</h1>
 		<section className="popular-cities middle-layout">
 		<article className="city-container">
 				<img src={parisImg}/>

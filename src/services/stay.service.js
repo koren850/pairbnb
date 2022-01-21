@@ -174,8 +174,8 @@ async function addTestData() {
             "type": "Cabin",
             "type of place": "Shared room",
             "imgUrls": [
-                "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z9_ly6miw.jpg",
+                "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z4_wvbadb.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z6_iwye5p.jpg",
@@ -280,9 +280,9 @@ async function addTestData() {
             "type": "Cabin",
             "type of place": "Private room",
             "imgUrls": [
+                "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z9_ly6miw.jpg",
-                "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z4_wvbadb.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z6_iwye5p.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z7_vbb404.jpg",
@@ -397,11 +397,11 @@ async function addTestData() {
             "type of place": "Hotel room",
 
             "imgUrls": [
+                "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z6_iwye5p.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z9_ly6miw.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z4_wvbadb.jpg",
-                "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z6_iwye5p.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z7_vbb404.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z2_m5ydxe.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg"
@@ -510,6 +510,7 @@ async function addTestData() {
             "type": "Cabin",
             "type of place": "Entire place",
             "imgUrls": [
+                "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z8_yd5xza.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520865/imgs/z9_ly6miw.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg",
@@ -517,7 +518,6 @@ async function addTestData() {
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z6_iwye5p.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z7_vbb404.jpg",
                 "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z2_m5ydxe.jpg",
-                "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642520864/imgs/z5_lpogr7.jpg"
             ],
             "price": 354.0,
             "summary": "If you would like to experience traditional Israeli country life style, our place is ideal. Our place is located in a picturesque farming village which is rich in nature near Golan Heights, Jordan River and the Manara Cliffs. You can enjoy our seasonal citrus fruits and tasty pecan nuts.",

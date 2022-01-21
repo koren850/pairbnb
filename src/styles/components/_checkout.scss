@@ -166,6 +166,15 @@
 		margin-inline-end: 2px;
 	}
 	.content {
-		border-radius: 50%;
+		border-radius: 25px;
+	}
+}
+.search-spacial-btn .active-mode {
+	& span {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100px;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 	}
 }
