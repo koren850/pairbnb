@@ -8,6 +8,7 @@ import { stayService } from "../services/stay.service";
 import { toggleDetails } from "../store/stay.action";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
+import reviewStar from "../styles/svg/star.svg";
 import home from "../styles/svg/entirehome.svg";
 import clean from "../styles/svg/clean.svg";
 import checkin from "../styles/svg/checkin.svg";
@@ -36,7 +37,12 @@ function _StayDetails({ toggleDetails }) {
 		<main className='detail-layout'>
 			<div className='middle-layout'>
 				<h1>{stay.name}</h1>
-				<h3>{stay.loc.address}</h3>
+
+				<div className='stay-reviews'>
+					<span className='stay-name-details'>{stay.loc.address}</span>
+					<img className='stay-reviews' src={reviewStar} /> {stay.reviews}({stay.reviews.length} reviews)
+				</div>
+
 				<div className='details-img-container'>
 					<img className='main-img' src={stay.imgUrls[0]} alt='' />
 					<img className='small-img' src={stay.imgUrls[1]} alt='' />
