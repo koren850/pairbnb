@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { PlaceTypeFilter } from "./PlaceType.jsx"
-
+// import { PriceFilter } from "./PriceFilter.jsx"
 import { setFilterBy } from "../store/stay.action.js";
+
+import downArrow from "../styles/svg/arrows/down-arrow.svg";
+import upArrow from "../styles/svg/arrows/up-arrow.svg";
+
 
 // import React from 'react';
 
@@ -19,17 +23,19 @@ export function _SortStay({ setFilterBy, stayType }) {
     const [placeType, toggleTypeSearch] = useState()
 
     useEffect(async () => {
-        console.log(filterBy)
+        // console.log(filterBy)
         await setFilterBy(filterBy, stayType)
     }, [filterBy])
 
     useEffect(() => {
-        console.log(placeType)
+        // console.log(placeType)
     }, [placeType])
 
     return (<div className="filter-container middle-layout">
+        {/* <PriceFilter /> */}
         <button className="filter-btn">Price</button>
-        <button className="filter-btn" onClick={() => { toggleTypeSearch(!placeType) }}>{placeType? "Type of place ⇧" : "Type of place ⇩"}</button>
+        
+        <button className="filter-btn" onClick={() => { toggleTypeSearch(!placeType) }} >{placeType ? <span className="flex"><span>Type of place </span><img className="filter-arrow" src={upArrow}/></span>:<span className="flex"><span>Type of place </span><img  className="filter-arrow" src={downArrow}/></span>}</button>
         {placeType && <PlaceTypeFilter />}
         <button className={filterBy["Wifi"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Wifi": !filterBy["Wifi"] }) }}>Wifi</button>
         <button className={filterBy["TV"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "TV": !filterBy["TV"] }) }}>TV</button>

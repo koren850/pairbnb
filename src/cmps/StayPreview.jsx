@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import reviewStar from "../styles/svg/star.svg";
+import ImageCarousel from "./ImageCarousel.jsx";
 
 export function StayPreview({ stay }) {
 	return (
 		<div>
 			<div className="stay-preview">
 				<div className="stay-preview-img">
-					<Link to={`/details/${stay._id}`}><img src={stay.imgUrls[0]} /></Link>
+					{/* <Link to={`/details/${stay._id}`}><img src={stay.imgUrls[0]} /></Link> */}
+					<ImageCarousel  stay = {stay}/>
 				</div>
 				<div className="stay-preview-details">
 					<div className="stay-reviews"><img src={reviewStar} /> {stay.reviews}({stay.reviews.length} reviews)</div>

@@ -20,13 +20,13 @@ function _StayDetails({ toggleDetails }) {
 		cdm();
 		async function cdm() {
 			const stayByid = await stayService.getById(params.id);
-			console.log(stayByid);
+			// console.log(stayByid);
 			setStay(stayByid);
 			toggleDetails(true);
-			console.log("hello");
+			// console.log("hello");
 		}
 		return () => {
-			console.log("bye");
+			// console.log("bye");
 			toggleDetails(false);
 		};
 	}, []);

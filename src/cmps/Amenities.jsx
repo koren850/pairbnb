@@ -1,5 +1,5 @@
 import airconditioning from "../styles/svg/amenities/air-conditioning.svg";
-import bbqgrill from "../styles/svg/amenities/bbq-grill.svg";
+import bbqgrill from "../styles/svg/amenities/BBQ-grill.svg";
 import beachaccess from "../styles/svg/amenities/beach-access.svg";
 import bedlinens from "../styles/svg/amenities/bed-linens.svg";
 import carbonmonoxidealarm from "../styles/svg/amenities/carbon-monoxide-alarm.svg";
@@ -94,7 +94,7 @@ export function Amenities({ amenities }) {
 	});
 
 	function fixAmenitie(amenitie) {
-		console.log(amenitie);
+		// console.log(amenitie);
 		return amenitie.replaceAll(" ", "").toLowerCase();
 	}
 
@@ -106,7 +106,7 @@ export function Amenities({ amenities }) {
 					return (
 						<li className='amenitie-item' key={amenitie}>
 							{/* <img src={fixAmenitie(amenitie)} /> */}
-							{console.log(amenitie)}
+							{/* {console.log(amenitie)} */}
 							<img className='amenitie' src={urls[fixAmenitie(amenitie)]} />
 							{/* <img className='amenitie' src={hairdryer} /> */}
 							{amenitie}

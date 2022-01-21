@@ -33,7 +33,7 @@ function _AppHeader({ toggleDetails, layout }) {
 		}
 	}, [layout, headerModes]);
 
-	console.log(isActive, isDark)
+	// console.log(isActive, isDark)
 
 	return (
 		<header className={`app-header column ${isActive && 'active-header'} ${isDark && 'dark-header'} header-layout ${layout ? "detail-layout" : "main-layout"}`}>
