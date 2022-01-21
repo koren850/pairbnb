@@ -1,5 +1,5 @@
 import airconditioning from "../styles/svg/amenities/air-conditioning.svg";
-import bbqgrill from "../styles/svg/amenities/bbq-grill.svg";
+import bbqgrill from "../styles/svg/amenities/BBQ-grill.svg";
 import beachaccess from "../styles/svg/amenities/beach-access.svg";
 import bedlinens from "../styles/svg/amenities/bed-linens.svg";
 import carbonmonoxidealarm from "../styles/svg/amenities/carbon-monoxide-alarm.svg";
