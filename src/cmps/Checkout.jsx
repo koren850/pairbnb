@@ -73,7 +73,7 @@ export function Checkout({ stay }) {
 							<div className='guest-type'>
 								<h3>Adults</h3>
 								<div>
-									<button style={order.adults < 2 ? { backgroundColor: "#ff00001d", cursor: "not-allowed" } : {}} onClick={() => handleChange("adults", -1)}>
+									<button style={order.adults < 2 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("adults", -1)}>
 										{minusSvg}
 									</button>
 									<span style={{ color: "black" }}>{order.adults}</span>
@@ -83,7 +83,7 @@ export function Checkout({ stay }) {
 							<div className='guest-type'>
 								<h3>Children</h3>
 								<div>
-									<button style={order.children < 1 ? { backgroundColor: "#ff00001d", cursor: "not-allowed" } : {}} onClick={() => handleChange("children", -1)}>
+									<button style={order.children < 1 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("children", -1)}>
 										{minusSvg}
 									</button>
 									<span style={{ color: "black" }}>{order.children}</span>
@@ -93,7 +93,7 @@ export function Checkout({ stay }) {
 							<div className='guest-type'>
 								<h3>Infants</h3>
 								<div>
-									<button style={order.infants < 1 ? { backgroundColor: "#ff00002d", cursor: "not-allowed" } : {}} onClick={() => handleChange("infants", -1)}>
+									<button style={order.infants < 1 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("infants", -1)}>
 										{minusSvg}
 									</button>
 									<span style={{ color: "black" }}>{order.infants}</span>
@@ -113,7 +113,9 @@ function getWeeksAfter(date, amount) {
 	return date ? addWeeks(date, amount) : undefined;
 }
 function MinMaxDateRangePicker({ order, setOrder }) {
-	const removeUrl = <img onClick={() => setOrder({ ...order, checkIn: null, checkOut: null })} className='clear-dates' src={remove} />;
+	const removeUrl = (
+		<img onClick={() => setOrder({ ...order, checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 })} className='clear-dates' src={remove} />
+	);
 	// const [value, setValue] = React.useState([null, null]);
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns}>
