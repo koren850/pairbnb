@@ -94,7 +94,6 @@ export function Amenities({ amenities }) {
 	});
 
 	function fixAmenitie(amenitie) {
-		console.log(amenitie);
 		return amenitie.replaceAll(" ", "").toLowerCase();
 	}
 
@@ -105,10 +104,7 @@ export function Amenities({ amenities }) {
 				{labels.map((amenitie) => {
 					return (
 						<li className='amenitie-item' key={amenitie}>
-							{/* <img src={fixAmenitie(amenitie)} /> */}
-							{console.log(amenitie)}
 							<img className='amenitie' src={urls[fixAmenitie(amenitie)]} />
-							{/* <img className='amenitie' src={hairdryer} /> */}
 							{amenitie}
 						</li>
 					);

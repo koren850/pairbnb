@@ -65,7 +65,7 @@ function _StayDetails({ toggleDetails }) {
 							<li>
 								<img className='stay-main-amenities' src={home} />
 								<h3>Entire home</h3>
-								<span>You will have the houseboat to yourself.</span>
+								<span>You will have the {stay.type.toLowerCase()} to yourself.</span>
 							</li>
 							<li>
 								<img className='stay-main-amenities' src={clean} />
@@ -83,7 +83,7 @@ function _StayDetails({ toggleDetails }) {
 						<hr></hr>
 						<Amenities amenities={stay.amenities} />
 					</div>
-					<Checkout />
+					<Checkout stay={stay} />
 				</div>
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
