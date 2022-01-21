@@ -5,7 +5,7 @@
 .bar {
   border: 2px solid $clr5;
   width: 850px;
-  background: $clr4;
+  background: $clr2;
   height: 70px;
   border-radius: 100vw;
   display: flex;
@@ -109,12 +109,13 @@ input[type="text"]:focus {
   top: 12%;
   & img {
     width: 50%;
+    transition: unset;
     transform: translate(-2%, 5%) rotate(-15deg);
   }
 }
 
 .bar.active-search-bar {
-  // padding-inline-end: 120px;
+  background-color: $clr4;
   .guests {
     padding-inline-end: 230px;
   }

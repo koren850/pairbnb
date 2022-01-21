@@ -1,11 +1,13 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { stayReducer } from "../store/stay.reducer.js"
+import { stayReducer } from "../store/stay.reducer.js";
+import { headerReducer } from "../store/header.reducer.js";
 
 
 
 const rootReducer = combineReducers({
-    stayModule: stayReducer
+    stayModule: stayReducer,
+    headerModule: headerReducer
 });
 
 export default createStore(rootReducer, applyMiddleware(thunk));

@@ -1,3 +1,7 @@
+.main-container {
+	padding-top: 82px;
+}
+
 .details-img-container {
 	display: grid;
 	grid-template-columns: repeat(4, 272px);
@@ -6,6 +10,12 @@
 
 	gap: 9px;
 	margin: auto;
+}
+
+.stay-name-details {
+	font-size: 1rem;
+	font-weight: bold;
+	margin-inline-end: 10px;
 }
 
 .main-img {

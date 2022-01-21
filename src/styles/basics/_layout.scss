@@ -2,7 +2,7 @@
 
 .app-layout {
 	display: grid;
-	grid-template-rows:82px 1fr 400px;
+	grid-template-rows:1fr 400px;
 }
 
 .main-layout {
@@ -30,11 +30,11 @@
 }
 
 .main-app-layout {
-	grid-row: 2 / 3;
+	grid-row: 1 / 2;
 }
 
 .footer-layout {
-	grid-row: 3 / 4;
+	grid-row: 2 / 3;
 }
 
 // Main Header Layout

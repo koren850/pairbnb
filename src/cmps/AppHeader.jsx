@@ -8,35 +8,62 @@ import userSvg from "../styles/svg/user.svg";
 import hamburgerSvg from "../styles/svg/hamburger.svg";
 import { Search } from "./Search";
 import { SearchBar } from "./SearchBar"
-import { toggleDetails } from "../store/stay.action";
+import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive, toggleIsExplore } from "../store/header.action";
 import { click } from "@testing-library/user-event/dist/click";
 
-function _AppHeader({ toggleDetails, layout }) {
-	const [headerModes, setHeaderModes] = useState({ isActive: true, isDark: true });
-	const { isActive, isDark } = headerModes;
+function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
+	const { headerLayoutSmall, isDark, isActive, isExplore } = headerMode;
 	const location = useLocation();
+
 	function onToggleIsActive() {
-		setHeaderModes({ isDark, isActive: !isActive })
+		toggleHeaderIsActive(!isActive);
+	}
+	function resetHeaderModes() {
+		console.log(isExplore);
+		if (window.scrollY < 1) {
+			if (isExplore) {
+				toggleHeaderIsActive(false);
+				toggleHeaderIsDark(false);
+			} else {
+				toggleHeaderIsActive(true);
+				toggleHeaderIsDark(true);
+			}
+		}
+		else {
+			toggleHeaderIsActive(false);
+			toggleHeaderIsDark(false);
+		}
 	}
 
-	function resetHeaderModes() {
-		setHeaderModes({ isActive: false, isDark: false })
-		window.removeEventListener('scroll', resetHeaderModes);
-	}
 	useEffect(() => {
-		if (isDark) window.addEventListener('scroll', resetHeaderModes);
-		if (location.pathname.includes("details")) {
-			toggleDetails(true);
-		} else toggleDetails(false);
+		if (!location.pathname || location.pathname === '/') {
+			toggleHeaderIsActive(false);
+			toggleHeaderIsDark(false);
+		}
+		else if (location.pathname.includes("details")) {
+			console.log('dont')
+			toggleIsExplore(true)
+			toggleDetailsLayout(true);
+			toggleHeaderIsActive(false);
+			toggleHeaderIsDark(false);
+		} else {
+			console.log('mashu aher')
+			toggleIsExplore(true)
+			toggleDetailsLayout(false);
+			toggleHeaderIsActive(false);
+			toggleHeaderIsDark(false);
+		}
+		window.addEventListener('scroll', resetHeaderModes);
+		
 		return () => {
 			window.removeEventListener('scroll', resetHeaderModes);
+			toggleIsExplore(true);
 		}
-	}, [layout, headerModes]);
+	}, []);
 
-	// console.log(isActive, isDark)
 
 	return (
-		<header className={`app-header column ${isActive && 'active-header'} ${isDark && 'dark-header'} header-layout ${layout ? "detail-layout" : "main-layout"}`}>
+		<header className={`app-header column ${isExplore ? 'explore-header' : ''} ${isActive ? 'active-header' : ''} ${isDark ? 'dark-header' : ''} header-layout ${headerLayoutSmall ? "detail-layout" : "main-layout"}`}>
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
 					<span className='logo'>
@@ -51,7 +78,7 @@ function _AppHeader({ toggleDetails, layout }) {
 						<small>B</small>
 					</span>
 				</Link>
-				{!isActive && <Search onToggleIsActive={onToggleIsActive} />}
+				{(!isActive) && <Search onToggleIsActive={onToggleIsActive} />}
 				<article className='nav-link'>
 					<Link to={`/explore`}> Explore</Link>
 					<Link className='become' to={`/explore`}>
@@ -64,19 +91,23 @@ function _AppHeader({ toggleDetails, layout }) {
 				</article>
 			</section>
 			<nav className="middle-layout search-bar-container">
-				{isActive && <SearchBar onToggleIsActive={onToggleIsActive} isDark={isDark} isActive={isActive} />}
+				{isActive && <SearchBar onToggleIsActive={onToggleIsActive} />}
 			</nav>
 		</header>
 	);
 }
 
-function mapStateToProps({ stayModule }) {
+function mapStateToProps({ headerModule }) {
 	return {
-		layout: stayModule.headerLayoutSmall,
+		headerMode: headerModule.headerMode,
+
 	};
 }
 const mapDispatchToProps = {
-	toggleDetails,
+	toggleDetailsLayout,
+	toggleHeaderIsDark,
+	toggleHeaderIsActive,
+	toggleIsExplore
 };
 
 export const AppHeader = connect(mapStateToProps, mapDispatchToProps)(_AppHeader);
