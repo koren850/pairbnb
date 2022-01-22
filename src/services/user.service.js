@@ -67,7 +67,7 @@ async function login(userCred) {
 }
 async function signup(userCred) {
     const users = getUsers()
-    localStorage.setItem(STORAGE_KEY, [...users, { email: userCred.email, password: userCred.password }])
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...users, { email: userCred.email, password: userCred.password }]))
     // userCred.score = 10000;
     // const user = await storageService.post('user', userCred)
     // const user = await httpService.post('auth/signup', userCred) ******* When backend is up uncomment

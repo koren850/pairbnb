@@ -53,13 +53,13 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 	};
 
 	const handleSubmit = (event) => {
-		// event.preventDefault();
+		event.preventDefault();
 		const data = new FormData(event.currentTarget);
 		const credentials = {
 			email: data.get("email"),
 			password: data.get("password"),
 		};
-		console.log(credentials)
+		console.log(credentials);
 		setIsSubmitting(true);
 		setTimeout(() => {
 			signingIn(credentials);
@@ -90,9 +90,9 @@ export function LogIn({ setIsSubmitting, signingIn }) {
                                 value="remember" color="primary" />}
                             label="Remember me"
                         /> */}
-						<button style={{ marginBlockStart: '10px', backgroundColor: 'transparent', width: '100%', height: '40px', border: 'none' }}>
+						<button style={{ marginBlockStart: "10px", backgroundColor: "transparent", width: "100%", height: "40px", border: "none" }}>
 							<div className='spacial-btn'>
-								<SpecialButton onClick={handleSubmit} size={{ width: 'inherit', height: '40px' }} text={'Sign In'} />
+								<SpecialButton size={{ width: "inherit", height: "40px" }} text={"Sign In"} />
 							</div>
 						</button>
 
