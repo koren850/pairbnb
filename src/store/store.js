@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { stayReducer } from "../store/stay.reducer.js";
 import { headerReducer } from "../store/header.reducer.js";
-import { userReducer } from './userReducer.js';
+import { userReducer } from './user.reducer.js';
 
 
 

@@ -1,23 +1,23 @@
 [
-    {
-        "_id": "mongo001",
-        "fullname": "Mosh Ben Ari",
-        "imgUrl": "/img/img1.jpg",
-        "username" : "moshmush12",
-        "password" : "secret"
-      },
-      {
-        "_id": "mongo102",
-        "fullname": "Sharon Milevich",
-        "imgUrl": "/img/img2.jpg",
-        "username" : "sharmil92",
-        "password" : "secret"
-      },
-      {
-        "_id": "mongo103",
-        "fullname": "Doron Megril",
-        "imgUrl": "/img/img2.jpg",
-        "username" : "Megril19",
-        "password" : "secret"
-      }
+	{
+		"_id": "mongo001",
+		"fullname": "Mosh Ben Ari",
+		"imgUrl": "/img/img1.jpg",
+		"email": "moshmush12@koko.com",
+		"password": "secret"
+	},
+	{
+		"_id": "mongo102",
+		"fullname": "Sharon Milevich",
+		"imgUrl": "/img/img2.jpg",
+		"email": "sharmil92@koko.com",
+		"password": "secret"
+	},
+	{
+		"_id": "mongo103",
+		"fullname": "Doron Megril",
+		"imgUrl": "/img/img2.jpg",
+		"email": "Megril19@koko.com",
+		"password": "secret"
+	}
 ]

@@ -1,7 +1,9 @@
+import { lastDayOfDecade } from 'date-fns'
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+const STORAGE_KEY = 'userDB'
 var gWatchedUser = null;
 
 export const userService = {
@@ -22,7 +24,8 @@ window.userService = userService
 
 function getUsers() {
     // return storageService.query('user')
-    return httpService.get(`user`)
+    //return httpService.get(`user`) ******* When backend is up uncomment
+    return JSON.parse(localStorage.getItem(STORAGE_KEY))
 }
 
 async function getById(userId) {
@@ -48,6 +51,10 @@ async function update(user) {
 }
 
 async function login(userCred) {
+    const users = getUsers()
+    console.log(userCred)
+    const currUser = users.find(user => user.password === userCred.password && user.email === userCred.email)
+    if (!currUser) return console.log('no such user')
     // const users = await storageService.query('user')
     // const user = users.find(user => user.username === userCred.username)
     // return _saveLocalUser(user)
@@ -55,9 +62,12 @@ async function login(userCred) {
     // const user = await httpService.post('auth/login', userCred) ******* When backend is up uncomment
     // socketService.emit('set-user-socket', user._id);
     //if (user) return _saveLocalUser(user) ******* When backend is up uncomment
-    if (userCred) return _saveLocalUser(userCred)
+
+    if (currUser) return _saveLocalUser(currUser)
 }
 async function signup(userCred) {
+    const users = getUsers()
+    localStorage.setItem(STORAGE_KEY, [...users, { email: userCred.email, password: userCred.password }])
     // userCred.score = 10000;
     // const user = await storageService.post('user', userCred)
     // const user = await httpService.post('auth/signup', userCred) ******* When backend is up uncomment
@@ -122,4 +132,36 @@ function getLoggedinUser() {
 //     var user = getLoggedinUser()
 //     if (user) socketService.emit('set-user-socket', user._id)
 // })();
+
+
+
+addDemoData()
+function addDemoData() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([
+        {
+            _id: 123,
+            email: "test",
+            password: "test",
+        },
+        {
+            _id: 124,
+            email: "koren",
+            password: "123",
+        },
+        {
+            _id: 125,
+            email: "michael",
+            password: "123",
+        },
+        {
+            _id: 126,
+            email: "idan",
+            password: "123",
+        }
+    ]))
+
+
+
+
+}
 
