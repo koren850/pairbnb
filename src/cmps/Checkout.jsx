@@ -16,7 +16,9 @@ export function Checkout({ stay }) {
 	const [order, setOrder] = useState({ checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const [guests, toggleGuests] = useState(false);
 
-	function reserveOrder(...args) {}
+	function reserveOrder(...args) {
+		console.log(args);
+	}
 
 	function openGuests() {
 		toggleGuests(!guests);
@@ -65,7 +67,11 @@ export function Checkout({ stay }) {
 						</div>
 					</div>
 				</div>
-				<SpecialButton args={null} onClick={reserveOrder} text='Check availability' />
+				<SpecialButton
+					args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalPrice() * stay.price }}
+					onClick={reserveOrder}
+					text='Check availability'
+				/>
 				{guests && <Guests init={order} set={setOrder} />}
 				{order.checkIn && order.checkOut && <h3 className='total-price'> Total price: ${getTotalPrice() * stay.price}</h3>}
 			</section>

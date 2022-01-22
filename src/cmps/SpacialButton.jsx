@@ -1,4 +1,4 @@
-export function SpecialButton({ text, size, isActive, onClick, args }) {
+export function SpecialButton({ text, size, isActive, onClick = () => {}, args }) {
 	return (
 		<div
 			onClick={() => onClick(args)}
