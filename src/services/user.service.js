@@ -64,12 +64,17 @@ function login(userCred) {
     const users = getUsers();
     return new Promise((resolve, reject) => {
         const currUser = users.find(user => user.email === userCred.email)
+        console.log(currUser)
         if (!currUser) reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
         else if (currUser.password !== userCred.password) {
             if (!userCred.isSocial) reject({reason:'Incorrect user password',unsolved:'password'});
         }
-        _saveLocalUser(currUser);
-        resolve(currUser);
+        if (currUser) {
+            _saveLocalUser(currUser);
+            console.log(currUser)
+            resolve(currUser);
+        }
+        else reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
     })
 
 }
@@ -90,9 +95,8 @@ function signup(userCred) {
         else if (!userCred.imgUrl) userCred.imgUrl = userSvg;
         // else if (!userCred.email || !userCred.password || !userCred.fullName)
         _saveLocalUser(userCred);
-        resolve(userCred);
-        console.log(users)
         localStorage.setItem(STORAGE_KEY, JSON.stringify([...users, userCred]));
+        resolve(userCred);
         // userCred.score = 10000;
         // const user = await storageService.post('user', userCred)
         // const user = await httpService.post('auth/signup', userCred) ******* When backend is up uncomment

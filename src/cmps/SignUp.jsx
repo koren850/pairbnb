@@ -83,9 +83,10 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 		setTimeout(async () => {
 			try {
 				await signingUp(credentials);
-				setIsSubmitting(false);
+				console.log('noooo')
 			}
 			catch (err) {
+				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err))
 				return;
 			};
@@ -113,17 +114,17 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 							<TextField
 							onChange={() => {connectionError.fullName && dispatch(updateInputsErrorInfo({ reason: '', unsolved:'userName' }))}}
 							 required fullWidth name='fullName' label='Full Name' type='fullName' id='fullName' autoComplete='current-fullName' />
-						<input type='text' value={connectionError.fullName} readOnly style={{ marginInlineStart: '10px', color: 'red', border: 'unset' }} />
+						<input type='text' value={connectionError.fullName} readOnly style={{width:'100%', marginInlineStart: '10px', color: 'red', border: 'unset' }} />
 
 							<TextField
 							onChange={() => {connectionError.email && dispatch(updateInputsErrorInfo({ reason: '', unsolved:'email' }))}}
 							 required fullWidth name='email' label='E-mail' type='email' id='email' autoComplete='current-email' />
-						<input type='text' value={connectionError.email} readOnly style={{ marginInlineStart: '10px', color: 'red', border: 'unset' }} />
+						<input type='text' value={connectionError.email} readOnly style={{width:'100%', marginInlineStart: '10px', color: 'red', border: 'unset' }} />
 							</Grid>
 							<Grid item xs={12}>
 						<TextField onChange={() => {connectionError.password &&  dispatch(updateInputsErrorInfo({ reason: '', unsolved: 'password' }))
 						}}  required fullWidth name='password' label='Password' type='password' id='password' autoComplete='current-password' />
-						<input type='text' value={connectionError.password} readOnly style={{ marginInlineStart: '10px', color: 'red', border: 'unset' }} />
+						<input type='text' value={connectionError.password} readOnly style={{width:'100%', marginInlineStart: '10px', color: 'red', border: 'unset' }} />
 							</Grid>
 						</Grid>
 						<button style={{ marginBlockStart: "10px", backgroundColor: "transparent", width: "100%", height: "40px", border: "none" }}>
