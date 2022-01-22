@@ -226,7 +226,7 @@ async function addTestData() {
             "reviews": [
                 {
                     "id": "c002",
-                    "txt": "From my top10 vacations ever !",
+                    "txt": "A very special, historic and beautiful place to be! Our room was decorated so nicely and everything was lovely - the bed, pillows, shower, coffee and more. We very much enjoyed our stay.",
                     "rate": 5,
                     "by": {
                         "_id": 126,
@@ -256,7 +256,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c006",
-                    "txt": "The most peaceful place ever...",
+                    "txt": "This is the second time we have stayed in the fantastic apartment in Tova! just a few wonderful days !! comfortable, clean, equipped with a magnificent view of the sea. Thanks!",
                     "rate": 5,
                     "by": {
                         "_id": 124,
@@ -370,7 +370,7 @@ async function addTestData() {
             "reviews": [
                 {
                     "id": "c004",
-                    "txt": "The cleanest place I have been, very peaceful the view is gorgeous...",
+                    "txt": "I could not picked a better place to stay , had a wonderful and amazing time . This was top of the list of best places/experiences ever .... Cozy amazing suite ,super clean, and comfortable , lovely authentic castle.... Location is awesome , available parking. Amazing Views from Castle , unique ,fairy tale experience type. a great host, very friendly , pays attention to every single detail to take care of guest , she exceeded my expectations .Traveling through Italy for 7 weeks . I have stayed in many places in Europe, Italy and around the world . I have never experience a place like this ! I recommend this place to everyone , Thank you for a wonderful experience.",
                     "rate": 4.5,
                     "by": {
                         "_id": 125,
@@ -380,7 +380,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c001",
-                    "txt": "The house was'nt clean enough...",
+                    "txt": "No pictures can do justice to the serenity you feel at this place. Waking up and sleeping to the sounds of river, sunshine always peaking through the trees, birds and butterflies fluttering around- there was a whimsical quality to it all. It felt like a slice of paradise. this hospitality was humbling and she made me feel at home thousands of miles away from my own. I wish I could’ve stayed longer. It’s a home for all fellow wanderers and a place to heal/ for dreams and realities to become one.",
                     "rate": 3.5,
                     "by": {
                         "_id": 125,
@@ -400,7 +400,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c006",
-                    "txt": "The most peaceful place ever...",
+                    "txt": "This is the second time we have stayed in the fantastic apartment in Tova! just a few wonderful days !! comfortable, clean, equipped with a magnificent view of the sea. Thanks!",
                     "rate": 5,
                     "by": {
                         "_id": 124,
@@ -527,7 +527,7 @@ async function addTestData() {
             "reviews": [
                 {
                     "id": "c001",
-                    "txt": "The house was'nt clean enough...",
+                    "txt": "No pictures can do justice to the serenity you feel at this place. Waking up and sleeping to the sounds of river, sunshine always peaking through the trees, birds and butterflies fluttering around- there was a whimsical quality to it all. It felt like a slice of paradise. this hospitality was humbling and she made me feel at home thousands of miles away from my own. I wish I could’ve stayed longer. It’s a home for all fellow wanderers and a place to heal/ for dreams and realities to become one.",
                     "rate": 3.5,
                     "by": {
                         "_id": 125,
@@ -537,7 +537,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c004",
-                    "txt": "The cleanest place I have been, very peaceful the view is gorgeous...",
+                    "txt": "I could not picked a better place to stay , had a wonderful and amazing time . This was top of the list of best places/experiences ever .... Cozy amazing suite ,super clean, and comfortable , lovely authentic castle.... Location is awesome , available parking. Amazing Views from Castle , unique ,fairy tale experience type . a great host, very friendly, pays attention to every single detail to take care of guest, she exceeded my expectations .Traveling through Italy for 7 weeks .I have stayed in many places in Europe, Italy and around the world .I have never experience a place like this ! I recommend this place to everyone, Thank you for a wonderful experience.",
                     "rate": 4.5,
                     "by": {
                         "_id": 125,
@@ -557,7 +557,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c006",
-                    "txt": "The most peaceful place ever...",
+                    "txt": "This is the second time we have stayed in the fantastic apartment in Tova! just a few wonderful days !! comfortable, clean, equipped with a magnificent view of the sea. Thanks!",
                     "rate": 5,
                     "by": {
                         "_id": 124,
@@ -681,7 +681,7 @@ async function addTestData() {
             "reviews": [
                 {
                     "id": "c001",
-                    "txt": "The house was'nt clean enough...",
+                    "txt": "No pictures can do justice to the serenity you feel at this place. Waking up and sleeping to the sounds of river, sunshine always peaking through the trees, birds and butterflies fluttering around- there was a whimsical quality to it all. It felt like a slice of paradise. this hospitality was humbling and she made me feel at home thousands of miles away from my own. I wish I could’ve stayed longer. It’s a home for all fellow wanderers and a place to heal/ for dreams and realities to become one.",
                     "rate": 3.5,
                     "by": {
                         "_id": 125,
@@ -691,7 +691,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c002",
-                    "txt": "From my top10 vacations ever !",
+                    "txt": "A very special, historic and beautiful place to be! Our room was decorated so nicely and everything was lovely - the bed, pillows, shower, coffee and more. We very much enjoyed our stay.",
                     "rate": 5,
                     "by": {
                         "_id": 126,
@@ -711,7 +711,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c004",
-                    "txt": "The cleanest place I have been, very peaceful the view is gorgeous...",
+                    "txt": "I could not picked a better place to stay , had a wonderful and amazing time . This was top of the list of best places/experiences ever .... Cozy amazing suite ,super clean, and comfortable , lovely authentic castle.... Location is awesome , available parking. Amazing Views from Castle , unique ,fairy tale experience type . a great host, very friendly, pays attention to every single detail to take care of guest, she exceeded my expectations .Traveling through Italy for 7 weeks .I have stayed in many places in Europe, Italy and around the world .I have never experience a place like this ! I recommend this place to everyone, Thank you for a wonderful experience.",
                     "rate": 4.5,
                     "by": {
                         "_id": 125,
@@ -821,7 +821,7 @@ async function addTestData() {
             "reviews": [
                 {
                     "id": "c001",
-                    "txt": "The house was'nt clean enough...",
+                    "txt": "No pictures can do justice to the serenity you feel at this place. Waking up and sleeping to the sounds of river, sunshine always peaking through the trees, birds and butterflies fluttering around- there was a whimsical quality to it all. It felt like a slice of paradise. this hospitality was humbling and she made me feel at home thousands of miles away from my own. I wish I could’ve stayed longer. It’s a home for all fellow wanderers and a place to heal/ for dreams and realities to become one.",
                     "rate": 3.5,
                     "by": {
                         "_id": 125,
@@ -831,7 +831,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c002",
-                    "txt": "From my top10 vacations ever !",
+                    "txt": "A very special, historic and beautiful place to be! Our room was decorated so nicely and everything was lovely - the bed, pillows, shower, coffee and more. We very much enjoyed our stay.",
                     "rate": 5,
                     "by": {
                         "_id": 126,
@@ -851,7 +851,7 @@ async function addTestData() {
                 },
                 {
                     "id": "c004",
-                    "txt": "The cleanest place I have been, very peaceful the view is gorgeous...",
+                    "txt": "I could not picked a better place to stay , had a wonderful and amazing time . This was top of the list of best places/experiences ever .... Cozy amazing suite ,super clean, and comfortable , lovely authentic castle.... Location is awesome , available parking. Amazing Views from Castle , unique ,fairy tale experience type . a great host, very friendly, pays attention to every single detail to take care of guest, she exceeded my expectations .Traveling through Italy for 7 weeks .I have stayed in many places in Europe, Italy and around the world .I have never experience a place like this ! I recommend this place to everyone, Thank you for a wonderful experience.",
                     "rate": 4.5,
                     "by": {
                         "_id": 125,
