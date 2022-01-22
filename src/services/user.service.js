@@ -2,6 +2,8 @@ import { lastDayOfDecade } from 'date-fns'
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 import { socketService, SOCKET_EVENT_USER_UPDATED } from './socket.service'
+import userSvg from "../styles/svg/user.svg";
+
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 const STORAGE_KEY = 'userDB'
 var gWatchedUser = null;
@@ -50,30 +52,53 @@ async function update(user) {
     return user;
 }
 
-async function login(userCred) {
-    const users = getUsers()
-    console.log(userCred)
-    const currUser = users.find(user => user.password === userCred.password && user.email === userCred.email)
-    if (!currUser) return console.log('no such user')
-    // const users = await storageService.query('user')
-    // const user = users.find(user => user.username === userCred.username)
-    // return _saveLocalUser(user)
 
-    // const user = await httpService.post('auth/login', userCred) ******* When backend is up uncomment
-    // socketService.emit('set-user-socket', user._id);
-    //if (user) return _saveLocalUser(user) ******* When backend is up uncomment
+// const users = await storageService.query('user')
+// const user = users.find(user => user.username === userCred.username)
+// return _saveLocalUser(user)
 
-    if (currUser) return _saveLocalUser(currUser)
+// const user = await httpService.post('auth/login', userCred) ******* When backend is up uncomment
+// socketService.emit('set-user-socket', user._id);
+//if (user) return _saveLocalUser(user) ******* When backend is up uncomment
+function login(userCred) {
+    const users = getUsers();
+    return new Promise((resolve, reject) => {
+        const currUser = users.find(user => user.email === userCred.email)
+        if (!currUser) reject({reason:'User doesn\'t exists',unsolved:'email'});
+        else if (currUser.password !== userCred.password) {
+            if (!userCred.isSocial) reject({reason:'Incorrect user password',unsolved:'password'});
+            _saveLocalUser(currUser);
+            resolve(currUser);
+        }
+    })
+
 }
-async function signup(userCred) {
+function signup(userCred) {
     const users = getUsers()
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...users, { email: userCred.email, password: userCred.password }]))
-    // userCred.score = 10000;
-    // const user = await storageService.post('user', userCred)
-    // const user = await httpService.post('auth/signup', userCred) ******* When backend is up uncomment
-    // socketService.emit('set-user-socket', user._id);
-    // return _saveLocalUser(user)******* When backend is up uncomment
-    return _saveLocalUser(userCred)
+    return new Promise((resolve, reject) => {
+        let currUser = users.find(user => user.email === userCred?.email)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const fullNameRegex = /^([\w]{3,})+\s+([\w\s]{3,})+$/i;
+        if (!fullNameRegex.test(userCred?.fullName)) reject({reason:'Invalid full name : '+userCred.fullName,unsolved:'fullName'});
+        if (currUser === -1) currUser = null;
+        else if (currUser) {
+            reject({reason:'Email already exists',unsolved:'email'});
+            console.log(currUser);
+        } 
+        else if (!emailRegex.test(userCred?.email)) reject({reason:'Invalid email pattern : '+userCred.email,unsolved:'email'});
+        else if (!userCred.isSocial && userCred.password?.length < 5) reject({reason:'password should have at list 6 digits / letters',unsolved:'password'});
+        else if (!userCred.imgSrc) userCred.imgSrc = userSvg;
+        // else if (!userCred.email || !userCred.password || !userCred.fullName)
+        _saveLocalUser(userCred);
+        resolve(userCred);
+        console.log(users)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([...users, userCred]));
+        // userCred.score = 10000;
+        // const user = await storageService.post('user', userCred)
+        // const user = await httpService.post('auth/signup', userCred) ******* When backend is up uncomment
+        // socketService.emit('set-user-socket', user._id);
+        // return _saveLocalUser(user)******* When backend is up uncomment
+    })
 }
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)

@@ -23,3 +23,11 @@ export function signOut() {
         dispatch(action)
     }
 }
+
+export function updateInputsErrorInfo(error) {
+    return async (dispatch) => {
+        const action = { type: 'UPDATE_INPUTS_ERROR', key: error.unsolved, content: error.reason };
+        console.log(error,'error')
+        dispatch(action)
+    }
+}

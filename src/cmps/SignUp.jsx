@@ -16,23 +16,35 @@ import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { GoogleLogin } from "react-google-login";
 import { SpecialButton } from "./SpacialButton";
+import { useDispatch, useSelector } from "react-redux";
+import { updateInputsErrorInfo } from "../store/user.action";
 
 const theme = createTheme();
 
 export function SignUp({ setIsSubmitting, signingUp }) {
 	const history = useHistory();
-	// const [value, setValue] = React.useState(new Date());
+	const dispatch = useDispatch();
+	const connectionError = useSelector(state => state.userModule.connectionError);
 
 	const responseFacebook = (response) => {
 		const credentials = {
 			fullName: response.name,
 			email: response.email,
 			imgSrc: response.picture.data.url,
+			isSocial: true,
 		};
-		console.log(credentials, "וואלה מגניב רצח הא?");
 		signingUp(credentials);
-		setTimeout(() => {
-			setIsSubmitting(true);
+		setIsSubmitting(true);
+		setTimeout(async () => {
+			try {
+				await signingUp(credentials);
+			}
+			catch (err) {
+				setIsSubmitting(false);
+				dispatch(updateInputsErrorInfo(err))
+				console.log(connectionError)
+				return;
+			}
 			history.push("/");
 		}, 2000);
 	};
@@ -42,11 +54,18 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 			fullName: response.profileObj.name,
 			email: response.profileObj.email,
 			imgSrc: response.profileObj.imageUrl,
+			isSocial: true,
 		};
-		console.log(credentials, "וואלה מגניב רצח הא?");
 		setIsSubmitting(true);
-		setTimeout(() => {
-			signingUp(credentials);
+		setTimeout(async () => {
+			try {
+				await signingUp(credentials);
+			}
+			catch (err) {
+				setIsSubmitting(false);
+				dispatch(updateInputsErrorInfo(err))
+				return;
+			}
 			history.push("/");
 		}, 2000);
 	};
@@ -60,14 +79,21 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 		const data = new FormData(event.currentTarget);
 		// eslint-disable-next-line no-console
 		const credentials = {
-			fullname: data.get("fullName"),
+			fullName: data.get("fullName"),
 			email: data.get("email"),
 			password: data.get("password"),
 		};
 		console.log(credentials);
 		setIsSubmitting(true);
-		setTimeout(() => {
-			signingUp(credentials);
+		setTimeout(async () => {
+			try {
+				await signingUp(credentials);
+			}
+			catch (err) {
+				setIsSubmitting(false);
+				dispatch(updateInputsErrorInfo(err))
+				return;
+			};
 			history.push("/");
 		}, 2000);
 	};
@@ -87,15 +113,22 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 						Sign up
 					</Typography>
 					<Box component='form' noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-						<Grid container spacing={2}>
+						<Grid container spacing={0}>
 							<Grid item xs={12}>
-								<TextField required fullWidth id='fullName' name='fullName' label='Full Name' type='fullName' autoComplete='full-name' />
+							<TextField
+							onChange={() => {connectionError.fullName && dispatch(updateInputsErrorInfo({ reason: '', unsolved:'userName' }))}}
+							 required fullWidth name='fullName' label='Full Name' type='fullName' id='fullName' autoComplete='current-fullName' />
+						<input type='text' value={connectionError.fullName} readOnly style={{ marginInlineStart: '10px', color: 'red', border: 'unset' }} />
+
+							<TextField
+							onChange={() => {connectionError.email && dispatch(updateInputsErrorInfo({ reason: '', unsolved:'email' }))}}
+							 required fullWidth name='email' label='E-mail' type='email' id='email' autoComplete='current-email' />
+						<input type='text' value={connectionError.email} readOnly style={{ marginInlineStart: '10px', color: 'red', border: 'unset' }} />
 							</Grid>
 							<Grid item xs={12}>
-								<TextField required fullWidth name='email' label='Email' type='email' id='email' autoComplete='new-email' />
-							</Grid>
-							<Grid item xs={12}>
-								<TextField required fullWidth name='password' label='Password' type='password' id='password' autoComplete='new-password' />
+						<TextField onChange={() => {connectionError.password &&  dispatch(updateInputsErrorInfo({ reason: '', unsolved: 'password' }))
+						}}  required fullWidth name='password' label='Password' type='password' id='password' autoComplete='current-password' />
+						<input type='text' value={connectionError.password} readOnly style={{ marginInlineStart: '10px', color: 'red', border: 'unset' }} />
 							</Grid>
 						</Grid>
 						<button style={{ marginBlockStart: "10px", backgroundColor: "transparent", width: "100%", height: "40px", border: "none" }}>
