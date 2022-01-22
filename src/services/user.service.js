@@ -162,22 +162,29 @@ function getLoggedinUser() {
 
 addDemoData()
 function addDemoData() {
+
     localStorage.setItem(STORAGE_KEY, JSON.stringify([
         {
             _id: 124,
             email: "koren",
+            fullName: "koren aharon",
             password: "123",
+            imgUrl: '../styles/img/team/koren.jpg',
 
         },
         {
             _id: 125,
             email: "michael",
+            fullName: "michael aharoni",
             password: "123",
+            imgUrl: '../styles/img/team/michael.png',
         },
         {
             _id: 126,
             email: "idan",
+            fullName: "idan gez",
             password: "123",
+            imgUrl: '../styles/img/team/idan.jpg',
         }
     ]))
 
