@@ -19,35 +19,57 @@ import { GoogleLogin } from 'react-google-login';
 
 const theme = createTheme();
 
-export function SignUp({ signingUp }) {
+export function SignUp({ setIsSubmitting, signingUp }) {
     const history = useHistory();
-    const [value, setValue] = React.useState(new Date());
+    // const [value, setValue] = React.useState(new Date());
 
     const responseFacebook = (response) => {
-        console.log(response);
+        const credentials = {
+            fullName: response.name,
+            email: response.email,
+            imgSrc: response.picture.data.url
+        }
+        console.log(credentials, "וואלה מגניב רצח הא?");
+        signingUp(credentials);
+        setTimeout(() => {
+            setIsSubmitting(true);
+            history.push('/');
+        }, 2000)
     }
 
     const responseGoogle = (response) => {
-        console.log(response.profileObj);
+        const credentials = {
+            fullName: response.profileObj.name,
+            email: response.profileObj.email,
+            imgSrc: response.profileObj.imageUrl
+        }
+        console.log(credentials, "וואלה מגניב רצח הא?");
+        setIsSubmitting(true);
+        setTimeout(() => {
+            signingUp(credentials);
+            history.push('/');
+        }, 2000)
     }
 
-    const handleChange = (newValue) => {
-        setValue(newValue);
-    };
+    // const handleChange = (newValue) => {
+    //     setValue(newValue);
+    // };
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
-        const userInfo = {
-            fullname: data.get('firstName') + ' ' + data.get('lastName'),
-            username: data.get('firstName') + data.get('lastName'),
-            bdate: value,
+        const credentials = {
+            fullname: data.get('fullName'),
             email: data.get('email'),
             password: data.get('password'),
         }
-        signingUp(userInfo);
-        history.push('/');
+        console.log(credentials)
+        setIsSubmitting(true);
+        setTimeout(()=>{
+            signingUp(credentials);
+            history.push('/');
+        },2000)
     };
 
 
@@ -63,9 +85,6 @@ export function SignUp({ signingUp }) {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'inherit' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
@@ -80,17 +99,6 @@ export function SignUp({ signingUp }) {
                                     label="Full Name"
                                     type="fullName"
                                     autoComplete="full-name"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                            <TextField
-                                    required
-                                    fullWidth
-                                    id="phone"
-                                    name="phone"
-                                    label="Phone Number"
-                                    type="number"
-                                    autoComplete="phone"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -120,8 +128,7 @@ export function SignUp({ signingUp }) {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            style={{backgroundColor:'#FF385C'}}
-                            // sx={{ mt: 3, mb: 2 }}
+                            style={{ backgroundColor: '#FF385C', marginBlockStart: '8px' }}
                         >
                             Sign Up
                         </Button>

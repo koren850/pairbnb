@@ -11,9 +11,11 @@ import { SearchBar } from "./SearchBar";
 import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive, toggleIsExplore } from "../store/header.action";
 import { click } from "@testing-library/user-event/dist/click";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { UserModal } from "./UserModal";
 
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
 	const { headerLayoutSmall, isDark, isActive, isExplore } = headerMode;
+	const [openModal, toggleOpenModal] = useState(false);
 	const location = useLocation();
 	const history = useHistory();
 	function onToggleIsActive() {
@@ -35,6 +37,14 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 			toggleHeaderIsDark(false);
 		}
 	}
+
+	// useEffect(()=>{
+	// 	console.log('yee')
+	// window.addEventListener('click',()=>toggleOpenModal(false));
+	// return()=>{
+	// 	window.removeEventListener('click',()=>toggleOpenModal(false));
+	// }
+	// },[openModal])
 
 	useEffect(() => {
 		if (!location.pathname || location.pathname === "/") {
@@ -63,9 +73,10 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 
 	return (
 		<header
-			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${
-				headerLayoutSmall ? "detail-layout" : "main-layout"
-			}`}>
+		className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${
+			headerLayoutSmall ? "detail-layout" : "main-layout"
+		}`}>
+				<UserModal openModal={openModal}/>
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
 					<span className='logo'>
@@ -83,7 +94,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 					<Link className='become' to={`/explore`}>
 						Become a Host
 					</Link>
-					<button className='user-menu'>
+					<button onClick={()=>toggleOpenModal(!openModal)} className='user-menu'>
 						<img className='hamburger-svg' src={hamburgerSvg} />
 						<img className='user-svg' src={userSvg} />
 					</button>

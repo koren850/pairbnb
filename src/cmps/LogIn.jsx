@@ -21,15 +21,35 @@ import { GoogleLogin } from 'react-google-login';
 
 const theme = createTheme();
 
-export function LogIn({ signingIn }) {
+export function LogIn({ setIsSubmitting, signingIn }) {
     const history = useHistory();
 
     const responseFacebook = (response) => {
-        console.log(response);
+        const credentials = {
+            fullName: response.name,
+            email: response.email,
+            imgSrc: response.picture.data.url
+        }
+        console.log(credentials, "וואלה מגניב רצח הא?");
+        setIsSubmitting(true);
+        setTimeout(() => {
+            signingIn(credentials);
+            history.push('/');
+        }, 2000)
     }
 
     const responseGoogle = (response) => {
-        console.log(response.profileObj);
+        const credentials = {
+            fullName: response.profileObj.name,
+            email: response.profileObj.email,
+            imgSrc: response.profileObj.imageUrl
+        }
+        console.log(credentials, "וואלה מגניב רצח הא?");
+        setIsSubmitting(true);
+        setTimeout(() => {
+            signingIn(credentials);
+            history.push('/');
+        }, 2000)
     }
 
     const handleSubmit = (event) => {
@@ -38,10 +58,12 @@ export function LogIn({ signingIn }) {
         const credentials = {
             username: data.get('username'),
             password: data.get('password'),
-            remember: data.get('remember')
         }
-        signingIn(credentials);
-        history.push('/');
+        setIsSubmitting(true);
+        setTimeout(() => {
+            signingIn(credentials);
+            history.push('/');
+        }, 2000)
     };
 
     return (
@@ -56,9 +78,6 @@ export function LogIn({ signingIn }) {
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: 'inherit', color: 'black' }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
@@ -94,7 +113,7 @@ export function LogIn({ signingIn }) {
                             type="submit"
                             fullWidth
                             variant="contained"
-                            style={{backgroundColor:'#FF385C'}}
+                            style={{ backgroundColor: '#FF385C' }}
                             // sx={{ mt: 3, mb: 2 }}
                             className="wow"
                         >
@@ -116,12 +135,12 @@ export function LogIn({ signingIn }) {
 
                         <FacebookLogin
                             appId="960690547913550"
-                            autoLoad={true}
                             fields="name,email,picture"
                             render={renderProps => (
                                 <FacebookLoginButton style={{ display: 'flex', justifyContent: 'center', height: '35px', margin: '10px 0', width: '396px' }} onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Facebook</FacebookLoginButton>
                             )}
-                            callback={responseFacebook} />
+                            callback={responseFacebook}
+                        />
                         <Grid container>
                             <Grid item xs>
                                 <Link to="/signup">
