@@ -46,11 +46,11 @@ export function updateStay(stay) {
     }
 }
 
-export function setFilterBy(filterBy,stayType) {
+export function setFilterBy(filterBy, stayType, stayPrice) {
     return async (dispatch) => {
 
         try {
-            const stays = await stayService.query(filterBy,stayType)
+            const stays = await stayService.query(filterBy, stayType, stayPrice)
             dispatch({ type: 'SET_FILTER', filterBy });
             dispatch({ type: 'SET_STAYS', stays });
         }
@@ -61,13 +61,28 @@ export function setFilterBy(filterBy,stayType) {
 }
 
 
-export function setSortBy(filterBy, stayType) {
+export function setSortBy(filterBy, stayType, stayPrice) {
     return async (dispatch) => {
 
         try {
-            const stays = await stayService.query(filterBy, stayType)
+            const stays = await stayService.query(filterBy, stayType, stayPrice)
             // console.log(stays)
             dispatch({ type: 'SET_STAY_TYPE', stayType });
+            dispatch({ type: 'SET_STAYS', stays });
+        }
+        catch {
+            console.log('cannot filter stays')
+        }
+    }
+}
+
+export function setByRange(filterBy, stayType, stayPrice) {
+    return async (dispatch) => {
+
+        try {
+            const stays = await stayService.query(filterBy, stayType, stayPrice)
+            // console.log(stays)
+            dispatch({ type: 'SET_STAY_RANGE', stayPrice });
             dispatch({ type: 'SET_STAYS', stays });
         }
         catch {

@@ -1,7 +1,11 @@
 const initialState = {
-    stays : [],
-    filterBy : null,
-    stayType: null
+    stays: [],
+    filterBy: null,
+    stayType: null,
+    stayPrice: {
+        minPrice: 0,
+        maxPrice: 1000,
+    }
 };
 
 export function stayReducer(state = initialState, action) {
@@ -29,6 +33,9 @@ export function stayReducer(state = initialState, action) {
             break;
         case 'SET_STAY_TYPE':
             newState = { ...state, stayType: { ...action.stayType } }
+            break;
+        case 'SET_STAY_RANGE':
+            newState = { ...state, stayPrice: { ...action.stayPrice } }
             break;
         case 'TOGGLE_HEADER_LAYOUT':
             newState = { ...state, headerLayoutSmall: action.set }

@@ -11,16 +11,29 @@ export const stayService = {
     getById,
     save,
     remove,
-    subscribe
+    subscribe,
+    getDataForPrice
 
 }
 window.cs = stayService;
 
 
-async function query(filterBy, stayType) {
-    const stays = await storageService.query(STORAGE_KEY);
+async function query(filterBy, stayType, stayPrice) {
+    // console.log(filterBy,stayType)
+    console.log('hi queryy')
+    let stays = await storageService.query(STORAGE_KEY);
     let filterValues;
     let stayTypeValues;
+    // if (stayPrice) {
+    const { minPrice, maxPrice } = stayPrice
+    let pricedStays = []
+    stays.map(stay => {
+        if (stay.price >= minPrice && stay.price <= maxPrice) return pricedStays.push(stay)
+    })
+    // console.log(pricedStays)
+    stays = pricedStays
+    // console.log(stays)
+
     if (stayType) stayTypeValues = Object.values(stayType).some(value => value);
     if (filterBy) filterValues = Object.values(filterBy).some(value => value);
     if ((!filterBy || !filterValues) && (!stayType || !stayTypeValues)) return stays;
@@ -73,8 +86,58 @@ async function query(filterBy, stayType) {
         return filterAndTypeStays
     }
 }
-
-
+// getDataForPrice()
+function getDataForPrice(stays) {
+    // const stays = await query()
+    console.log(stays)
+    let ranges = [{
+        key: "*-250",
+        to: 250,
+        doc_count: 0
+    },
+    {
+        key: "250-300",
+        from: 250,
+        to: 300,
+        doc_count: 0
+    },
+    {
+        key: "300-320",
+        from: 300,
+        to: 320,
+        doc_count: 0
+    },
+    {
+        key: "320-340",
+        from: 320,
+        to: 340,
+        doc_count: 0
+    },
+    {
+        key: "340-360",
+        from: 340,
+        to: 360,
+        doc_count: 0
+    },
+    {
+        key: "360-380",
+        from: 360,
+        to: 380,
+        doc_count: 0
+    },
+    {
+        key: "380-*",
+        from: 380,
+        doc_count: 0
+    }]
+    stays.forEach(stay => {
+        return ranges.map(range => {
+            if (stay.price >= range.from && stay.price < range.to) return range["doc_count"]++
+        })
+    })
+    console.log(ranges)
+    return ranges
+}
 
 
 function getById(stayId) {

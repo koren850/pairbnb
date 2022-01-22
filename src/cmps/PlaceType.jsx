@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { setSortBy } from "../store/stay.action.js";
 
 
-export function _PlaceTypeFilter({ setSortBy, filterBy }) {
+export function _PlaceTypeFilter({ setSortBy, filterBy,stayPrice }) {
     const [stayType, setStayType] = useState({
         "Entire place": false,
         "Hotel room": false,
@@ -26,7 +26,7 @@ export function _PlaceTypeFilter({ setSortBy, filterBy }) {
         });
     };
     useEffect(async () => {
-        await setSortBy(filterBy, stayType)
+        await setSortBy(filterBy, stayType,stayPrice)
     }, [stayType])
 
 
@@ -80,6 +80,8 @@ function mapStateToProps({ stayModule }) {
         stayType: stayModule.stayType,
         filterBy: stayModule.filterBy,
         stays: stayModule.stays,
+        stayPrice: stayModule.stayPrice
+
     };
 }
 const mapDispatchToProps = {
