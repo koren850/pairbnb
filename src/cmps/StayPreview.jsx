@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import reviewStar from "../styles/svg/star.svg";
 import ImageCarousel from "./ImageCarousel.jsx";
 
+import likeHeart from "../styles/svg/like-heart.svg"
+import likeHeartBlack from "../styles/svg/like-heart-black.svg"
+
 export function StayPreview({ stay }) {
 	return (
 		<div>
 			<div className="stay-preview">
+				<button><img className="stay-preview-heart" src={likeHeartBlack} /></button>
 				<div className="stay-preview-img">
-					{/* <Link to={`/details/${stay._id}`}><img src={stay.imgUrls[0]} /></Link> */}
-					<ImageCarousel  stay = {stay}/>
+					<ImageCarousel stay={stay} />
 				</div>
 				<div className='stay-preview-details'>
 					<div className='stay-reviews'>
@@ -20,8 +23,7 @@ export function StayPreview({ stay }) {
 					</div>
 					<div className='stay-name'>{stay.name}</div>
 					<div className='stay-price-night'>
-						<div className='stay-price'>${stay.price} / </div>
-						<div className='stay-night'> night</div>
+						<div className='stay-price'>${stay.price} /<span className='stay-night'>night</span> </div>
 					</div>
 				</div>
 			</div>
