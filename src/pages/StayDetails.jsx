@@ -21,13 +21,13 @@ function _StayDetails({toggleDetailsLayout }) {
 		cdm();
 		async function cdm() {
 			const stayByid = await stayService.getById(params.id);
-			console.log(stayByid);
+			// console.log(stayByid);
 			setStay(stayByid);
 			toggleDetailsLayout(true);
-			console.log("hello");
+			// console.log("hello");
 		}
 		return () => {
-			console.log("bye");
+			// console.log("bye");
 			toggleDetailsLayout(false);
 		};
 	}, []);

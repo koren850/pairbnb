@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateRangePicker from "@mui/lab/DateRangePicker";
-
+import { Guests } from "./Guests";
 import remove from "../styles/svg/delete-date.svg";
 
 import plus from "../styles/svg/plus.svg";
@@ -38,7 +38,6 @@ export function Checkout({ stay }) {
 	}
 
 	const minusSvg = <img className='plus-minus' src={minus} />;
-	console.log(minusSvg);
 	const plusSvg = <img className='plus-minus' src={plus} />;
 
 	return (
@@ -67,42 +66,7 @@ export function Checkout({ stay }) {
 					</div>
 				</div>
 				<SpecialButton args={null} onClick={reserveOrder} text='Check availability' />
-				{guests && (
-					<div className='guests-checkout'>
-						<div className='guest-add flex'>
-							<div className='guest-type'>
-								<h3>Adults</h3>
-								<div>
-									<button style={order.adults < 2 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("adults", -1)}>
-										{minusSvg}
-									</button>
-									<span style={{ color: "black" }}>{order.adults}</span>
-									<button onClick={() => handleChange("adults", 1)}>{plusSvg}</button>
-								</div>
-							</div>
-							<div className='guest-type'>
-								<h3>Children</h3>
-								<div>
-									<button style={order.children < 1 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("children", -1)}>
-										{minusSvg}
-									</button>
-									<span style={{ color: "black" }}>{order.children}</span>
-									<button onClick={() => handleChange("children", 1)}>{plusSvg}</button>
-								</div>
-							</div>
-							<div className='guest-type'>
-								<h3>Infants</h3>
-								<div>
-									<button style={order.infants < 1 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("infants", -1)}>
-										{minusSvg}
-									</button>
-									<span style={{ color: "black" }}>{order.infants}</span>
-									<button onClick={() => handleChange("infants", 1)}>{plusSvg}</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				)}
+				{guests && <Guests init={order} set={setOrder} />}
 				{order.checkIn && order.checkOut && <h3 className='total-price'> Total price: ${getTotalPrice() * stay.price}</h3>}
 			</section>
 		</main>
@@ -112,7 +76,7 @@ export function Checkout({ stay }) {
 function getWeeksAfter(date, amount) {
 	return date ? addWeeks(date, amount) : undefined;
 }
-function MinMaxDateRangePicker({ order, setOrder }) {
+export function MinMaxDateRangePicker({ order, setOrder }) {
 	const removeUrl = (
 		<img onClick={() => setOrder({ ...order, checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 })} className='clear-dates' src={remove} />
 	);
@@ -129,7 +93,7 @@ function MinMaxDateRangePicker({ order, setOrder }) {
 				startText='Check-in'
 				endText='Check-out'
 				renderInput={(startProps, endProps) => (
-					<React.Fragment className='koko'>
+					<React.Fragment>
 						<TextField className={"start-date"} {...startProps} />
 						<TextField {...endProps} />
 						<span>{removeUrl}</span>
