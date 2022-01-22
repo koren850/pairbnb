@@ -13,18 +13,18 @@ import home from "../styles/svg/entirehome.svg";
 import clean from "../styles/svg/clean.svg";
 import checkin from "../styles/svg/checkin.svg";
 
-function _StayDetails({toggleDetailsLayout }) {
+function _StayDetails({ toggleDetailsLayout }) {
 	const params = useParams();
 	const [stay, setStay] = useState(null);
+	const [avg, setAvg] = useState(0);
 
 	useEffect(() => {
 		cdm();
 		async function cdm() {
 			const stayByid = await stayService.getById(params.id);
-			// console.log(stayByid);
+			getAvgRating(stayByid);
 			setStay(stayByid);
 			toggleDetailsLayout(true);
-			// console.log("hello");
 		}
 		return () => {
 			// console.log("bye");
@@ -32,29 +32,39 @@ function _StayDetails({toggleDetailsLayout }) {
 		};
 	}, []);
 
+	function getAvgRating(stayToAvg) {
+		let ammount = 0;
+		stayToAvg.reviews.forEach((review) => (ammount += review.rate));
+		const divider = stayToAvg.reviews.length;
+		setAvg(ammount / divider);
+	}
+
 	if (!stay) return <Loader />;
 	return (
 		<main className='detail-layout main-container'>
 			<div className='middle-layout'>
-				<h1>{stay.name}</h1>
+				<h1 className='stay-name'>{stay.name}</h1>
 
 				<div className='stay-reviews'>
 					<span className='stay-name-details'>{stay.loc.address}</span>
-					<img className='stay-reviews' src={reviewStar} /> {stay.reviews}({stay.reviews.length} reviews)
+					<img className='stay-reviews' src={reviewStar} /> <span>{avg}</span>({stay.reviews.length} reviews)
 				</div>
 
 				<div className='details-img-container'>
 					<img className='main-img' src={stay.imgUrls[0]} alt='' />
 					<img className='small-img' src={stay.imgUrls[1]} alt='' />
 					<img className='small-img corner-top' src={stay.imgUrls[2]} alt='' />
-					<img className='small-img' src={stay.imgUrls[4]} alt='' />
-					<img className='small-img corner-bottom' src={stay.imgUrls[5]} alt='' />
+					<img className='small-img' src={stay.imgUrls[3]} alt='' />
+					<img className='small-img corner-bottom' src={stay.imgUrls[4]} alt='' />
 				</div>
 				<div className='stay-info-container'>
 					<div className='stay-info'>
-						<h1>
-							{stay.type} hosted by {stay.host.inside}
-						</h1>
+						<div className='host-info flex'>
+							<h1>
+								{stay.type} hosted by <span className='host-name'>{stay.host.fullName}</span>
+							</h1>
+							<img className='mini-host-img' src={stay.host.imgUrl} />
+						</div>
 						<ul className='stay-baths-beds flex'>
 							{stay.capacity} guests
 							<li>{stay.capacity - 1} beds</li>
@@ -62,20 +72,26 @@ function _StayDetails({toggleDetailsLayout }) {
 						</ul>
 						<hr></hr>
 						<ul className='stay-main-amenities-list'>
-							<li>
+							<li className='flex'>
 								<img className='stay-main-amenities' src={home} />
-								<h3>Entire home</h3>
-								<span>You will have the {stay.type.toLowerCase()} to yourself.</span>
+								<div>
+									<h3>Entire home</h3>
+									<p>You will have the {stay.type.toLowerCase()} to yourself.</p>
+								</div>
 							</li>
-							<li>
+							<li className='flex'>
 								<img className='stay-main-amenities' src={clean} />
-								<h3>Enhanced Clean</h3>
-								<span>This Host committed to Airbnb's 5-step enhanced cleaning process.</span>
+								<div>
+									<h3>Enhanced Clean</h3>
+									<p>This Host committed to Airbnb's 5-step enhanced cleaning process.</p>
+								</div>
 							</li>
-							<li>
+							<li className='flex'>
 								<img className='stay-main-amenities' src={checkin} />
-								<h3>Self check-in</h3>
-								<span>Check yourself in with the lockbox.</span>
+								<div>
+									<h3>Self check-in</h3>
+									<p>Check yourself in with the lockbox.</p>
+								</div>
 							</li>
 						</ul>
 						<hr></hr>
@@ -85,6 +101,7 @@ function _StayDetails({toggleDetailsLayout }) {
 					</div>
 					<Checkout stay={stay} />
 				</div>
+
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>
