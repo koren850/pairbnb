@@ -17,7 +17,7 @@ export default function ImageCarousel({ stay }) {
     }
 
     return (
-        <Carousel showThumbs={false} showStatus={false} onClickItem={() => onClickItem(stay._id)}>
+        <Carousel  showThumbs={false} showStatus={false} onClickItem={() => onClickItem(stay._id)}>
             <div>
                 <img src={stay.imgUrls[0]} />
                 {/* <button ><img style={{ width: "45px" }} src={arrowLeft} alt="" /></button> */}

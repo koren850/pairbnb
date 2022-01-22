@@ -44,7 +44,7 @@ export function _SortStay({ setFilterBy, stayType, stayPrice }) {
 
     return (<div className="filter-container middle-layout">
 
-        <button className="filter-btn" onClick={() => { togglePrice() }} >{isPriceFilter ? <span className="flex"><span>Price </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Price </span><img className="filter-arrow" src={downArrow} /></span>}</button>
+        <button className="filter-btn" onClick={() => { togglePrice() }} >{isPriceFilter ? <span className="flex"><span>Price </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Price: ${stayPrice.minPrice}-{stayPrice.maxPrice}</span><img className="filter-arrow" src={downArrow} /></span>}</button>
         {isPriceFilter && <PriceSlider />}
         <button className="filter-btn" onClick={() => { togglePlaces() }} >{placeType ? <span className="flex"><span>Type of place </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Type of place </span><img className="filter-arrow" src={downArrow} /></span>}</button>
         {placeType && <PlaceTypeFilter />}
