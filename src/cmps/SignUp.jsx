@@ -38,6 +38,7 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 		setTimeout(async () => {
 			try {
 				await signingUp(credentials);
+				history.push("/");
 			}
 			catch (err) {
 				setIsSubmitting(false);
@@ -45,7 +46,6 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 				console.log(connectionError)
 				return;
 			}
-			history.push("/");
 		}, 2000);
 	};
 
@@ -60,19 +60,15 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 		setTimeout(async () => {
 			try {
 				await signingUp(credentials);
+				history.push("/");
 			}
 			catch (err) {
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err))
 				return;
 			}
-			history.push("/");
 		}, 2000);
 	};
-
-	// const handleChange = (newValue) => {
-	//     setValue(newValue);
-	// };
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -83,14 +79,13 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 			email: data.get("email"),
 			password: data.get("password"),
 		};
-		console.log(credentials);
 		setIsSubmitting(true);
 		setTimeout(async () => {
 			try {
 				await signingUp(credentials);
+				setIsSubmitting(false);
 			}
 			catch (err) {
-				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err))
 				return;
 			};

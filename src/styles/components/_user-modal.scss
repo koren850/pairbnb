@@ -1,12 +1,13 @@
 .user-modal-container {
-    top:-100%;
-    &.open{
-        top: 27.6%;
+  transition: 0.3s;
+  top: 256%;
+    &.active-modal {
+        top: 110.6%;
     }
   box-shadow: 0px 2px 3px $clr5;
   overflow: hidden;
   background-color: #fff;
-  position: fixed;
+  position: absolute;
   height: 240px;
   width: 240px;
   border-radius: 20px;
