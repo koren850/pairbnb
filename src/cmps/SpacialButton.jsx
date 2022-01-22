@@ -105,12 +105,12 @@ export function SpecialButton({ text, size, isActive, onClick = () => {}, args }
 			<div className='cell'></div>
 			<div className='cell'></div>
 			<div className='content'>
-				<button className='action-btn'>
+				<div className='action-btn'>
 					<span style={size && { transform: "translate(0,0)" }}>
 						{text}
 						{isActive && "Search"}
 					</span>
-				</button>
+				</div>
 			</div>
 		</div>
 	);

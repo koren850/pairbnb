@@ -148,6 +148,19 @@
 		height: 100%;
 		background-color: transparent;
 		border: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		span {
+			justify-content: center;
+			align-items: center;
+			display: flex;
+			img {
+				padding: 0;
+				transform: translate(0%, 0%) rotate(-15deg);
+			}
+		}
 	}
 
 	span {
@@ -157,7 +170,6 @@
 		font-size: 16px;
 		line-height: 20px;
 		font-weight: 600;
-		font-family: sans-serif;
 	}
 
 	p.footer {

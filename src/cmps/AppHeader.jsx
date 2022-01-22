@@ -15,7 +15,7 @@ import { UserModal } from "./UserModal";
 
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
 	const { headerLayoutSmall, isDark, isActive, isExplore } = headerMode;
-	const [openModal, toggleOpenModal] = useState(false);
+	const [userModalState, toggleModal] = useState(false);
 	const location = useLocation();
 	const history = useHistory();
 	function onToggleIsActive() {
@@ -38,13 +38,13 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 		}
 	}
 
-	// useEffect(()=>{
-	// 	console.log('yee')
-	// window.addEventListener('click',()=>toggleOpenModal(false));
-	// return()=>{
-	// 	window.removeEventListener('click',()=>toggleOpenModal(false));
-	// }
-	// },[openModal])
+	// useEffect(() => {
+	// 	console.log("yee");
+	// 	window.addEventListener("click", () => toggleOpenModal(false));
+	// 	return () => {
+	// 		window.removeEventListener("click", () => toggleOpenModal(false));
+	// 	};
+	// }, []);
 
 	useEffect(() => {
 		if (!location.pathname || location.pathname === "/") {
@@ -64,7 +64,6 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 			toggleHeaderIsDark(false);
 		}
 		window.addEventListener("scroll", resetHeaderModes);
-
 		return () => {
 			window.removeEventListener("scroll", resetHeaderModes);
 			toggleIsExplore(true);
@@ -73,10 +72,10 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 
 	return (
 		<header
-		className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${
-			headerLayoutSmall ? "detail-layout" : "main-layout"
-		}`}>
-				<UserModal openModal={openModal}/>
+			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${
+				headerLayoutSmall ? "detail-layout" : "main-layout"
+			}`}>
+			{userModalState && <UserModal currState={userModalState} toggleModal={toggleModal} />}
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
 					<span className='logo'>
@@ -94,7 +93,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 					<Link className='become' to={`/explore`}>
 						Become a Host
 					</Link>
-					<button onClick={()=>toggleOpenModal(!openModal)} className='user-menu'>
+					<button onClick={() => toggleModal(true)} className='user-menu'>
 						<img className='hamburger-svg' src={hamburgerSvg} />
 						<img className='user-svg' src={userSvg} />
 					</button>

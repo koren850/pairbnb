@@ -5,19 +5,33 @@ import { signOut } from "../store/user.action";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { userService } from "../services/user.service";
 
-export function UserModal({ openModal }) {
-	const [loggUser, setLoggUser] = useState(null);
+export function UserModal({ toggleModal, currState }) {
+	const [loggUser, setLoggUser] = useState(userService.getLoggedinUser());
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userModule);
 	const history = useHistory();
 
+	function toggle(ev) {
+		console.log(ev.target);
+		ev.stopPropagation();
+		toggleModal(!currState);
+	}
+
+	useEffect(() => {
+		window.addEventListener("click", toggle);
+		return () => {
+			window.removeEventListener("click", toggle);
+		};
+	}, []);
 	function onLogOut() {
-		console.log(user);
+		userService.logout();
+		console.log("logout");
 	}
 
 	return (
-		<nav className={`user-modal-container ${openModal && "open"}`}>
+		<nav className={`user-modal-container ${currState && "open"}`}>
 			<ul>
 				<li>
 					{loggUser ? (
@@ -43,15 +57,7 @@ export function UserModal({ openModal }) {
 				<li>
 					<span className='user-modal-span'>Start hosting</span>
 				</li>
-				<li>
-					{loggUser ? (
-						<button onClick={onLogOut} className='log-out-btn'>
-							<span className='user-modal-span'>Log out</span>
-						</button>
-					) : (
-						<span className='user-modal-span'>About</span>
-					)}
-				</li>
+				<li onClick={onLogOut}>{loggUser ? <span className='user-modal-span'>Log out</span> : <span className='user-modal-span'>About</span>}</li>
 				<li>
 					<span className='user-modal-span'>Help</span>
 				</li>
