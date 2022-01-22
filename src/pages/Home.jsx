@@ -7,7 +7,7 @@ import hostImg from "../styles/img/host.jpg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleIsExplore, toggleHeaderIsActive, toggleHeaderIsDark } from "../store/header.action";
-import {SearchBarFilterInput} from "../cmps/SearchBarFilterInput"
+import SearchBarFilterInput from "../cmps/SearchBarFilterInput"
 
 export function Home() {
 	const isExplore = useSelector((state) => state.headerModule.headerMode.isExplore);
@@ -25,7 +25,6 @@ export function Home() {
 	return (
 		<main className='home main-layout'>
 				<div className="middle-layout">
-			<SearchBarFilterInput placeholder={'Where are we going ?'} data={['avb','fafa','asd']}/>
 				</div>
 			<section className='hero full-layout'>
 				<img 

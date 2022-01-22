@@ -17,7 +17,6 @@ export const stayService = {
 }
 window.cs = stayService;
 
-
 async function query(filterBy, stayType, stayPrice) {
     // console.log(filterBy,stayType)
     console.log('hi queryy')

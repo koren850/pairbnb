@@ -1,14 +1,15 @@
 import React, { useState } from "react";
+import {stayService} from "../services/stay.service";
 
-export function SearchBarFilterInput({ placeholder, data }) {
+async function SearchBar({ placeholder }) {
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
-
+  const data = await stayService.query();
   const handleFilter = (event) => {
     const searchWord = event.target.value;
     setWordEntered(searchWord);
     const newFilter = data.filter((value) => {
-      return value.title.toLowerCase().includes(searchWord.toLowerCase());
+      return value.loc.country.toLowerCase().includes(searchWord.toLowerCase());
     });
 
     if (searchWord === "") {
@@ -25,7 +26,7 @@ export function SearchBarFilterInput({ placeholder, data }) {
 
   return (
     <div className="search">
-      <div className="searchInputs">
+      {/* <div className="searchInputs">
         <input
           type="text"
           placeholder={placeholder}
@@ -34,9 +35,9 @@ export function SearchBarFilterInput({ placeholder, data }) {
         />
         <div className="searchIcon">
           {filteredData.length === 0 ? (
-           <div>Search</div>
+            <p>Search</p>
           ) : (
-            <div>Clean</div>
+            <p>Clear</p>
           )}
         </div>
       </div>
@@ -44,13 +45,15 @@ export function SearchBarFilterInput({ placeholder, data }) {
         <div className="dataResult">
           {filteredData.slice(0, 15).map((value, key) => {
             return (
-              <a className="dataItem" href={value.link} target="_blank">
-                <p>{value.title} </p>
+              <a className="dataItem" href="#" target="_blank">
+                <p>{value.loc.country} </p>
               </a>
             );
           })}
         </div>
-      )}
+      )} */}
     </div>
   );
 }
+
+export default SearchBar;
