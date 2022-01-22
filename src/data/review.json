@@ -1,62 +1,62 @@
 [
-    {
-        "id": "c001",
-        "txt": "The house was'nt clean enough...",
-        "rate": 3.5,
-        "by": {
-          "_id": "mongo001",
-          "fullname": "Mosh Ben Ari",
-          "imgUrl": "/img/img2.jpg"
-        }
-      },
-      {
-        "id": "c002",
-        "txt": "From my top10 vacations ever !",
-        "rate": 5,
-        "by": {
-            "_id": "mongo102",
-            "fullname": "Sharon Milevich",
-          "imgUrl": "/img/img2.jpg"
-        }
-      },
-      {
-        "id": "c003",
-        "txt": "I cant even explain how amazing was the staying... the owner is very kind, the place is warm and clean.",
-        "rate": 5,
-        "by": {
-            "_id": "mongo001",
-            "fullname": "Mosh Ben Ari",
-          "imgUrl": "/img/img2.jpg"
-        }
-      },
-      {
-        "id": "c004",
-        "txt": "The cleanest place I have been, very peaceful the view is gorgeous...",
-        "rate": 4.5,
-        "by": {
-            "_id": "mongo103",
-            "fullname": "Doron Megril",
-          "imgUrl": "/img/img2.jpg"
-        }
-      },
-      {
-        "id": "c005",
-        "txt": "Stunning view, the extra service wasnt so good, (I'm talking about the clean-up and the breakfast).",
-        "rate": 4,
-        "by": {
-            "_id": "mongo103",
-            "fullname": "Doron Megril",
-          "imgUrl": "/img/img2.jpg"
-        }
-      },
-      {
-        "id": "c006",
-        "txt": "The most peaceful place ever...",
-        "rate": 5,
-        "by": {
-            "_id": "mongo102",
-            "fullname": "Sharon Milevich",
-          "imgUrl": "/img/img2.jpg"
-        }
-      }
+	{
+		"id": "c001",
+		"txt": "The house was'nt clean enough...",
+		"rate": 3.5,
+		"by": {
+			"_id": 125,
+			"fullname": "michael aharoni",
+			"imgUrl": "../styles/img/team/michael.png"
+		}
+	},
+	{
+		"id": "c002",
+		"txt": "From my top10 vacations ever !",
+		"rate": 5,
+		"by": {
+			"_id": 126,
+			"fullname": "idan gez",
+			"imgUrl": "../styles/img/team/idan.jpg"
+		}
+	},
+	{
+		"id": "c003",
+		"txt": "I cant even explain how amazing was the staying... the owner is very kind, the place is warm and clean.",
+		"rate": 5,
+		"by": {
+			"_id": 126,
+			"fullname": "idan gez",
+			"imgUrl": "../styles/img/team/idan.jpg"
+		}
+	},
+	{
+		"id": "c004",
+		"txt": "The cleanest place I have been, very peaceful the view is gorgeous...",
+		"rate": 4.5,
+		"by": {
+			"_id": 125,
+			"fullname": "michael aharoni",
+			"imgUrl": "../styles/img/team/michael.png"
+		}
+	},
+	{
+		"id": "c005",
+		"txt": "Stunning view, the extra service wasnt so good, (I'm talking about the clean-up and the breakfast).",
+		"rate": 4,
+		"by": {
+			"_id": 124,
+			"fullname": "koren aharon",
+			"imgUrl": "../styles/img/team/koren.jpg"
+		}
+	},
+	{
+		"id": "c006",
+		"txt": "The most peaceful place ever...",
+		"rate": 5,
+		"by": {
+			"_id": 124,
+			"fullname": "koren aharon",
+			"imgUrl": "../styles/img/team/koren.jpg"
+		}
+	}
 ]

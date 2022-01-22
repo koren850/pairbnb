@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
 import { PlaceTypeFilter } from "./PlaceType.jsx"
 // import { PriceFilter } from "./PriceFilter.jsx"
+import { PriceSlider } from "./PriceSlider.jsx"
 import { setFilterBy } from "../store/stay.action.js";
 
 import downArrow from "../styles/svg/arrows/down-arrow.svg";
@@ -10,7 +11,7 @@ import upArrow from "../styles/svg/arrows/up-arrow.svg";
 
 // import React from 'react';
 
-export function _SortStay({ setFilterBy, stayType }) {
+export function _SortStay({ setFilterBy, stayType, stayPrice }) {
 
     const [filterBy, setFilter] = useState({
         "Wifi": false,
@@ -21,21 +22,31 @@ export function _SortStay({ setFilterBy, stayType }) {
         "Pets allowed": false
     })
     const [placeType, toggleTypeSearch] = useState()
+    const [isPriceFilter, togglePriceFilter] = useState()
 
     useEffect(async () => {
-        // console.log(filterBy)
-        await setFilterBy(filterBy, stayType)
+        await setFilterBy(filterBy, stayType, stayPrice)
     }, [filterBy])
 
     useEffect(() => {
-        // console.log(placeType)
     }, [placeType])
 
+    function togglePrice() {
+        // console.log('hi')
+        togglePriceFilter(!isPriceFilter)
+        toggleTypeSearch(false)
+    }
+
+    function togglePlaces() {
+        toggleTypeSearch(!placeType)
+        togglePriceFilter(false)
+    }
+
     return (<div className="filter-container middle-layout">
-        {/* <PriceFilter /> */}
-        <button className="filter-btn">Price</button>
-        
-        <button className="filter-btn" onClick={() => { toggleTypeSearch(!placeType) }} >{placeType ? <span className="flex"><span>Type of place </span><img className="filter-arrow" src={upArrow}/></span>:<span className="flex"><span>Type of place </span><img  className="filter-arrow" src={downArrow}/></span>}</button>
+
+        <button className="filter-btn" onClick={() => { togglePrice() }} >{isPriceFilter ? <span className="flex"><span>Price </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Price </span><img className="filter-arrow" src={downArrow} /></span>}</button>
+        {isPriceFilter && <PriceSlider />}
+        <button className="filter-btn" onClick={() => { togglePlaces() }} >{placeType ? <span className="flex"><span>Type of place </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Type of place </span><img className="filter-arrow" src={downArrow} /></span>}</button>
         {placeType && <PlaceTypeFilter />}
         <button className={filterBy["Wifi"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Wifi": !filterBy["Wifi"] }) }}>Wifi</button>
         <button className={filterBy["TV"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "TV": !filterBy["TV"] }) }}>TV</button>
@@ -53,6 +64,8 @@ function mapStateToProps({ stayModule }) {
         filterBy: stayModule.filterBy,
         stayType: stayModule.stayType,
         stays: stayModule.stays,
+        stayPrice: stayModule.stayPrice
+
     };
 }
 const mapDispatchToProps = {

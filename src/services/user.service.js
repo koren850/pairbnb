@@ -64,7 +64,7 @@ function login(userCred) {
     const users = getUsers();
     return new Promise((resolve, reject) => {
         const currUser = users.find(user => user.email === userCred.email)
-        if (!currUser) reject({reason:'User doesn\'t exists',unsolved:'email'});
+        if (!currUser) reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
         else if (currUser.password !== userCred.password) {
             if (!userCred.isSocial) reject({reason:'Incorrect user password',unsolved:'password'});
         }
@@ -82,11 +82,11 @@ function signup(userCred) {
         // if (!fullNameRegex.test(userCred?.fullName)) reject({reason:'Invalid full name : '+userCred.fullName,unsolved:'fullName'});
         if (currUser === -1) currUser = null;
         else if (currUser) {
-            reject({reason:'Email already exists',unsolved:'email'});
+            reject({ reason: 'Email already exists', unsolved: 'email' });
             console.log(currUser);
-        } 
-        else if (!emailRegex.test(userCred?.email)) reject({reason:'Invalid email pattern : '+userCred.email,unsolved:'email'});
-        else if (!userCred.isSocial && userCred.password?.length < 5) reject({reason:'password should have at list 6 digits / letters',unsolved:'password'});
+        }
+        else if (!emailRegex.test(userCred?.email)) reject({ reason: 'Invalid email pattern : ' + userCred.email, unsolved: 'email' });
+        else if (!userCred.isSocial && userCred.password?.length < 5) reject({ reason: 'password should have at list 6 digits / letters', unsolved: 'password' });
         else if (!userCred.imgSrc) userCred.imgSrc = userSvg;
         // else if (!userCred.email || !userCred.password || !userCred.fullName)
         _saveLocalUser(userCred);
@@ -162,26 +162,29 @@ function getLoggedinUser() {
 
 addDemoData()
 function addDemoData() {
+
     localStorage.setItem(STORAGE_KEY, JSON.stringify([
-        {
-            _id: 123,
-            email: "test",
-            password: "test",
-        },
         {
             _id: 124,
             email: "koren",
+            fullName: "koren aharon",
             password: "123",
+            imgUrl: '../styles/img/team/koren.jpg',
+
         },
         {
             _id: 125,
             email: "michael",
+            fullName: "michael aharoni",
             password: "123",
+            imgUrl: '../styles/img/team/michael.png',
         },
         {
             _id: 126,
             email: "idan",
+            fullName: "idan gez",
             password: "123",
+            imgUrl: '../styles/img/team/idan.jpg',
         }
     ]))
 
