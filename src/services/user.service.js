@@ -169,7 +169,7 @@ function addDemoData() {
             email: "koren",
             fullName: "koren aharon",
             password: "123",
-            imgUrl: '../styles/img/team/koren.jpg',
+            imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
 
         },
         {
@@ -177,14 +177,14 @@ function addDemoData() {
             email: "michael",
             fullName: "michael aharoni",
             password: "123",
-            imgUrl: '../styles/img/team/michael.png',
+            imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg',
         },
         {
             _id: 126,
             email: "idan",
             fullName: "idan gez",
             password: "123",
-            imgUrl: '../styles/img/team/idan.jpg',
+            imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
         }
     ]))
 
