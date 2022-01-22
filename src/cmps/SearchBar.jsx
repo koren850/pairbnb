@@ -56,7 +56,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests origi " + (someActive === "guests" ? "active" : "")}>
 				<p>Guests</p>
 				<div className='header-guests'>{someActive === "guests" && <Guests init={search} set={setGuests} />}</div>
-				<input value={search.guestsCount === 1 ? "" : search.guestsCount} className='bar-input' type='text' placeholder='Add guests' />
+				<input value={search.guestsCount === 1 ? "" : search.guestsCount} onChange={()=>{}} className='bar-input' type='text' placeholder='Add guests' />
 				<div className='spacial-btn search-spacial-btn'>
 					<SpecialButton isActive={someActive} size={{ width: "50px", height: "50px" }} text={<img src={searchSvg} className='search-svg' alt='' />} />
 				</div>

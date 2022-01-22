@@ -15,6 +15,7 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { GoogleLogin } from 'react-google-login';
+import { SpecialButton } from './SpacialButton';
 
 
 const theme = createTheme();
@@ -124,14 +125,11 @@ export function SignUp({ setIsSubmitting, signingUp }) {
                                 />
                             </Grid>
                         </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            style={{ backgroundColor: '#FF385C', marginBlockStart: '8px' }}
-                        >
-                            Sign Up
-                        </Button>
+                        <button style={{marginBlockStart:'10px',backgroundColor:'transparent',width:'100%',height:'40px',border:'none'}}>
+                        <div className='spacial-btn'>
+                        <SpecialButton onClick={handleSubmit} size={{width:'inherit',height:'40px'}} text={'Sign Up'}/>
+                        </div>
+                        </button>
                         <GoogleLogin
                             scope="profile email"
                             redirect_uri="https://localhost:3000/user/login"
@@ -147,7 +145,6 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 
                         <FacebookLogin
                             appId="960690547913550"
-                            autoLoad={true}
                             fields="name,email,picture"
                             render={renderProps => (
                                 <FacebookLoginButton style={{ display: 'flex', justifyContent: 'center', height: '35px', margin: '10px 0', width: '396px' }} onClick={renderProps.onClick} disabled={renderProps.disabled}>SignUp with Facebook</FacebookLoginButton>
