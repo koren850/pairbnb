@@ -32,7 +32,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 		const credentials = {
 			fullName: response.name,
 			email: response.email,
-			imgSrc: response.picture.data.url,
+			imgUrl: response.picture.data.url,
 			isSocial: true,
 		};
 		setIsSubmitting(true);
@@ -55,7 +55,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 		const credentials = {
 			fullName: response.profileObj.name,
 			email: response.profileObj.email,
-			imgSrc: response.profileObj.imageUrl,
+			imgUrl: response.profileObj.imageUrl,
 			isSocial: true,
 		};
 		setIsSubmitting(true);
@@ -114,10 +114,10 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 						<TextField
 							onChange={() => {connectionError.email && dispatch(updateInputsErrorInfo({ reason: '', unsolved:'email' }))}}
 							 required fullWidth name='email' label='E-mail' type='email' id='email' autoComplete='current-email' />
-						<input type='text' value={connectionError.email} readOnly style={{ marginInlineStart: '10px', color: 'red', border: 'unset' }} />
+						<input type='text' value={connectionError.email} readOnly style={{width:'100%', marginInlineStart: '10px', color: 'red', border: 'unset' }} />
 						<TextField onChange={() => {connectionError.password &&  dispatch(updateInputsErrorInfo({ reason: '', unsolved: 'password' }))
 						}}  required fullWidth name='password' label='Password' type='password' id='password' autoComplete='current-password' />
-						<input type='text' value={connectionError.password} readOnly style={{ marginInlineStart: '10px', color: 'red', border: 'unset' }} />
+						<input type='text' value={connectionError.password} readOnly style={{width:'100%', marginInlineStart: '10px', color: 'red', border: 'unset' }} />
 						<button style={{ marginBlockStart: "10px", backgroundColor: "transparent", width: "100%", height: "40px", border: "none" }}>
 							<div className='spacial-btn'>
 								<SpecialButton size={{ width: "inherit", height: "40px" }} text={"Sign In"} />
