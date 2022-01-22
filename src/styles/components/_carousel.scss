@@ -208,7 +208,9 @@
       position: relative;
       text-align: center; }
       .carousel .slide img {
-        width: 100%;
+        height:244px;
+        width: 326px;
+        object-fit:cover;
         vertical-align: top;
         border: 0; }
       .carousel .slide iframe {

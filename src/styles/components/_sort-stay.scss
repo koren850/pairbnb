@@ -23,7 +23,6 @@
  .filter-btn-active{
     cursor: pointer;
     height: 38px;
-    border: 1px solid #ddd;
     border-radius: 30px;
     color: $clr3;
     font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
@@ -32,12 +31,20 @@
     line-height: 18px;
     margin-right: 8px;
     font-size: 14px;
-    border: 2px solid $clr3
+    border: 1px solid $clr3
+ }
+
+ .filter-btn:hover{
+    transition: border 0.5s;
+    border: 1px solid rgba(0, 0, 0, 0.507);
+
  }
 
  .filter-arrow{
-   height: 20px;
+   height: 22px;
    width:fit-content;
+   position:relative;
+   top:-2px;
 
  }
 
