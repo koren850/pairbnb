@@ -30,7 +30,7 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 		const credentials = {
 			fullName: response.name,
 			email: response.email,
-			imgSrc: response.picture.data.url,
+			imgUrl: response.picture.data.url,
 			isSocial: true,
 		};
 		signingUp(credentials);
@@ -53,7 +53,7 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 		const credentials = {
 			fullName: response.profileObj.name,
 			email: response.profileObj.email,
-			imgSrc: response.profileObj.imageUrl,
+			imgUrl: response.profileObj.imageUrl,
 			isSocial: true,
 		};
 		setIsSubmitting(true);

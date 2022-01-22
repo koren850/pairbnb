@@ -87,7 +87,7 @@ function signup(userCred) {
         }
         else if (!emailRegex.test(userCred?.email)) reject({ reason: 'Invalid email pattern : ' + userCred.email, unsolved: 'email' });
         else if (!userCred.isSocial && userCred.password?.length < 5) reject({ reason: 'password should have at list 6 digits / letters', unsolved: 'password' });
-        else if (!userCred.imgSrc) userCred.imgSrc = userSvg;
+        else if (!userCred.imgUrl) userCred.imgUrl = userSvg;
         // else if (!userCred.email || !userCred.password || !userCred.fullName)
         _saveLocalUser(userCred);
         resolve(userCred);

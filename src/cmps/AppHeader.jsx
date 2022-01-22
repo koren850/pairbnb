@@ -14,22 +14,21 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { UserModal } from "./UserModal";
 import {userService} from "../services/user.service"
 
-
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
 	const { headerLayoutSmall, isDark, isActive, isExplore } = headerMode;
 	const [userModalState, toggleModal] = useState(false);
 	const location = useLocation();
 	const history = useHistory();
-
+	
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
 	}
-
-	const img = getImgToShow();
-	console.log(img)
+	
+	const img = getImgToShow(); 
+	
 	function getImgToShow() {
 		let currUser = userService.getLoggedinUser();
-		return (currUser) ? currUser.imgSrc : userSvg;
+		return (currUser) ? (currUser.imgUrl ? currUser.imgUrl : userSvg ) : userSvg;
 	}
 
 	function resetHeaderModes() {
