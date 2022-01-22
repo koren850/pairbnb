@@ -9,15 +9,20 @@ import { userService } from "../services/user.service";
 
 export function UserModal({ toggleModal, currState }) {
 	const [loggUser, setLoggUser] = useState(userService.getLoggedinUser());
-	const dispatch = useDispatch();
 	const user = useSelector((state) => state.userModule);
 	const history = useHistory();
+
+	const isActive = useSelector((state) => state.headerModule.headerMode.isActive)
 
 	function toggle(ev) {
 		console.log(ev.target);
 		ev.stopPropagation();
 		toggleModal(!currState);
 	}
+
+	// useEffect(()=>{
+	// 	console.log(isActive)
+	// },[isActive])
 
 	useEffect(() => {
 		window.addEventListener("click", toggle);
@@ -31,7 +36,7 @@ export function UserModal({ toggleModal, currState }) {
 	}
 
 	return (
-		<nav className={`user-modal-container ${currState && "open"}`}>
+		<nav className={`user-modal-container ${isActive && "active-modal"} ${currState && "open"}`}>
 			<ul>
 				<li>
 					{loggUser ? (

@@ -67,9 +67,9 @@ function login(userCred) {
         if (!currUser) reject({reason:'User doesn\'t exists',unsolved:'email'});
         else if (currUser.password !== userCred.password) {
             if (!userCred.isSocial) reject({reason:'Incorrect user password',unsolved:'password'});
-            _saveLocalUser(currUser);
-            resolve(currUser);
         }
+        _saveLocalUser(currUser);
+        resolve(currUser);
     })
 
 }
@@ -78,8 +78,8 @@ function signup(userCred) {
     return new Promise((resolve, reject) => {
         let currUser = users.find(user => user.email === userCred?.email)
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const fullNameRegex = /^([\w]{3,})+\s+([\w\s]{3,})+$/i;
-        if (!fullNameRegex.test(userCred?.fullName)) reject({reason:'Invalid full name : '+userCred.fullName,unsolved:'fullName'});
+        // const fullNameRegex = //;
+        // if (!fullNameRegex.test(userCred?.fullName)) reject({reason:'Invalid full name : '+userCred.fullName,unsolved:'fullName'});
         if (currUser === -1) currUser = null;
         else if (currUser) {
             reject({reason:'Email already exists',unsolved:'email'});

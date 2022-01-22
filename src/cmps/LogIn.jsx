@@ -35,19 +35,19 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 			imgSrc: response.picture.data.url,
 			isSocial: true,
 		};
-		console.log(credentials, "וואלה מגניב רצח הא?");
 		setIsSubmitting(true);
 		setTimeout(async () => {
 			try {
 				await signingIn(credentials);
+				history.push("/");
+				console.log('MMM')
 			}
 			catch (err) {
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err))
-				console.log(connectionError)
+				console.log('www')
 				return;
 			}
-			history.push("/");
 		}, 2000);
 	};
 	
@@ -58,19 +58,17 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 			imgSrc: response.profileObj.imageUrl,
 			isSocial: true,
 		};
-		console.log(credentials, "וואלה מגניב רצח הא?");
 		setIsSubmitting(true);
 		setTimeout(async () => {
 			try {
 				await signingIn(credentials);
+				history.push("/");
 			}
 			catch (err) {
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err))
-				console.log(connectionError)
 				return;
 			}
-			history.push("/");
 		}, 2000);
 	};
 
@@ -84,16 +82,17 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 		setIsSubmitting(true);
 		setTimeout( async () => {
 			try {
+				console.log('before siging')
 				await signingIn(credentials);
-				console.log(credentials);
+				console.log('after siging')
+				history.push("/");
 			}
 			catch (err) {
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err))
-				console.log(connectionError)
+				console.log('MMM')
 				return;
 			}
-			history.push("/");
 		}, 2000);
 	};
 

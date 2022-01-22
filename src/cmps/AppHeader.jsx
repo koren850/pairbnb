@@ -12,15 +12,26 @@ import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive, toggleIs
 import { click } from "@testing-library/user-event/dist/click";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { UserModal } from "./UserModal";
+import {userService} from "../services/user.service"
+
 
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
 	const { headerLayoutSmall, isDark, isActive, isExplore } = headerMode;
 	const [userModalState, toggleModal] = useState(false);
 	const location = useLocation();
 	const history = useHistory();
+
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
 	}
+
+	const img = getImgToShow();
+	console.log(img)
+	function getImgToShow() {
+		let currUser = userService.getLoggedinUser();
+		return (currUser) ? currUser.imgSrc : userSvg;
+	}
+
 	function resetHeaderModes() {
 		if (history.location.pathname !== "/") return toggleIsExplore(true);
 		if (isExplore) return;
@@ -95,7 +106,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 					</Link>
 					<button onClick={() => toggleModal(true)} className='user-menu'>
 						<img className='hamburger-svg' src={hamburgerSvg} />
-						<img className='user-svg' src={userSvg} />
+						<img className='user-svg' src={img} />
 					</button>
 				</article>
 			</section>
