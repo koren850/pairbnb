@@ -17,6 +17,7 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { GoogleLogin } from "react-google-login";
+import { SpecialButton } from "./SpacialButton";
 
 const theme = createTheme();
 
@@ -52,12 +53,13 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 	};
 
 	const handleSubmit = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 		const data = new FormData(event.currentTarget);
 		const credentials = {
-			username: data.get("username"),
+			email: data.get("email"),
 			password: data.get("password"),
 		};
+		console.log(credentials)
 		setIsSubmitting(true);
 		setTimeout(() => {
 			signingIn(credentials);
@@ -88,16 +90,11 @@ export function LogIn({ setIsSubmitting, signingIn }) {
                                 value="remember" color="primary" />}
                             label="Remember me"
                         /> */}
-
-						<Button
-							type='submit'
-							fullWidth
-							variant='contained'
-							style={{ backgroundColor: "#FF385C" }}
-							// sx={{ mt: 3, mb: 2 }}
-							className='wow'>
-							Sign In
-						</Button>
+						<button style={{ marginBlockStart: '10px', backgroundColor: 'transparent', width: '100%', height: '40px', border: 'none' }}>
+							<div className='spacial-btn'>
+								<SpecialButton onClick={handleSubmit} size={{ width: 'inherit', height: '40px' }} text={'Sign In'} />
+							</div>
+						</button>
 
 						<GoogleLogin
 							scope='profile email'

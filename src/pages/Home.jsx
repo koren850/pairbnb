@@ -11,7 +11,6 @@ import { toggleIsExplore, toggleHeaderIsActive, toggleHeaderIsDark } from "../st
 export function Home() {
 	const isExplore = useSelector((state) => state.headerModule.headerMode.isExplore);
 	const dispatch = useDispatch();
-	console.log(isExplore);
 	useEffect(() => {
 		dispatch(toggleIsExplore(false));
 		dispatch(toggleHeaderIsActive(true));
