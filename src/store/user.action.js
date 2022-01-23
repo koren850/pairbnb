@@ -30,3 +30,11 @@ export function updateInputsErrorInfo(error) {
         dispatch(action)
     }
 }
+export function updateUser(user) {
+    console.log(user)
+    return async (dispatch) => {
+        userService.update(user)
+        const action = { type: 'UPDATE_USER', user };
+        dispatch(action)
+    }
+}

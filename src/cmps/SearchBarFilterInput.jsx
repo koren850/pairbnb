@@ -22,7 +22,7 @@ export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLoca
     ChooseLocation(location);
   }
 
-  console.log(data);
+  // console.log(data);
   return (<article className="search-filter-container">
     <div className="search-filter-inputs">
       <input ref={elLocationInput} id="location" className="search-input" value={userCurrSearch} placeholder={placeholder} onChange={handleChange} type="text" />

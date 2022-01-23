@@ -6,7 +6,10 @@ import { userService } from "../services/user.service.js"
 import greyHeart from "../styles/svg/grey-heart.svg";
 import pinkHeart from "../styles/svg/pink-heart.svg";
 
-export function StayPreview({ stay }) {
+import { connect } from "react-redux";
+import { updateUser } from "../store/user.action.js"
+
+function _StayPreview({ stay, updateUser }) {
 	let avg = 0;
 	let ammount = 0;
 	stay.reviews.forEach((review) => (ammount += review.rate));
@@ -23,21 +26,33 @@ export function StayPreview({ stay }) {
 		}
 	}
 
-	function toggleLikedPlace(stayId) {
+	function toggleLikedPlace(stay) {
 		let loggedinUser = userService.getLoggedinUser();
-		loggedinUser ? console.log(stayId, loggedinUser) : console.log('please login first')
-
+		console.log(loggedinUser)
+		// loggedinUser ? console.log(stayId, loggedinUser) : console.log('please login first')
+		let likedStay = loggedinUser.likedStays.find(currStay => {
+			return currStay._id === stay._id
+		})
+		console.log(loggedinUser.likedStays)
+		if (likedStay) {
+			loggedinUser.likedStays = loggedinUser.likedStays.filter(currStay => {
+				return currStay._id !== likedStay._id
+			})
+		} else {
+			loggedinUser.likedStays.push(stay)
+		}
+		updateUser(loggedinUser)
 	}
 
 	return (
 		<div>
 			<div className='stay-preview'>
 				{likedId !== stay._id &&
-					< button onClick={() => { toggleLikedPlace(stay._id) }}>
+					< button onClick={() => { toggleLikedPlace(stay) }}>
 						<img className='stay-preview-heart' src={greyHeart} />
 					</button>}
 				{likedId === stay._id &&
-					<button button onClick={() => { toggleLikedPlace(stay._id) }}>
+					<button button onClick={() => { toggleLikedPlace(stay) }}>
 						<img className='stay-preview-heart' src={pinkHeart} />
 					</button>}
 				<div className='stay-preview-img'>
@@ -62,3 +77,13 @@ export function StayPreview({ stay }) {
 		</div >
 	);
 }
+function mapStateToProps({ userModule }) {
+	return {
+		userModule: userModule.user
+	};
+}
+const mapDispatchToProps = {
+	updateUser
+};
+
+export const StayPreview = connect(mapStateToProps, mapDispatchToProps)(_StayPreview);
