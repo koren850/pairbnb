@@ -1,39 +1,30 @@
 [
 	{
-		"_id": "mongo001",
-		"fullname": "Mosh Ben Ari",
-		"imgUrl": "/img/img1.jpg",
-		"email": "moshmush12@koko.com",
-		"password": "secret",
-		"likedStays": [
-			{
-				"_id": "h102",
-				"name": "House Of Uncle My"
-			}
-		]
+		"_id": 124,
+		"email": "koren",
+		"fullName": "koren aharon",
+		"password": "123",
+		"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 	},
 	{
-		"_id": "mongo102",
-		"fullname": "Sharon Milevich",
-		"imgUrl": "/img/img2.jpg",
-		"email": "sharmil92@koko.com",
-		"password": "secret",
-		"likedStays": [
-			{
-				"_id": "h102",
-				"name": "House Of Uncle My"
-			}
-		]	},
+		"_id": 125,
+		"email": "michael",
+		"fullName": "michael aharoni",
+		"password": "123",
+		"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
+	},
 	{
-		"_id": "mongo103",
-		"fullname": "Doron Megril",
-		"imgUrl": "/img/img2.jpg",
-		"email": "Megril19@koko.com",
-		"password": "secret",
-		"likedStays": [
-			{
-				"_id": "h102",
-				"name": "House Of Uncle My"
-			}
-		]	}
+		"_id": 126,
+		"email": "idan",
+		"fullName": "idan gez",
+		"password": "123",
+		"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
+	},
+	{
+		"_id": 127,
+		"email": "tal",
+		"fullName": "tal ekroni",
+		"password": "123",
+		"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
+	}
 ]

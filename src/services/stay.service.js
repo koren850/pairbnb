@@ -198,24 +198,51 @@ async function addTestData() {
             ],
             "price": 380.0,
             "summary": "Welcome to my city home. It is centrally located in NYC, just steps from Madison Square Garden and Penn Station to get you off to all your favorite destinations. This apartment makes for lovely weekend stay when I'm not in town - close to attractions, restaurants, nightlife and shopping. Thank you for considering. Please reach out with any questions and I will happily answer them.",
-            "capacity": 6,
-            "amenities": [{
-                "Bathroom": [
-                    "Shampoo",
-                    "Hot water"
-                ]
-            },
-            {
-                "Bedroom and laundry": [
-                    "Essentials",
-                    "Hangers"
-                ]
-            },],
             "host": {
                 "_id": 125,
-                "fullName": "michael aharoni",
+                "fullname": "michael aharoni",
                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg',
             },
+            "capacity": 6,
+            "amenities": [{
+
+                "Bathroom": ["Shampoo", "Hot water"]
+            },
+            {
+                "Bedroom and laundry": ["Washer", "Essentials", "Hangers", "Bed linens", "Room-darkening shades", "Iron"]
+            },
+            {
+                "Entertainment": ["Ethernet connection", "TV",]
+            },
+
+            {
+                "Heating and cooling": ["Air conditioning", "Indoor fireplace", "Heating"]
+            },
+            {
+                "Home safety": ["Fire extinguisher", "First aid kit"]
+            },
+            {
+                "Internet and office": ["Wifi", "Dedicated workspace"]
+            },
+            {
+                "Kitchen and dining": ["Kitchen", "Refrigerator", "Cooking basics", "Dishes and silverware", "Dishwasher", "Stove", "Coffee maker"]
+            },
+            {
+                "Location features": ["Beach access", "Private entrance"]
+            },
+            {
+                "Outdoor": ["Patio or balcony", "BBQ grill"]
+            },
+            {
+                "Parking and facilities": ["Free parking on premises", "Pool"]
+            },
+            {
+                "Services": ["Pets allowed", "Smoking allowed", "Security cameras"]
+            },
+            {
+                "Not included": ["Smoke alarm", "Carbon monoxide alarm", "Hair dryer", "Long term stays allowed",]
+            }
+                ,],
             "loc": {
                 "country": "New-York",
                 "countryCode": "NY",
@@ -232,6 +259,16 @@ async function addTestData() {
                         "_id": 126,
                         "fullname": "idan gez",
                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
+                    }
+                },
+                {
+                    "id": "c007",
+                    "txt": "This was the most beautiful, delightful apartment I have seen. The host was respectful and friendly, we ran into some issues before the checkin, so he waited for us without any problems. The place is better than the photos, very cleaned and has a great river view especially in the morning. I would totally recommend this place for everyone want to enjoy his staying.",
+                    "rate": 4.4,
+                    "by": {
+                        "_id": 127,
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {
@@ -287,7 +324,7 @@ async function addTestData() {
             "capacity": 4,
             "host": {
                 "_id": 126,
-                "fullName": "idan gez",
+                "fullname": "idan gez",
                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
             },
             "loc": {
@@ -376,6 +413,16 @@ async function addTestData() {
                         "_id": 125,
                         "fullname": "michael aharoni",
                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
+                    }
+                },
+                {
+                    "id": "c007",
+                    "txt": "This was the most beautiful, delightful apartment I have seen. The host was respectful and friendly, we ran into some issues before the checkin, so he waited for us without any problems. The place is better than the photos, very cleaned and has a great river view especially in the morning. I would totally recommend this place for everyone want to enjoy his staying.",
+                    "rate": 4.4,
+                    "by": {
+                        "_id": 127,
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {
@@ -514,7 +561,7 @@ async function addTestData() {
             ],
             "host": {
                 "_id": 126,
-                "fullName": "idan gez",
+                "fullname": "idan gez",
                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
             },
             "loc": {
@@ -533,6 +580,16 @@ async function addTestData() {
                         "_id": 125,
                         "fullname": "michael aharoni",
                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
+                    }
+                },
+                {
+                    "id": "c008",
+                    "txt": "This place looks nice but the experience is bad and not acceptable. I have to start by saying thank. The place clean looks very nice Excapt that we didn't really enjoy our time here. First it was the power generator, it took maybe more than one hour troubleshooting the generator and 7:30 the assistant brought another generator. (The first one which he brought was full of corrousions and very old) There was no water although the generator was ON. We spent the with no water, I informed the assistant but it was dark. He gave some instructions but no luck. I spent time just troubleshooting.",
+                    "rate": 2.5,
+                    "by": {
+                        "_id": 127,
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {
@@ -588,6 +645,11 @@ async function addTestData() {
             ],
             "price": 365.0,
             "summary": "Our Deluxe chalet is a studio chalet - The entire chalet is one open space (except for the bathroom of course…) The chalet has a Living space with T.V, a small basic kitchenette, indoor Jacuzzi and a bathroom with a shower and toilets. From the chalet's balcony you can look over a spectacular view of the Sea of Galilee in all its glory. The Chalet has 1 double bed and 3 sofa beds and fits best for 2 adults and 2 children. We don't recommend it for 2 couples or 5 adults.",
+            "host": {
+                "_id": 124,
+                "fullname": "koren aharon",
+                "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
+            },
             "capacity": 5,
             "amenities": [
                 {
@@ -666,11 +728,6 @@ async function addTestData() {
                     ]
                 }
             ],
-            "host": {
-                "_id": 124,
-                "fullName": "koren aharon",
-                "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
-            },
             "loc": {
                 "country": "Israel",
                 "countryCode": "IL",
@@ -697,6 +754,16 @@ async function addTestData() {
                         "_id": 126,
                         "fullname": "idan gez",
                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
+                    }
+                },
+                {
+                    "id": "c008",
+                    "txt": "This place looks nice but the experience is bad and not acceptable. I have to start by saying thank. The place clean looks very nice Excapt that we didn't really enjoy our time here. First it was the power generator, it took maybe more than one hour troubleshooting the generator and 7:30 the assistant brought another generator. (The first one which he brought was full of corrousions and very old) There was no water although the generator was ON. We spent the with no water, I informed the assistant but it was dark. He gave some instructions but no luck. I spent time just troubleshooting.",
+                    "rate": 2.5,
+                    "by": {
+                        "_id": 127,
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {
@@ -741,6 +808,11 @@ async function addTestData() {
             ],
             "price": 354.0,
             "summary": "If you would like to experience traditional Israeli country life style, our place is ideal. Our place is located in a picturesque farming village which is rich in nature near Golan Heights, Jordan River and the Manara Cliffs. You can enjoy our seasonal citrus fruits and tasty pecan nuts.",
+            "host": {
+                "_id": 124,
+                "fullname": "koren aharon",
+                "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
+            },
             "capacity": 7,
             "amenities": [
                 {
@@ -806,11 +878,6 @@ async function addTestData() {
                     ]
                 }
             ],
-            "host": {
-                "_id": 124,
-                "fullName": "koren aharon",
-                "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
-            },
             "loc": {
                 "country": "Israel",
                 "countryCode": "IL",
@@ -837,6 +904,16 @@ async function addTestData() {
                         "_id": 126,
                         "fullname": "idan gez",
                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
+                    }
+                },
+                {
+                    "id": "c007",
+                    "txt": "This was the most beautiful, delightful apartment I have seen. The host was respectful and friendly, we ran into some issues before the checkin, so he waited for us without any problems. The place is better than the photos, very cleaned and has a great river view especially in the morning. I would totally recommend this place for everyone want to enjoy his staying.",
+                    "rate": 4.4,
+                    "by": {
+                        "_id": 127,
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {

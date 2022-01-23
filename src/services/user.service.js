@@ -67,7 +67,7 @@ function login(userCred) {
         console.log(currUser)
         if (!currUser) reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
         else if (currUser.password !== userCred.password) {
-            if (!userCred.isSocial) reject({reason:'Incorrect user password',unsolved:'password'});
+            if (!userCred.isSocial) reject({ reason: 'Incorrect user password', unsolved: 'password' });
         }
         if (currUser) {
             _saveLocalUser(currUser);
@@ -166,7 +166,6 @@ function getLoggedinUser() {
 
 // addDemoData()
 function addDemoData() {
-
     localStorage.setItem(STORAGE_KEY, JSON.stringify([
         {
             _id: 124,
@@ -201,6 +200,19 @@ function addDemoData() {
             fullName: "idan gez",
             password: "123",
             imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
+            likedStays: [
+                {
+                    "_id": "mongo001",
+                    "name": "Jaklino Riso"
+                }
+            ]
+        },
+        {
+            _id: 127,
+            email: "tal",
+            fullName: "tal ekroni",
+            password: "123",
+            imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png',
             likedStays: [
                 {
                     "_id": "mongo001",
