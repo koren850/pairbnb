@@ -4,20 +4,36 @@
 		"fullname": "Mosh Ben Ari",
 		"imgUrl": "/img/img1.jpg",
 		"email": "moshmush12@koko.com",
-		"password": "secret"
+		"password": "secret",
+		"likedStays": [
+			{
+				"_id": "h102",
+				"name": "House Of Uncle My"
+			}
+		]
 	},
 	{
 		"_id": "mongo102",
 		"fullname": "Sharon Milevich",
 		"imgUrl": "/img/img2.jpg",
 		"email": "sharmil92@koko.com",
-		"password": "secret"
-	},
+		"password": "secret",
+		"likedStays": [
+			{
+				"_id": "h102",
+				"name": "House Of Uncle My"
+			}
+		]	},
 	{
 		"_id": "mongo103",
 		"fullname": "Doron Megril",
 		"imgUrl": "/img/img2.jpg",
 		"email": "Megril19@koko.com",
-		"password": "secret"
-	}
+		"password": "secret",
+		"likedStays": [
+			{
+				"_id": "h102",
+				"name": "House Of Uncle My"
+			}
+		]	}
 ]
