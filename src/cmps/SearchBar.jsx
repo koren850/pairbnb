@@ -42,7 +42,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 		searchKeys.forEach(key => params += `${key}=${userProps[key]}&`)
 		history.push(params.slice(0, -1))
 	}
-
+ 
 	// function turnOffSome() {
 	// 	if (someActive === "check-in" && isScreenOpen) return setSomeActive("check-out");
 	// 	console.log(someActive);
