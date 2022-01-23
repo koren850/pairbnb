@@ -1,7 +1,15 @@
-export function SpecialButton({ text, size, isActive, onClick = () => {}, args }) {
+export function SpecialButton({
+	text,
+	size,
+	isActive,
+	onClick = (ev) => {
+		ev.stopPropagation();
+	},
+	args,
+}) {
 	return (
 		<div
-			onClick={() => onClick(args)}
+			onClick={(ev) => onClick(ev, args)}
 			style={size && (isActive ? { width: 120 + "px", height: size.height } : { width: size.width, height: size.height })}
 			className={"btn-container " + (isActive && "active-mode")}>
 			<div className='cell'></div>

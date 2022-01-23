@@ -164,7 +164,7 @@ function getLoggedinUser() {
 
 
 
-// addDemoData()
+addDemoData()
 function addDemoData() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([
         {

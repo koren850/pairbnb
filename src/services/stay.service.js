@@ -209,7 +209,7 @@ async function addTestData() {
                 "Bathroom": ["Shampoo", "Hot water"]
             },
             {
-                "Bedroom and laundry": ["Washer", "Essentials", "Hangers", "Bed linens", "Room-darkening shades", "Iron"]
+                "Bedroom and laundry": ["Washer", "Essentials", "Hangers", "Bed linens", "Iron"]
             },
             {
                 "Entertainment": ["Ethernet connection", "TV",]

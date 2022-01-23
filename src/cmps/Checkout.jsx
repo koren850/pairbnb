@@ -11,12 +11,24 @@ import plus from "../styles/svg/plus.svg";
 import minus from "../styles/svg/minus.svg";
 import { SpecialButton } from "./SpacialButton";
 import { circularProgressClasses } from "@material-ui/core";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+	palette: {
+		primary: {
+			main: "#FF385C",
+		},
+		secondary: {
+			main: "#FF385C",
+		},
+	},
+});
 
 export function Checkout({ stay }) {
 	const [order, setOrder] = useState({ checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const [guests, toggleGuests] = useState(false);
 
-	function reserveOrder(...args) {
+	function reserveOrder(ev, args) {
 		console.log(args);
 	}
 
@@ -88,24 +100,26 @@ export function MinMaxDateRangePicker({ order, setOrder }) {
 	);
 	// const [value, setValue] = React.useState([null, null]);
 	return (
-		<LocalizationProvider dateAdapter={AdapterDateFns}>
-			<DateRangePicker
-				disablePast
-				value={[order.checkIn, order.checkOut]}
-				maxDate={getWeeksAfter(order.checkIn, 8)}
-				onChange={(newValue) => {
-					setOrder({ ...order, checkIn: newValue[0], checkOut: newValue[1] });
-				}}
-				startText='Check-in'
-				endText='Check-out'
-				renderInput={(startProps, endProps) => (
-					<React.Fragment>
-						<TextField className={"start-date"} {...startProps} />
-						<TextField className={"end-date"} {...endProps} />
-						<span>{removeUrl}</span>
-					</React.Fragment>
-				)}
-			/>
-		</LocalizationProvider>
+		<ThemeProvider theme={theme}>
+			<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<DateRangePicker
+					disablePast
+					value={[order.checkIn, order.checkOut]}
+					maxDate={getWeeksAfter(order.checkIn, 8)}
+					onChange={(newValue) => {
+						setOrder({ ...order, checkIn: newValue[0], checkOut: newValue[1] });
+					}}
+					startText='Check-in'
+					endText='Check-out'
+					renderInput={(startProps, endProps) => (
+						<React.Fragment>
+							<TextField className={"start-date"} {...startProps} />
+							<TextField className={"end-date"} {...endProps} />
+							<span>{removeUrl}</span>
+						</React.Fragment>
+					)}
+				/>
+			</LocalizationProvider>
+		</ThemeProvider>
 	);
 }

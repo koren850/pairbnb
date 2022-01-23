@@ -1,118 +1,117 @@
 .home {
-  display: grid;
-  grid-template-rows: repeat(autofill, 1fr);
+	display: grid;
+	grid-template-rows: repeat(autofill, 1fr);
 
-  .hero {
-    display: flex;
-    grid-row: 1 / 2;
-  }
-  position: relative;
-  & .hero-title {
-    color: $clr2;
-    font-size: 48px;
-    position: absolute;
-    top: 52vh;
-    left: 50%;
-    transform: translate(-50%, 50%);
-  }
-  .cities-title {
-    grid-row: 2 / 3;
+	.hero {
+		display: flex;
+		grid-row: 1 / 2;
+	}
+	position: relative;
+	& .hero-title {
+		color: $clr2;
+		font-size: 48px;
+		position: absolute;
+		top: 52vh;
+		left: 50%;
+		transform: translate(-50%, 50%);
+	}
+	.cities-title {
+		grid-row: 2 / 3;
+	}
+	.popular-cities {
+		grid-row: 3 / 4;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 25px;
+		margin-top: 25px;
+		.city-container {
+			position: relative;
+			border-radius: 15px;
+			overflow: hidden;
+			height: 80%;
+			color: $clr5;
+			cursor: pointer;
+			text-shadow: 2px 2px 4px #000000;
+			&:hover img {
+				filter: grayscale(0%);
+			}
+			&:hover h1 {
+				font-size: 150%;
+				text-shadow: 2px 2px 50px 10px #000000;
+				top: 10%;
+				color: $clr2;
+			}
+		}
+		& img {
+			height: 100%;
+			filter: grayscale(60%);
+			transition: 0.5s;
+		}
+		& p,
+		h1 {
+			position: absolute;
+			top: 10%;
+			left: 50%;
+			transform: translateX(-50%);
+			transition: 0.5s;
+		}
+	}
+	.host {
+		grid-row: 4 / 5;
+		height: 70vh;
+		position: relative;
+		& img {
+			width: 100%;
+			height: 100%;
+			border-radius: 15px;
+		}
 
-  }
-  .popular-cities {
-    grid-row: 3 / 4;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 25px;
-    margin-top: 25px;
-    .city-container {
-      position: relative;
-      border-radius: 15px;
-      overflow: hidden;
-      height: 80%;
-      color: $clr5;
-      cursor: pointer;
-      text-shadow: 2px 2px 4px #000000;
-      &:hover img {
-        filter: grayscale(0%);
-      }
-      &:hover h1 {
-        font-size: 150%;
-        text-shadow: 2px 2px 50px 10px #000000;
-        top: 10%;
-        color: $clr2;
-      }
-    }
-    & img {
-      height: 100%;
-      filter: grayscale(60%);
-      transition: 0.5s;
-    }
-    & p,
-    h1 {
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: 0.5s;
-    }
-  }
-  .host {
-    grid-row: 4 / 5;
-    height: 70vh;
-    position: relative;
-    & img {
-      width: 100%;
-      height: 100%;
-      border-radius: 15px;
-    }
-
-    & h1 {
-      position: absolute;
-      font-size: 70px;
-      top: -5%;
-      color: $clr2;
-      font-weight: 100;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      left: 2%;
-      // transform: translateX(-50%);
-      text-shadow: 5px 5px 2px #000000;
-    }
-  }
+		& h1 {
+			position: absolute;
+			font-size: 70px;
+			top: -5%;
+			color: $clr2;
+			font-weight: 100;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+			left: 2%;
+			// transform: translateX(-50%);
+			text-shadow: 5px 5px 2px #000000;
+		}
+	}
 }
 
 .hero-btn {
-    top: 36%;
-    left: 50%;
-    transform: translateX(-50%);
+	top: 36%;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .host-btn {
-  top: 80%;
-  left: 5%;
+	top: 80%;
+	left: 5%;
 }
 
 .home-btn {
-  background-color: #fff;
-  position: absolute;
-  height: 50px;
-  width: 150px;
-  transition: 0.5s;
-  &:hover span {
-    background: -webkit-linear-gradient(rgb(194, 63, 107), $clr1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;  }
-  & span {
-    font-size: 20px;
-    font-family: circular;
-    // font-weight: 500;
-    background: -webkit-linear-gradient(#72019b, #ad0187, #e91f95);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+	background-color: #fff;
+	position: absolute;
+	height: 50px;
+	width: 150px;
+	transition: 0.5s;
+	&:hover span {
+		background: -webkit-linear-gradient(rgb(194, 63, 107), $clr1);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	& span {
+		font-size: 20px;
+		font-family: circular;
+		// font-weight: 500;
+		background: -webkit-linear-gradient(#72019b, #ad0187, #e91f95);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
 }
 
 .cities-title {
-  margin-block-end: 0;
+	margin-block-end: 0;
 }

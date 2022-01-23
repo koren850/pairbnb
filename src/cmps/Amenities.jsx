@@ -27,7 +27,6 @@ import petsallowed from "../styles/svg/amenities/pets-allowed.svg";
 import pool from "../styles/svg/amenities/pool.svg";
 import privateentrance from "../styles/svg/amenities/private-entrance.svg";
 import refrigerator from "../styles/svg/amenities/refrigerator.svg";
-import roomdarkeningshades from "../styles/svg/amenities/room-darkening-shades.svg";
 import shampoo from "../styles/svg/amenities/shampoo.svg";
 import smokealarm from "../styles/svg/amenities/smoke-alarm.svg";
 import smokingallowed from "../styles/svg/amenities/smoking-allowed.svg";
@@ -49,7 +48,6 @@ const urls = {
 	smokingallowed,
 	essentials,
 	smokealarm,
-	roomdarkeningshades,
 	refrigerator,
 	privateentrance,
 	pool,

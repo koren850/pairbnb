@@ -22,18 +22,16 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
 	}
 
-	function onSearch(userPropsToSearch) {
-		// const {location, checkIn, checkOut, guestsCount, adults, children, infants} = userPropsToSearch
-		const searchKeys = Object.keys(userPropsToSearch);
-		let params = '/';
-		searchKeys.forEach(key=>params+=`${key}=${userPropsToSearch[key]}&`)
-		console.log(params.slice(0,-1));
+	function onSearch(ev) {
+		if (someActive !== "guests") ev.stopPropagation();
+		const searchKeys = Object.keys(userProps);
+		let params = '/explore/';
+		console.log(userProps)
+		searchKeys.forEach(key=>params+=`${key}=${userProps[key]}&`)
 		history.push(params.slice(0,-1))
-
 	}
 
 	function turnOffSome() {
-		console.log("hello");
 		if (!headerMode.isActive) return;
 		if (window.scrollY < 1) return setSomeActive(null);
 		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
@@ -66,7 +64,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 			</div>
 			<hr />
 			{/* <div className={"date-header"}>
-				<MinMaxDateRangePicker order={search} setOrder={setGuests} />
+				<MinMaxDateRangePicker order={userProps} setOrder={setUserProps} />
 			</div> */}
 			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in origi " + (someActive === "check-in" ? "active" : "")}>
 				<p>Check in</p>
