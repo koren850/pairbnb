@@ -12,17 +12,18 @@ export const stayService = {
     save,
     remove,
     subscribe,
+    searchStays
     // getDataForPrice
 
 }
 window.cs = stayService;
 
 async function query(filterBy, stayType, stayPrice) {
-
+    
     let stays = await storageService.query(STORAGE_KEY);
     let filterValues;
     let stayTypeValues;
-    const { minPrice, maxPrice } = (stayPrice) ? stayPrice : {minPrice:0,maxPrice:1000};
+    const { minPrice, maxPrice } = (stayPrice) ? stayPrice : { minPrice: 0, maxPrice: 1000 };
     let pricedStays = []
     stays.map(stay => {
         if (stay.price >= minPrice && stay.price <= maxPrice) return pricedStays.push(stay)
@@ -80,59 +81,23 @@ async function query(filterBy, stayType, stayPrice) {
         return filterAndTypeStays
     }
 }
-// getDataForPrice()
-// function getDataForPrice(stays) {
-//     // const stays = await query()
-//     console.log(stays)
-//     let ranges = [{
-//         key: "*-250",
-//         to: 250,
-//         doc_count: 0
-//     },
-//     {
-//         key: "250-300",
-//         from: 250,
-//         to: 300,
-//         doc_count: 0
-//     },
-//     {
-//         key: "300-320",
-//         from: 300,
-//         to: 320,
-//         doc_count: 0
-//     },
-//     {
-//         key: "320-340",
-//         from: 320,
-//         to: 340,
-//         doc_count: 0
-//     },
-//     {
-//         key: "340-360",
-//         from: 340,
-//         to: 360,
-//         doc_count: 0
-//     },
-//     {
-//         key: "360-380",
-//         from: 360,
-//         to: 380,
-//         doc_count: 0
-//     },
-//     {
-//         key: "380-*",
-//         from: 380,
-//         doc_count: 0
-//     }]
-//     stays.forEach(stay => {
-//         return ranges.map(range => {
-//             if (stay.price >= range.from && stay.price < range.to) return range["doc_count"]++
-//         })
-//     })
-//     console.log(ranges)
-//     return ranges
-// }
 
+async function searchStays(search) {
+    const { location, guestsCount } = search
+    let stays = await storageService.query(STORAGE_KEY);
+    let stayByCapacity = [];
+    stays.map(stay => {
+        if (stay.capacity >= guestsCount) return stayByCapacity.push(stay)
+    })
+    if (location) {
+        let staysByLocation = [];
+        stayByCapacity.map(stay => {
+            if (stay.loc.address === location) return staysByLocation.push(stay)
+        })
+        return staysByLocation
+    }
+    return stayByCapacity
+}
 
 function getById(stayId) {
     return storageService.get(STORAGE_KEY, stayId)

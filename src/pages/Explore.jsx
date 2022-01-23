@@ -1,19 +1,48 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { loadStays } from "../store/stay.action.js";
+import { loadStays, loadSearchedStays } from "../store/stay.action.js";
 import { SortStay } from "../cmps/SortStay";
 import { Loader } from "../cmps/Loader";
 import { toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive } from "../store/header.action.js";
+import { stayService } from "../services/stay.service.js"
 // import { Link } from "react-router-dom";
 
 import { StayList } from "../cmps/StayList.jsx";
+import { useParams, useSearchParam } from "react-router-dom";
 
-export function _Explore({ loadStays, stays, toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive }) {
+export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive }) {
 	const [currStays, setCurrStays] = useState(null);
+
+
+	// if (match.params.search) {
+
+	// 	const { search } = match.params
+	// 	let searchParams = search.split('&')
+	// 	let params = {}
+	// 	searchParams.forEach(param => {
+	// 		let searchObj = param.split('=')
+	// 		params[searchObj[0]] = searchObj[1]
+	// 	})
+	// 	stayService.searchStays(params)
+	// }
+
+
 	useEffect(async () => {
 		toggleIsExplore(true);
-		await loadStays();
-		setCurrStays({ stays });
+		if (match.params.search) {
+			const { search } = match.params
+			let searchParams = search.split('&')
+			let params = {}
+			searchParams.forEach(param => {
+				let searchObj = param.split('=')
+				params[searchObj[0]] = searchObj[1]
+			})
+			await loadSearchedStays(params)
+			setCurrStays({ stays });
+		} else {
+			await loadStays();
+			setCurrStays({ stays });
+		}
 	}, []);
 
 	if (!stays) return <Loader />;
@@ -41,6 +70,7 @@ function mapStateToProps({ stayModule }) {
 }
 const mapDispatchToProps = {
 	loadStays,
+	loadSearchedStays,
 	toggleIsExplore,
 	toggleHeaderIsDark,
 	toggleHeaderIsActive,

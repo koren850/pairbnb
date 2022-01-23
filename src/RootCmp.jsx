@@ -13,7 +13,8 @@ export function RootCmp() {
 			<AppHeader />
 			<main className="main-app-layout">
 				<Switch>
-					<Route component={Explore} path='/explore' />
+					<Route component={Explore} path='/explore/:search?' />
+					{/* field1=value1&field1=value2&field1=value3.. */}
 					<Route component={UserLogin} path='/user/' />
 					<Route component={StayDetails} path='/details/:id' />
 					<Route component={Home} path='/' />

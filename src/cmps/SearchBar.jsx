@@ -32,7 +32,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		if (someActive !==("guests")) ev.stopPropagation();
 		const searchKeys = Object.keys(userProps);
 		let params = '/explore/';
-		console.log(userProps)
+		// console.log(userProps)
 		searchKeys.forEach(key=>params+=`${key}=${userProps[key]}&`)
 		history.push(params.slice(0,-1))
 	}
