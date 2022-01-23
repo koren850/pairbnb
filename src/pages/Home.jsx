@@ -7,7 +7,6 @@ import hostImg from "../styles/img/host.jpg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleIsExplore, toggleHeaderIsActive, toggleHeaderIsDark } from "../store/header.action";
-import SearchBarFilterInput from "../cmps/SearchBarFilterInput"
 
 export function Home() {
 	const isExplore = useSelector((state) => state.headerModule.headerMode.isExplore);
@@ -41,22 +40,18 @@ export function Home() {
 				<article className='city-container'>
 					<img src={parisImg} />
 					<h1>Paris</h1>
-					{/* <p>France</p> */}
 				</article>
 				<article className='city-container'>
 					<img src={jerusalemImg} />
 					<h1>Jerusalem</h1>
-					{/* <p>Israel</p> */}
 				</article>
 				<article className='city-container'>
 					<img src={dubaiImg} />
 					<h1>Dubai</h1>
-					{/* <p>Saudi Arabia</p> */}
 				</article>
 				<article className='city-container'>
 					<img src={vegasImg} />
 					<h1>Las Vegas</h1>
-					{/* <p>U.S.A</p> */}
 				</article>
 			</section>
 			<section className='host middle-layout'>

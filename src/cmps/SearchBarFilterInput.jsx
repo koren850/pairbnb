@@ -1,59 +1,39 @@
 import React, { useState } from "react";
-import {stayService} from "../services/stay.service";
+import locationSvg from "../styles/svg/location.svg";
 
-async function SearchBar({ placeholder }) {
+export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput }) {
   const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
-  const data = await stayService.query();
-  const handleFilter = (event) => {
-    const searchWord = event.target.value;
-    setWordEntered(searchWord);
-    const newFilter = data.filter((value) => {
-      return value.loc.country.toLowerCase().includes(searchWord.toLowerCase());
-    });
+  const [userCurrSearch, setUserCurrSearch] = useState('');
+  const [visible, setVisible] = useState(true);
 
-    if (searchWord === "") {
-      setFilteredData([]);
-    } else {
-      setFilteredData(newFilter);
-    }
-  };
+  function handleChange({ target }) {
+    if (!visible) setVisible(true);
+    const { value } = target;
+    let newFilter = data.filter(item => (item.loc.country.toLowerCase().includes(value.toLowerCase()) || item.loc.address.toLowerCase().includes(value.toLowerCase())));
+    if (!value) newFilter = [];
+    setFilteredData(newFilter);
+    setUserCurrSearch(value)
+  }
 
-  const clearInput = () => {
-    setFilteredData([]);
-    setWordEntered("");
-  };
+  function onPlaceClick(ev, location) {
+    ev.stopPropagation();
+    if (visible) setVisible(false);
+    setUserCurrSearch(location);
+    ChooseLocation(location);
+  }
 
-  return (
-    <div className="search">
-      {/* <div className="searchInputs">
-        <input
-          type="text"
-          placeholder={placeholder}
-          value={wordEntered}
-          onChange={handleFilter}
-        />
-        <div className="searchIcon">
-          {filteredData.length === 0 ? (
-            <p>Search</p>
-          ) : (
-            <p>Clear</p>
-          )}
-        </div>
-      </div>
-      {filteredData.length != 0 && (
-        <div className="dataResult">
-          {filteredData.slice(0, 15).map((value, key) => {
-            return (
-              <a className="dataItem" href="#" target="_blank">
-                <p>{value.loc.country} </p>
-              </a>
-            );
-          })}
-        </div>
-      )} */}
+  console.log(data);
+  return (<article className="search-filter-container">
+    <div className="search-filter-inputs">
+      <input ref={elLocationInput} id="location" className="search-input" value={userCurrSearch} placeholder={placeholder} onChange={handleChange} type="text" />
+      <div className="search-icon"></div>
+      {(filteredData.length !== 0) && <ul className={`data-result ${(visible) ? '' : 'not-visible'}`}>
+        {filteredData.map((value, idx) => {
+          return <li onClick={(ev) => onPlaceClick(ev, value.loc.address)} key={value.loc.country + idx} className="data-item"><p>{value.loc.address} , <small>{value.loc.country}</small></p><img src={locationSvg}/></li>
+        })}
+      </ul>}
+
     </div>
-  );
+  </article>)
 }
 
-export default SearchBar;

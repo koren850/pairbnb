@@ -19,8 +19,17 @@ import { SpecialButton } from "./SpacialButton";
 import { useDispatch, useSelector } from "react-redux";
 import { updateInputsErrorInfo } from "../store/user.action";
 
-const theme = createTheme();
-
+const theme = createTheme({
+	palette: {
+	  primary: {
+		main: "#FF385C"
+	  },
+	  secondary: {
+		main: "#FF385C"
+	  }
+	}
+  });
+  
 export function SignUp({ setIsSubmitting, signingUp }) {
 	const history = useHistory();
 	const dispatch = useDispatch();

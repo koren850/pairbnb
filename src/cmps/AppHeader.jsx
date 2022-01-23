@@ -12,7 +12,8 @@ import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive, toggleIs
 import { click } from "@testing-library/user-event/dist/click";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { UserModal } from "./UserModal";
-import {userService} from "../services/user.service"
+import {userService} from "../services/user.service";
+
 
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
 	const { headerLayoutSmall, isDark, isActive, isExplore } = headerMode;
@@ -82,9 +83,9 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 
 	return (
 		<header
-			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${
-				headerLayoutSmall ? "detail-layout" : "main-layout"
-			}`}>
+		className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${
+			headerLayoutSmall ? "detail-layout" : "main-layout"
+		}`}>
 			{userModalState && <UserModal currState={userModalState} toggleModal={toggleModal} />}
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
@@ -97,6 +98,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 						<small>B</small>
 					</span>
 				</Link>
+				
 				{!isActive && <Search onToggleIsActive={onToggleIsActive} />}
 				<article className='nav-link'>
 					<Link to={`/explore`}> Explore</Link>

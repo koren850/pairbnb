@@ -1,70 +1,74 @@
 .searchInputs {
-    margin-top: 105px;
-    display: flex;
-    background-color: blue;
-    z-index: 100;
+  margin-top: 105px;
+  display: flex;
+  z-index: 100;
+}
+
+.search-input {
+  z-index: 100000;
+  height: 20px;
+}
+
+.searchIcon {
+  height: 60px;
+  width: 50px;
+  background-color: white;
+  display: grid;
+  place-items: center;
+}
+
+.searchIcon svg {
+  font-size: 35px;
+}
+
+.data-result {
+  position: absolute;
+  top: 107%;
+  left: 0%;
+  width: 280px;
+  max-height: 200px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
+  overflow-y: auto;
+  padding: 0;
+  border-radius: 25px;
+  &.not-visible {
+    visibility: hidden;
   }
-  
-  .search input {
-    background-color: white;
-    border: 0;
-    border-radius: 2px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-    font-size: 18px;
-    padding: 15px;
-    height: 30px;
-    width: 300px;
+}
+
+.data-result::-webkit-scrollbar {
+  display: none;
+}
+
+.data-result .data-item {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  color: black;
+  padding-inline-start: 10px;
+}
+
+.data-item p {
+  padding-inline-start: 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.data-item {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+  & img {
+    width: 20%;
+    height: 50%;
+    padding-inline-end:10px;
   }
-  
-  .searchIcon {
-    height: 60px;
-    width: 50px;
-    background-color: white;
-    display: grid;
-    place-items: center;
-  }
-  
-  input:focus {
-    outline: none;
-  }
-  .searchIcon svg {
-    font-size: 35px;
-  }
-  
-  .dataResult {
-    margin-top: 5px;
-    width: 300px;
-    height: 200px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    overflow: hidden;
-    overflow-y: auto;
-  }
-  
-  .dataResult::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .dataResult .dataItem {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    color: black;
-  }
-  
-  .dataItem p {
-    margin-left: 10px;
-  }
-  a {
-    text-decoration: none;
-  }
-  
-  a:hover {
-    background-color: lightgrey;
-  }
-  
-  #clearBtn {
-    cursor: pointer;
-  }
+}
+
+li:hover {
+  background-color: $clr5;
+}
