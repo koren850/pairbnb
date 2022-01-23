@@ -7,6 +7,7 @@ import { Amenities } from "../cmps/Amenities";
 import { stayService } from "../services/stay.service";
 import { toggleDetailsLayout } from "../store/header.action";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { Review } from "../cmps/Review";
 
 import reviewStar from "../styles/svg/star.svg";
 import home from "../styles/svg/entirehome.svg";
@@ -101,7 +102,16 @@ function _StayDetails({ toggleDetailsLayout }) {
 					</div>
 					<Checkout stay={stay} />
 				</div>
-
+				<ul className='reviews-header flex'>
+					<img src={reviewStar} />
+					<div>{avg}</div>
+					<li>({stay.reviews.length} Reviews)</li>
+				</ul>
+				<div className='reviews-container'>
+					{stay.reviews.map((review) => {
+						return <Review review={review} avg={avg} />;
+					})}
+				</div>
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>

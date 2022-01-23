@@ -1,0 +1,38 @@
+.reviews-header {
+	border-top: 1px solid rgba(0, 0, 0, 0.424);
+	padding: 30px 0;
+	gap: 20px;
+	img {
+		height: 20px;
+		width: 20px;
+	}
+}
+.reviews-container {
+	gap: 120px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.424);
+	padding-bottom: 20px;
+	margin-bottom: 50px;
+}
+
+.review {
+	width: 450px;
+	img {
+		height: 55px;
+		width: 55px;
+		object-fit: cover;
+		border-radius: 50%;
+	}
+	p {
+		margin-top: 10px;
+		font-weight: 100;
+	}
+}
+
+.review-user-info {
+	gap: 10px;
+	h2 {
+		font-weight: 400;
+	}
+}
