@@ -11,7 +11,7 @@ export function StayPreview({ stay }) {
 	let ammount = 0;
 	stay.reviews.forEach((review) => (ammount += review.rate));
 	const divider = stay.reviews.length;
-	avg = ammount / divider;
+	avg = (ammount / divider).toFixed(1);
 
 	return (
 		<div>

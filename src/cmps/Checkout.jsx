@@ -101,7 +101,7 @@ export function MinMaxDateRangePicker({ order, setOrder }) {
 				renderInput={(startProps, endProps) => (
 					<React.Fragment>
 						<TextField className={"start-date"} {...startProps} />
-						<TextField {...endProps} />
+						<TextField className={"end-date"} {...endProps} />
 						<span>{removeUrl}</span>
 					</React.Fragment>
 				)}

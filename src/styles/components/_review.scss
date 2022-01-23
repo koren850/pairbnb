@@ -1,8 +1,10 @@
 .reviews-header {
+	align-items: center;
 	border-top: 1px solid rgba(0, 0, 0, 0.424);
 	padding: 30px 0;
-	gap: 20px;
+	gap: 5px;
 	img {
+		margin-inline-end: 10px;
 		height: 20px;
 		width: 20px;
 	}
@@ -31,6 +33,7 @@
 }
 
 .review-user-info {
+	text-transform: capitalize;
 	gap: 10px;
 	h2 {
 		font-weight: 400;
