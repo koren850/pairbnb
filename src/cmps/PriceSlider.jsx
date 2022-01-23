@@ -88,7 +88,7 @@ AirbnbThumbComponent.propTypes = {
     children: PropTypes.node,
 };
 
-export function _PriceSlider({ stays, setByRange, filterBy, stayType }) {
+export function _PriceSlider({ stays, setByRange, filterBy, stayType, searchParams }) {
 
     const [stayPrice, setPriceRange] = useState({
         minPrice: 0,
@@ -101,7 +101,7 @@ export function _PriceSlider({ stays, setByRange, filterBy, stayType }) {
     };
 
     useEffect(async () => {
-        await setByRange(filterBy, stayType, stayPrice)
+        await setByRange(filterBy, stayType, stayPrice,searchParams)
     }, [stayPrice])
 
     // const marks = stays.map(stay => {
@@ -156,7 +156,9 @@ function mapStateToProps({ stayModule }) {
         stayType: stayModule.stayType,
         filterBy: stayModule.filterBy,
         stays: stayModule.stays,
-        stayPrice: stayModule.stayPrice
+        stayPrice: stayModule.stayPrice,
+        searchParams: stayModule.searchParams
+
     };
 }
 const mapDispatchToProps = {

@@ -11,7 +11,7 @@ import upArrow from "../styles/svg/arrows/up-arrow.svg";
 
 // import React from 'react';
 
-export function _SortStay({ setFilterBy, stayType, stayPrice }) {
+export function _SortStay({ setFilterBy, stayType, stayPrice, searchParams }) {
 
     const [filterBy, setFilter] = useState({
         "Wifi": false,
@@ -25,14 +25,13 @@ export function _SortStay({ setFilterBy, stayType, stayPrice }) {
     const [isPriceFilter, togglePriceFilter] = useState()
 
     useEffect(async () => {
-        await setFilterBy(filterBy, stayType, stayPrice)
+        await setFilterBy(filterBy, stayType, stayPrice,searchParams)
     }, [filterBy])
 
     useEffect(() => {
     }, [placeType])
 
     function togglePrice() {
-        // console.log('hi')
         togglePriceFilter(!isPriceFilter)
         toggleTypeSearch(false)
     }
@@ -64,8 +63,8 @@ function mapStateToProps({ stayModule }) {
         filterBy: stayModule.filterBy,
         stayType: stayModule.stayType,
         stays: stayModule.stays,
-        stayPrice: stayModule.stayPrice
-
+        stayPrice: stayModule.stayPrice,
+        searchParams: stayModule.searchParams
     };
 }
 const mapDispatchToProps = {

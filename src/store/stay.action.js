@@ -10,12 +10,14 @@ export function loadStays(filterBy) {
         }
     };
 }
-export function loadSearchedStays(params) {
+export function loadSearchedStays(searchParams) {
     return async (dispatch) => {
         try {
-            const stays = await stayService.searchStays(params)
+            const stays = await stayService.searchStays(searchParams)
             console.log(stays)
             dispatch({ type: 'SET_STAYS', stays });
+            dispatch({ type: 'SET_PARAMS', searchParams });
+
         } catch {
             console.log('could not get stays ');
         }
@@ -57,11 +59,12 @@ export function updateStay(stay) {
     }
 }
 
-export function setFilterBy(filterBy, stayType, stayPrice) {
+export function setFilterBy(filterBy, stayType, stayPrice,searchParams) {
+    console.log(searchParams)
     return async (dispatch) => {
 
         try {
-            const stays = await stayService.query(filterBy, stayType, stayPrice)
+            const stays = await stayService.query(filterBy, stayType, stayPrice,searchParams)
             dispatch({ type: 'SET_FILTER', filterBy });
             dispatch({ type: 'SET_STAYS', stays });
         }
@@ -87,11 +90,11 @@ export function setSortBy(filterBy, stayType, stayPrice) {
     }
 }
 
-export function setByRange(filterBy, stayType, stayPrice) {
+export function setByRange(filterBy, stayType, stayPrice,searchParams) {
     return async (dispatch) => {
 
         try {
-            const stays = await stayService.query(filterBy, stayType, stayPrice)
+            const stays = await stayService.query(filterBy, stayType, stayPrice,searchParams)
             // console.log(stays)
             dispatch({ type: 'SET_STAY_RANGE', stayPrice });
             dispatch({ type: 'SET_STAYS', stays });

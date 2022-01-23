@@ -12,21 +12,6 @@ import { useParams, useSearchParam } from "react-router-dom";
 
 export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive }) {
 	const [currStays, setCurrStays] = useState(null);
-
-
-	// if (match.params.search) {
-
-	// 	const { search } = match.params
-	// 	let searchParams = search.split('&')
-	// 	let params = {}
-	// 	searchParams.forEach(param => {
-	// 		let searchObj = param.split('=')
-	// 		params[searchObj[0]] = searchObj[1]
-	// 	})
-	// 	stayService.searchStays(params)
-	// }
-
-
 	useEffect(async () => {
 		toggleIsExplore(true);
 		if (match.params.search) {

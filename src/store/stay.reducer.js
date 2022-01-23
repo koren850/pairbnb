@@ -5,7 +5,8 @@ const initialState = {
     stayPrice: {
         minPrice: 0,
         maxPrice: 1000,
-    }
+    },
+    searchParams: null,
 };
 
 export function stayReducer(state = initialState, action) {
@@ -27,6 +28,10 @@ export function stayReducer(state = initialState, action) {
         case 'REMOVE_STAY':
             let stays = state.stays.filter(stay => stay._id !== action.stayId)
             newState = { ...state, stays }
+            break;
+        case 'SET_PARAMS':
+            console.log(action)
+            newState = { ...state, searchParams: { ...action.searchParams } }
             break;
         case 'SET_FILTER':
             newState = { ...state, filterBy: { ...action.filterBy } }

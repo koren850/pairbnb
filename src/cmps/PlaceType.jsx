@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { setSortBy } from "../store/stay.action.js";
 
 
-export function _PlaceTypeFilter({ setSortBy, filterBy,stayPrice }) {
+export function _PlaceTypeFilter({ setSortBy, filterBy, stayPrice, searchParams }) {
     const [stayType, setStayType] = useState({
         "Entire place": false,
         "Hotel room": false,
@@ -26,7 +26,7 @@ export function _PlaceTypeFilter({ setSortBy, filterBy,stayPrice }) {
         });
     };
     useEffect(async () => {
-        await setSortBy(filterBy, stayType,stayPrice)
+        await setSortBy(filterBy, stayType, stayPrice, searchParams)
     }, [stayType])
 
 
@@ -37,7 +37,7 @@ export function _PlaceTypeFilter({ setSortBy, filterBy,stayPrice }) {
                     <FormGroup className="place-type-filter">
                         <FormControlLabel
                             control={
-                                <Checkbox style={{color: "#FF385C"}} className="type-header" checked={stayType["Entire place"]} onChange={handleChange} name="Entire place" />
+                                <Checkbox style={{ color: "#FF385C" }} className="type-header" checked={stayType["Entire place"]} onChange={handleChange} name="Entire place" />
                             }
                             label="Entire place"
                         />
@@ -45,7 +45,7 @@ export function _PlaceTypeFilter({ setSortBy, filterBy,stayPrice }) {
 
                         <FormControlLabel
                             control={
-                                <Checkbox style={{color: "#FF385C"}} className="type-header" checked={stayType["Hotel room"]} onChange={handleChange} name="Hotel room" />
+                                <Checkbox style={{ color: "#FF385C" }} className="type-header" checked={stayType["Hotel room"]} onChange={handleChange} name="Hotel room" />
                             }
                             label="Hotel room"
                         />
@@ -53,7 +53,7 @@ export function _PlaceTypeFilter({ setSortBy, filterBy,stayPrice }) {
 
                         <FormControlLabel
                             control={
-                                <Checkbox style={{color: "#FF385C"}} className="type-header" checked={stayType["Private room"]} onChange={handleChange} name="Private room" />
+                                <Checkbox style={{ color: "#FF385C" }} className="type-header" checked={stayType["Private room"]} onChange={handleChange} name="Private room" />
                             }
                             label="Private room"
                         />
@@ -61,7 +61,7 @@ export function _PlaceTypeFilter({ setSortBy, filterBy,stayPrice }) {
 
                         <FormControlLabel
                             control={
-                                <Checkbox style={{color: "#FF385C"}} className="type-header" checked={stayType["Shared room"]} onChange={handleChange} name="Shared room" />
+                                <Checkbox style={{ color: "#FF385C" }} className="type-header" checked={stayType["Shared room"]} onChange={handleChange} name="Shared room" />
                             }
                             label="Shared room"
                         />
@@ -80,7 +80,9 @@ function mapStateToProps({ stayModule }) {
         stayType: stayModule.stayType,
         filterBy: stayModule.filterBy,
         stays: stayModule.stays,
-        stayPrice: stayModule.stayPrice
+        stayPrice: stayModule.stayPrice,
+        searchParams: stayModule.searchParams
+
 
     };
 }

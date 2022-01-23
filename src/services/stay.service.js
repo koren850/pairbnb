@@ -18,9 +18,14 @@ export const stayService = {
 }
 window.cs = stayService;
 
-async function query(filterBy, stayType, stayPrice) {
-    
-    let stays = await storageService.query(STORAGE_KEY);
+async function query(filterBy, stayType, stayPrice, searchParams) {
+    console.log(searchParams)
+    let stays
+    if (searchParams) {
+        stays = await searchStays(searchParams)
+    } else stays = await storageService.query(STORAGE_KEY);
+    console.log(stays)
+    // let stays = await storageService.query(STORAGE_KEY);
     let filterValues;
     let stayTypeValues;
     const { minPrice, maxPrice } = (stayPrice) ? stayPrice : { minPrice: 0, maxPrice: 1000 };
@@ -83,20 +88,23 @@ async function query(filterBy, stayType, stayPrice) {
 }
 
 async function searchStays(search) {
+    console.log(search)
     const { location, guestsCount } = search
+    console.log(location)
+    console.log(guestsCount)
     let stays = await storageService.query(STORAGE_KEY);
-    let stayByCapacity = [];
+    let staysByCapacity = [];
     stays.map(stay => {
-        if (stay.capacity >= guestsCount) return stayByCapacity.push(stay)
+        if (stay.capacity >= guestsCount) return staysByCapacity.push(stay)
     })
     if (location) {
         let staysByLocation = [];
-        stayByCapacity.map(stay => {
+        staysByCapacity.map(stay => {
             if (stay.loc.address === location) return staysByLocation.push(stay)
         })
         return staysByLocation
     }
-    return stayByCapacity
+    return staysByCapacity
 }
 
 function getById(stayId) {
