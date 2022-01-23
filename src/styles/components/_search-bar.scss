@@ -72,6 +72,14 @@ input[type="text"]:focus {
 	position: relative;
 }
 
+.search-bar-date-picker {
+	position: fixed;
+	top: 110%;
+	left:11%;
+	border-radius: 25px;
+	overflow: hidden;
+}
+
 .bar > div.origi {
 	position: relative;
 }

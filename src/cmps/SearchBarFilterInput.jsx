@@ -24,7 +24,7 @@ export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLoca
 
   return (<article className="search-filter-container">
     <div className="search-filter-inputs">
-      <input ref={elLocationInput} id="location" className="search-input" value={userCurrSearch} placeholder={placeholder} onChange={handleChange} type="text" />
+      <input autocomplete="off" ref={elLocationInput} id="location" className="search-input" value={userCurrSearch} placeholder={placeholder} onChange={handleChange} type="text" />
       <div className="search-icon"></div>
       {(filteredData.length !== 0) && <ul className={`data-result ${(visible) ? '' : 'not-visible'}`}>
         {filteredData.map((value, idx) => {
