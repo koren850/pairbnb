@@ -43,12 +43,16 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 		history.push(params.slice(0, -1))
 	}
 
+	// function turnOffSome() {
+	// 	if (someActive === "check-in" && isScreenOpen) return setSomeActive("check-out");
+	// 	console.log(someActive);
+	// 	if (!headerMode.isActive) return;
+	// 	if (window.scrollY < 1) return setSomeActive(null);
+	// 	someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
+	// }
+
 	function turnOffSome() {
-		if (someActive === "check-in" && isScreenOpen) return setSomeActive("check-out");
-		console.log(someActive);
-		if (!headerMode.isActive) return;
-		if (window.scrollY < 1) return setSomeActive(null);
-		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
+
 	}
 
 	function ChooseLocation(location) {
