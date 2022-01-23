@@ -1,21 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import searchSvg from "../styles/svg/search.svg";
 import { SpecialButton } from "./SpacialButton";
 import { connect } from "react-redux";
 import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from "../store/header.action";
 import { Guests } from "./Guests";
-import { MinMaxDateRangePicker } from "./Checkout";
 import { SearchBarFilterInput } from "../cmps/SearchBarFilterInput";
 import { stayService } from "../services/stay.service";
 
 function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	const [someActive, setSomeActive] = useState(null);
 	const [locationsData, setLocationsData] = useState(null);
-	const [userProps, setUserProps] = useState({ location: "", checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
+	const [userProps, setUserProps] = useState({ location: '', checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
+	const elLocationInput = useRef();
 
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
+		if (elName === 'location') elLocationInput.current.focus();
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
 	}
 
@@ -30,8 +31,8 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
 	}
 
-	function onChooseLocation(location) {
-		setUserProps(...userProps,location);
+	function ChooseLocation(location) {
+		setUserProps({...userProps,location});
 	}
 
 	useEffect(() => {
@@ -52,7 +53,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		<div className={"bar origi " + (someActive && "active-search-bar")}>
 			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location origi " + (someActive === "location" ? "active" : "")}>
 				<p>Location</p>
-			<SearchBarFilterInput placeholder={'Where are you going ?'} data={locationsData} />
+			<SearchBarFilterInput elLocationInput={elLocationInput} ChooseLocation={ChooseLocation} placeholder={'Where are you going ?'} data={locationsData} />
 				{/* <input type='text' placeholder='Where are you going?' /> */}
 			</div>
 			<hr />
@@ -61,12 +62,12 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 			</div> */}
 			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in origi " + (someActive === "check-in" ? "active" : "")}>
 				<p>Check in</p>
-				<input className='bar-input' type='text' placeholder='Add dates' />
+				<input className='bar-input' readOnly type='text' placeholder='Add dates' />
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out origi " + (someActive === "check-out" ? "active" : "")}>
 				<p>Check out</p>
-				<input className='bar-input' type='text' placeholder='Add dates' />
+				<input className='bar-input' readOnly type='text' placeholder='Add dates' />
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests origi " + (someActive === "guests" ? "active" : "")}>
@@ -76,7 +77,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 				<div className='spacial-btn search-spacial-btn'>
 					<SpecialButton
 						onClick={onSearch}
-						args={{ checkIn: userProps.checkIn, checkOut: userProps.checkOut, guestsCount: userProps.guestsCount }}
+						args={userProps}
 						isActive={someActive}
 						size={{ width: "50px", height: "50px" }}
 						text={<img src={searchSvg} className='search-svg' alt='' />}

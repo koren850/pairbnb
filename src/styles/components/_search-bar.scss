@@ -93,6 +93,7 @@ input[type="text"]:focus {
 .bar > hr {
 	border: 0.1px solid $clr5;
 	height: 30px;
+	opacity: 50%;
 }
 
 .bar > div.origi:hover::before {
