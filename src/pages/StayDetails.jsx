@@ -13,6 +13,7 @@ import reviewStar from "../styles/svg/star.svg";
 import home from "../styles/svg/entirehome.svg";
 import clean from "../styles/svg/clean.svg";
 import checkin from "../styles/svg/checkin.svg";
+import heart from "../styles/svg/grey-heart.svg";
 
 function _StayDetails({ toggleDetailsLayout }) {
 	const params = useParams();
@@ -42,13 +43,26 @@ function _StayDetails({ toggleDetailsLayout }) {
 
 	if (!stay) return <Loader />;
 	return (
-		<main className='detail-layout main-container'>
+		<main className='detail-layout main-container details-page'>
 			<div className='middle-layout'>
-				<h1 className='stay-name'>{stay.name}</h1>
+				<h1 className='stay-name-details'>{stay.name}</h1>
 
-				<div className='stay-reviews'>
-					<span className='stay-name-details'>{stay.loc.address}</span>
-					<img className='stay-reviews' src={reviewStar} /> <span>{avg}</span>({stay.reviews.length} reviews)
+				<div className='stay-reviews-details'>
+					<div className='flex info-start'>
+						<div>
+							<img className='star-details' src={reviewStar} />
+							<span>{avg}</span>
+							<span className='dot'>·</span>
+							<span className='reviews-count-details'>{stay.reviews.length} reviews</span>
+							<span className='dot-before-address'>·</span>
+							<span className='stay-location-details'>{stay.loc.address}</span>
+						</div>
+						<div className='flex share-save'>
+							<div>Share</div>
+							<img src={heart} />
+							<div>Save</div>
+						</div>
+					</div>
 				</div>
 
 				<div className='details-img-container'>
@@ -61,17 +75,20 @@ function _StayDetails({ toggleDetailsLayout }) {
 				<div className='stay-info-container'>
 					<div className='stay-info'>
 						<div className='host-info flex'>
-							<h1>
-								{stay.type} hosted by <span className='host-name'>{stay.host.fullname}</span>
-							</h1>
+							<div>
+								<h2>
+									{stay.type} hosted by <span className='host-name'>{stay.host.fullname}</span>
+								</h2>
+								<ul className='stay-baths-beds flex'>
+									<div>{stay.capacity} guests</div>
+									<span className='dot'>·</span>
+									<div>{stay.capacity - 1} beds</div>
+									<span className='dot'>·</span>
+									<div>{parseInt(stay.capacity / 2)} baths</div>
+								</ul>
+							</div>
 							<img className='mini-host-img' src={stay.host.imgUrl} />
 						</div>
-						<ul className='stay-baths-beds flex'>
-							{stay.capacity} guests
-							<li>{stay.capacity - 1} beds</li>
-							<li>{parseInt(stay.capacity / 2)} baths</li>
-						</ul>
-						<hr></hr>
 						<ul className='stay-main-amenities-list'>
 							<li className='flex'>
 								<img className='stay-main-amenities' src={home} />
@@ -95,12 +112,10 @@ function _StayDetails({ toggleDetailsLayout }) {
 								</div>
 							</li>
 						</ul>
-						<hr></hr>
-						<p>{stay.summary}</p>
-						<hr></hr>
+						<p className={"stay-summery"}>{stay.summary}</p>
 						<Amenities amenities={stay.amenities} />
 					</div>
-					<Checkout stay={stay} />
+					<Checkout avg={avg} stay={stay} />
 				</div>
 				<div className='reviews-header flex'>
 					<img src={reviewStar} />

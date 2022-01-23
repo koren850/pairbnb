@@ -12,6 +12,7 @@ import minus from "../styles/svg/minus.svg";
 import { SpecialButton } from "./SpacialButton";
 import { circularProgressClasses } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import reviewStar from "../styles/svg/star.svg";
 
 const theme = createTheme({
 	palette: {
@@ -24,7 +25,7 @@ const theme = createTheme({
 	},
 });
 
-export function Checkout({ stay }) {
+export function Checkout({ stay, avg }) {
 	const [order, setOrder] = useState({ checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const [guests, toggleGuests] = useState(false);
 
@@ -63,7 +64,11 @@ export function Checkout({ stay }) {
 						<span className='cost'>${stay.price}</span> / night
 					</p>
 					<p>
-						<span className='reviews'>({stay.reviews.length} reviews)</span>
+						<span>
+							<img className='star-checkout' src={reviewStar} />
+						</span>
+						<span className='avg-checkout'> {avg} · </span>
+						<span className='reviews'>{stay.reviews.length} reviews</span>
 					</p>
 				</div>
 
