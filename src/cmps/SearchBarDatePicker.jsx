@@ -5,9 +5,10 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from '@mui/material/Box';
+import { ClickAwayListener } from '@mui/base';
 
 
-export function SearchBarDatePicker({checkInVisible, checkOutVisible, ChooseDates}) {
+export function SearchBarDatePicker({checkInVisible,setCheckInVisible,setCheckOutVisible, checkOutVisible, ChooseDates}) {
     
     const [value, setValue] = React.useState([null, null]);
     console.log()
@@ -22,6 +23,12 @@ export function SearchBarDatePicker({checkInVisible, checkOutVisible, ChooseDate
         }
     });
 
+function handleClickAway(){
+    console.log('iee')
+    setCheckInVisible(false);
+    setCheckOutVisible(false)
+}
+    
     return (
         <React.Fragment>
             {(checkInVisible || checkOutVisible) && <section className='search-bar-date-picker'>
@@ -30,6 +37,7 @@ export function SearchBarDatePicker({checkInVisible, checkOutVisible, ChooseDate
                         <StaticDateRangePicker
                             displayStaticWrapperAs="desktop"
                             value={value}
+                            onClickAway={handleClickAway}
                             onChange={(newValue) => {
                                 setValue(newValue);
                             }}

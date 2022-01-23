@@ -29,8 +29,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	}
 
 	function onSearch(ev) {
-		console.log(someActive)
-		if (someActive !== ("guests" || "check-in" || "check-out")) ev.stopPropagation();
+		if (someActive !==("guests")) ev.stopPropagation();
 		const searchKeys = Object.keys(userProps);
 		let params = '/explore/';
 		console.log(userProps)
@@ -38,10 +37,8 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		history.push(params.slice(0,-1))
 	}
 
-	function turnOffSome(ev) {
-		console.log(ev.target);
+	function turnOffSome() {
 		if (!headerMode.isActive) return;
-		if (someActive === ("check-in" || "check-out")) return;
 		if (window.scrollY < 1) return setSomeActive(null);
 		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
 	}
@@ -70,6 +67,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	
 	return (
 		<div className={"bar origi " + (someActive && "active-search-bar")}>
+			<SearchBarDatePicker setCheckInVisible={setCheckInVisible} setCheckOutVisible={setCheckOutVisible} checkInVisible={checkInVisible} checkOutVisible={checkOutVisible} ChooseDates={ChooseDates}/>
 			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location origi " + (someActive === "location" ? "active" : "")}>
 				<p>Location</p>
 			<SearchBarFilterInput elLocationInput={elLocationInput} ChooseLocation={ChooseLocation} placeholder={'Where are you going ?'} data={locationsData} />
@@ -82,7 +80,6 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in origi " + (someActive === "check-in" ? "active" : "")}>
 				<p>Check in</p>
 				<input className='bar-input' readOnly type='text' placeholder='Add dates' />
-				<SearchBarDatePicker checkInVisible={checkInVisible} checkOutVisible={checkOutVisible} ChooseDates={ChooseDates}/>
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out origi " + (someActive === "check-out" ? "active" : "")}>

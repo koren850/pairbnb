@@ -20,6 +20,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 	const [userModalState, toggleModal] = useState(false);
 	const location = useLocation();
 	const history = useHistory();
+	const [isScreenOpen, setIsScreenOpen] = useState(true);
 	
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
@@ -86,6 +87,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 		className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${
 			headerLayoutSmall ? "detail-layout" : "main-layout"
 		}`}>
+			<div className={isScreenOpen ? "screen screen-open full-layout" : "screen full-layout"}></div>
 			{userModalState && <UserModal currState={userModalState} toggleModal={toggleModal} />}
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
@@ -111,7 +113,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 					</button>
 				</article>
 			</section>
-			<nav className='middle-layout search-bar-container'>{isActive && <SearchBar onToggleIsActive={onToggleIsActive} />}</nav>
+			<nav className='middle-layout search-bar-container'>{isActive && <SearchBar setIsScreenOpen={setIsScreenOpen} isScreenOpen={isScreenOpen} onToggleIsActive={onToggleIsActive} />}</nav>
 		</header>
 	);
 }

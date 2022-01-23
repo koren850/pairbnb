@@ -84,6 +84,19 @@ input[type="text"]:focus {
 	position: relative;
 }
 
+.bar .screen{
+	pointer-events: none;
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	height: 100vh;
+	width: 100vw;
+	background-color: rgba(0, 0, 0, 0.164);
+	&.screen-open {
+		pointer-events: all;
+	}
+}
+
 .bar > div.origi::before {
 	position: absolute;
 	content: "";
