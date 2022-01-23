@@ -16,7 +16,8 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
 	}
 
-	function onSearch(order) {
+	function onSearch(ev, order) {
+		if (someActive !== "guests") ev.stopPropagation();
 		console.log(order);
 	}
 
@@ -45,7 +46,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 			</div>
 			<hr />
 			{/* <div className={"date-header"}>
-				<MinMaxDateRangePicker order={search} setOrder={setGuests} />
+				<MinMaxDateRangePicker order={userProps} setOrder={setUserProps} />
 			</div> */}
 			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in origi " + (someActive === "check-in" ? "active" : "")}>
 				<p>Check in</p>
