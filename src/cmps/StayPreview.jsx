@@ -16,13 +16,13 @@ export function StayPreview({ stay }) {
 	avg = (ammount / divider).toFixed(1);
 
 	let currUser = userService.getLoggedinUser();
-	const likedPlace = currUser.likedStays.filter(likedstay => likedstay._id === stay._id)
-	// console.log(likedPlace)
-	let likedId
-	if (likedPlace.length > 0) {
-		likedId = likedPlace[0]._id
-
-		console.log(likedId)
+	let likedPlace;
+	let likedId;
+	if (currUser) {
+		likedPlace = currUser.likedStays.filter(likedstay => likedstay._id === stay._id)
+		if (likedPlace.length > 0) {
+			likedId = likedPlace[0]._id
+		}
 	}
 
 	return (
@@ -30,31 +30,31 @@ export function StayPreview({ stay }) {
 			<div className='stay-preview'>
 				{likedId !== stay._id &&
 					< button >
-					<img className='stay-preview-heart' src={greyHeart} />
-				</button>}
-			{likedId === stay._id &&
-				<button>
-					<img className='stay-preview-heart' src={pinkHeart} />
-				</button>}
-			<div className='stay-preview-img'>
-				<ImageCarousel stay={stay} />
-			</div>
-			<div className='stay-preview-details'>
-				<div className='stay-reviews'>
-					<img src={reviewStar} />
-					<span>{avg}</span>({stay.reviews.length} reviews)
+						<img className='stay-preview-heart' src={greyHeart} />
+					</button>}
+				{likedId === stay._id &&
+					<button>
+						<img className='stay-preview-heart' src={pinkHeart} />
+					</button>}
+				<div className='stay-preview-img'>
+					<ImageCarousel stay={stay} />
 				</div>
-				<div className='stay-type-country'>
-					{stay.type} • {stay.loc.address}
-				</div>
-				<div className='stay-name'>{stay.name}</div>
-				<div className='stay-price-night'>
-					<div className='stay-price'>
-						${stay.price} /<span className='stay-night'>night</span>
+				<div className='stay-preview-details'>
+					<div className='stay-reviews'>
+						<img src={reviewStar} />
+						<span>{avg}</span>({stay.reviews.length} reviews)
+					</div>
+					<div className='stay-type-country'>
+						{stay.type} • {stay.loc.address}
+					</div>
+					<div className='stay-name'>{stay.name}</div>
+					<div className='stay-price-night'>
+						<div className='stay-price'>
+							${stay.price} /<span className='stay-night'>night</span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div >
 	);
 }
