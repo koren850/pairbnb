@@ -4,12 +4,22 @@
 		border-radius: 13px;
 		padding: 20px;
 		width: 350px;
-		margin: 50px auto 30px;
+		margin: 0 auto 30px;
 		box-shadow: 0 0 5px 5px #00000015;
 		position: sticky;
-		top: 15%;
+		top: 13%;
 		z-index: 1;
 		transition: 0.5s;
+		color: $clr6;
+
+		.total-price {
+			* {
+				font-weight: 600;
+			}
+			font-size: 1rem;
+			justify-content: space-between;
+			border-top: 1px solid rgb(221, 221, 221);
+		}
 	}
 
 	.order-form-header {
@@ -79,14 +89,18 @@
 	// MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-focused css-1sumxir-MuiFormLabel-root-MuiInputLabel-root
 
 	span.cost {
-		color: black;
+		color: $clr6;
 		font-size: 1.3em;
 	}
 
 	span.reviews {
-		color: #00000070;
+		color: lighten($clr6, 10);
 		font-size: 0.85em;
 		text-decoration: underline;
+	}
+	.avg-checkout {
+		color: lighten($clr6, 10);
+		font-size: 0.85em;
 	}
 
 	.btn-container {
@@ -184,6 +198,15 @@
 		width: 100%;
 		text-align: center;
 	}
+	.price-container {
+		margin-top: 20px;
+		.price-details {
+			justify-content: space-between;
+			& > :first-child {
+				text-decoration: underline;
+			}
+		}
+	}
 }
 .search-spacial-btn {
 	.btn-container {
@@ -228,6 +251,8 @@
 	z-index: 1;
 	width: inherit;
 	transition: visibility 0.5s, opacity 0.5s linear;
+	padding-bottom: 10px;
+	border-bottom: 1px solid rgb(221, 221, 221);
 }
 
 .guest-type {
@@ -287,7 +312,7 @@
 	}
 }
 
-// .MuiDateRangePickerDay-rangeIntervalDayPreview {
-// 	color: $clr1;
-// 	background-color: $clr1;
-// }
+.star-checkout {
+	height: 12px;
+	width: 12px;
+}
