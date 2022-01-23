@@ -1,12 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import reviewStar from "../styles/svg/star.svg";
 import ImageCarousel from "./ImageCarousel.jsx";
 import { userService } from "../services/user.service.js"
 
 import greyHeart from "../styles/svg/grey-heart.svg";
 import pinkHeart from "../styles/svg/pink-heart.svg";
-// import heart2 from "../styles/svg/heart2.svg";
 
 export function StayPreview({ stay }) {
 	let avg = 0;
@@ -25,15 +23,21 @@ export function StayPreview({ stay }) {
 		}
 	}
 
+	function toggleLikedPlace(stayId) {
+		let loggedinUser = userService.getLoggedinUser();
+		loggedinUser ? console.log(stayId, loggedinUser) : console.log('please login first')
+
+	}
+
 	return (
 		<div>
 			<div className='stay-preview'>
 				{likedId !== stay._id &&
-					< button >
+					< button onClick={() => { toggleLikedPlace(stay._id) }}>
 						<img className='stay-preview-heart' src={greyHeart} />
 					</button>}
 				{likedId === stay._id &&
-					<button>
+					<button button onClick={() => { toggleLikedPlace(stay._id) }}>
 						<img className='stay-preview-heart' src={pinkHeart} />
 					</button>}
 				<div className='stay-preview-img'>
