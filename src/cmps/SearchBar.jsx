@@ -4,26 +4,33 @@ import { SpecialButton } from "./SpacialButton";
 import { connect } from "react-redux";
 import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from "../store/header.action";
 import { Guests } from "./Guests";
-import { SearchBarFilterInput } from "../cmps/SearchBarFilterInput";
+import { SearchBarFilterInput } from "./SearchBarFilterInput";
 import { stayService } from "../services/stay.service";
 import { useHistory } from "react-router-dom";
+import {SearchBarDatePicker} from "./SearchBarDatePicker";
+
 
 function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	const [someActive, setSomeActive] = useState(null);
 	const [locationsData, setLocationsData] = useState(null);
 	const [userProps, setUserProps] = useState({ location: '', checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const elLocationInput = useRef();
+	const [checkInVisible, setCheckInVisible] = useState(false);
+	const [checkOutVisible, setCheckOutVisible] = useState(false);
 	const history = useHistory();
 
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
 		if (elName === 'location') elLocationInput.current.focus();
+		(elName === 'check-in') ? (elName === someActive ? setCheckInVisible(false) : setCheckInVisible(true)) : setCheckInVisible(false);
+		(elName === 'check-out') ? (elName === someActive ? setCheckOutVisible(false) : setCheckOutVisible(true)) : setCheckOutVisible(false);
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
 	}
 
 	function onSearch(ev) {
-		if (someActive !== "guests") ev.stopPropagation();
+		console.log(someActive)
+		if (someActive !== ("guests" || "check-in" || "check-out")) ev.stopPropagation();
 		const searchKeys = Object.keys(userProps);
 		let params = '/explore/';
 		console.log(userProps)
@@ -31,14 +38,20 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		history.push(params.slice(0,-1))
 	}
 
-	function turnOffSome() {
+	function turnOffSome(ev) {
+		console.log(ev.target);
 		if (!headerMode.isActive) return;
+		if (someActive === ("check-in" || "check-out")) return;
 		if (window.scrollY < 1) return setSomeActive(null);
 		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
 	}
 
 	function ChooseLocation(location) {
 		setUserProps({...userProps,location});
+	}
+
+	function ChooseDates(dates) {
+		setUserProps({...userProps,dates});
 	}
 
 	useEffect(() => {
@@ -69,6 +82,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in origi " + (someActive === "check-in" ? "active" : "")}>
 				<p>Check in</p>
 				<input className='bar-input' readOnly type='text' placeholder='Add dates' />
+				<SearchBarDatePicker checkInVisible={checkInVisible} checkOutVisible={checkOutVisible} ChooseDates={ChooseDates}/>
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out origi " + (someActive === "check-out" ? "active" : "")}>
