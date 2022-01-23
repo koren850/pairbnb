@@ -6,10 +6,14 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from '@mui/material/Box';
 
-
-export function SearchBarDatePicker({checkInVisible, checkOutVisible, ChooseDates}) {
+export function SearchBarDatePicker({ChooseDates}) {
     
     const [value, setValue] = React.useState([null, null]);
+
+    React.useEffect(()=>{
+        ChooseDates(value)
+    },[value])
+
     console.log()
     const theme = createTheme({
         palette: {
@@ -21,10 +25,10 @@ export function SearchBarDatePicker({checkInVisible, checkOutVisible, ChooseDate
             }
         }
     });
-
+    
     return (
-        <React.Fragment>
-            {(checkInVisible || checkOutVisible) && <section className='search-bar-date-picker'>
+
+            <section className='search-bar-date-picker'>
                 <ThemeProvider theme={theme}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <StaticDateRangePicker
@@ -43,7 +47,6 @@ export function SearchBarDatePicker({checkInVisible, checkOutVisible, ChooseDate
                         />
                     </LocalizationProvider>
                 </ThemeProvider>
-            </section>}
-        </React.Fragment>
+            </section>
     );
 }
