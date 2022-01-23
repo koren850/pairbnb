@@ -20,6 +20,8 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 	const location = useLocation();
 	const history = useHistory();
 	const [isScreenOpen, setIsScreenOpen] = useState(false);
+	const [isSearchBarOpen, setIsSearchBarOpen] = useState(isActive);
+	const [someActive, setSomeActive] = useState(null);
 
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
@@ -40,6 +42,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 				toggleHeaderIsActive(false);
 				toggleHeaderIsDark(false);
 			} else {
+				setSomeActive(null);
 				toggleHeaderIsActive(true);
 				toggleHeaderIsDark(true);
 			}
@@ -47,6 +50,23 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 			toggleHeaderIsActive(false);
 			toggleHeaderIsDark(false);
 		}
+	}
+
+	function turnOffSome() {
+		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
+	}
+
+	function handleSearchModals(ev) {
+		ev.stopPropagation()
+		setIsScreenOpen(!isScreenOpen);
+		turnOffSome();
+	}
+
+	function handleCloseSearchBar(ev) {
+		ev.stopPropagation()
+		if (!isExplore && isDark) return;
+		toggleHeaderIsActive(!isActive);
+		setIsSearchBarOpen(!isSearchBarOpen);
 	}
 
 	useEffect(() => {
@@ -75,7 +95,8 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 		<header
 			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${headerLayoutSmall ? "detail-layout" : "main-layout"
 				}`}>
-			<div onClick={() => setIsScreenOpen(!isScreenOpen)} className={isScreenOpen ? "screen screen-open full-layout" : "screen full-layout"}></div>
+			<div onClick={handleSearchModals} className={isScreenOpen ? "screen screen-open full-layout" : "screen full-layout"}></div>
+			<div onClick={handleCloseSearchBar} className={isSearchBarOpen ? "screen screen-open search-bar-screen full-layout" : "search-bar-screen  screen full-layout"}></div>
 			{userModalState && <UserModal currState={userModalState} toggleModal={toggleModal} />}
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
@@ -85,7 +106,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 					</span>
 				</Link>
 
-				{!isActive && <Search onToggleIsActive={onToggleIsActive} />}
+				{!isActive && <Search isSearchBarOpen={isSearchBarOpen} setIsSearchBarOpen={setIsSearchBarOpen} onToggleIsActive={onToggleIsActive} />}
 				<article className='nav-link'>
 					<Link to={`/explore`}> Explore</Link>
 					<Link className='become' to={`/explore`}>
@@ -97,7 +118,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 					</button>
 				</article>
 			</section>
-			<nav className='middle-layout search-bar-container'>{isActive && <SearchBar isScreenOpen={isScreenOpen} setIsScreenOpen={setIsScreenOpen} ToggleIsActive={onToggleIsActive} />}</nav>
+			<nav className='middle-layout search-bar-container'>{isActive && <SearchBar turnOffSome={turnOffSome} setSomeActive={setSomeActive} someActive={someActive} isScreenOpen={isScreenOpen} setIsScreenOpen={setIsScreenOpen} ToggleIsActive={onToggleIsActive} />}</nav>
 		</header>
 	);
 }

@@ -10,8 +10,7 @@ import { useHistory } from "react-router-dom";
 import { SearchBarDatePicker } from "./SearchBarDatePicker";
 
 
-function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScreenOpen }) {
-	const [someActive, setSomeActive] = useState(null);
+function _SearchBar({ someActive,turnOffSome, setSomeActive,toggleHeaderIsActive, headerMode, isScreenOpen, setIsScreenOpen }) {
 	const [locationsData, setLocationsData] = useState(null);
 	const [userProps, setUserProps] = useState({ location: '', checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const elLocationInput = useRef();
@@ -20,10 +19,11 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
-		if (elName === 'location') {
+		if (elName === 'location' && someActive !== elName) {
 			setIsScreenOpen(true);
 			elLocationInput.current.focus();
 		} 
+		else elLocationInput.current.blur();
 		(elName === 'check-in' || elName === 'check-out') ? setIsScreenOpen(true) : setIsScreenOpen(false);
 		if (someActive === elName) {
 			setSomeActive(null)
@@ -42,18 +42,6 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 		searchKeys.forEach(key => params += `${key}=${userProps[key]}&`)
 		history.push(params.slice(0, -1))
 	}
- 
-	// function turnOffSome() {
-	// 	if (someActive === "check-in" && isScreenOpen) return setSomeActive("check-out");
-	// 	console.log(someActive);
-	// 	if (!headerMode.isActive) return;
-	// 	if (window.scrollY < 1) return setSomeActive(null);
-	// 	someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
-	// }
-
-	function turnOffSome() {
-
-	}
 
 	function ChooseLocation(location) {
 		setUserProps({ ...userProps, location });
@@ -71,10 +59,8 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 			const data = await stayService.query();
 			setLocationsData(data);
 		};
-		window.addEventListener("click", turnOffSome);
 		window.addEventListener("scroll", turnOffSome);
 		return () => {
-			window.removeEventListener("click", turnOffSome);
 			window.removeEventListener("scroll", turnOffSome);
 		};
 	}, []);
