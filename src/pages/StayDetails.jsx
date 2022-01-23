@@ -38,7 +38,8 @@ function _StayDetails({ toggleDetailsLayout }) {
 		let ammount = 0;
 		stayToAvg.reviews.forEach((review) => (ammount += review.rate));
 		const divider = stayToAvg.reviews.length;
-		setAvg((ammount / divider).toFixed(1));
+		if (((ammount / divider).toFixed(2) * 100) % 10 == 0) return setAvg((ammount / divider).toFixed(1));
+		setAvg((ammount / divider).toFixed(2));
 	}
 
 	if (!stay) return <Loader />;
@@ -51,15 +52,15 @@ function _StayDetails({ toggleDetailsLayout }) {
 					<div className='flex info-start'>
 						<div>
 							<img className='star-details' src={reviewStar} />
-							<span>{avg}</span>
-							<span className='dot'>·</span>
+							<span className='avg-top-details'>{avg}</span>
+							<span className='dot-before-reviews'>·</span>
 							<span className='reviews-count-details'>{stay.reviews.length} reviews</span>
 							<span className='dot-before-address'>·</span>
 							<span className='stay-location-details'>{stay.loc.address}</span>
 						</div>
 						<div className='flex share-save'>
 							<div>Share</div>
-							<img src={heart} />
+							<img className='heart-details' src={heart} />
 							<div>Save</div>
 						</div>
 					</div>

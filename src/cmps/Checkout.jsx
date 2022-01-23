@@ -90,7 +90,26 @@ export function Checkout({ stay, avg }) {
 					text='Check availability'
 				/>
 				{guests && <Guests init={order} set={setOrder} />}
-				{order.checkIn && order.checkOut && <h3 className='total-price'> Total price: ${getTotalPrice() * stay.price}</h3>}
+				{order.checkIn && order.checkOut && (
+					<div className='price-container'>
+						<div>
+							<div className='flex price-details'>
+								<div>
+									${stay.price} X {getTotalPrice()} nights
+								</div>
+								<div>${getTotalPrice() * stay.price}</div>
+							</div>
+							<div className='flex price-details'>
+								<div>Service fee</div>
+								<div>${parseInt(getTotalPrice() * stay.price * 0.025)}</div>
+							</div>
+						</div>
+						<div className='flex total-price'>
+							<h3> Total price:</h3>
+							<h3>${parseInt(getTotalPrice() * stay.price * 1.025)}</h3>
+						</div>
+					</div>
+				)}
 			</section>
 		</main>
 	);
