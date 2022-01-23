@@ -1,6 +1,6 @@
 import searchSvg from "../styles/svg/search.svg";
 import { SpecialButton } from "./SpacialButton";
-export function Search({onToggleIsActive,setIsSearchBarOpen}) {
+export function Search({ onToggleIsActive, setIsSearchBarOpen }) {
 	function handleSearchClick() {
 		setIsSearchBarOpen(true);
 		onToggleIsActive();

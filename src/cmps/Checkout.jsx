@@ -85,7 +85,7 @@ export function Checkout({ stay, avg }) {
 					</div>
 				</div>
 				<SpecialButton
-					args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalPrice() * stay.price }}
+					args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalPrice() * stay.price * 1.025 }}
 					onClick={reserveOrder}
 					text='Check availability'
 				/>

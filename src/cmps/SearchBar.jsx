@@ -9,13 +9,7 @@ import { stayService } from "../services/stay.service";
 import { useHistory } from "react-router-dom";
 import { SearchBarDatePicker } from "./SearchBarDatePicker";
 
-<<<<<<< HEAD
-
-function _SearchBar({ someActive,turnOffSome, setSomeActive,toggleHeaderIsActive, headerMode, isScreenOpen, setIsScreenOpen }) {
-=======
-function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScreenOpen }) {
-	const [someActive, setSomeActive] = useState(null);
->>>>>>> 21580fa14e1ded2b4d5f328b29a307b7bce13bdd
+function _SearchBar({ someActive, turnOffSome, setSomeActive, toggleHeaderIsActive, headerMode, isScreenOpen, setIsScreenOpen }) {
 	const [locationsData, setLocationsData] = useState(null);
 	const [userProps, setUserProps] = useState({ location: "", checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const elLocationInput = useRef();
@@ -24,12 +18,11 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
-		if (elName === 'location' && someActive !== elName) {
+		if (elName === "location" && someActive !== elName) {
 			setIsScreenOpen(true);
 			elLocationInput.current.focus();
-		} 
-		else elLocationInput.current.blur();
-		(elName === 'check-in' || elName === 'check-out') ? setIsScreenOpen(true) : setIsScreenOpen(false);
+		} else elLocationInput.current.blur();
+		elName === "check-in" || elName === "check-out" ? setIsScreenOpen(true) : setIsScreenOpen(false);
 		if (someActive === elName) {
 			setSomeActive(null);
 			setIsScreenOpen(false);
@@ -66,7 +59,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 		async function setInitialData() {
 			const data = await stayService.query();
 			setLocationsData(data);
-		};
+		}
 		window.addEventListener("scroll", turnOffSome);
 		return () => {
 			window.removeEventListener("scroll", turnOffSome);

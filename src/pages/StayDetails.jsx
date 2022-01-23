@@ -54,9 +54,13 @@ function _StayDetails({ toggleDetailsLayout }) {
 							<img className='star-details' src={reviewStar} />
 							<span className='avg-top-details'>{avg}</span>
 							<span className='dot-before-reviews'>·</span>
-							<span className='reviews-count-details'>{stay.reviews.length} reviews</span>
+							<a href='#reviews' className='reviews-count-details'>
+								{stay.reviews.length} reviews
+							</a>
 							<span className='dot-before-address'>·</span>
 							<span className='stay-location-details'>{stay.loc.address}</span>
+							<span>, </span>
+							<span className='stay-location-country'> {stay.loc.country}</span>
 						</div>
 						<div className='flex share-save'>
 							<div>Share</div>
@@ -101,7 +105,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 							<li className='flex'>
 								<img className='stay-main-amenities' src={clean} />
 								<div>
-									<h3>Enhanced Clean</h3>
+									<h3>Enhanced clean</h3>
 									<p>This Host committed to Airbnb's 5-step enhanced cleaning process.</p>
 								</div>
 							</li>
@@ -118,7 +122,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 					</div>
 					<Checkout avg={avg} stay={stay} />
 				</div>
-				<div className='reviews-header flex'>
+				<div id='reviews' className='reviews-header flex'>
 					<img src={reviewStar} />
 					<span>{avg}</span>
 					<div>({stay.reviews.length} Reviews)</div>
