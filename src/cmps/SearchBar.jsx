@@ -6,12 +6,14 @@ import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from ".
 import { Guests } from "./Guests";
 import { SearchBarFilterInput } from "../cmps/SearchBarFilterInput";
 import { stayService } from "../services/stay.service";
+import { useHistory } from "react-router-dom";
 
 function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	const [someActive, setSomeActive] = useState(null);
 	const [locationsData, setLocationsData] = useState(null);
 	const [userProps, setUserProps] = useState({ location: '', checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const elLocationInput = useRef();
+	const history = useHistory();
 
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
@@ -20,13 +22,16 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
 	}
 
-	function onSearch(ev, order) {
+	function onSearch(ev) {
 		if (someActive !== "guests") ev.stopPropagation();
-		console.log(order);
+		const searchKeys = Object.keys(userProps);
+		let params = '/explore/';
+		console.log(userProps)
+		searchKeys.forEach(key=>params+=`${key}=${userProps[key]}&`)
+		history.push(params.slice(0,-1))
 	}
 
 	function turnOffSome() {
-		console.log("hello");
 		if (!headerMode.isActive) return;
 		if (window.scrollY < 1) return setSomeActive(null);
 		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
