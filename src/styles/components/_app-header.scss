@@ -8,34 +8,45 @@
   padding-block-start: 1px;
   padding-block-end: 1px;
   transition: background-color 1s;
+  & .screen {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+    &.screen-open {
+      // background-color: rgba(231, 27, 27, 0.164);
+      pointer-events: all;
+    }
+  }
   & .middle-layout {
-	  display: flex;
-	  justify-content: space-between;
-	  align-items: center;
-	}
-	&.active-header {
-	  transition: 1s;
-	  padding-block-start: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &.active-header {
+    transition: 1s;
+    padding-block-start: 15px;
     padding-block-end: 165px;
   }
   &.dark-header {
-	  background-color: inherit;
-	  box-shadow: none;
-	  & a, .logo{
-	  color: $clr2;
-	  }
-	  & a:hover{
-		  background-color: #262626;
-	  }
-	  .user-menu {
-		background-color: #fff;
-	  }
+    background-color: inherit;
+    box-shadow: none;
+    & a,
+    .logo {
+      color: $clr2;
+    }
+    .user-menu {
+      background-color: #fff;
+      &a:hover {
+      }
+    }
   }
   &.explore-header {
-	position:absolute;
-	grid-column: 1 / 4;
+    position: absolute;
+    grid-column: 1 / 4;
   }
-
 }
 
 .search-bar-container {
@@ -83,7 +94,7 @@
     border-radius: 25px;
     height: 42px;
     &:hover {
-      background-color: $clr4;
+      background-color: #262626;
     }
     &:last-of-type {
       margin-inline-end: 5px;

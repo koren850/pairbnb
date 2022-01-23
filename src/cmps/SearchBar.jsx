@@ -10,21 +10,18 @@ import { useHistory } from "react-router-dom";
 import {SearchBarDatePicker} from "./SearchBarDatePicker";
 
 
-function _SearchBar({ toggleHeaderIsActive, headerMode }) {
+function _SearchBar({ toggleHeaderIsActive, headerMode,isScreenOpen,setIsScreenOpen }) {
 	const [someActive, setSomeActive] = useState(null);
 	const [locationsData, setLocationsData] = useState(null);
 	const [userProps, setUserProps] = useState({ location: '', checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const elLocationInput = useRef();
-	const [checkInVisible, setCheckInVisible] = useState(false);
-	const [checkOutVisible, setCheckOutVisible] = useState(false);
 	const history = useHistory();
-
+	const {checkIn, checkOut} = userProps;
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
 		if (elName === 'location') elLocationInput.current.focus();
-		(elName === 'check-in') ? (elName === someActive ? setCheckInVisible(false) : setCheckInVisible(true)) : setCheckInVisible(false);
-		(elName === 'check-out') ? (elName === someActive ? setCheckOutVisible(false) : setCheckOutVisible(true)) : setCheckOutVisible(false);
+		(elName === 'check-in'|| elName === 'check-out') ? (elName === someActive ? setIsScreenOpen(false) : setIsScreenOpen(true)) : setIsScreenOpen(false);
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
 	}
 
@@ -38,6 +35,8 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	}
 
 	function turnOffSome() {
+		if (someActive === "check-in" && isScreenOpen) return setSomeActive("check-out");
+		console.log(someActive);
 		if (!headerMode.isActive) return;
 		if (window.scrollY < 1) return setSomeActive(null);
 		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
@@ -48,7 +47,9 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	}
 
 	function ChooseDates(dates) {
-		setUserProps({...userProps,dates});
+		const checkIn = (dates[0]) ? new Date(dates[0]).toDateString() : null;
+		const checkOut = (dates[1]) ? new Date(dates[1]).toDateString() : null;
+		setUserProps({...userProps,checkIn,checkOut});
 	}
 
 	useEffect(() => {
@@ -67,24 +68,20 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	
 	return (
 		<div className={"bar origi " + (someActive && "active-search-bar")}>
-			<SearchBarDatePicker setCheckInVisible={setCheckInVisible} setCheckOutVisible={setCheckOutVisible} checkInVisible={checkInVisible} checkOutVisible={checkOutVisible} ChooseDates={ChooseDates}/>
+			{isScreenOpen && <SearchBarDatePicker ChooseDates={ChooseDates}/>}
 			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location origi " + (someActive === "location" ? "active" : "")}>
 				<p>Location</p>
 			<SearchBarFilterInput elLocationInput={elLocationInput} ChooseLocation={ChooseLocation} placeholder={'Where are you going ?'} data={locationsData} />
-				{/* <input type='text' placeholder='Where are you going?' /> */}
 			</div>
 			<hr />
-			{/* <div className={"date-header"}>
-				<MinMaxDateRangePicker order={userProps} setOrder={setUserProps} />
-			</div> */}
 			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in origi " + (someActive === "check-in" ? "active" : "")}>
 				<p>Check in</p>
-				<input className='bar-input' readOnly type='text' placeholder='Add dates' />
+				<input className='bar-input' readOnly type='text' placeholder={checkIn ? checkIn : 'Add dates'} />
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out origi " + (someActive === "check-out" ? "active" : "")}>
 				<p>Check out</p>
-				<input className='bar-input' readOnly type='text' placeholder='Add dates' />
+				<input className='bar-input' readOnly type='text' placeholder={checkOut ? checkOut : 'Add dates'} />
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests origi " + (someActive === "guests" ? "active" : "")}>
