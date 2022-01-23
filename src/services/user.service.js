@@ -164,7 +164,7 @@ function getLoggedinUser() {
 
 
 
-addDemoData()
+// addDemoData()
 function addDemoData() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify([
         {
@@ -173,6 +173,12 @@ function addDemoData() {
             fullName: "koren aharon",
             password: "123",
             imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
+            likedStays: [
+                {
+                    "_id": "mongo001",
+                    "name": "House Of Uncle My"
+                }
+            ]
 
         },
         {
@@ -181,6 +187,12 @@ function addDemoData() {
             fullName: "michael aharoni",
             password: "123",
             imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg',
+            likedStays: [
+                {
+                    "_id": "mongo001",
+                    "name": "Jaklino Riso"
+                }
+            ]
         },
         {
             _id: 126,
@@ -188,13 +200,25 @@ function addDemoData() {
             fullName: "idan gez",
             password: "123",
             imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
+            likedStays: [
+                {
+                    "_id": "mongo001",
+                    "name": "Jaklino Riso"
+                }
+            ]
         },
         {
             _id: 127,
             email: "tal",
             fullName: "tal ekroni",
             password: "123",
-            imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642921759/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png',
+            imgUrl: 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png',
+            likedStays: [
+                {
+                    "_id": "mongo001",
+                    "name": "Jaklino Riso"
+                }
+            ]
         }
     ]))
 

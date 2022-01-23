@@ -200,7 +200,7 @@ async function addTestData() {
             "summary": "Welcome to my city home. It is centrally located in NYC, just steps from Madison Square Garden and Penn Station to get you off to all your favorite destinations. This apartment makes for lovely weekend stay when I'm not in town - close to attractions, restaurants, nightlife and shopping. Thank you for considering. Please reach out with any questions and I will happily answer them.",
             "host": {
                 "_id": 125,
-                "fullName": "michael aharoni",
+                "fullname": "michael aharoni",
                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg',
             },
             "capacity": 6,
@@ -267,8 +267,8 @@ async function addTestData() {
                     "rate": 4.4,
                     "by": {
                         "_id": 127,
-                        "fullName": "tal ekroni",
-                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642921759/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {
@@ -324,7 +324,7 @@ async function addTestData() {
             "capacity": 4,
             "host": {
                 "_id": 126,
-                "fullName": "idan gez",
+                "fullname": "idan gez",
                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
             },
             "loc": {
@@ -421,8 +421,8 @@ async function addTestData() {
                     "rate": 4.4,
                     "by": {
                         "_id": 127,
-                        "fullName": "tal ekroni",
-                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642921759/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {
@@ -561,7 +561,7 @@ async function addTestData() {
             ],
             "host": {
                 "_id": 126,
-                "fullName": "idan gez",
+                "fullname": "idan gez",
                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
             },
             "loc": {
@@ -588,8 +588,8 @@ async function addTestData() {
                     "rate": 2.5,
                     "by": {
                         "_id": 127,
-                        "fullName": "tal ekroni",
-                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642921759/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {
@@ -647,7 +647,7 @@ async function addTestData() {
             "summary": "Our Deluxe chalet is a studio chalet - The entire chalet is one open space (except for the bathroom of course…) The chalet has a Living space with T.V, a small basic kitchenette, indoor Jacuzzi and a bathroom with a shower and toilets. From the chalet's balcony you can look over a spectacular view of the Sea of Galilee in all its glory. The Chalet has 1 double bed and 3 sofa beds and fits best for 2 adults and 2 children. We don't recommend it for 2 couples or 5 adults.",
             "host": {
                 "_id": 124,
-                "fullName": "koren aharon",
+                "fullname": "koren aharon",
                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
             },
             "capacity": 5,
@@ -762,8 +762,8 @@ async function addTestData() {
                     "rate": 2.5,
                     "by": {
                         "_id": 127,
-                        "fullName": "tal ekroni",
-                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642921759/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {
@@ -810,7 +810,7 @@ async function addTestData() {
             "summary": "If you would like to experience traditional Israeli country life style, our place is ideal. Our place is located in a picturesque farming village which is rich in nature near Golan Heights, Jordan River and the Manara Cliffs. You can enjoy our seasonal citrus fruits and tasty pecan nuts.",
             "host": {
                 "_id": 124,
-                "fullName": "koren aharon",
+                "fullname": "koren aharon",
                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
             },
             "capacity": 7,
@@ -912,8 +912,8 @@ async function addTestData() {
                     "rate": 4.4,
                     "by": {
                         "_id": 127,
-                        "fullName": "tal ekroni",
-                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642921759/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
+                        "fullname": "tal ekroni",
+                        "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
                     }
                 },
                 {

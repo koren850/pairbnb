@@ -37,7 +37,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 		let ammount = 0;
 		stayToAvg.reviews.forEach((review) => (ammount += review.rate));
 		const divider = stayToAvg.reviews.length;
-		setAvg(ammount / divider);
+		setAvg((ammount / divider).toFixed(1));
 	}
 
 	if (!stay) return <Loader />;
@@ -62,7 +62,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 					<div className='stay-info'>
 						<div className='host-info flex'>
 							<h1>
-								{stay.type} hosted by <span className='host-name'>{stay.host.fullName}</span>
+								{stay.type} hosted by <span className='host-name'>{stay.host.fullname}</span>
 							</h1>
 							<img className='mini-host-img' src={stay.host.imgUrl} />
 						</div>
@@ -102,11 +102,11 @@ function _StayDetails({ toggleDetailsLayout }) {
 					</div>
 					<Checkout stay={stay} />
 				</div>
-				<ul className='reviews-header flex'>
+				<div className='reviews-header flex'>
 					<img src={reviewStar} />
-					<div>{avg}</div>
-					<li>({stay.reviews.length} Reviews)</li>
-				</ul>
+					<span>{avg}</span>
+					<div>({stay.reviews.length} Reviews)</div>
+				</div>
 				<div className='reviews-container'>
 					{stay.reviews.map((review) => {
 						return <Review review={review} avg={avg} />;
