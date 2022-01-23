@@ -161,12 +161,14 @@
 		align-items: center;
 
 		span {
-			justify-content: center;
+			justify-content: space-around;
 			align-items: center;
 			display: flex;
 			img {
-				padding: 0;
-				transform: translate(0%, 0%) rotate(-15deg);
+				position: relative;
+				left: -2%;
+				padding: 3px;
+				transform: translate(0.5px, 2px) rotate(-15deg);
 			}
 		}
 	}

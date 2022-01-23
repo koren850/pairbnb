@@ -9,6 +9,10 @@ import { stayService } from "../services/stay.service";
 import { useHistory } from "react-router-dom";
 import { SearchBarDatePicker } from "./SearchBarDatePicker";
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5de14270bcdeff8c695f65893484acf51c8e5147
 function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScreenOpen }) {
 	const [someActive, setSomeActive] = useState(null);
 	const [locationsData, setLocationsData] = useState(null);
@@ -19,6 +23,7 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
+<<<<<<< HEAD
 		if (elName === "location") elLocationInput.current.focus();
 		elName === "check-in" || elName === "check-out" ? (elName === someActive ? setIsScreenOpen(false) : setIsScreenOpen(true)) : setIsScreenOpen(false);
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
@@ -30,6 +35,29 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 		let params = "/explore/";
 		searchKeys.forEach((key) => (params += `${key}=${userProps[key]}&`));
 		history.push(params.slice(0, -1));
+=======
+		if (elName === 'location') {
+			setIsScreenOpen(true);
+			elLocationInput.current.focus();
+		} 
+		(elName === 'check-in' || elName === 'check-out') ? setIsScreenOpen(true) : setIsScreenOpen(false);
+		if (someActive === elName) {
+			setSomeActive(null)
+			setIsScreenOpen(false)
+		} else {
+			setSomeActive(elName);
+			setIsScreenOpen(true)
+		}
+
+	}
+
+	function onSearch(ev) {
+		if (someActive !== ("guests")) ev.stopPropagation();
+		const searchKeys = Object.keys(userProps);
+		let params = '/explore/';
+		searchKeys.forEach(key => params += `${key}=${userProps[key]}&`)
+		history.push(params.slice(0, -1))
+>>>>>>> 5de14270bcdeff8c695f65893484acf51c8e5147
 	}
 
 	function turnOffSome() {
@@ -45,8 +73,13 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 	}
 
 	function ChooseDates(dates) {
+<<<<<<< HEAD
 		const checkIn = dates[0] ? new Date(dates[0]).toDateString() : null;
 		const checkOut = dates[1] ? new Date(dates[1]).toDateString() : null;
+=======
+		const checkIn = (dates[0]) ? new Date(dates[0]).toDateString() : null;
+		const checkOut = (dates[1]) ? new Date(dates[1]).toDateString() : null;
+>>>>>>> 5de14270bcdeff8c695f65893484acf51c8e5147
 		setUserProps({ ...userProps, checkIn, checkOut });
 	}
 
@@ -66,10 +99,17 @@ function _SearchBar({ toggleHeaderIsActive, headerMode, isScreenOpen, setIsScree
 
 	return (
 		<div className={"bar origi " + (someActive && "active-search-bar")}>
+<<<<<<< HEAD
 			{isScreenOpen && <SearchBarDatePicker ChooseDates={ChooseDates} />}
 			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location origi " + (someActive === "location" ? "active" : "")}>
 				<p>Location</p>
 				<SearchBarFilterInput elLocationInput={elLocationInput} ChooseLocation={ChooseLocation} placeholder={"Where are you going ?"} data={locationsData} />
+=======
+			{(isScreenOpen && (someActive === 'check-in' || someActive === 'check-out')) && <SearchBarDatePicker ChooseDates={ChooseDates} />}
+			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location origi " + (someActive === "location" ? "active" : "")}>
+				<p>Location</p>
+				<SearchBarFilterInput someActive={someActive} setIsScreenOpen={setIsScreenOpen} isScreenOpen={isScreenOpen} elLocationInput={elLocationInput} ChooseLocation={ChooseLocation} placeholder={'Where are you going ?'} data={locationsData} />
+>>>>>>> 5de14270bcdeff8c695f65893484acf51c8e5147
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in origi " + (someActive === "check-in" ? "active" : "")}>
