@@ -1,59 +1,19 @@
 import React, { useState } from "react";
-import {stayService} from "../services/stay.service";
 
-async function SearchBar({ placeholder }) {
-  const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered, setWordEntered] = useState("");
-  const data = await stayService.query();
-  const handleFilter = (event) => {
-    const searchWord = event.target.value;
-    setWordEntered(searchWord);
-    const newFilter = data.filter((value) => {
-      return value.loc.country.toLowerCase().includes(searchWord.toLowerCase());
-    });
+export function SearchBarFilterInput({ placeholder, data,onChooseLocation }) {
 
-    if (searchWord === "") {
-      setFilteredData([]);
-    } else {
-      setFilteredData(newFilter);
-    }
-  };
+      console.log(data);
+  return (<article className="search-filter-container">
+    <div className="search-filter-inputs">
+      <input placeholder={placeholder} type="text"/>
+      <div className="search-icon"></div>
+     {data && <div className="data-result">
+      {data.map((value,idx)=>{
+        return <div onClick={onChooseLocation} key={value.loc.country,idx}>{value.loc.country}</div>
+      })}
+      </div>}
 
-  const clearInput = () => {
-    setFilteredData([]);
-    setWordEntered("");
-  };
-
-  return (
-    <div className="search">
-      {/* <div className="searchInputs">
-        <input
-          type="text"
-          placeholder={placeholder}
-          value={wordEntered}
-          onChange={handleFilter}
-        />
-        <div className="searchIcon">
-          {filteredData.length === 0 ? (
-            <p>Search</p>
-          ) : (
-            <p>Clear</p>
-          )}
-        </div>
-      </div>
-      {filteredData.length != 0 && (
-        <div className="dataResult">
-          {filteredData.slice(0, 15).map((value, key) => {
-            return (
-              <a className="dataItem" href="#" target="_blank">
-                <p>{value.loc.country} </p>
-              </a>
-            );
-          })}
-        </div>
-      )} */}
     </div>
-  );
+  </article>)
 }
 
-export default SearchBar;

@@ -22,7 +22,7 @@ async function query(filterBy, stayType, stayPrice) {
     let stays = await storageService.query(STORAGE_KEY);
     let filterValues;
     let stayTypeValues;
-    const { minPrice, maxPrice } = stayPrice
+    const { minPrice, maxPrice } = (stayPrice) ? stayPrice : {minPrice:0,maxPrice:1000};
     let pricedStays = []
     stays.map(stay => {
         if (stay.price >= minPrice && stay.price <= maxPrice) return pricedStays.push(stay)
