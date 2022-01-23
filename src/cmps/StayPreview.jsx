@@ -20,8 +20,6 @@ function _StayPreview({ stay, updateUser }) {
 	let likedPlace;
 	let likedId;
 	if (currUser) {
-		console.log(currUser);
-		console.log(currUser.likedStays);
 		likedPlace = currUser.likedStays.filter((likedstay) => likedstay._id === stay._id);
 		if (likedPlace.length > 0) {
 			likedId = likedPlace[0]._id;
@@ -30,12 +28,9 @@ function _StayPreview({ stay, updateUser }) {
 
 	function toggleLikedPlace(stay) {
 		let loggedinUser = userService.getLoggedinUser();
-		console.log(loggedinUser)
-		// loggedinUser ? console.log(stayId, loggedinUser) : console.log('please login first')
 		let likedStay = loggedinUser.likedStays.find(currStay => {
 			return currStay._id === stay._id
 		})
-		console.log(loggedinUser.likedStays)
 		if (likedStay) {
 			loggedinUser.likedStays = loggedinUser.likedStays.filter(currStay => {
 				return currStay._id !== likedStay._id

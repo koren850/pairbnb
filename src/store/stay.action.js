@@ -10,6 +10,17 @@ export function loadStays(filterBy) {
         }
     };
 }
+export function loadSearchedStays(params) {
+    return async (dispatch) => {
+        try {
+            const stays = await stayService.searchStays(params)
+            console.log(stays)
+            dispatch({ type: 'SET_STAYS', stays });
+        } catch {
+            console.log('could not get stays ');
+        }
+    };
+}
 
 export function removeStay(stayId) {
     return async (dispatch) => {
