@@ -35,7 +35,7 @@ export function Home() {
 					</button>
 				</Link>
 			</section>
-			<h1 className='middle-layout cities-title'>Most popular cities around the word.</h1>
+			<h1 className='middle-layout cities-title'>Popular cities around the word.</h1>
 			<section className='popular-cities middle-layout'>
 				<article className='city-container'>
 					<img src={parisImg} />

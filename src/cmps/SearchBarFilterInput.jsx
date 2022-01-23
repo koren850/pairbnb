@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import locationSvg from "../styles/svg/location.svg";
 
-export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput }) {
+export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput,isScreenOpen,setIsScreenOpen,someActive }) {
   const [filteredData, setFilteredData] = useState([]);
   const [userCurrSearch, setUserCurrSearch] = useState('');
-  const [visible, setVisible] = useState(true);
+  // const [visible, setVisible] = useState(true);
 
   function handleChange({ target }) {
-    if (!visible) setVisible(true);
+    // if (!visible) setVisible(true);
     const { value } = target;
     let newFilter = data.filter(item => (item.loc.country.toLowerCase().includes(value.toLowerCase()) || item.loc.address.toLowerCase().includes(value.toLowerCase())));
     if (!value) newFilter = [];
@@ -17,7 +17,8 @@ export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLoca
 
   function onPlaceClick(ev, location) {
     ev.stopPropagation();
-    if (visible) setVisible(false);
+    // if (visible) setVisible(false);
+    setIsScreenOpen(false);
     setUserCurrSearch(location);
     ChooseLocation(location);
   }
@@ -26,9 +27,10 @@ export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLoca
     <div className="search-filter-inputs">
       <input autoComplete="off" ref={elLocationInput} id="location" className="search-input" value={userCurrSearch} placeholder={placeholder} onChange={handleChange} type="text" />
       <div className="search-icon"></div>
-      {(filteredData.length !== 0) && <ul className={`data-result ${(visible) ? '' : 'not-visible'}`}>
+      {((filteredData.length !== 0)&& isScreenOpen && (someActive==="location")) && <ul className={`data-result 
+      `}>
         {filteredData.map((value, idx) => {
-          return <li onClick={(ev) => onPlaceClick(ev, value.loc.address)} key={value.loc.country + idx} className="data-item"><p>{value.loc.address} , <small>{value.loc.country}</small></p><img src={locationSvg}/></li>
+          return <li onClick={(ev) => onPlaceClick(ev, value.loc.address)} key={value.loc.country + idx} className="data-item"><img src={locationSvg}/><p>{value.loc.address} , <small>{value.loc.country}</small></p></li>
         })}
       </ul>}
 
