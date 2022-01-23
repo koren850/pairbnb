@@ -6,12 +6,14 @@ import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from ".
 import { Guests } from "./Guests";
 import { SearchBarFilterInput } from "../cmps/SearchBarFilterInput";
 import { stayService } from "../services/stay.service";
+import { useHistory } from "react-router-dom";
 
 function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	const [someActive, setSomeActive] = useState(null);
 	const [locationsData, setLocationsData] = useState(null);
 	const [userProps, setUserProps] = useState({ location: '', checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const elLocationInput = useRef();
+	const history = useHistory();
 
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
@@ -20,8 +22,14 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
 	}
 
-	function onSearch(order) {
-		console.log(order);
+	function onSearch(userPropsToSearch) {
+		// const {location, checkIn, checkOut, guestsCount, adults, children, infants} = userPropsToSearch
+		const searchKeys = Object.keys(userPropsToSearch);
+		let params = '/';
+		searchKeys.forEach(key=>params+=`${key}=${userPropsToSearch[key]}&`)
+		console.log(params.slice(0,-1));
+		history.push(params.slice(0,-1))
+
 	}
 
 	function turnOffSome() {
