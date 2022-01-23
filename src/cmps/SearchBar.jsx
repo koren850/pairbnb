@@ -8,12 +8,16 @@ import { MinMaxDateRangePicker } from "./Checkout";
 
 function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 	const [someActive, setSomeActive] = useState(null);
-	const [search, setGuests] = useState({ checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
+	const [userProps, setUserProps] = useState({ location: "", checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
 		someActive === elName ? setSomeActive(null) : setSomeActive(elName);
+	}
+
+	function onSearch(order) {
+		console.log(order);
 	}
 
 	function turnOffSome() {
@@ -55,10 +59,16 @@ function _SearchBar({ toggleHeaderIsActive, headerMode }) {
 			<hr />
 			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests origi " + (someActive === "guests" ? "active" : "")}>
 				<p>Guests</p>
-				<div className='header-guests'>{someActive === "guests" && <Guests init={search} set={setGuests} />}</div>
-				<input value={search.guestsCount === 1 ? "" : search.guestsCount} readOnly className='bar-input' type='text' placeholder='Add guests' />
+				<div className='header-guests'>{someActive === "guests" && <Guests init={userProps} set={setUserProps} />}</div>
+				<input value={userProps.guestsCount === 1 ? "" : userProps.guestsCount} readOnly className='bar-input' type='text' placeholder='Add guests' />
 				<div className='spacial-btn search-spacial-btn'>
-					<SpecialButton isActive={someActive} size={{ width: "50px", height: "50px" }} text={<img src={searchSvg} className='search-svg' alt='' />} />
+					<SpecialButton
+						onClick={onSearch}
+						args={{ checkIn: userProps.checkIn, checkOut: userProps.checkOut, guestsCount: userProps.guestsCount }}
+						isActive={someActive}
+						size={{ width: "50px", height: "50px" }}
+						text={<img src={searchSvg} className='search-svg' alt='' />}
+					/>
 				</div>
 			</div>
 		</div>
