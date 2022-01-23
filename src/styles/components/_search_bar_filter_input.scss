@@ -67,7 +67,7 @@
     height: 50%;
     padding-inline-end:10px;
   }
-  li:hover {
+ &:hover {
     background-color: $clr5;
   }
 }
