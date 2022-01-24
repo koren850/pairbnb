@@ -4,7 +4,7 @@ import Slider, { SliderThumb } from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
-import { setByRange } from "../store/stay.action.js";
+import { setByRange } from "../../../store/stay.action.js";
 
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";

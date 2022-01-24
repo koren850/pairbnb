@@ -4,15 +4,14 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DateRangePicker from "@mui/lab/DateRangePicker";
-import { Guests } from "./Guests";
-import remove from "../styles/svg/delete-date.svg";
+import { Guests } from "../General/Guests";
+import remove from "../../styles/svg/delete-date.svg";
 
-import plus from "../styles/svg/plus.svg";
-import minus from "../styles/svg/minus.svg";
-import { SpecialButton } from "./SpacialButton";
-import { circularProgressClasses } from "@material-ui/core";
+import plus from "../../styles/svg/plus.svg";
+import minus from "../../styles/svg/minus.svg";
+import { SpecialBtn } from "../General/SpecialBtn";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import reviewStar from "../styles/svg/star.svg";
+import reviewStar from "../../styles/svg/star.svg";
 
 const theme = createTheme({
 	palette: {
@@ -56,7 +55,7 @@ export function Checkout({ stay, avg }) {
 	const plusSvg = <img className='plus-minus' src={plus} />;
 
 	return (
-		<main className='spacial-btn checkout-container'>
+		<main className='special-btn checkout-container'>
 			{guests && <div onClick={() => toggleGuests(false)} className='guest-screen'></div>}
 			<section className='order-container'>
 				<div className='order-form-header'>
@@ -84,7 +83,7 @@ export function Checkout({ stay, avg }) {
 						</div>
 					</div>
 				</div>
-				<SpecialButton
+				<SpecialBtn
 					args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalPrice() * stay.price }}
 					onClick={reserveOrder}
 					text='Check availability'

@@ -1,20 +1,16 @@
 import * as React from 'react';
+
 import TextField from '@mui/material/TextField';
 import StaticDateRangePicker from '@mui/lab/StaticDateRangePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export function SearchBarDatePicker({ChooseDates}) {
     
     const [value, setValue] = React.useState([null, null]);
-
-    React.useEffect(()=>{
-        ChooseDates(value)
-    },[value])
-
-    console.log()
+   
     const theme = createTheme({
         palette: {
             primary: {
@@ -25,9 +21,13 @@ export function SearchBarDatePicker({ChooseDates}) {
             }
         }
     });
+
+    React.useEffect(()=>{
+        ChooseDates(value)
+    },[value])
+
     
     return (
-
             <section className='search-bar-date-picker'>
                 <ThemeProvider theme={theme}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>

@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { signOut } from "../store/user.action";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { userService } from "../services/user.service";
+
+import { userService } from "../../../services/user.service";
 
 export function UserModal({ toggleModal, currState }) {
 	const [loggUser, setLoggUser] = useState(userService.getLoggedinUser());
-	const user = useSelector((state) => state.userModule);
-	const history = useHistory();
-
 	const isActive = useSelector((state) => state.headerModule.headerMode.isActive)
 
 	function toggle(ev) {
@@ -19,10 +13,6 @@ export function UserModal({ toggleModal, currState }) {
 		ev.stopPropagation();
 		toggleModal(!currState);
 	}
-
-	// useEffect(()=>{
-	// 	console.log(isActive)
-	// },[isActive])
 
 	useEffect(() => {
 		window.addEventListener("click", toggle);

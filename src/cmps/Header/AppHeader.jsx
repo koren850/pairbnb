@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
-import airLogoSvg from "../styles/svg/air-logo.svg";
-import airDarkLogoSvg from "../styles/svg/air-dark-logo.svg";
-import userSvg from "../styles/svg/user.svg";
-import hamburgerSvg from "../styles/svg/hamburger.svg";
+
+import { userService } from "../../services/user.service";
+import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive, toggleIsExplore } from "../../store/header.action";
+
 import { Search } from "./Search";
 import { SearchBar } from "./SearchBar";
-import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive, toggleIsExplore } from "../store/header.action";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { UserModal } from "./UserModal";
-import { userService } from "../services/user.service";
+import { UserModal } from "./User/UserModal";
 
+import airLogoSvg from "../../styles/svg/air-logo.svg";
+import airDarkLogoSvg from "../../styles/svg/air-dark-logo.svg";
+import userSvg from "../../styles/svg/user.svg";
+import hamburgerSvg from "../../styles/svg/hamburger.svg";
 
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
+
 	const { headerLayoutSmall, isDark, isActive, isExplore } = headerMode;
+
 	const [userModalState, toggleModal] = useState(false);
-	const location = useLocation();
-	const history = useHistory();
 	const [isScreenOpen, setIsScreenOpen] = useState(false);
 	const [isSearchBarOpen, setIsSearchBarOpen] = useState(isActive);
 	const [someActive, setSomeActive] = useState(null);
 
+	const location = useLocation();
+	const history = useHistory();
+	const img = getImgToShow();
+
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
 	}
-
-	const img = getImgToShow();
 
 	function getImgToShow() {
 		let currUser = userService.getLoggedinUser();

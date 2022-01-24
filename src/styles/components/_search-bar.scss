@@ -18,18 +18,18 @@
 	line-height: 20px;
 }
 
-.bar div.origi {
+.bar div.original {
 	border-radius: inherit;
 	padding: 0.8rem 1.5rem;
 	transition: background 250ms ease;
 	cursor: pointer;
 }
 
-.bar div.origi:hover {
+.bar div.original:hover {
 	background: $clr5;
 }
 
-.bar div.origi.active {
+.bar div.original.active {
 	background: $clr2;
 	box-shadow: 5px 5px 50px 1px rgba(63, 63, 63, 0.404);
 	.header-guests {
@@ -83,11 +83,11 @@ input[type="text"]:focus {
 	overflow: hidden;
 }
 
-.bar > div.origi {
+.bar > div.original {
 	position: relative;
 }
 
-.bar > div.origi::before {
+.bar > div.original::before {
 	position: absolute;
 	content: "";
 	left: 0;
@@ -97,7 +97,7 @@ input[type="text"]:focus {
 	height: 55%;
 }
 
-.bar > div.origi:nth-of-type(1)::before {
+.bar > div.original:nth-of-type(1)::before {
 	background: transparent;
 }
 
@@ -107,19 +107,19 @@ input[type="text"]:focus {
 	opacity: 50%;
 }
 
-.bar > div.origi:hover::before {
+.bar > div.original:hover::before {
 	background: transparent;
 }
 
-.bar > div.origi:hover + hr {
+.bar > div.original:hover + hr {
 	visibility: hidden;
 }
 
-.bar > div.origi.active + hr {
+.bar > div.original.active + hr {
 	visibility: hidden;
 }
 
-.bar .spacial-btn {
+.bar .special-btn {
 	position: absolute;
 	z-index: 0;
 	right: 3%;
@@ -136,7 +136,7 @@ input[type="text"]:focus {
 	.guests {
 		padding-inline-end: 230px;
 	}
-	.spacial-btn {
+	.special-btn {
 		right: 2.5%;
 		& img {
 			width: 20%;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Map } from "../cmps/Map";
+import { Map } from "../cmps/Details/Map";
 import { connect } from "react-redux";
-import { Loader } from "../cmps/Loader";
-import { Checkout } from "../cmps/Checkout";
-import { Amenities } from "../cmps/Amenities";
+import { Loader } from "../cmps/General/Loader";
+import { Checkout } from "../cmps/Details/Checkout";
+import { Amenities } from "../cmps/Details/Amenities";
 import { stayService } from "../services/stay.service";
 import { toggleDetailsLayout } from "../store/header.action";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { Review } from "../cmps/Review";
+import { Review } from "../cmps/Details/Review";
 
 import reviewStar from "../styles/svg/star.svg";
 import home from "../styles/svg/entirehome.svg";

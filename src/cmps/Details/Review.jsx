@@ -1,4 +1,3 @@
-import reviewStar from "../styles/svg/star.svg";
 
 export function Review({ review }) {
 	return (

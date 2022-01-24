@@ -1,13 +1,13 @@
 import React from "react";
-import reviewStar from "../styles/svg/star.svg";
+import reviewStar from "../../styles/svg/star.svg";
 import ImageCarousel from "./ImageCarousel.jsx";
-import { userService } from "../services/user.service.js";
+import { userService } from "../../services/user.service.js";
 
-import greyHeart from "../styles/svg/grey-heart.svg";
-import pinkHeart from "../styles/svg/pink-heart.svg";
+import greyHeart from "../../styles/svg/grey-heart.svg";
+import pinkHeart from "../../styles/svg/pink-heart.svg";
 
 import { connect } from "react-redux";
-import { updateUser } from "../store/user.action.js"
+import { updateUser } from "../../store/user.action.js"
 
 function _StayPreview({ stay, updateUser }) {
 	let avg = 0;
