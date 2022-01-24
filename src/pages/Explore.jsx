@@ -9,8 +9,9 @@ import { StayList } from "../cmps/Explore/StayList.jsx";
 import { Loader } from "../cmps/General/Loader";
 
 export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive }) {
-	const [currStays, setCurrStays] = useState(null);
-
+	const [currStays, setCurrStays] = useState(null)
+	const [searchLocation, setSearchLocation] = useState(null)
+	
 	useEffect(async () => {
 		toggleIsExplore(true);
 		if (match.params.search) {
@@ -21,6 +22,7 @@ export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsE
 				let searchObj = param.split('=')
 				params[searchObj[0]] = searchObj[1]
 			})
+			setSearchLocation(params.location)
 			await loadSearchedStays(params)
 			setCurrStays({ stays });
 		} else {
@@ -35,6 +37,7 @@ export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsE
 		<main className='main-layout main-container'>
 			<section className='middle-layout'>
 				<SortAmenities />
+				{match.params.search && <div>{stays.length} stays in {searchLocation}</div>}
 				{!stays.length ? (
 					<div className='empty-list'>
 						<h2>Nothing comes up here</h2>
