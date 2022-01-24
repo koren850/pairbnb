@@ -20,9 +20,7 @@ export function stayReducer(state = initialState, action) {
             break;
         case 'UPDATE_STAY':
             newState = {
-                ...state, stays: state.stays.map(stay => {
-                    return (stay._id === action.updatedSTAY._id) ? action.updatedSTAY : stay
-                })
+                ...state, stays: state.stays.map(stay => (stay._id === action.updatedSTAY._id) ? action.updatedSTAY : stay)
             }
             break;
         case 'REMOVE_STAY':

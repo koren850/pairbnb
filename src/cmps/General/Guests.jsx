@@ -4,6 +4,8 @@ import plus from "../../styles/svg/plus.svg";
 import minus from "../../styles/svg/minus.svg";
 
 export function Guests({ init, set }) {
+	const minusSvg = <img className='plus-minus' src={minus} />;
+	const plusSvg = <img className='plus-minus' src={plus} />;
 	const order = init;
 
 	function handleChange(type, diff) {
@@ -16,8 +18,6 @@ export function Guests({ init, set }) {
 		ev.stopPropagation();
 	}
 
-	const minusSvg = <img className='plus-minus' src={minus} />;
-	const plusSvg = <img className='plus-minus' src={plus} />;
 	return (
 		<div onClick={stop} className='guests-checkout'>
 			<div className='guest-add flex'>

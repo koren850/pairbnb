@@ -1,4 +1,3 @@
-
 export function toggleDetailsLayout(set) {
     return (dispatch) => {
         try {
@@ -9,7 +8,7 @@ export function toggleDetailsLayout(set) {
     };
 }
 
-export function toggleHeaderIsDark(set) {
+export function toggleHeaderIsTop(set) {
     return (dispatch) => {
         try {
             dispatch({ type: 'TOGGLE_HEADER_ISTOP', set });
@@ -29,15 +28,6 @@ export function toggleHeaderIsActive(set) {
     };
 }
 
-export function toggleIsFlexible(set) {
-    return (dispatch) => {
-        try {
-            dispatch({ type: 'TOGGLE_HEADER_ISFLEXIBLE', set });
-        } catch {
-            console.log('could not toggle ');
-        }
-    };
-}
 
 export function toggleIsExplore(set) {
     return (dispatch) => {

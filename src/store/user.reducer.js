@@ -1,4 +1,5 @@
 import { userService } from '../services/user.service'
+
 const initialState = {
 	user: userService.getLoggedinUser() || {},
 	connectionError: {
