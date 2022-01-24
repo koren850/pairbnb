@@ -8,11 +8,10 @@ export function Search({ onToggleIsActive, setIsSearchBarOpen }) {
 		onToggleIsActive();
 	}
 
-	const searchParams = useSelector(state => state.stayModule.searchParams)
-	
+	const searchParams = useSelector((state) => state.stayModule.searchParams);
 	return (
 		<nav className='search' onClick={handleSearchClick}>
-			<p>{searchParams ? searchParams.location : "Start your search"}</p>
+			<p>{searchParams.location ? searchParams.location : "Start your search"}</p>
 			<div className='special-btn search-special-btn'>
 				<SpecialBtn text={<img src={searchSvg} className='search-svg' alt='' />} />
 			</div>
