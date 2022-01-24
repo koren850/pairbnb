@@ -1,24 +1,27 @@
 import React from "react";
-import reviewStar from "../../styles/svg/star.svg";
-import ImageCarousel from "./ImageCarousel.jsx";
-import { userService } from "../../services/user.service.js";
+import { connect } from "react-redux";
 
+import { userService } from "../../services/user.service.js";
+import { updateUser } from "../../store/user.action.js"
+
+import ImageCarousel from "./ImageCarousel.jsx";
+
+import reviewStar from "../../styles/svg/star.svg";
 import greyHeart from "../../styles/svg/grey-heart.svg";
 import pinkHeart from "../../styles/svg/pink-heart.svg";
 
-import { connect } from "react-redux";
-import { updateUser } from "../../store/user.action.js"
-
 function _StayPreview({ stay, updateUser }) {
-	let avg = 0;
+
+	// Consider moving into stay.service
 	let ammount = 0;
-	stay.reviews.forEach((review) => (ammount += review.rate));
 	const divider = stay.reviews.length;
-	avg = (ammount / divider).toFixed(1);
+	stay.reviews.forEach((review) => (ammount += review.rate));
+	const avg = (ammount / divider).toFixed(1);
 
 	let currUser = userService.getLoggedinUser();
 	let likedPlace;
 	let likedId;
+
 	if (currUser) {
 		likedPlace = currUser.likedStays.filter((likedstay) => likedstay._id === stay._id);
 		if (likedPlace.length > 0) {
@@ -28,6 +31,8 @@ function _StayPreview({ stay, updateUser }) {
 
 	function toggleLikedPlace(stay) {
 		let loggedinUser = userService.getLoggedinUser();
+		// USER MSG - ask guest to sign in / up / continue as guest for demo purposes
+		if (!loggedinUser) return console.log('please sign in first')
 		let likedStay = loggedinUser.likedStays.find(currStay => {
 			return currStay._id === stay._id
 		})

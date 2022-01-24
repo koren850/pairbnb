@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from "react-redux";
+
 import { PlaceTypeFilter } from "./PlaceType.jsx"
 import { PriceSlider } from "./PriceSlider.jsx"
+
 import { setFilterBy } from "../../../store/stay.action.js";
 
 import downArrow from "../../../styles/svg/arrows/down-arrow.svg";
 import upArrow from "../../../styles/svg/arrows/up-arrow.svg";
 
-
-// import React from 'react';
-
 export function _SortAmenities({ setFilterBy, stayType, stayPrice, searchParams }) {
-
     const [filterBy, setFilter] = useState({
         "Wifi": false,
         "TV": false,
@@ -24,7 +22,7 @@ export function _SortAmenities({ setFilterBy, stayType, stayPrice, searchParams 
     const [isPriceFilter, togglePriceFilter] = useState()
 
     useEffect(async () => {
-        await setFilterBy(filterBy, stayType, stayPrice,searchParams)
+        await setFilterBy(filterBy, stayType, stayPrice, searchParams)
     }, [filterBy])
 
     useEffect(() => {

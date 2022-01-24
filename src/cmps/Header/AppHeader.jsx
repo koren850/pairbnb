@@ -21,7 +21,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 
 	const [userModalState, toggleModal] = useState(false);
 	const [isScreenOpen, setIsScreenOpen] = useState(false);
-	const [isSearchBarOpen, setIsSearchBarOpen] = useState(isActive);
+	const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
 	const [someActive, setSomeActive] = useState(null);
 
 	const location = useLocation();

@@ -1,22 +1,19 @@
-// import * as React from 'react';
+import React, { useEffect, useState } from 'react'
+import { connect } from "react-redux";
+
 import PropTypes from 'prop-types';
 import Slider, { SliderThumb } from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
+
 import { setByRange } from "../../../store/stay.action.js";
-
-import React, { useEffect, useState } from 'react'
-import { connect } from "react-redux";
-
-
 function ValueLabelComponent(props) {
     const { children, value } = props;
 
     return (
         <Tooltip enterTouchDelay={0} placement="top" title={value}>
             {children}
-            <div>Helllloooo</div>
         </Tooltip>
     );
 }
@@ -25,22 +22,6 @@ ValueLabelComponent.propTypes = {
     children: PropTypes.element.isRequired,
     value: PropTypes.number.isRequired,
 };
-
-
-// const marks = [
-//     {
-//         value: 100,
-//     },
-//     {
-//         value: 200,
-//     },
-//     {
-//         value: 370,
-//     },
-//     {
-//         value: 600,
-//     },
-// ];
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
     color: '#FF385C',
@@ -89,7 +70,6 @@ AirbnbThumbComponent.propTypes = {
 };
 
 export function _PriceSlider({ stays, setByRange, filterBy, stayType, searchParams }) {
-
     const [stayPrice, setPriceRange] = useState({
         minPrice: 0,
         maxPrice: 1000,
@@ -101,39 +81,31 @@ export function _PriceSlider({ stays, setByRange, filterBy, stayType, searchPara
     };
 
     useEffect(async () => {
-        await setByRange(filterBy, stayType, stayPrice,searchParams)
+        await setByRange(filterBy, stayType, stayPrice, searchParams)
     }, [stayPrice])
-
-    // const marks = stays.map(stay => {
-    //     return {value:stay.price}
-    // })
 
     let maxPrice = 1000
     let minPrice = 0
+
     const stayPrices = stays.map(stay => {
         if (stay.price > maxPrice) maxPrice = stay.price
         if (stay.price < minPrice) minPrice = stay.price
-
         return stay.price
     })
-
 
     return (
         <section className="price-filter-container">
             <Box sx={{ width: 285 }}>
                 <Box sx={{ m: 3 }} />
-                {/* <Typography gutterBottom>Airbnb</Typography> */}
                 <AirbnbSlider
                     min={minPrice}
                     name="priceRange"
                     max={maxPrice}
                     onChange={(ev) => handleChange(ev)}
                     // marks={marks}
-                    // value={500}
                     components={{ Thumb: AirbnbThumbComponent }}
                     getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-                    defaultValue={[0, 1000]}
-                />
+                    defaultValue={[0, 1000]} />
                 <div className="price-range flex">
                     <div className="minmax-price">
                         <div className="min-price">Min Price</div>
@@ -144,8 +116,6 @@ export function _PriceSlider({ stays, setByRange, filterBy, stayType, searchPara
                         <div className="max-price">${stayPrice.maxPrice}</div>
                     </div>
                 </div>
-
-
             </Box>
         </section>
     );

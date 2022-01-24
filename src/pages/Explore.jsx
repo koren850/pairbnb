@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+
 import { loadStays, loadSearchedStays } from "../store/stay.action.js";
-import { SortAmenities } from "../cmps/Explore/Filter/SortAmenities";
-import { Loader } from "../cmps/General/Loader";
 import { toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive } from "../store/header.action.js";
 
+import { SortAmenities } from "../cmps/Explore/Filter/SortAmenities";
 import { StayList } from "../cmps/Explore/StayList.jsx";
+import { Loader } from "../cmps/General/Loader";
 
 export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive }) {
 	const [currStays, setCurrStays] = useState(null);
+
 	useEffect(async () => {
 		toggleIsExplore(true);
 		if (match.params.search) {
@@ -28,6 +30,7 @@ export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsE
 	}, []);
 
 	if (!stays) return <Loader />;
+
 	return (
 		<main className='main-layout main-container'>
 			<section className='middle-layout'>

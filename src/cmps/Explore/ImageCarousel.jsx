@@ -1,11 +1,9 @@
 
 import React from 'react';
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from 'react-responsive-carousel';
 import { useHistory } from 'react-router-dom';
 
-import arrowLeft from '../../styles/svg/arrows/left-arrow.svg';
-
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 export default function ImageCarousel({ stay }) {
 
@@ -16,10 +14,9 @@ export default function ImageCarousel({ stay }) {
     }
 
     return (
-        <Carousel  showThumbs={false} showStatus={false} onClickItem={() => onClickItem(stay._id)}>
+        <Carousel showThumbs={false} showStatus={false} onClickItem={() => onClickItem(stay._id)}>
             <div>
                 <img src={stay.imgUrls[0]} />
-                {/* <button ><img style={{ width: "45px" }} src={arrowLeft} alt="" /></button> */}
             </div>
             <div>
                 <img src={stay.imgUrls[1]} />

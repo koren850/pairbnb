@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { connect } from "react-redux";
+
 import Box from '@mui/material/Box';
-// import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import Checkbox from '@mui/material/Checkbox';
 
-import { connect } from "react-redux";
 import { setSortBy } from "../../../store/stay.action.js";
-
 
 export function _PlaceTypeFilter({ setSortBy, filterBy, stayPrice, searchParams }) {
     const [stayType, setStayType] = useState({
@@ -20,12 +19,11 @@ export function _PlaceTypeFilter({ setSortBy, filterBy, stayPrice, searchParams 
     });
 
     const handleChange = (event) => {
-        setStayType({
-            ...stayType,
-            [event.target.name]: event.target.checked,
-        });
+        setStayType({ ...stayType, [event.target.name]: event.target.checked, });
     };
+    
     useEffect(async () => {
+        console.log(searchParams)
         await setSortBy(filterBy, stayType, stayPrice, searchParams)
     }, [stayType])
 
