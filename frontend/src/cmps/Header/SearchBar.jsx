@@ -50,8 +50,7 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 
 	function ChooseLocation(location) {
 		setUserProps({ ...userProps, location });
-		setParams({ ...searchParams, location })
-
+		setParams({ ...searchParams, location });
 	}
 
 	function ChooseDates(dates) {
@@ -61,7 +60,7 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 	}
 
 	useEffect(() => {
-		(async ()=> {
+		(async () => {
 			const data = await stayService.query();
 			setLocationsData(data);
 		})();

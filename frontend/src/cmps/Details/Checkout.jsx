@@ -55,7 +55,7 @@ export function Checkout({ stay, avg }) {
 					onClick={reserveOrder}
 					text='Check availability'
 				/>
-				{isGuestsActive && <Guests init={order} set={setOrder} />}
+				{isGuestsActive && <Guests init={order} ammount={stay.capacity} set={setOrder} />}
 				{order.checkIn && order.checkOut && (
 					<div className='price-container'>
 						<div>

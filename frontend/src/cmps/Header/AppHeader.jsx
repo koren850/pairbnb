@@ -95,8 +95,9 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 
 	return (
 		<header
-			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isTop ? "top-header" : ""} header-layout ${headerLayoutSmall ? "detail-layout" : "main-layout"
-				}`}>
+			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isTop ? "top-header" : ""} header-layout ${
+				headerLayoutSmall ? "detail-layout" : "main-layout"
+			}`}>
 			<div onClick={handleSearchModals} className={isScreenOpen ? "screen screen-open full-layout" : "screen full-layout"}></div>
 			<div onClick={handleCloseSearchBar} className={isSearchBarOpen ? "screen screen-open search-bar-screen full-layout" : "search-bar-screen  screen full-layout"}></div>
 			{userModalState && <UserModal currState={userModalState} toggleModal={toggleModal} />}
@@ -111,7 +112,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 				{!isActive && <Search isSearchBarOpen={isSearchBarOpen} setIsSearchBarOpen={setIsSearchBarOpen} onToggleIsActive={onToggleIsActive} />}
 				<article className='nav-link'>
 					<Link to={`/explore`}> Explore</Link>
-					<Link className='become' to={`/explore`}>
+					<Link className='become' to={`/host`}>
 						Become a Host
 					</Link>
 					<button onClick={() => toggleModal(true)} className='user-menu'>
