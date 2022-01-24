@@ -1,5 +1,4 @@
 import { SpecialBtn } from "../General/SpecialBtn";
-
 import searchSvg from "../../styles/svg/search.svg";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
