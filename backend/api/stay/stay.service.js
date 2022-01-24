@@ -5,9 +5,9 @@ const asyncLocalStorage = require('../../services/als.service')
 async function query(filterBy = {}) {
     try {
         const criteria = _buildCriteria(filterBy)
-        const collection = await dbService.getCollection('review')
-        // const reviews = await collection.find(criteria).toArray()
-        var reviews = await collection.aggregate([
+        const collection = await dbService.getCollection('stay')
+        // const stays = await collection.find(criteria).toArray()
+        var stays = await collection.aggregate([
             {
                 $match: criteria
             },
@@ -36,57 +36,71 @@ async function query(filterBy = {}) {
                 $unwind: '$aboutUser'
             }
         ]).toArray()
-        reviews = reviews.map(review => {
-            review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
-            review.aboutUser = { _id: review.aboutUser._id, fullname: review.aboutUser.fullname }
-            delete review.byUserId
-            delete review.aboutUserId
-            return review
+        stays = stays.map(stay => {
+            stay.byUser = { _id: stay.byUser._id, fullName: stay.byUser.fullName }
+            stay.aboutUser = { _id: stay.aboutUser._id, fullName: stay.aboutUser.fullName }
+            delete stay.byUserId
+            delete stay.aboutUserId
+            return stay
         })
 
-        return reviews
+        return stays
     } catch (err) {
-        logger.error('cannot find reviews', err)
+        logger.error('cannot find stays', err)
         throw err
     }
 
 }
 
-async function remove(reviewId) {
+async function remove(stayId) {
     try {
         const store = asyncLocalStorage.getStore()
         const { userId, isAdmin } = store
-        const collection = await dbService.getCollection('review')
+        const collection = await dbService.getCollection('stay')
         // remove only if user is owner/admin
-        const criteria = { _id: ObjectId(reviewId) }
+        const criteria = { _id: ObjectId(stayId) }
         if (!isAdmin) criteria.byUserId = ObjectId(userId)
         await collection.deleteOne(criteria)
     } catch (err) {
-        logger.error(`cannot remove review ${reviewId}`, err)
+        logger.error(`cannot remove stay ${stayId}`, err)
         throw err
     }
 }
 
 
-async function add(review) {
+async function add(stay) {
     try {
-        const reviewToAdd = {
-            byUserId: ObjectId(review.byUserId),
-            aboutUserId: ObjectId(review.aboutUserId),
-            txt: review.txt
+        const stayToAdd = {
+            byUserId: ObjectId(stay.byUserId),
+            aboutUserId: ObjectId(stay.aboutUserId),
+            txt: stay.txt
+            
         }
-        const collection = await dbService.getCollection('review')
-        await collection.insertOne(reviewToAdd)
-        return reviewToAdd;
+        const collection = await dbService.getCollection('stay')
+        await collection.insertOne(stayToAdd)
+        return stayToAdd;
     } catch (err) {
-        logger.error('cannot insert review', err)
+        logger.error('cannot insert stay', err)
         throw err
     }
 }
 
 function _buildCriteria(filterBy) {
     const criteria = {}
-    if (filterBy.byUserId) criteria.byUserId = filterBy.byUserId
+    if (filterBy.txt) {
+        const txtCriteria = { $regex: filterBy.txt, $options: 'i' }
+        criteria.$or = [
+            {
+                email: txtCriteria
+            },
+            {
+                fullName: txtCriteria
+            }
+        ]
+    }
+    if (filterBy.minBalance) {
+        criteria.score = { $gte: filterBy.minBalance }
+    }
     return criteria
 }
 

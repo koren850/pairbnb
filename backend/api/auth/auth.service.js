@@ -3,37 +3,40 @@ const userService = require('../user/user.service')
 const logger = require('../../services/logger.service')
 
 
-async function login(username, password) {
-    logger.debug(`auth.service - login with username: ${username}`)
-
-    const user = await userService.getByUsername(username)
-    if (!user) return Promise.reject('Invalid username or password')
-    // TODO: un-comment for real login
-    // const match = await bcrypt.compare(password, user.password)
-    // if (!match) return Promise.reject('Invalid username or password')
-
-    delete user.password
-    user._id = user._id.toString()
-    return user
+async function login(email, password, isSocial) {
+    logger.debug(`auth.service - login with email: ${email}`)
+    try {
+        const user = await userService.getByEmail(email)
+        if (!user) return new Error({ reason: 'User doesn\'t exists', unsolved: 'email' });
+        const match = await bcrypt.compare(password, user.password)
+        if (!match) {
+            if (!isSocial) return new Error({ reason: 'Incorrect user password', unsolved: 'password' });
+        }
+        if (user) {
+            delete user.password
+            // user._id = user._id.toString() // need ?
+            return (user);
+        }
+    } catch (err) {
+        if (err) return err;
+    }
 }
 
-// (async ()=>{
-//     await signup('bubu', '123', 'Bubu Bi')
-//     await signup('mumu', '123', 'Mumu Maha')
-// })()
-    
-
-async function signup(username, password, fullname) {
+async function signup(email, password, isSocial, imgUrl, fullName) {
     const saltRounds = 10
-
-    logger.debug(`auth.service - signup with username: ${username}, fullname: ${fullname}`)
-    if (!username || !password || !fullname) return Promise.reject('fullname, username and password are required!')
-
-    const userExist = await userService.getByUsername(username)
-    if (userExist) return Promise.reject('Username already taken')
-
-    const hash = await bcrypt.hash(password, saltRounds)
-    return userService.add({ username, password: hash, fullname })
+    logger.debug(`auth.service - signup with email: ${email}, fullName: ${fullName}`)
+    try {
+        const user = await userService.getByEmail(email);
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (user === -1) return new Error({ reason: 'Email already exists', unsolved: 'email' });
+        else if (!emailRegex.test(email)) return new Error({ reason: 'Invalid email pattern : ' + userCred.email, unsolved: 'email' });
+        else if (!isSocial && password?.length < 5) return new Error({ reason: 'password should have at list 6 digits / letters', unsolved: 'password' });
+        likedStays = [];
+        const hash = (isSocial) ? '(User from social have no password).' : await bcrypt.hash(password, saltRounds);
+        return userService.add({ fullName,email, password: hash,imgUrl,likedStays,isSocial })
+    } catch(err) {
+        return err;
+    }
 }
 
 module.exports = {

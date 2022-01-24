@@ -54,7 +54,6 @@ function login(userCred) {
         }
         else reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
     })
-
 }
 function signup(userCred) {
     const users = getUsers()
@@ -78,6 +77,7 @@ function signup(userCred) {
         // return _saveLocalUser(user)******* When backend is up uncomment
     })
 }
+
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
     // return await httpService.post('auth/logout')******* When backend is up uncomment
