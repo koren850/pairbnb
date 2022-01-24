@@ -29,7 +29,7 @@
         },
         "reviews": [],
         "likedByUsers": [
-            "Mosh Ben Ari",
+            {"Mosh Ben Ari"},
             "Moris Boris"
         ]
     },

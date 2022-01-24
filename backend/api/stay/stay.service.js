@@ -1,41 +1,41 @@
-const dbService = require('../../services/db.service')
-const ObjectId = require('mongodb').ObjectId
-const asyncLocalStorage = require('../../services/als.service')
+const dbService = require('../../services/db.service');
+const ObjectId = require('mongodb').ObjectId;
+const asyncLocalStorage = require('../../services/als.service');
 
 async function query(filterBy = {}) {
     try {
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection('stay')
-        // const stays = await collection.find(criteria).toArray()
-        var stays = await collection.aggregate([
-            {
-                $match: criteria
-            },
-            {
-                $lookup:
-                {
-                    localField: 'byUserId',
-                    from: 'user',
-                    foreignField: '_id',
-                    as: 'byUser'
-                }
-            },
-            {
-                $unwind: '$byUser'
-            },
-            {
-                $lookup:
-                {
-                    localField: 'aboutUserId',
-                    from: 'user',
-                    foreignField: '_id',
-                    as: 'aboutUser'
-                }
-            },
-            {
-                $unwind: '$aboutUser'
-            }
-        ]).toArray()
+        const stays = await collection.find(criteria).toArray();
+        // var stays = await collection.aggregate([
+        //     {
+        //         $match: criteria
+        //     },
+        //     {
+        //         $lookup:
+        //         {
+        //             localField: 'byUserId',
+        //             from: 'user',
+        //             foreignField: '_id',
+        //             as: 'byUser'
+        //         }
+        //     },
+        //     {
+        //         $unwind: '$byUser'
+        //     },
+        //     {
+        //         $lookup:
+        //         {
+        //             localField: 'aboutUserId',
+        //             from: 'user',
+        //             foreignField: '_id',
+        //             as: 'aboutUser'
+        //         }
+        //     },
+        //     {
+        //         $unwind: '$aboutUser'
+        //     }
+        // ]).toArray()
         stays = stays.map(stay => {
             stay.byUser = { _id: stay.byUser._id, fullName: stay.byUser.fullName }
             stay.aboutUser = { _id: stay.aboutUser._id, fullName: stay.aboutUser.fullName }
@@ -73,8 +73,18 @@ async function add(stay) {
         const stayToAdd = {
             byUserId: ObjectId(stay.byUserId),
             aboutUserId: ObjectId(stay.aboutUserId),
-            txt: stay.txt
-            
+            txt: stay.txt,
+            name: stay.name,
+            type: stay.type,
+            imgUrls: stay.imgUrls,
+            price: stay.price,
+            summary: stay.summary,
+            capacity: stay.capacity,
+            amenities: stay.amenities,
+            host: stay.host,
+            loc: stay.loc,
+            reviews: stay.reviews,
+            likedByUsers: stay.likedByUsers
         }
         const collection = await dbService.getCollection('stay')
         await collection.insertOne(stayToAdd)
