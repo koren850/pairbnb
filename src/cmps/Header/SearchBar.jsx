@@ -25,12 +25,11 @@ function _SearchBar({ someActive,turnOffSome, setSomeActive, isScreenOpen, setIs
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
-		if (elName === 'location' && someActive !== elName) {
+		if (elName === "location" && someActive !== elName) {
 			setIsScreenOpen(true);
 			elLocationInput.current.focus();
-		} 
-		else elLocationInput.current.blur();
-		(elName === 'check-in' || elName === 'check-out') ? setIsScreenOpen(true) : setIsScreenOpen(false);
+		} else elLocationInput.current.blur();
+		elName === "check-in" || elName === "check-out" ? setIsScreenOpen(true) : setIsScreenOpen(false);
 		if (someActive === elName) {
 			setSomeActive(null);
 			setIsScreenOpen(false);
@@ -63,7 +62,7 @@ function _SearchBar({ someActive,turnOffSome, setSomeActive, isScreenOpen, setIs
 		async function setInitialData() {
 			const data = await stayService.query();
 			setLocationsData(data);
-		};
+		}
 		window.addEventListener("scroll", turnOffSome);
 		return () => {
 			window.removeEventListener("scroll", turnOffSome);
