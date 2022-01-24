@@ -7,6 +7,7 @@ import hostImg from "../styles/img/host.jpg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleIsExplore, toggleHeaderIsActive, toggleHeaderIsTop } from "../store/header.action";
+import { setParams } from "../store/stay.action";
 
 export function Home() {
 	const dispatch = useDispatch();
@@ -14,6 +15,15 @@ export function Home() {
 	const heroUrl = "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642610299/imgs/HD_wallpaper__brown_wooden_dock_and_cottages_Maldives_resort_artificial_lights_zxkna8.jpg";
 
 	useEffect(() => {
+		dispatch(setParams({
+			adults: 1,
+			checkIn: null,
+			checkOut: null,
+			children: 0,
+			guestsCount: 1,
+			infants: 0,
+			location: ""
+		}))
 		dispatch(toggleIsExplore(false));
 		dispatch(toggleHeaderIsActive(true));
 		dispatch(toggleHeaderIsTop(true));

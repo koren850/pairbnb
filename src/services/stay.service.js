@@ -81,10 +81,7 @@ async function query(filterBy, stayType, stayPrice, searchParams) {
 }
 
 async function searchStays(search) {
-    console.log(search)
     const { location, guestsCount } = search
-    console.log(location)
-    console.log(guestsCount)
     let stays = await storageService.query(STORAGE_KEY);
     let staysByCapacity = [];
     stays.map(stay => {

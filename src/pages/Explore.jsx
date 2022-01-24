@@ -8,10 +8,10 @@ import { SortAmenities } from "../cmps/Explore/Filter/SortAmenities";
 import { StayList } from "../cmps/Explore/StayList.jsx";
 import { Loader } from "../cmps/General/Loader";
 
-export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive }) {
+export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore }) {
 	const [currStays, setCurrStays] = useState(null)
 	const [searchLocation, setSearchLocation] = useState(null)
-	
+
 	useEffect(async () => {
 		toggleIsExplore(true);
 		if (match.params.search) {
@@ -29,7 +29,7 @@ export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsE
 			await loadStays();
 			setCurrStays({ stays });
 		}
-	}, []);
+	}, [match.params])
 
 	if (!stays) return <Loader />;
 
@@ -37,7 +37,9 @@ export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsE
 		<main className='main-layout main-container'>
 			<section className='middle-layout'>
 				<SortAmenities />
-				{match.params.search && <div>{stays.length} stays in {searchLocation}</div>}
+				<div className="sort-stays-seperator"></div>
+				{/* <hr style={{  }} /> */}
+				{match.params.search && <div className="explore-search-stays">{stays.length} stays in {searchLocation}</div>}
 				{!stays.length ? (
 					<div className='empty-list'>
 						<h2>Nothing comes up here</h2>

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { toggleDetailsLayout, toggleHeaderIsActive } from "../../store/header.action";
+import { setParams } from "../../store/stay.action";
 import { stayService } from "../../services/stay.service";
 
 import { Guests } from "../General/Guests";
@@ -12,8 +13,9 @@ import { SpecialBtn } from "../General/SpecialBtn";
 
 import searchSvg from "../../styles/svg/search.svg";
 
-function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen }) {
+function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen, searchParams, setParams }) {
 	const [locationsData, setLocationsData] = useState(null);
+
 	const [userProps, setUserProps] = useState({ location: "", checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 
 	const elLocationInput = useRef();
@@ -48,6 +50,8 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 
 	function ChooseLocation(location) {
 		setUserProps({ ...userProps, location });
+		setParams({ ...searchParams, location })
+
 	}
 
 	function ChooseDates(dates) {
@@ -74,6 +78,7 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + (someActive === "location" ? "active" : "")}>
 				<p>Location</p>
 				<SearchBarFilterInput
+					// searchParams={searchParams}
 					someActive={someActive}
 					setIsScreenOpen={setIsScreenOpen}
 					isScreenOpen={isScreenOpen}
@@ -112,15 +117,16 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 	);
 }
 
-function mapStateToProps({ headerModule }) {
+function mapStateToProps({ headerModule, stayModule }) {
 	return {
 		headerMode: headerModule.headerMode,
+		searchParams: stayModule.searchParams,
 	};
 }
 const mapDispatchToProps = {
 	toggleDetailsLayout,
-
 	toggleHeaderIsActive,
+	setParams,
 };
 
 export const SearchBar = connect(mapStateToProps, mapDispatchToProps)(_SearchBar);

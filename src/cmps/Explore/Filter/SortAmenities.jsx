@@ -39,11 +39,12 @@ export function _SortAmenities({ setFilterBy, stayType, stayPrice, searchParams 
     }
 
     return (<div className="filter-container middle-layout">
-
-        <button className="filter-btn" onClick={() => { togglePrice() }} >{isPriceFilter ? <span className="flex"><span>Price </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Price: ${stayPrice.minPrice}-{stayPrice.maxPrice}</span><img className="filter-arrow" src={downArrow} /></span>}</button>
-        {isPriceFilter && <PriceSlider />}
-        <button className="filter-btn" onClick={() => { togglePlaces() }} >{placeType ? <span className="flex"><span>Type of place </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Type of place </span><img className="filter-arrow" src={downArrow} /></span>}</button>
-        {placeType && <PlaceTypeFilter />}
+        <div className="filter-dropdowns-container">
+            <button className="filter-btn" onClick={() => { togglePrice() }} >{isPriceFilter ? <span className="flex"><span>Price </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Price: ${stayPrice.minPrice}-{stayPrice.maxPrice}</span><img className="filter-arrow" src={downArrow} /></span>}</button>
+            {isPriceFilter && <PriceSlider />}
+            <button className="filter-btn" onClick={() => { togglePlaces() }} >{placeType ? <span className="flex"><span>Type of place </span><img className="filter-arrow" src={upArrow} /></span> : <span className="flex"><span>Type of place </span><img className="filter-arrow" src={downArrow} /></span>}</button>
+            {placeType && <PlaceTypeFilter />}
+        </div>
         <button className={filterBy["Wifi"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Wifi": !filterBy["Wifi"] }) }}>Wifi</button>
         <button className={filterBy["TV"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "TV": !filterBy["TV"] }) }}>TV</button>
         <button className={filterBy["Kitchen"] ? "filter-btn-active" : "filter-btn"} onClick={() => { setFilter({ ...filterBy, "Kitchen": !filterBy["Kitchen"] }) }}>Kitchen</button>

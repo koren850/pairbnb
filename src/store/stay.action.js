@@ -23,6 +23,17 @@ export function loadSearchedStays(searchParams) {
     };
 }
 
+export function setParams(searchParams) {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: 'SET_PARAMS', searchParams });
+
+        } catch {
+            console.log('could not set params ');
+        }
+    };
+}
+
 //consider use
 // export function removeStay(stayId) {
 //     return async (dispatch) => {

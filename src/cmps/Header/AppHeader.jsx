@@ -95,9 +95,8 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 
 	return (
 		<header
-			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isTop ? "top-header" : ""} header-layout ${
-				headerLayoutSmall ? "detail-layout" : "main-layout"
-			}`}>
+			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isTop ? "top-header" : ""} header-layout ${headerLayoutSmall ? "detail-layout" : "main-layout"
+				}`}>
 			<div onClick={handleSearchModals} className={isScreenOpen ? "screen screen-open full-layout" : "screen full-layout"}></div>
 			<div onClick={handleCloseSearchBar} className={isSearchBarOpen ? "screen screen-open search-bar-screen full-layout" : "search-bar-screen  screen full-layout"}></div>
 			{userModalState && <UserModal currState={userModalState} toggleModal={toggleModal} />}

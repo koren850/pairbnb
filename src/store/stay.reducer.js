@@ -6,7 +6,16 @@ const initialState = {
         minPrice: 0,
         maxPrice: 1000,
     },
-    searchParams: null,
+    searchParams: 
+    {
+    adults: 1,
+    checkIn: null,
+    checkOut: null,
+    children: 0,
+    guestsCount: 1,
+    infants: 0,
+    location: ""
+},
 };
 
 export function stayReducer(state = initialState, action) {
@@ -28,8 +37,7 @@ export function stayReducer(state = initialState, action) {
             newState = { ...state, stays }
             break;
         case 'SET_PARAMS':
-            console.log(action)
-            newState = { ...state, searchParams: { ...action.searchParams } }
+            newState = { ...state, searchParams: (action.searchParams) }
             break;
         case 'SET_FILTER':
             newState = { ...state, filterBy: { ...action.filterBy } }
