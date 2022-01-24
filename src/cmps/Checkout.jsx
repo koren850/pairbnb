@@ -12,6 +12,7 @@ import minus from "../styles/svg/minus.svg";
 import { SpecialButton } from "./SpacialButton";
 import { circularProgressClasses } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import reviewStar from "../styles/svg/star.svg";
 
 const theme = createTheme({
 	palette: {
@@ -24,7 +25,7 @@ const theme = createTheme({
 	},
 });
 
-export function Checkout({ stay }) {
+export function Checkout({ stay, avg }) {
 	const [order, setOrder] = useState({ checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const [guests, toggleGuests] = useState(false);
 
@@ -63,7 +64,11 @@ export function Checkout({ stay }) {
 						<span className='cost'>${stay.price}</span> / night
 					</p>
 					<p>
-						<span className='reviews'>({stay.reviews.length} reviews)</span>
+						<span>
+							<img className='star-checkout' src={reviewStar} />
+						</span>
+						<span className='avg-checkout'> {avg} · </span>
+						<span className='reviews'>{stay.reviews.length} reviews</span>
 					</p>
 				</div>
 
@@ -80,12 +85,31 @@ export function Checkout({ stay }) {
 					</div>
 				</div>
 				<SpecialButton
-					args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalPrice() * stay.price }}
+					args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalPrice() * stay.price * 1.025 }}
 					onClick={reserveOrder}
 					text='Check availability'
 				/>
 				{guests && <Guests init={order} set={setOrder} />}
-				{order.checkIn && order.checkOut && <h3 className='total-price'> Total price: ${getTotalPrice() * stay.price}</h3>}
+				{order.checkIn && order.checkOut && (
+					<div className='price-container'>
+						<div>
+							<div className='flex price-details'>
+								<div>
+									${stay.price} X {getTotalPrice()} nights
+								</div>
+								<div>${getTotalPrice() * stay.price}</div>
+							</div>
+							<div className='flex price-details'>
+								<div>Service fee</div>
+								<div>${parseInt(getTotalPrice() * stay.price * 0.025)}</div>
+							</div>
+						</div>
+						<div className='flex total-price'>
+							<h3> Total price:</h3>
+							<h3>${parseInt(getTotalPrice() * stay.price * 1.025)}</h3>
+						</div>
+					</div>
+				)}
 			</section>
 		</main>
 	);

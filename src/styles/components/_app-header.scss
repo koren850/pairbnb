@@ -12,12 +12,16 @@
     pointer-events: none;
     position: fixed;
     inset: 0;
-    z-index: -1;
+    // z-index: 100;
     height: 100vh;
     width: 100vw;
     &.screen-open {
-      // background-color: rgba(231, 27, 27, 0.164);
+      // background-color: rgba(211, 231, 27, 0.164);
       pointer-events: all;
+    }
+    &.search-bar-screen {
+      z-index: -100;
+      // background-color: rgba(0, 255, 0, 0.685);
     }
   }
   & .middle-layout {
@@ -26,7 +30,6 @@
     align-items: center;
   }
   &.active-header {
-    transition: 1s;
     padding-block-start: 15px;
     padding-block-end: 165px;
   }
@@ -40,6 +43,7 @@
     .user-menu {
       background-color: #fff;
       &a:hover {
+        background: $clr4;
       }
     }
   }
@@ -63,14 +67,13 @@
 }
 
 .short-search-bar {
-  z-index: 10;
+  z-index: -1;
   order: 1;
 }
 
 .logo {
   color: $clr1;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: 900;
+  font-family: circular;
   display: flex;
   align-items: center;
   font-size: 25px;
@@ -94,7 +97,8 @@
     border-radius: 25px;
     height: 42px;
     &:hover {
-      background-color: #262626;
+      background-color: $clr5;
+      color:$clr3;
     }
     &:last-of-type {
       margin-inline-end: 5px;
@@ -109,7 +113,6 @@
   height: 40px;
   width: 80px;
   padding: 0 6.5px;
-  transition: box-shadow, 0.5s;
   &:hover {
     box-shadow: 0px 2px 4px $clr5;
   }
