@@ -59,7 +59,7 @@ function _StayPreview({ stay, updateUser }) {
 				<div className='stay-preview-details'>
 					<div className='stay-reviews'>
 						<img src={reviewStar} />
-						<span>{avg}</span>({stay.reviews.length} reviews)
+						<span className="stay-reviews-total">{avg}</span><span className="stay-reviews-brackets">({stay.reviews.length} reviews)</span>
 					</div>
 					<div className='stay-type-country'>
 						{stay.type} • {stay.loc.address}
