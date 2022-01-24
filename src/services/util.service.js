@@ -6,7 +6,6 @@ export const utilService = {
     shuffleArray,
     getRandomName,
     generate,
-    drawNum,
     sortByWords,
     sortByNums
 }
@@ -25,7 +24,7 @@ function makeId(length = 6) {
 function shuffleArray(array) {
     var nums = [];
     for (var i = 0; i < array.length; i++) {
-        var idx = getRandomInt(0, array.length-1);
+        var idx = getRandomInt(0, array.length - 1);
         var currNum = array[idx];
         nums[i] = currNum;
         array.splice(idx, 1);
@@ -37,7 +36,7 @@ function generate(genLength = 5, str = 'abcdefghijklmnopqrst0123456789uvwxyzABCD
     var res = '';
     var randIdx = 0;
     for (var i = 0; i < genLength; i++) {
-        randIdx = Math.floor(Math.random()*str.length);
+        randIdx = Math.floor(Math.random() * str.length);
         res += str.charAt(randIdx);
     }
     return res;
@@ -52,12 +51,6 @@ function getRandomName(length = 4) {
         if (!i) randomWord = randomWord.toUpperCase();
     }
     return randomWord
-}
-
-function drawNum(numsArr) {
-    var currNum = numsArr[getRandomInt(0, numsArr.length)];
-    numsArr.splice(numsArr.indexOf(currNum), 1)
-    return currNum;
 }
 
 function sortByWords(words) {

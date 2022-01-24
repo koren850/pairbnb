@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import ApiKeys from "../../api-key.json";
+
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+
+import ApiKeys from "../../api-key.json";
+
 import home from "../../styles/svg/home.svg";
 
 const containerStyle = {

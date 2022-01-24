@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from "../../store/header.action";
+import { toggleDetailsLayout, toggleHeaderIsActive } from "../../store/header.action";
 import { stayService } from "../../services/stay.service";
 
 import { Guests } from "../General/Guests";
@@ -12,8 +12,7 @@ import { SpecialBtn } from "../General/SpecialBtn";
 
 import searchSvg from "../../styles/svg/search.svg";
 
-
-function _SearchBar({ someActive,turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen }) {
+function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen }) {
 	const [locationsData, setLocationsData] = useState(null);
 	const [userProps, setUserProps] = useState({ location: "", checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 
@@ -120,7 +119,7 @@ function mapStateToProps({ headerModule }) {
 }
 const mapDispatchToProps = {
 	toggleDetailsLayout,
-	toggleHeaderIsDark,
+
 	toggleHeaderIsActive,
 };
 

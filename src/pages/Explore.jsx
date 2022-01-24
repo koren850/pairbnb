@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { loadStays, loadSearchedStays } from "../store/stay.action.js";
-import { toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive } from "../store/header.action.js";
+import { toggleIsExplore, toggleHeaderIsTop, toggleHeaderIsActive } from "../store/header.action.js";
 
 import { SortAmenities } from "../cmps/Explore/Filter/SortAmenities";
 import { StayList } from "../cmps/Explore/StayList.jsx";
@@ -60,7 +60,7 @@ const mapDispatchToProps = {
 	loadStays,
 	loadSearchedStays,
 	toggleIsExplore,
-	toggleHeaderIsDark,
+	toggleHeaderIsTop,
 	toggleHeaderIsActive,
 };
 

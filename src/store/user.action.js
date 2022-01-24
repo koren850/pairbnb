@@ -30,6 +30,7 @@ export function updateInputsErrorInfo(error) {
         dispatch(action)
     }
 }
+
 export function updateUser(user) {
     console.log(user)
     return async (dispatch) => {

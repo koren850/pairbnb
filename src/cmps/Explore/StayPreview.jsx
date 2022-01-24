@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { userService } from "../../services/user.service.js";
-import { updateUser } from "../../store/user.action.js"
+import { updateUser } from "../../store/user.action.js";
 
 import ImageCarousel from "./ImageCarousel.jsx";
 
@@ -11,7 +11,6 @@ import greyHeart from "../../styles/svg/grey-heart.svg";
 import pinkHeart from "../../styles/svg/pink-heart.svg";
 
 function _StayPreview({ stay, updateUser }) {
-
 	// Consider moving into stay.service
 	let ammount = 0;
 	const divider = stay.reviews.length;
@@ -32,48 +31,55 @@ function _StayPreview({ stay, updateUser }) {
 	function toggleLikedPlace(stay) {
 		let loggedinUser = userService.getLoggedinUser();
 		// USER MSG - ask guest to sign in / up / continue as guest for demo purposes
-		if (!loggedinUser) return console.log('please sign in first')
-		let likedStay = loggedinUser.likedStays.find(currStay => {
-			return currStay._id === stay._id
-		})
+		if (!loggedinUser) return console.log("please sign in first");
+		let likedStay = loggedinUser.likedStays.find((currStay) => {
+			return currStay._id === stay._id;
+		});
 		if (likedStay) {
-			loggedinUser.likedStays = loggedinUser.likedStays.filter(currStay => {
-				return currStay._id !== likedStay._id
-			})
+			loggedinUser.likedStays = loggedinUser.likedStays.filter((currStay) => {
+				return currStay._id !== likedStay._id;
+			});
 		} else {
-			loggedinUser.likedStays.push(stay)
+			loggedinUser.likedStays.push(stay);
 		}
-		updateUser(loggedinUser)
+		updateUser(loggedinUser);
 	}
 
 	return (
-		<div>
-			<div className='stay-preview'>
-				{likedId !== stay._id &&
-					< button onClick={() => { toggleLikedPlace(stay) }}>
-						<img className='stay-preview-heart' src={greyHeart} />
-					</button>}
-				{likedId === stay._id &&
-					<button button onClick={() => { toggleLikedPlace(stay) }}>
-						<img className='stay-preview-heart' src={pinkHeart} />
-					</button>
-				}
-				<div className='stay-preview-img'>
-					<ImageCarousel stay={stay} />
+		<div className='stay-preview'>
+			{likedId !== stay._id && (
+				<button
+					onClick={() => {
+						toggleLikedPlace(stay);
+					}}>
+					<img className='stay-preview-heart' src={greyHeart} />
+				</button>
+			)}
+			{likedId === stay._id && (
+				<button
+					button
+					onClick={() => {
+						toggleLikedPlace(stay);
+					}}>
+					<img className='stay-preview-heart' src={pinkHeart} />
+				</button>
+			)}
+			<div className='stay-preview-img'>
+				<ImageCarousel stay={stay} />
+			</div>
+			<div className='stay-preview-details'>
+				<div className='stay-reviews'>
+					<img src={reviewStar} />
+					<span className='stay-reviews-total'>{avg}</span>
+					<span className='stay-reviews-brackets'>({stay.reviews.length} reviews)</span>
 				</div>
-				<div className='stay-preview-details'>
-					<div className='stay-reviews'>
-						<img src={reviewStar} />
-						<span className="stay-reviews-total">{avg}</span><span className="stay-reviews-brackets">({stay.reviews.length} reviews)</span>
-					</div>
-					<div className='stay-type-country'>
-						{stay.type} • {stay.loc.address}
-					</div>
-					<div className='stay-name'>{stay.name}</div>
-					<div className='stay-price-night'>
-						<div className='stay-price'>
-							${stay.price} /<span className='stay-night'>night</span>
-						</div>
+				<div className='stay-type-country'>
+					{stay.type} • {stay.loc.address}
+				</div>
+				<div className='stay-name'>{stay.name}</div>
+				<div className='stay-price-night'>
+					<div className='stay-price'>
+						${stay.price} /<span className='stay-night'>night</span>
 					</div>
 				</div>
 			</div>
@@ -82,11 +88,11 @@ function _StayPreview({ stay, updateUser }) {
 }
 function mapStateToProps({ userModule }) {
 	return {
-		userModule: userModule.user
+		userModule: userModule.user,
 	};
 }
 const mapDispatchToProps = {
-	updateUser
+	updateUser,
 };
 
 export const StayPreview = connect(mapStateToProps, mapDispatchToProps)(_StayPreview);
