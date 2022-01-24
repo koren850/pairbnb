@@ -6,7 +6,7 @@ import { userService } from "../../../services/user.service";
 
 export function UserModal({ toggleModal, currState }) {
 	const [loggUser, setLoggUser] = useState(userService.getLoggedinUser());
-	const isActive = useSelector((state) => state.headerModule.headerMode.isActive)
+	const isActive = useSelector((state) => state.headerModule.headerMode.isActive);
 
 	function toggle(ev) {
 		console.log(ev.target);
@@ -30,7 +30,7 @@ export function UserModal({ toggleModal, currState }) {
 			<ul>
 				<li>
 					{loggUser ? (
-						<Link to={"/"}>
+						<Link to={"/host"}>
 							<span className='user-modal-span'>Statistics & Dashboard</span>
 						</Link>
 					) : (
@@ -50,7 +50,9 @@ export function UserModal({ toggleModal, currState }) {
 				</li>
 				<hr />
 				<li>
-					<span className='user-modal-span'>Start hosting</span>
+					<Link to={"/host"}>
+						<span className='user-modal-span'>Start hosting</span>
+					</Link>
 				</li>
 				<li onClick={onLogOut}>{loggUser ? <span className='user-modal-span'>Log out</span> : <span className='user-modal-span'>About</span>}</li>
 				<li>
