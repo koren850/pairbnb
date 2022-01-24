@@ -32,14 +32,15 @@ export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsE
 	}, [match.params])
 
 	if (!stays) return <Loader />;
-
 	return (
 		<main className='main-layout main-container'>
 			<section className='middle-layout'>
 				<SortAmenities />
-				<div className="sort-stays-seperator"></div>
-				{/* <hr style={{  }} /> */}
-				{match.params.search && <div className="explore-search-stays">{stays.length} stays in {searchLocation}</div>}
+				{searchLocation &&
+					<div>
+						<div className="sort-stays-seperator"></div>
+						<div className="explore-search-stays">{stays.length} stays in {searchLocation}</div>
+					</div>}
 				{!stays.length ? (
 					<div className='empty-list'>
 						<h2>Nothing comes up here</h2>
