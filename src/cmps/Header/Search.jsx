@@ -1,8 +1,8 @@
 import { SpecialBtn } from "../General/SpecialBtn";
-
 import searchSvg from "../../styles/svg/search.svg";
 
 export function Search({onToggleIsActive,setIsSearchBarOpen}) {
+
 	function handleSearchClick() {
 		setIsSearchBarOpen(true);
 		onToggleIsActive();

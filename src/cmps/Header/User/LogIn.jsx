@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { SpecialBtn } from "../../General/SpecialBtn";
 import { updateInputsErrorInfo } from "../../../store/user.action";
+import apiKeys from "../../../api-key.json";
 
 const theme = createTheme({
 	palette: {
@@ -132,7 +133,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 						<GoogleLogin
 							scope='profile email'
 							redirect_uri='https://localhost:3000/user/login'
-							clientId='490177482976-lt2ap2i9ei79difra3envh2b1g1528bn.apps.googleusercontent.com'
+							clientId={apiKeys.googleAuth}
 							buttonText='Login with Google acccount'
 							onSuccess={responseGoogle}
 							onFailure={responseGoogle}
@@ -148,7 +149,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 						/>
 
 						<FacebookLogin
-							appId='960690547913550'
+							appId={apiKeys.facebookAuth}
 							fields='name,email,picture'
 							render={(renderProps) => (
 								<FacebookLoginButton

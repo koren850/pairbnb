@@ -58,11 +58,10 @@ function _SearchBar({ someActive,turnOffSome, setSomeActive, isScreenOpen, setIs
 	}
 
 	useEffect(() => {
-		setInitialData();
-		async function setInitialData() {
+		(async ()=> {
 			const data = await stayService.query();
 			setLocationsData(data);
-		}
+		})();
 		window.addEventListener("scroll", turnOffSome);
 		return () => {
 			window.removeEventListener("scroll", turnOffSome);
