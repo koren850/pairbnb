@@ -1,6 +1,5 @@
 
 import { storageService } from './async-storage.service.js'
-import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 
 const STORAGE_KEY = 'stay_db'
@@ -13,19 +12,13 @@ export const stayService = {
     remove,
     subscribe,
     searchStays
-    // getDataForPrice
-
 }
-window.cs = stayService;
 
 async function query(filterBy, stayType, stayPrice, searchParams) {
-    console.log(searchParams)
     let stays
     if (searchParams) {
         stays = await searchStays(searchParams)
     } else stays = await storageService.query(STORAGE_KEY);
-    console.log(stays)
-    // let stays = await storageService.query(STORAGE_KEY);
     let filterValues;
     let stayTypeValues;
     const { minPrice, maxPrice } = (stayPrice) ? stayPrice : { minPrice: 0, maxPrice: 1000 };
@@ -110,13 +103,11 @@ async function searchStays(search) {
 function getById(stayId) {
     return storageService.get(STORAGE_KEY, stayId)
 }
+
 function remove(stayId) {
-    // return new Promise((resolve, reject) => {
-    //     setTimeout(reject, 2000)
-    // })
-    // return Promise.reject('Not now!');
     return storageService.remove(STORAGE_KEY, stayId)
 }
+
 function save(stay) {
     if (stay._id) {
         return storageService.put(STORAGE_KEY, stay)
@@ -126,12 +117,6 @@ function save(stay) {
     }
 }
 
-// function getEmptyStay() {
-//     return {
-//         vendor: 'Susita-' + (Date.now() % 1000),
-//         price: utilService.getRandomIntInclusive(1000, 9000),
-//     }
-// }
 
 function subscribe(listener) {
     listeners.push(listener)

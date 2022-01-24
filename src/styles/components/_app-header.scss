@@ -1,130 +1,130 @@
 .app-header {
-  position: fixed;
-  z-index: 10;
-  width: 100%;
-  background-color: $clr2;
-  height: 80px;
-  box-shadow: 0px 2px 2px $clr5;
-  padding-block-start: 1px;
-  padding-block-end: 1px;
-  transition: background-color 1s;
-  & .screen {
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    // z-index: 100;
-    height: 100vh;
-    width: 100vw;
-    &.screen-open {
-      // background-color: rgba(211, 231, 27, 0.164);
-      pointer-events: all;
-    }
-    &.search-bar-screen {
-      z-index: -100;
-      // background-color: rgba(0, 255, 0, 0.685);
-    }
-  }
-  & .middle-layout {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  &.active-header {
-    padding-block-start: 15px;
-    padding-block-end: 165px;
-  }
-  &.dark-header {
-    background-color: inherit;
-    box-shadow: none;
-    & a,
-    .logo {
-      color: $clr2;
-    }
-    .user-menu {
-      background-color: #fff;
-      &a:hover {
-        background: $clr4;
-      }
-    }
-  }
-  &.explore-header {
-    position: absolute;
-    grid-column: 1 / 4;
-  }
+	position: fixed;
+	z-index: 10;
+	width: 100%;
+	background-color: $clr2;
+	height: 80px;
+	box-shadow: 0px 2px 2px $clr5;
+	padding-block-start: 1px;
+	padding-block-end: 1px;
+	transition: background-color 1s;
+	& .screen {
+		pointer-events: none;
+		position: fixed;
+		inset: 0;
+		// z-index: 100;
+		height: 100vh;
+		width: 100vw;
+		&.screen-open {
+			// background-color: rgba(211, 231, 27, 0.164);
+			pointer-events: all;
+		}
+		&.search-bar-screen {
+			z-index: -100;
+			// background-color: rgba(0, 255, 0, 0.685);
+		}
+	}
+	& .middle-layout {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&.active-header {
+		padding-block-start: 15px;
+		padding-block-end: 165px;
+	}
+	&.top-header {
+		background-color: inherit;
+		box-shadow: none;
+		& a,
+		.logo {
+			color: $clr2;
+		}
+		.user-menu {
+			background-color: #fff;
+			&a:hover {
+				background: $clr4;
+			}
+		}
+	}
+	&.explore-header {
+		position: absolute;
+		grid-column: 1 / 4;
+	}
 }
 
 .search-bar-container {
-  overflow: hidden;
-  order: 5;
-  z-index: 10;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 100%;
+	overflow: hidden;
+	order: 5;
+	z-index: 10;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 100%;
 }
 
 .short-search-bar {
-  z-index: -1;
-  order: 1;
+	z-index: -1;
+	order: 1;
 }
 
 .logo {
-  color: $clr1;
-  font-family: circular;
-  display: flex;
-  align-items: center;
-  font-size: 25px;
+	color: $clr1;
+	font-family: circular;
+	display: flex;
+	align-items: center;
+	font-size: 25px;
 }
 
 .air-logo {
-  margin: 0;
-  padding: 0;
-  transform: translateY(-15%);
+	margin: 0;
+	padding: 0;
+	transform: translateY(-15%);
 }
 
 .nav-link {
-  display: flex;
-  width: inherit;
-  align-items: center;
-  justify-content: space-between;
-  a {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-radius: 25px;
-    height: 42px;
-    &:hover {
-      background-color: $clr5;
-      color:$clr3;
-    }
-    &:last-of-type {
-      margin-inline-end: 5px;
-    }
-  }
+	display: flex;
+	width: inherit;
+	align-items: center;
+	justify-content: space-between;
+	a {
+		display: flex;
+		align-items: center;
+		padding: 15px;
+		border-radius: 25px;
+		height: 42px;
+		&:hover {
+			background-color: $clr5;
+			color: $clr3;
+		}
+		&:last-of-type {
+			margin-inline-end: 5px;
+		}
+	}
 }
 
 .user-menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 40px;
-  width: 80px;
-  padding: 0 6.5px;
-  &:hover {
-    box-shadow: 0px 2px 4px $clr5;
-  }
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 40px;
+	width: 80px;
+	padding: 0 6.5px;
+	&:hover {
+		box-shadow: 0px 2px 4px $clr5;
+	}
 }
 
 .user-svg {
-  width: 31px;
-  box-shadow: inset 0px 0px 0px 3px #717171;
-  border-radius: 50%;
+	width: 31px;
+	box-shadow: inset 0px 0px 0px 3px #717171;
+	border-radius: 50%;
 }
 
 .hamburger-svg {
-  width: 30px;
-  height: 17px;
+	width: 30px;
+	height: 17px;
 }

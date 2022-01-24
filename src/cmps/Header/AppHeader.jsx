@@ -4,20 +4,19 @@ import { useHistory, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import { userService } from "../../services/user.service";
-import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive, toggleIsExplore } from "../../store/header.action";
+import { toggleDetailsLayout, toggleHeaderIsTop, toggleHeaderIsActive, toggleIsExplore } from "../../store/header.action";
 
 import { Search } from "./Search";
 import { SearchBar } from "./SearchBar";
 import { UserModal } from "./User/UserModal";
 
 import airLogoSvg from "../../styles/svg/air-logo.svg";
-import airDarkLogoSvg from "../../styles/svg/air-dark-logo.svg";
+import airTopLogoSvg from "../../styles/svg/air-dark-logo.svg";
 import userSvg from "../../styles/svg/user.svg";
 import hamburgerSvg from "../../styles/svg/hamburger.svg";
 
-function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
-
-	const { headerLayoutSmall, isDark, isActive, isExplore } = headerMode;
+function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
+	const { headerLayoutSmall, isTop, isActive, isExplore } = headerMode;
 
 	const [userModalState, toggleModal] = useState(false);
 	const [isScreenOpen, setIsScreenOpen] = useState(false);
@@ -34,7 +33,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 
 	function getImgToShow() {
 		let currUser = userService.getLoggedinUser();
-		return (currUser) ? (currUser.imgUrl ? currUser.imgUrl : userSvg) : userSvg;
+		return currUser ? (currUser.imgUrl ? currUser.imgUrl : userSvg) : userSvg;
 	}
 
 	function resetHeaderModes() {
@@ -43,15 +42,15 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 		if (window.scrollY <= 1) {
 			if (isExplore) {
 				toggleHeaderIsActive(false);
-				toggleHeaderIsDark(false);
+				toggleHeaderIsTop(false);
 			} else {
 				setSomeActive(null);
 				toggleHeaderIsActive(true);
-				toggleHeaderIsDark(true);
+				toggleHeaderIsTop(true);
 			}
 		} else {
 			toggleHeaderIsActive(false);
-			toggleHeaderIsDark(false);
+			toggleHeaderIsTop(false);
 		}
 	}
 
@@ -60,14 +59,14 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 	}
 
 	function handleSearchModals(ev) {
-		ev.stopPropagation()
+		ev.stopPropagation();
 		setIsScreenOpen(!isScreenOpen);
 		turnOffSome();
 	}
 
 	function handleCloseSearchBar(ev) {
-		ev.stopPropagation()
-		if (!isExplore && isDark) return;
+		ev.stopPropagation();
+		if (!isExplore && isTop) return;
 		toggleHeaderIsActive(!isActive);
 		setIsSearchBarOpen(!isSearchBarOpen);
 	}
@@ -75,17 +74,17 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 	useEffect(() => {
 		if (!location.pathname || location.pathname === "/") {
 			toggleHeaderIsActive(false);
-			toggleHeaderIsDark(false);
+			toggleHeaderIsTop(false);
 		} else if (location.pathname.includes("details")) {
 			toggleIsExplore(true);
 			toggleDetailsLayout(true);
 			toggleHeaderIsActive(false);
-			toggleHeaderIsDark(false);
+			toggleHeaderIsTop(false);
 		} else {
 			toggleIsExplore(true);
 			toggleDetailsLayout(false);
 			toggleHeaderIsActive(false);
-			toggleHeaderIsDark(false);
+			toggleHeaderIsTop(false);
 		}
 		window.addEventListener("scroll", resetHeaderModes);
 		return () => {
@@ -96,15 +95,16 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 
 	return (
 		<header
-			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isDark ? "dark-header" : ""} header-layout ${headerLayoutSmall ? "detail-layout" : "main-layout"
-				}`}>
+			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isTop ? "top-header" : ""} header-layout ${
+				headerLayoutSmall ? "detail-layout" : "main-layout"
+			}`}>
 			<div onClick={handleSearchModals} className={isScreenOpen ? "screen screen-open full-layout" : "screen full-layout"}></div>
 			<div onClick={handleCloseSearchBar} className={isSearchBarOpen ? "screen screen-open search-bar-screen full-layout" : "search-bar-screen  screen full-layout"}></div>
 			{userModalState && <UserModal currState={userModalState} toggleModal={toggleModal} />}
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
 					<span className='logo'>
-						P{isDark ? <img src={airDarkLogoSvg} className='air-logo' alt='' /> : <img src={airLogoSvg} className='air-logo' alt='' />}I<span className='logo-r'>R</span>
+						P{isTop ? <img src={airTopLogoSvg} className='air-logo' alt='' /> : <img src={airLogoSvg} className='air-logo' alt='' />}I<span className='logo-r'>R</span>
 						BNB
 					</span>
 				</Link>
@@ -121,7 +121,18 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsDark, toggleIsExplore, 
 					</button>
 				</article>
 			</section>
-			<nav className='middle-layout search-bar-container'>{isActive && <SearchBar turnOffSome={turnOffSome} setSomeActive={setSomeActive} someActive={someActive} isScreenOpen={isScreenOpen} setIsScreenOpen={setIsScreenOpen} ToggleIsActive={onToggleIsActive} />}</nav>
+			<nav className='middle-layout search-bar-container'>
+				{isActive && (
+					<SearchBar
+						turnOffSome={turnOffSome}
+						setSomeActive={setSomeActive}
+						someActive={someActive}
+						isScreenOpen={isScreenOpen}
+						setIsScreenOpen={setIsScreenOpen}
+						ToggleIsActive={onToggleIsActive}
+					/>
+				)}
+			</nav>
 		</header>
 	);
 }
@@ -133,7 +144,7 @@ function mapStateToProps({ headerModule }) {
 }
 const mapDispatchToProps = {
 	toggleDetailsLayout,
-	toggleHeaderIsDark,
+	toggleHeaderIsTop,
 	toggleHeaderIsActive,
 	toggleIsExplore,
 };

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Map } from "../cmps/Details/Map";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+
+import { Map } from "../cmps/Details/Map";
 import { Loader } from "../cmps/General/Loader";
 import { Checkout } from "../cmps/Details/Checkout";
 import { Amenities } from "../cmps/Details/Amenities";
+import { Review } from "../cmps/Details/Review";
+
 import { stayService } from "../services/stay.service";
 import { toggleDetailsLayout } from "../store/header.action";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { Review } from "../cmps/Details/Review";
 
 import reviewStar from "../styles/svg/star.svg";
 import home from "../styles/svg/entirehome.svg";
 import clean from "../styles/svg/clean.svg";
 import checkin from "../styles/svg/checkin.svg";
-import heart from "../styles/svg/grey-heart.svg";
+import greyHeart from "../styles/svg/grey-heart.svg";
 
 function _StayDetails({ toggleDetailsLayout }) {
 	const params = useParams();
@@ -21,15 +23,13 @@ function _StayDetails({ toggleDetailsLayout }) {
 	const [avg, setAvg] = useState(0);
 
 	useEffect(() => {
-		cdm();
-		async function cdm() {
+		(async () => {
 			const stayByid = await stayService.getById(params.id);
 			getAvgRating(stayByid);
 			setStay(stayByid);
 			toggleDetailsLayout(true);
-		}
+		})();
 		return () => {
-			// console.log("bye");
 			toggleDetailsLayout(false);
 		};
 	}, []);
@@ -43,6 +43,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 	}
 
 	if (!stay) return <Loader />;
+
 	return (
 		<main className='detail-layout main-container details-page'>
 			<div className='middle-layout'>
@@ -64,7 +65,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 						</div>
 						<div className='flex share-save'>
 							<div>Share</div>
-							<img className='heart-details' src={heart} />
+							<img className='heart-details' src={greyHeart} />
 							<div>Save</div>
 						</div>
 					</div>
