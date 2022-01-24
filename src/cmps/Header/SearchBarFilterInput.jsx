@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import locationSvg from "../styles/svg/location.svg";
+
+import locationSvg from "../../styles/svg/location.svg";
 
 export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput,isScreenOpen,setIsScreenOpen,someActive }) {
   const [filteredData, setFilteredData] = useState([]);
   const [userCurrSearch, setUserCurrSearch] = useState('');
-  // const [visible, setVisible] = useState(true);
 
   function handleChange({ target }) {
-    // if (!visible) setVisible(true);
     const { value } = target;
     let newFilter = data.filter(item => (item.loc.country.toLowerCase().includes(value.toLowerCase()) || item.loc.address.toLowerCase().includes(value.toLowerCase())));
     if (!value) newFilter = [];
@@ -17,13 +16,13 @@ export function SearchBarFilterInput({ placeholder, data, ChooseLocation, elLoca
 
   function onPlaceClick(ev, location) {
     ev.stopPropagation();
-    // if (visible) setVisible(false);
     setIsScreenOpen(false);
     setUserCurrSearch(location);
     ChooseLocation(location);
   }
 
-  return (<article className="search-filter-container">
+  return (
+  <article className="search-filter-container">
     <div className="search-filter-inputs">
       <input autoComplete="off" ref={elLocationInput} id="location" className="search-input" value={userCurrSearch} placeholder={placeholder} onChange={handleChange} type="text" />
       <div className="search-icon"></div>

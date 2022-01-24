@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import ApiKeys from "../api-key.json";
+import ApiKeys from "../../api-key.json";
 import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
-import home from "../styles/svg/home.svg";
+import home from "../../styles/svg/home.svg";
 
 const containerStyle = {
 	width: "1120px",

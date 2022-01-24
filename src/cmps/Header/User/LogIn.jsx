@@ -1,26 +1,23 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import { Link } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { FacebookLoginButton } from "react-social-login-buttons";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { GoogleLogin } from "react-google-login";
-import { SpecialButton } from "./SpacialButton";
-import { useDispatch, useSelector } from "react-redux";
-import { updateInputsErrorInfo } from "../store/user.action";
+
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import { Link } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+import { SpecialBtn } from "../../General/SpecialBtn";
+import { updateInputsErrorInfo } from "../../../store/user.action";
 
 const theme = createTheme({
 	palette: {
@@ -50,18 +47,17 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 			try {
 				await signingIn(credentials);
 				history.push("/");
-				console.log('MMM')
 			}
 			catch (err) {
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err))
-				console.log('www')
 				return;
 			}
-		}, 2000);
+		}, 1500);
 	};
 	
 	const responseGoogle = (response) => {
+		console.log('google')
 		const credentials = {
 			fullName: response.profileObj.name,
 			email: response.profileObj.email,
@@ -79,7 +75,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 				dispatch(updateInputsErrorInfo(err))
 				return;
 			}
-		}, 2000);
+		}, 1500);
 	};
 
 	const handleSubmit = (event) => {
@@ -100,10 +96,9 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 			catch (err) {
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err))
-				console.log('MMM')
 				return;
 			}
-		}, 2000);
+		}, 1500);
 	};
 
 	return (
@@ -129,8 +124,8 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 						}}  required fullWidth name='password' label='Password' type='password' id='password' autoComplete='current-password' />
 						<input type='text' value={connectionError.password} readOnly style={{width:'100%', marginInlineStart: '10px', color: 'red', border: 'unset' }} />
 						<button style={{ marginBlockStart: "10px", backgroundColor: "transparent", width: "100%", height: "40px", border: "none" }}>
-							<div className='spacial-btn'>
-								<SpecialButton size={{ width: "inherit", height: "40px" }} text={"Sign In"} />
+							<div className='special-btn'>
+								<SpecialBtn size={{ width: "inherit", height: "40px" }} text={"Sign In"} />
 							</div>
 						</button>
 

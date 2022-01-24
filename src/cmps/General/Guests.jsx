@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import plus from "../styles/svg/plus.svg";
-import minus from "../styles/svg/minus.svg";
+import plus from "../../styles/svg/plus.svg";
+import minus from "../../styles/svg/minus.svg";
 
 export function Guests({ init, set }) {
 	const order = init;

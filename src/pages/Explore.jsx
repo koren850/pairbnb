@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { loadStays, loadSearchedStays } from "../store/stay.action.js";
-import { SortStay } from "../cmps/SortStay";
-import { Loader } from "../cmps/Loader";
+import { SortAmenities } from "../cmps/Explore/Filter/SortAmenities";
+import { Loader } from "../cmps/General/Loader";
 import { toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive } from "../store/header.action.js";
-import { stayService } from "../services/stay.service.js"
-// import { Link } from "react-router-dom";
 
-import { StayList } from "../cmps/StayList.jsx";
-import { useParams, useSearchParam } from "react-router-dom";
+import { StayList } from "../cmps/Explore/StayList.jsx";
 
 export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore, toggleHeaderIsDark, toggleHeaderIsActive }) {
 	const [currStays, setCurrStays] = useState(null);
@@ -34,7 +31,7 @@ export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsE
 	return (
 		<main className='main-layout main-container'>
 			<section className='middle-layout'>
-				<SortStay />
+				<SortAmenities />
 				{!stays.length ? (
 					<div className='empty-list'>
 						<h2>Nothing comes up here</h2>

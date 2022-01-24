@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
-// import ReactDOM from "react-dom";
 import styled from "styled-components";
-// import sample from "./sample2.json";
 import RangeSlider from "./PriceFilterCmps/RangeSlider";
 import Histogram from "./PriceFilterCmps/Histogram";
 import RangeInput from "./PriceFilterCmps/RangeInput";
-import { stayService } from "../services/stay.service.js"
-console.log('hi')
+import { stayService } from "../../../services/stay.service.js"
 
 const DIV = styled.div`
   padding: 15px;
@@ -20,15 +17,7 @@ const SPACE = styled.div`
 `;
 
 export function PriceFilter({ stays }) {
-    // console.log(stays)
     let ranges = stayService.getDataForPrice(stays)
-    // let ranges = []
-    // getData()
-    // async function getData() {
-    //     ranges = await stayService.getDataForPrice()
-    //     return ranges
-    // }
-    // console.log(ranges)
     const sample = {
         type: "price",
         max: 1000,

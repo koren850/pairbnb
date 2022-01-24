@@ -1,4 +1,4 @@
-export function SpecialButton({
+export function SpecialBtn({
 	text,
 	size,
 	isActive,

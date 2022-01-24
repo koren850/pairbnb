@@ -8,7 +8,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import Checkbox from '@mui/material/Checkbox';
 
 import { connect } from "react-redux";
-import { setSortBy } from "../store/stay.action.js";
+import { setSortBy } from "../../../store/stay.action.js";
 
 
 export function _PlaceTypeFilter({ setSortBy, filterBy, stayPrice, searchParams }) {

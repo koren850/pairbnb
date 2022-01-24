@@ -9,8 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleIsExplore, toggleHeaderIsActive, toggleHeaderIsDark } from "../store/header.action";
 
 export function Home() {
-	const isExplore = useSelector((state) => state.headerModule.headerMode.isExplore);
 	const dispatch = useDispatch();
+
+	const heroUrl = 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642610299/imgs/HD_wallpaper__brown_wooden_dock_and_cottages_Maldives_resort_artificial_lights_zxkna8.jpg';
+
 	useEffect(() => {
 		dispatch(toggleIsExplore(false));
 		dispatch(toggleHeaderIsActive(true));
@@ -26,8 +28,7 @@ export function Home() {
 				<div className="middle-layout">
 				</div>
 			<section className='hero full-layout'>
-				<img 
-				src='https://res.cloudinary.com/dqj9g5gso/image/upload/v1642610299/imgs/HD_wallpaper__brown_wooden_dock_and_cottages_Maldives_resort_artificial_lights_zxkna8.jpg' />
+				<img src={heroUrl} alt="Hero Img"/>
 				<h1 className='hero-title'>Not sure where to go? Perfect.</h1>
 				<Link to={"/explore"}>
 					<button className='hero-btn home-btn'>
@@ -38,24 +39,24 @@ export function Home() {
 			<h1 className='middle-layout cities-title'>Popular cities around the word.</h1>
 			<section className='popular-cities middle-layout'>
 				<article className='city-container'>
-					<img src={parisImg} />
+					<img src={parisImg} alt="City Img" />
 					<h1>Paris</h1>
 				</article>
 				<article className='city-container'>
-					<img src={jerusalemImg} />
+					<img src={jerusalemImg} alt="City Img"/>
 					<h1>Jerusalem</h1>
 				</article>
 				<article className='city-container'>
-					<img src={dubaiImg} />
+					<img src={dubaiImg} alt="City Img" />
 					<h1>Dubai</h1>
 				</article>
 				<article className='city-container'>
-					<img src={vegasImg} />
+					<img src={vegasImg} alt="City Img"/>
 					<h1>Las Vegas</h1>
 				</article>
 			</section>
 			<section className='host middle-layout'>
-				<img src={hostImg} />
+				<img src={hostImg} alt="Host Img" />
 				<h1 className='host-title'>Become a host.</h1>
 				<Link to={"/host"}>
 					<button className='host-btn home-btn'>

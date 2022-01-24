@@ -1,20 +1,27 @@
 import { useEffect, useRef, useState } from "react";
-import searchSvg from "../styles/svg/search.svg";
-import { SpecialButton } from "./SpacialButton";
 import { connect } from "react-redux";
-import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from "../store/header.action";
-import { Guests } from "./Guests";
-import { SearchBarFilterInput } from "./SearchBarFilterInput";
-import { stayService } from "../services/stay.service";
 import { useHistory } from "react-router-dom";
-import { SearchBarDatePicker } from "./SearchBarDatePicker";
 
-function _SearchBar({ someActive, turnOffSome, setSomeActive, toggleHeaderIsActive, headerMode, isScreenOpen, setIsScreenOpen }) {
+import { toggleDetailsLayout, toggleHeaderIsDark, toggleHeaderIsActive } from "../../store/header.action";
+import { stayService } from "../../services/stay.service";
+
+import { Guests } from "../General/Guests";
+import { SearchBarFilterInput } from "./SearchBarFilterInput";
+import { SearchBarDatePicker } from "./SearchBarDatePicker";
+import { SpecialBtn } from "../General/SpecialBtn";
+
+import searchSvg from "../../styles/svg/search.svg";
+
+
+function _SearchBar({ someActive,turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen }) {
 	const [locationsData, setLocationsData] = useState(null);
 	const [userProps, setUserProps] = useState({ location: "", checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
+
 	const elLocationInput = useRef();
 	const history = useHistory();
+
 	const { checkIn, checkOut } = userProps;
+
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
@@ -40,10 +47,6 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, toggleHeaderIsActi
 		history.push(params.slice(0, -1));
 	}
 
-	// function turnOffSome() {
-
-	// }
-
 	function ChooseLocation(location) {
 		setUserProps({ ...userProps, location });
 	}
@@ -67,9 +70,9 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, toggleHeaderIsActi
 	}, []);
 
 	return (
-		<div className={"bar origi " + (someActive && "active-search-bar")}>
+		<div className={"bar original " + (someActive && "active-search-bar")}>
 			{isScreenOpen && (someActive === "check-in" || someActive === "check-out") && <SearchBarDatePicker ChooseDates={ChooseDates} />}
-			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location origi " + (someActive === "location" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + (someActive === "location" ? "active" : "")}>
 				<p>Location</p>
 				<SearchBarFilterInput
 					someActive={someActive}
@@ -82,22 +85,22 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, toggleHeaderIsActi
 				/>
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in origi " + (someActive === "check-in" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in original " + (someActive === "check-in" ? "active" : "")}>
 				<p>Check in</p>
 				<input className='bar-input' readOnly type='text' placeholder={checkIn ? checkIn : "Add dates"} />
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out origi " + (someActive === "check-out" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out original " + (someActive === "check-out" ? "active" : "")}>
 				<p>Check out</p>
 				<input className='bar-input' readOnly type='text' placeholder={checkOut ? checkOut : "Add dates"} />
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests origi " + (someActive === "guests" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests original " + (someActive === "guests" ? "active" : "")}>
 				<p>Guests</p>
 				<div className='header-guests'>{someActive === "guests" && <Guests init={userProps} set={setUserProps} />}</div>
 				<input value={userProps.guestsCount === 1 ? "" : userProps.guestsCount} readOnly className='bar-input' type='text' placeholder='Add guests' />
-				<div className='spacial-btn search-spacial-btn'>
-					<SpecialButton
+				<div className='special-btn search-special-btn'>
+					<SpecialBtn
 						onClick={onSearch}
 						args={userProps}
 						isActive={someActive}
