@@ -23,14 +23,23 @@ async function deleteStay(req, res) {
     }
 }
 
+async function getById(req, res) {
+    try {
+        const user = await stayService.getStayById(req.params.id)
+        res.send(user)
+    } catch (err) {
+        logger.error('Failed to delete stay', err)
+        res.status(500).send({ err: 'Failed to delete stay' })
+    }
+}
 
 async function addStay(req, res) {
     try {
         var stay = req.body
-        stay.byUserId = req.session.user._id   
+        stay.byUserId = req.session.user._id
         stay = await stayService.add(stay)
         // prepare the updated stay for sending out
-        stay.aboutUser = await userService.getById(stay.aboutUserId) 
+        stay.aboutUser = await userService.getById(stay.aboutUserId)
         // Give the user credit for adding a stay
         var user = await userService.getById(stay.byUserId)
         user.score += 10;
@@ -55,5 +64,7 @@ async function addStay(req, res) {
 module.exports = {
     getStays,
     deleteStay,
-    addStay
+    addStay,
+    getById
+
 }
