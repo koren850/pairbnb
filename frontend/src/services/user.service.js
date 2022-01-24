@@ -15,6 +15,7 @@ export const userService = {
     getLoggedinUser,
     getUsers,
     getById,
+    update
 }
 
 function getUsers() {

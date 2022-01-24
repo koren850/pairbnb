@@ -6,8 +6,8 @@
 }
 
 ::selection {
-	background-color: lighten($clr1, 20%);
-	color: $clr2;
+	background-color: transparent;
+	color: $clr1;
 }
 
 html {

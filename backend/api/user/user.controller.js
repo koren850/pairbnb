@@ -1,6 +1,5 @@
-const userService = require('./user.service')
-const socketService = require('../../services/socket.service')
-const logger = require('../../services/logger.service')
+const userService = require('./user.service');
+const logger = require('../../services/logger.service');
 
 async function getUser(req, res) {
     try {
@@ -12,20 +11,6 @@ async function getUser(req, res) {
     }
 }
 
-async function getUsers(req, res) {
-    try {
-        const filterBy = {
-            txt: req.query?.txt || '',
-            minBalance: +req.query?.minBalance || 0
-        }
-        const users = await userService.query(filterBy)
-        res.send(users)
-    } catch (err) {
-        logger.error('Failed to get users', err)
-        res.status(500).send({ err: 'Failed to get users' })
-    }
-}
-
 async function deleteUser(req, res) {
     try {
         await userService.remove(req.params.id)
@@ -33,6 +18,16 @@ async function deleteUser(req, res) {
     } catch (err) {
         logger.error('Failed to delete user', err)
         res.status(500).send({ err: 'Failed to delete user' })
+    }
+}
+
+async function getUsers(req, res) {
+    try {
+        const users = await userService.query();
+        res.send(users)
+    } catch (err) {
+        logger.error('Failed to get users', err)
+        res.status(500).send({ err: 'Failed to get users' })
     }
 }
 

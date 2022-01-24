@@ -1,8 +1,7 @@
-
-
 .app-layout {
 	display: grid;
-	grid-template-rows:1fr 400px;
+	grid-template-rows: 1fr 400px;
+	min-height: 100vh;
 }
 
 .main-layout {

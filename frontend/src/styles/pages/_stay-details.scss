@@ -19,6 +19,12 @@
 	grid-template-rows: repeat(2, 240px);
 	gap: 9px;
 	margin: auto;
+	img {
+		transition: 0.2s;
+		&:hover {
+			filter: brightness(85%);
+		}
+	}
 }
 
 .stay-name-details {
