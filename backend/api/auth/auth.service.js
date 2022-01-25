@@ -16,7 +16,6 @@ async function login(email, password, isSocial) {
             delete user.password
             // user._id = user._id.toString() // need ?
 
-            console.log(user);
             return (user);
         }
     } catch (err) {

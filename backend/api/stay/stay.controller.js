@@ -13,6 +13,7 @@ async function getStays(req, res) {
     }
 }
 
+
 async function deleteStay(req, res) {
     try {
         await stayService.remove(req.params.id)

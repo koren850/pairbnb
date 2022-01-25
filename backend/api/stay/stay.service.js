@@ -2,55 +2,62 @@ const dbService = require('../../services/db.service');
 const ObjectId = require('mongodb').ObjectId;
 const asyncLocalStorage = require('../../services/als.service');
 
-async function query(filterBy = {}) {
+async function query(filterOptions) {
     try {
-        const criteria = {} // for now ***********
-        // const criteria = _buildCriteria(filterBy) need to build with our fillter ********************
+        const criteria = (Object.values(filterOptions).length) ? _buildCriteria(filterOptions) : {};
+    console.log(criteria)
         const collection = await dbService.getCollection('stay')
         const stays = await collection.find(criteria).toArray();
-        // var stays = await collection.aggregate([
-        //     {
-        //         $match: criteria
-        //     },
-        //     {
-        //         $lookup:
-        //         {
-        //             localField: 'byUserId',
-        //             from: 'user',
-        //             foreignField: '_id',
-        //             as: 'byUser'
-        //         }
-        //     },
-        //     {
-        //         $unwind: '$byUser'
-        //     },
-        //     {
-        //         $lookup:
-        //         {
-        //             localField: 'aboutUserId',
-        //             from: 'user',
-        //             foreignField: '_id',
-        //             as: 'aboutUser'
-        //         }
-        //     },
-        //     {
-        //         $unwind: '$aboutUser'
-        //     }
-        // ]).toArray()
-        // stays = stays.map(stay => {
-        //     stay.byUser = { _id: stay.byUser._id, fullName: stay.byUser.fullName }
-        //     stay.aboutUser = { _id: stay.aboutUser._id, fullName: stay.aboutUser.fullName }
-        //     delete stay.byUserId
-        //     delete stay.aboutUserId
-        //     return stay
-        // })
-
         return stays
     } catch (err) {
         logger.error('cannot find stays', err)
         throw err
     }
 
+}
+
+function _buildCriteria(filterOptions) {
+    let { filterBy, stayPrice, searchParams } = filterOptions;
+    filterBy = (filterBy) ? JSON.parse(filterBy) : null;
+    stayPrice = (stayPrice) ? JSON.parse(stayPrice) : null;
+    searchParams = (searchParams) ? JSON.parse(searchParams) : null;
+    const criteria = {};
+    if (filterBy) {
+        const amenities = {};
+        if (filterBy.Wifi) amenities['Internet and office'].Wifi = true;
+        if (filterBy.TV) amenities.Entertainment.TV = true;
+        if (filterBy.Kitchen) amenities['Kitchen and dining'].Kitchen = true;
+        if (filterBy['Air conditioning']) amenities['Heating and cooling']['Air conditioning'] = true;
+        if (filterBy['Smoking allowed']) amenities.Services['Smoking allowed'] = true;
+        if (filterBy['Pets allowed']) amenities.Services['Pets allowed'] = true;
+        criteria.amenities = amenities;
+    }
+    console.log(filterBy.Wifi);
+    if (stayPrice) {
+        criteria.price = {$gte:stayPrice.minPrice, $lte: stayPrice.maxPrice}
+    }
+    if (filterOptions.stayType) {
+        const or = [];
+        if (stayType["Entire place"]) or.push({ ["Entire place"]: true });
+        if (stayType["Hotel room"]) or.push({ ["Hotel room"]: true });
+        if (stayType["Private room"]) or.push({ ["Private room"]: true });
+        if (stayType["Shared room"]) or.push({ ["Shared room"]: true });
+        criteria["type of place"].$or = (or.length) ? or : [];
+    }
+    if (searchParams) {
+        let capacity = (searchParams.guestsCount) ? { $gte: searchParams.guestsCount } : 1;
+        let regex = (searchParams.location) ? new RegExp(searchParams.location, 'i') : '';
+        const or = (regex) ? [{ country: { $regex: regex } }, { address: { $regex: regex } }] : '';
+        criteria.capacity = capacity;
+        (or) ? criteria.loc.$or = or : '';
+    }
+    return criteria;
+    //     let regex = (filterBy.content) ? new RegExp(filterBy.content, 'i') : '';
+    //     let criteria = {};
+    // (filterBy.status) ? ((filterBy.status === 'true') ? criteria.inStock=true: criteria.inStock = false) : '';
+    // const or = (regex) ? ([{name:{$regex:regex}},{_id:{$regex:regex}},{price:{$regex:regex}}]) : '';
+    // filterBy.labels ? criteria.labels = {$all:filterBy.labels.split(',')} : '';
+    // (or) ? criteria.$or = or : '';
 }
 
 async function getStayById(stayId) {
@@ -106,25 +113,6 @@ async function add(stay) {
         logger.error('cannot insert stay', err)
         throw err
     }
-}
-
-function _buildCriteria(filterBy) {
-    const criteria = {}
-    if (filterBy.txt) {
-        const txtCriteria = { $regex: filterBy.txt, $options: 'i' }
-        criteria.$or = [
-            {
-                email: txtCriteria
-            },
-            {
-                fullName: txtCriteria
-            }
-        ]
-    }
-    if (filterBy.minBalance) {
-        criteria.score = { $gte: filterBy.minBalance }
-    }
-    return criteria
 }
 
 module.exports = {

@@ -16,11 +16,11 @@ export const stayService = {
 }
 
 async function query(filterBy, stayType, stayPrice, searchParams) {
-    // const stays = await httpService.get(`stay`, filterBy, stayType, stayPrice, searchParams)
-    const stays = await httpService.get('stay/')
-
+    const params = {
+        filterBy, stayPrice, stayType, searchParams
+    }
+    const stays = await httpService.get(`stay`, params);
     return stays
-
     // let stays
     // if (searchParams) {
     //     stays = await searchStays(searchParams)
