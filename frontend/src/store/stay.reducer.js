@@ -1,21 +1,27 @@
 const initialState = {
     stays: [],
+    staysToShow: [],
     filterBy: null,
-    stayType: null,
+    stayType: {
+        "Entire place": false,
+        "Hotel room": false,
+        "Private room": false,
+        "Shared room": false,
+    },
     stayPrice: {
         minPrice: 0,
         maxPrice: 1000,
     },
-    searchParams: 
+    searchParams:
     {
-    adults: 1,
-    checkIn: null,
-    checkOut: null,
-    children: 0,
-    guestsCount: 1,
-    infants: 0,
-    location: ""
-},
+        adults: 1,
+        checkIn: null,
+        checkOut: null,
+        children: 0,
+        guestsCount: 1,
+        infants: 0,
+        location: ""
+    },
 };
 
 export function stayReducer(state = initialState, action) {
@@ -23,6 +29,10 @@ export function stayReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_STAYS':
             newState = { ...state, stays: [...action.stays] }
+            break;
+        case 'SET_STAYS_TO_SHOW':
+            newState = { ...state, staysToShow: [...action.staysToShow] }
+            console.log(state.staysToShow);
             break;
         case 'ADD_STAY':
             newState = { ...state, stays: [action.newstay, ...state.stays] }

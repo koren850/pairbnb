@@ -11,7 +11,8 @@ export const stayService = {
     getById,
     save,
     remove,
-    searchStays
+    searchStays,
+    sortStays
     // subscribe,
 }
 
@@ -19,64 +20,70 @@ async function query(filterBy, stayType, stayPrice, searchParams) {
     console.log(searchParams);
     const stays = await httpService.get(`stay`, searchParams);
     return stays;
-    // let filterValues;
-    // let stayTypeValues;
-    // const { minPrice, maxPrice } = (stayPrice) ? stayPrice : { minPrice: 0, maxPrice: 1000 };
-    // let pricedStays = [];
-    // stays.map(stay => {
-    //     if (stay.price >= minPrice && stay.price <= maxPrice) return pricedStays.push(stay)})
-    // stays = pricedStays
-    // if (stayType) stayTypeValues = Object.values(stayType).some(value => value);
-    // if (filterBy) filterValues = Object.values(filterBy).some(value => value);
-    // if ((!filterBy || !filterValues) && (!stayType || !stayTypeValues)) return stays;
-    // if (filterBy && !stayTypeValues) {
-    //     const labels = Object.keys(filterBy).filter(key => filterBy[key]);
-    //     let filteredStays = []
-    //     stays.filter(stay => {
-    //         const stayAmenities = [];
-    //         stay.amenities.forEach(amenity => {
-    //             const [values] = Object.values(amenity)
-    //             values.forEach((value) => stayAmenities.push(value));
-    //         })
-    //         let currStay = labels.every((label) => {
-    //             return stayAmenities.includes(label);
-    //         })
-    //         if (currStay) filteredStays.push(stay);
-    //     })
-    //     return filteredStays
-    // }
-    // else if (stayType && !filterValues) {
-    //     const types = Object.keys(stayType).filter(key => stayType[key]);
-    //     let filteredStays = []
-    //     stays.forEach(stay => {
-    //         let currStay = stay["type of place"].includes(types)
-    //         if (currStay) filteredStays.push(stay);
-    //     })
-    //     return filteredStays
-    // }
-    // else if (stayType && filterBy) {
-    //     const labels = Object.keys(filterBy).filter(key => filterBy[key]);
-    //     let filteredStays = []
-    //     stays.filter(stay => {
-    //         const stayAmenities = [];
-    //         stay.amenities.forEach(amenity => {
-    //             const [values] = Object.values(amenity)
-    //             values.forEach((value) => stayAmenities.push(value));
-    //         })
-    //         let currStay = labels.every((label) => {
-    //             return stayAmenities.includes(label);
-    //         })
-    //         if (currStay) filteredStays.push(stay);
-    //         return filteredStays
-    //     })
-    //     const filterAndTypeStays = []
-    //     const types = Object.keys(stayType).filter(key => stayType[key]);
-    //     filteredStays.forEach(stay => {
-    //         let currStay = stay["type of place"].includes(types)
-    //         if (currStay) filterAndTypeStays.push(stay);
-    //     })
-    //     return filterAndTypeStays
+}
 
+
+function sortStays(stays, filterBy, stayType, stayPrice) {
+    let filterValues;
+    let stayTypeValues;
+    const { minPrice, maxPrice } = (stayPrice) ? stayPrice : { minPrice: 0, maxPrice: 1000 };
+    let pricedStays = [];
+    stays.forEach(stay => {
+        if (stay.price >= minPrice && stay.price <= maxPrice) return pricedStays.push(stay)
+    })
+    stays = pricedStays
+    if (stayType) stayTypeValues = Object.values(stayType).some(value => value);
+    if (filterBy) filterValues = Object.values(filterBy).some(value => value);
+    if ((!filterBy || !filterValues) && (!stayType || !stayTypeValues)) return stays;
+    if (filterBy && !stayTypeValues) {
+        const labels = Object.keys(filterBy).filter(key => filterBy[key]);
+        let filteredStays = []
+        stays.filter(stay => {
+            const stayAmenities = [];
+            stay.amenities.forEach(amenity => {
+                const [values] = Object.values(amenity)
+                values.forEach((value) => stayAmenities.push(value));
+            })
+            let currStay = labels.every((label) => {
+                return stayAmenities.includes(label);
+            })
+            if (currStay) filteredStays.push(stay);
+        })
+        return filteredStays
+    }
+    else if (stayType && !filterValues) {
+        const types = Object.keys(stayType).filter(key => stayType[key]);
+        let filteredStays = []
+        //************************************************************************************** */
+        stays.forEach(stay => {
+            let currStay = stay["type of place"].includes(types)
+            if (currStay) filteredStays.push(stay);
+        })
+        return filteredStays
+    }
+    else if (stayType && filterBy) {
+        const labels = Object.keys(filterBy).filter(key => filterBy[key]);
+        let filteredStays = []
+        stays.filter(stay => {
+            const stayAmenities = [];
+            stay.amenities.forEach(amenity => {
+                const [values] = Object.values(amenity)
+                values.forEach((value) => stayAmenities.push(value));
+            })
+            let currStay = labels.every((label) => {
+                return stayAmenities.includes(label);
+            })
+            if (currStay) filteredStays.push(stay);
+            return filteredStays
+        })
+        const filterAndTypeStays = []
+        const types = Object.keys(stayType).filter(key => stayType[key]);
+        filteredStays.forEach(stay => {
+            let currStay = stay["type of place"].includes(types)
+            if (currStay) filterAndTypeStays.push(stay);
+        })
+        return filterAndTypeStays
+    }
     // let stays
     // if (searchParams) {
     //     stays = await searchStays(searchParams)
