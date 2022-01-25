@@ -1,9 +1,9 @@
 import { stayService } from '../services/stay.service.js'
 
-export function loadStays(filterBy) {
+export function loadStays(params) {
     return async (dispatch) => {
         try {
-            const stays = await stayService.query(filterBy)
+            const stays = await stayService.query(params)
             dispatch({ type: 'SET_STAYS', stays });
             dispatch({ type: 'SET_STAYS_TO_SHOW', staysToShow: stays });
         } catch {
@@ -12,18 +12,43 @@ export function loadStays(filterBy) {
     };
 }
 
-
-export function loadSearchedStays(searchParams) {
-    return async (dispatch) => {
+export function sortByType(stays, filterBy, stayType, stayPrice) {
+    return (dispatch) => {
         try {
-            const stays = await stayService.searchStays(searchParams)
-            dispatch({ type: 'SET_STAYS', stays });
-            dispatch({ type: 'SET_PARAMS', searchParams });
-
-        } catch {
-            console.log('could not get stays ');
+            const sortedStays = stayService.sortStays(stays, filterBy, stayType, stayPrice)
+            dispatch({ type: 'SET_STAY_TYPE', stayType });
+            dispatch({ type: 'SET_STAYS_TO_SHOW', staysToShow: sortedStays });
         }
-    };
+        catch {
+            console.log('cannot filter stays')
+        }
+    }
+}
+
+export function sortByPrice(stays, filterBy, stayType, stayPrice, searchParams) {
+    return (dispatch) => {
+        try {
+            const sortedStays = stayService.sortStays(stays, filterBy, stayType, stayPrice, searchParams)
+            dispatch({ type: 'SET_STAY_RANGE', stayPrice });
+            dispatch({ type: 'SET_STAYS_TO_SHOW', staysToShow: sortedStays });
+        }
+        catch {
+            console.log('cannot filter stays')
+        }
+    }
+}
+
+export function sortByAmenities(stays, filterBy, stayType, stayPrice) {
+    return (dispatch) => {
+        try {
+            const sortedStays = stayService.sortStays(stays, filterBy, stayType, stayPrice)
+            dispatch({ type: 'SET_FILTER', filterBy });
+            dispatch({ type: 'SET_STAYS_TO_SHOW', staysToShow: sortedStays });
+        }
+        catch {
+            console.log('cannot filter stays')
+        }
+    }
 }
 
 export function setParams(searchParams) {
@@ -37,15 +62,6 @@ export function setParams(searchParams) {
     };
 }
 
-//consider use
-// export function removeStay(stayId) {
-//     return async (dispatch) => {
-//         await stayService.remove(stayId)
-//         console.log('Deleted Succesfully!');
-//         dispatch({ type: 'REMOVE_TOY', stayId })
-//     }
-// }
-
 export function addStay(stay) {
     return async (dispatch) => {
         try {
@@ -58,6 +74,30 @@ export function addStay(stay) {
         }
     }
 }
+
+
+// export function loadSearchedStays(searchParams) {
+//     return async (dispatch) => {
+//         try {
+//             const stays = await stayService.searchStays(searchParams)
+//             dispatch({ type: 'SET_STAYS', stays });
+//             dispatch({ type: 'SET_PARAMS', searchParams });
+
+//         } catch {
+//             console.log('could not get stays ');
+//         }
+//     };
+// }
+
+//consider use
+// export function removeStay(stayId) {
+//     return async (dispatch) => {
+//         await stayService.remove(stayId)
+//         console.log('Deleted Succesfully!');
+//         dispatch({ type: 'REMOVE_TOY', stayId })
+//     }
+// }
+
 
 //consider use
 // export function updateStay(stay) {
@@ -74,54 +114,15 @@ export function addStay(stay) {
 // }
 
 //for futre consider make dynamic dispach *******
-export function setFilterBy(filterBy, stayType, stayPrice, searchParams) {
-    return async (dispatch) => {
-        try {
-            const stays = await stayService.query(filterBy, stayType, stayPrice, searchParams)
-            dispatch({ type: 'SET_FILTER', filterBy });
-            dispatch({ type: 'SET_STAYS', stays });
-        }
-        catch {
-            console.log('cannot filter stays')
-        }
-    }
-}
-export function setStayType(stayType,) {
-    return (dispatch) => {
-        try {
-            dispatch({ type: 'SET_STAY_TYPE', stayType });
-        }
-        catch {
-            console.log('cannot filter stays')
-        }
-    }
-}
 
+// export function setStayType(stayType,) {
+//     return (dispatch) => {
+//         try {
+//             dispatch({ type: 'SET_STAY_TYPE', stayType });
+//         }
+//         catch {
+//             console.log('cannot filter stays')
+//         }
+//     }
+// }
 
-
-export function setSortBy(stays, filterBy, stayType, stayPrice) {
-    console.log(stays)
-    return (dispatch) => {
-        try {
-            const sortedStays = stayService.sortStays(stays, filterBy, stayType, stayPrice)
-            dispatch({ type: 'SET_STAY_TYPE', stayType });
-            dispatch({ type: 'SET_STAYS_TO_SHOW', staysToShow: sortedStays });
-        }
-        catch {
-            console.log('cannot filter stays')
-        }
-    }
-}
-
-export function setByRange(filterBy, stayType, stayPrice, searchParams) {
-    return async (dispatch) => {
-        try {
-            const stays = await stayService.query(filterBy, stayType, stayPrice, searchParams)
-            dispatch({ type: 'SET_STAY_RANGE', stayPrice });
-            dispatch({ type: 'SET_STAYS', stays });
-        }
-        catch {
-            console.log('cannot filter stays')
-        }
-    }
-}

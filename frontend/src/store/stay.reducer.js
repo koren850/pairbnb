@@ -32,7 +32,6 @@ export function stayReducer(state = initialState, action) {
             break;
         case 'SET_STAYS_TO_SHOW':
             newState = { ...state, staysToShow: [...action.staysToShow] }
-            console.log(state.staysToShow);
             break;
         case 'ADD_STAY':
             newState = { ...state, stays: [action.newstay, ...state.stays] }

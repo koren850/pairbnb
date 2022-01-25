@@ -11,14 +11,13 @@ export const stayService = {
     getById,
     save,
     remove,
-    searchStays,
     sortStays
+    // searchStays,
     // subscribe,
 }
 
-async function query(filterBy, stayType, stayPrice, searchParams) {
-    console.log(searchParams);
-    const stays = await httpService.get(`stay`, searchParams);
+async function query(params) {
+    const stays = await httpService.get(`stay`, params);
     return stays;
 }
 
@@ -77,36 +76,32 @@ function sortStays(stays, filterBy, stayType, stayPrice) {
         })
         const filterAndTypeStays = []
         const types = Object.keys(stayType).filter(key => stayType[key]);
-        stays.forEach(stay => {
+        filteredStays.forEach(stay => {
             let currStay = types.some(type => stay["type of place"] === type)
-            if (currStay) filteredStays.push(stay);
+            if (currStay) filterAndTypeStays.push(stay);
         })
         return filterAndTypeStays
     }
-    // let stays
-    // if (searchParams) {
-    //     stays = await searchStays(searchParams)
-    // } else stays = await storageService.query(STORAGE_KEY);
 }
 
-async function searchStays(search) {
-    const stays = await httpService.get(`stay`, search)
-    return stays
-    // const { location, guestsCount } = search
-    // let stays = await storageService.query(STORAGE_KEY);
-    // let staysByCapacity = [];
-    // stays.map(stay => {
-    //     if (stay.capacity >= guestsCount) return staysByCapacity.push(stay)
-    // })
-    // if (location) {
-    //     let staysByLocation = [];
-    //     staysByCapacity.map(stay => {
-    //         if (stay.loc.address === location) return staysByLocation.push(stay)
-    //     })
-    //     return staysByLocation
-    // }
-    // return staysByCapacity
-}
+// async function searchStays(search) {
+//     const stays = await httpService.get(`stay`, search)
+//     return stays
+// const { location, guestsCount } = search
+// let stays = await storageService.query(STORAGE_KEY);
+// let staysByCapacity = [];
+// stays.map(stay => {
+//     if (stay.capacity >= guestsCount) return staysByCapacity.push(stay)
+// })
+// if (location) {
+//     let staysByLocation = [];
+//     staysByCapacity.map(stay => {
+//         if (stay.loc.address === location) return staysByLocation.push(stay)
+//     })
+//     return staysByLocation
+// }
+// return staysByCapacity
+// }
 
 async function getById(stayId) {
     const stay = await httpService.get(`stay/${stayId}`)

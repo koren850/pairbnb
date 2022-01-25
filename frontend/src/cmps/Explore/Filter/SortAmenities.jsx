@@ -4,12 +4,12 @@ import { connect } from "react-redux";
 import { PlaceTypeFilter } from "./PlaceType.jsx"
 import { PriceSlider } from "./PriceSlider.jsx"
 
-import { setFilterBy } from "../../../store/stay.action.js";
+import { sortByAmenities } from "../../../store/stay.action.js";
 
 import downArrow from "../../../styles/svg/arrows/down-arrow.svg";
 import upArrow from "../../../styles/svg/arrows/up-arrow.svg";
 
-export function _SortAmenities({ setFilterBy, stayType, stayPrice, searchParams }) {
+export function _SortAmenities({ sortByAmenities, stayType, stayPrice, stays }) {
     const [filterBy, setFilter] = useState({
         "Wifi": false,
         "TV": false,
@@ -21,8 +21,8 @@ export function _SortAmenities({ setFilterBy, stayType, stayPrice, searchParams 
     const [placeType, toggleTypeSearch] = useState()
     const [isPriceFilter, togglePriceFilter] = useState()
 
-    useEffect(async () => {
-        await setFilterBy(filterBy, stayType, stayPrice, searchParams)
+    useEffect(() => {
+        sortByAmenities(stays, filterBy, stayType, stayPrice)
     }, [filterBy])
 
     useEffect(() => {
@@ -66,7 +66,7 @@ function mapStateToProps({ stayModule }) {
     };
 }
 const mapDispatchToProps = {
-    setFilterBy
+    sortByAmenities
 };
 
 export const SortAmenities = connect(mapStateToProps, mapDispatchToProps)(_SortAmenities);

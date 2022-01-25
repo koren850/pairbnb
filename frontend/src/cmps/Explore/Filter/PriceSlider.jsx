@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 import Box from '@mui/material/Box';
 
-import { setByRange } from "../../../store/stay.action.js";
+import { sortByPrice } from "../../../store/stay.action.js";
 function ValueLabelComponent(props) {
     const { children, value } = props;
 
@@ -69,7 +69,7 @@ AirbnbThumbComponent.propTypes = {
     children: PropTypes.node,
 };
 
-export function _PriceSlider({ stays, setByRange, filterBy, stayType, searchParams }) {
+export function _PriceSlider({ stays, sortByPrice, filterBy, stayType }) {
     const [stayPrice, setPriceRange] = useState({
         minPrice: 0,
         maxPrice: 1000,
@@ -80,8 +80,8 @@ export function _PriceSlider({ stays, setByRange, filterBy, stayType, searchPara
         setPriceRange({ minPrice: priceRange[0], maxPrice: priceRange[1] })
     };
 
-    useEffect(async () => {
-        await setByRange(filterBy, stayType, stayPrice, searchParams)
+    useEffect(() => {
+        sortByPrice(stays, filterBy, stayType, stayPrice)
     }, [stayPrice])
 
     let maxPrice = 1000
@@ -132,7 +132,7 @@ function mapStateToProps({ stayModule }) {
     };
 }
 const mapDispatchToProps = {
-    setByRange,
+    sortByPrice,
 };
 
 export const PriceSlider = connect(mapStateToProps, mapDispatchToProps)(_PriceSlider);

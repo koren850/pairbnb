@@ -8,13 +8,12 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
 
-import { setSortBy, setStayType } from "../../../store/stay.action.js";
+import { sortByType } from "../../../store/stay.action.js";
 
-export function _PlaceTypeFilter({ setSortBy, filterBy, stayPrice, searchParams, stays, stayType, setStayType }) {
+export function _PlaceTypeFilter({ sortByType, filterBy, stayPrice, searchParams, stays, stayType }) {
 	const handleChange = (event) => {
-		console.log(stayType);
 		const newStayTypes = { ...stayType, [event.target.name]: event.target.checked };
-		setSortBy(stays, filterBy, newStayTypes, stayPrice, searchParams);
+		sortByType(stays, filterBy, newStayTypes, stayPrice, searchParams);
 	};
 
 	return (
@@ -63,9 +62,7 @@ function mapStateToProps({ stayModule }) {
 	};
 }
 const mapDispatchToProps = {
-	// loadStays,
-	setSortBy,
-	setStayType,
+	sortByType,
 };
 
 export const PlaceTypeFilter = connect(mapStateToProps, mapDispatchToProps)(_PlaceTypeFilter);
