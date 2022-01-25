@@ -5,7 +5,6 @@ async function login(req, res) {
     const { email, password, isSocial } = req.body
     try {
         const user = await authService.login(email, password, isSocial);
-        console.log(user);
         req.session.user = user;
         res.json(user)
     } catch (err) {

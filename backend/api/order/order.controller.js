@@ -38,7 +38,6 @@ async function addOrder(req, res) {
         order.byUser = user
         const fullUser = await userService.getById(user._id)
 
-        console.log('CTRL SessionId:', req.sessionID);
         // socketService.broadcast({type: 'order-added', data: order, userId: order.byUserId})
         // socketService.emitToUser({type: 'order-about-you', data: order, userId: order.aboutUserId})
         // socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
@@ -46,7 +45,6 @@ async function addOrder(req, res) {
         res.send(order)
 
     } catch (err) {
-        console.log(err)
         logger.error('Failed to add order', err)
         res.status(500).send({ err: 'Failed to add order' })
     }

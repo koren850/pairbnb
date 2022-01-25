@@ -49,6 +49,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 				await signingIn(credentials);
 				history.push("/");
 			} catch (err) {
+				console.log(err);
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err));
 				return;
@@ -57,7 +58,6 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 	};
 
 	const responseGoogle = (response) => {
-		console.log("google");
 		const credentials = {
 			fullName: response.profileObj.name,
 			email: response.profileObj.email,
@@ -87,11 +87,10 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 		setIsSubmitting(true);
 		setTimeout(async () => {
 			try {
-				console.log("before siging");
 				await signingIn(credentials);
-				console.log("after siging");
 				history.push("/");
 			} catch (err) {
+				console.log(err)
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err));
 				return;
