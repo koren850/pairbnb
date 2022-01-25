@@ -8,27 +8,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
 
-import { setSortBy } from "../../../store/stay.action.js";
+import { setSortBy, setStayType } from "../../../store/stay.action.js";
 
-export function _PlaceTypeFilter({ setSortBy, filterBy, stayPrice, searchParams, stays, staysToShow, stayType1 }) {
-	// const [stayType, setStayType] = useState({
-	// 	"Entire place": false,
-	// 	"Hotel room": false,
-	// 	"Private room": false,
-	// 	"Shared room": false,
-	// });
-
-	const [firstLoad, setFirstLoad] = useState(true);
-
+export function _PlaceTypeFilter({ setSortBy, filterBy, stayPrice, searchParams, stays, stayType, setStayType }) {
 	const handleChange = (event) => {
-		setStayType({ ...stayType, [event.target.name]: event.target.checked });
+		console.log(stayType);
+		const newStayTypes = { ...stayType, [event.target.name]: event.target.checked };
+		setSortBy(stays, filterBy, newStayTypes, stayPrice, searchParams);
 	};
-
-	useEffect(() => {
-		if (firstLoad) return setFirstLoad(false);
-		console.log(searchParams);
-		setSortBy(stays, filterBy, stayType, stayPrice, searchParams);
-	}, [stayType]);
 
 	return (
 		<div className='place-type-filter-container'>
@@ -78,6 +65,7 @@ function mapStateToProps({ stayModule }) {
 const mapDispatchToProps = {
 	// loadStays,
 	setSortBy,
+	setStayType,
 };
 
 export const PlaceTypeFilter = connect(mapStateToProps, mapDispatchToProps)(_PlaceTypeFilter);
