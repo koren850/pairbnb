@@ -16,7 +16,9 @@ module.exports = {
 async function query() {
     try {
         const collection = await dbService.getCollection('user');
-        let users = await collection.find(criteria).toArray();
+        const criteria = {};
+        let users = await collection.find({}).toArray();
+        console.log(users);
         users = users.map(user => {
             delete user.password
             user.createdAt = ObjectId(user._id).getTimestamp()
