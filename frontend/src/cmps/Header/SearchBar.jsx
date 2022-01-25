@@ -61,6 +61,7 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 
 	useEffect(() => {
 		(async () => {
+			console.log('header-query')
 			const data = await stayService.query();
 			setLocationsData(data);
 		})();

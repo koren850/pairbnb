@@ -2,13 +2,14 @@ const dbService = require('../../services/db.service');
 const ObjectId = require('mongodb').ObjectId;
 const asyncLocalStorage = require('../../services/als.service');
 
-async function query(filterOptions) {
+async function query(filterOptions = {}) {
     try {
-        const criteria = (Object.values(filterOptions).length) ? _buildCriteria(filterOptions) : {};
-    console.log(criteria)
-        const collection = await dbService.getCollection('stay')
-        const stays = await collection.find(criteria).toArray();
-        return stays
+        const dudu = (Object.keys(filterOptions).length) ? filterOptions : {};
+        const criteria = (Object.keys(dudu).length) ? _buildCriteria(dudu) : dudu;
+        // const collection = await dbService.getCollection('stay');
+        // const stays = await collection.find({}).toArray();
+        // console.log(stays);
+        // return stays
     } catch (err) {
         logger.error('cannot find stays', err)
         throw err
@@ -16,48 +17,18 @@ async function query(filterOptions) {
 
 }
 
-function _buildCriteria(filterOptions) {
-    let { filterBy, stayPrice, searchParams } = filterOptions;
-    filterBy = (filterBy) ? JSON.parse(filterBy) : null;
-    stayPrice = (stayPrice) ? JSON.parse(stayPrice) : null;
-    searchParams = (searchParams) ? JSON.parse(searchParams) : null;
+function _buildCriteria(params) {
     const criteria = {};
-    if (filterBy) {
-        const amenities = {};
-        if (filterBy.Wifi) amenities['Internet and office'].Wifi = true;
-        if (filterBy.TV) amenities.Entertainment.TV = true;
-        if (filterBy.Kitchen) amenities['Kitchen and dining'].Kitchen = true;
-        if (filterBy['Air conditioning']) amenities['Heating and cooling']['Air conditioning'] = true;
-        if (filterBy['Smoking allowed']) amenities.Services['Smoking allowed'] = true;
-        if (filterBy['Pets allowed']) amenities.Services['Pets allowed'] = true;
-        criteria.amenities = amenities;
-    }
-    console.log(filterBy.Wifi);
-    if (stayPrice) {
-        criteria.price = {$gte:stayPrice.minPrice, $lte: stayPrice.maxPrice}
-    }
-    if (filterOptions.stayType) {
-        const or = [];
-        if (stayType["Entire place"]) or.push({ ["Entire place"]: true });
-        if (stayType["Hotel room"]) or.push({ ["Hotel room"]: true });
-        if (stayType["Private room"]) or.push({ ["Private room"]: true });
-        if (stayType["Shared room"]) or.push({ ["Shared room"]: true });
-        criteria["type of place"].$or = (or.length) ? or : [];
-    }
-    if (searchParams) {
-        let capacity = (searchParams.guestsCount) ? { $gte: searchParams.guestsCount } : 1;
-        let regex = (searchParams.location) ? new RegExp(searchParams.location, 'i') : '';
-        const or = (regex) ? [{ country: { $regex: regex } }, { address: { $regex: regex } }] : '';
-        criteria.capacity = capacity;
-        (or) ? criteria.loc.$or = or : '';
-    }
+    // criteria.capacity = { $gte: params.guestsCount };
+    let regex = new RegExp(params.location, 'i');
+    const or = (regex) ? ([{ country: { $regex: regex } }, { address: { $regex: regex } }]) : '';
+    // const or = (regex) ? ([{ name: { $regex: regex } }, { _id: { $regex: regex } }, { price: { $regex: regex } }]) : '';
+    // const or = (regex) ? [{ country: { $regex: regex } }, { address: { $regex: regex } }] : '';
+    // (or) ? criteria.loc.$or = or : '';
+    console.log(or)
+    criteria.loc = {$or : or};
+    console.log(criteria)
     return criteria;
-    //     let regex = (filterBy.content) ? new RegExp(filterBy.content, 'i') : '';
-    //     let criteria = {};
-    // (filterBy.status) ? ((filterBy.status === 'true') ? criteria.inStock=true: criteria.inStock = false) : '';
-    // const or = (regex) ? ([{name:{$regex:regex}},{_id:{$regex:regex}},{price:{$regex:regex}}]) : '';
-    // filterBy.labels ? criteria.labels = {$all:filterBy.labels.split(',')} : '';
-    // (or) ? criteria.$or = or : '';
 }
 
 async function getStayById(stayId) {
