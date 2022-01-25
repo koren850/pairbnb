@@ -7,28 +7,35 @@ import { toggleIsExplore, toggleHeaderIsTop, toggleHeaderIsActive } from "../sto
 import { SortAmenities } from "../cmps/Explore/Filter/SortAmenities";
 import { StayList } from "../cmps/Explore/StayList.jsx";
 import { Loader } from "../cmps/General/Loader";
+import { useParams } from "react-router-dom";
 
 export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore }) {
 	const [currStays, setCurrStays] = useState(null)
-	const [searchLocation, setSearchLocation] = useState(null)
+	const [searchLocation, setSearchLocation] = useState(null);
 
-	useEffect(async () => {
-		toggleIsExplore(true);
-		if (match.params.search) {
-			const { search } = match.params
-			let searchParams = search.split('&')
-			let params = {}
-			searchParams.forEach(param => {
-				let searchObj = param.split('=')
-				params[searchObj[0]] = searchObj[1]
-			})
-			setSearchLocation(params.location)
-			await loadSearchedStays(params)
-			setCurrStays({ stays });
-		} else {
-			await loadStays();
-			setCurrStays({ stays });
-		}
+	useEffect(() => {
+		(async () => {
+			toggleIsExplore(true);
+			if (match.params.search) {
+				const { search } = match.params
+				let searchParams = search.split('&')
+				let params = {}
+				searchParams.forEach(param => {
+					let searchObj = param.split('=')
+					params[searchObj[0]] = searchObj[1]
+				})
+				for (let key in params) {
+				if (params[key] === "null") params[key] = null
+				else if (!isNaN(+params[key])) params[key] = +params[key];
+				}
+				setSearchLocation(params.location)
+				await loadSearchedStays(params)
+				setCurrStays({ stays });
+			} else {
+				await loadStays();
+				setCurrStays({ stays });
+			}
+		})();
 	}, [match.params])
 
 	if (!stays) return <Loader />;

@@ -16,24 +16,15 @@ export const stayService = {
 }
 
 async function query(filterBy, stayType, stayPrice, searchParams) {
-
-    const params = {
-        filterBy, stayPrice, stayType, searchParams
-    }
-    console.log(params)
-    const stays = await httpService.get(`stay`, params);
-    return stays
-    // let stays
-    // if (searchParams) {
-    //     stays = await searchStays(searchParams)
-    // } else stays = await storageService.query(STORAGE_KEY);
+    console.log(searchParams);
+    const stays = await httpService.get(`stay`, searchParams);
+    return stays;
     // let filterValues;
     // let stayTypeValues;
     // const { minPrice, maxPrice } = (stayPrice) ? stayPrice : { minPrice: 0, maxPrice: 1000 };
-    // let pricedStays = []
+    // let pricedStays = [];
     // stays.map(stay => {
-    //     if (stay.price >= minPrice && stay.price <= maxPrice) return pricedStays.push(stay)
-    // })
+    //     if (stay.price >= minPrice && stay.price <= maxPrice) return pricedStays.push(stay)})
     // stays = pricedStays
     // if (stayType) stayTypeValues = Object.values(stayType).some(value => value);
     // if (filterBy) filterValues = Object.values(filterBy).some(value => value);
@@ -85,7 +76,11 @@ async function query(filterBy, stayType, stayPrice, searchParams) {
     //         if (currStay) filterAndTypeStays.push(stay);
     //     })
     //     return filterAndTypeStays
-    // }
+
+    // let stays
+    // if (searchParams) {
+    //     stays = await searchStays(searchParams)
+    // } else stays = await storageService.query(STORAGE_KEY);
 }
 
 async function searchStays(search) {

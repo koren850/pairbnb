@@ -2,7 +2,7 @@ const dbService = require('../../services/db.service');
 const ObjectId = require('mongodb').ObjectId;
 const asyncLocalStorage = require('../../services/als.service');
 
-async function query(filterOptions) {
+async function query(filterOptions = {}) {
     try {
         // console.log(filterOptions)
         const criteria = (Object.values(filterOptions).length) ? _buildCriteria(filterOptions) : {};
