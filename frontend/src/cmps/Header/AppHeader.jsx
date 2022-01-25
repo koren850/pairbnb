@@ -26,6 +26,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 	const location = useLocation();
 	const history = useHistory();
 	const img = getImgToShow();
+
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
 	}
