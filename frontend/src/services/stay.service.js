@@ -16,9 +16,11 @@ export const stayService = {
 }
 
 async function query(filterBy, stayType, stayPrice, searchParams) {
+
     const params = {
         filterBy, stayPrice, stayType, searchParams
     }
+    console.log(params)
     const stays = await httpService.get(`stay`, params);
     return stays
     // let stays

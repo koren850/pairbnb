@@ -5,6 +5,7 @@ const stayService = require('./stay.service')
 
 async function getStays(req, res) {
     try {
+
         const stays = await stayService.query(req.query)
         res.send(stays)
     } catch (err) {
