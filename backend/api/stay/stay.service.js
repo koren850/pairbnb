@@ -4,12 +4,14 @@ const asyncLocalStorage = require('../../services/als.service');
 
 async function query(filterOptions = {}) {
     try {
-        const dudu = (Object.keys(filterOptions).length) ? filterOptions : {};
-        const criteria = (Object.keys(dudu).length) ? _buildCriteria(dudu) : dudu;
-        // const collection = await dbService.getCollection('stay');
-        // const stays = await collection.find({}).toArray();
+        // const dudu = (Object.keys(filterOptions).length) ? filterOptions : {};
+        // const criteria = (Object.keys(dudu).length) ? _buildCriteria(dudu) : dudu;
+        const criteria = _buildCriteria(filterOptions);
+        console.log(criteria);
+        const collection = await dbService.getCollection('stay');
+        const stays = await collection.find(criteria).toArray();
         // console.log(stays);
-        // return stays
+        return stays
     } catch (err) {
         logger.error('cannot find stays', err)
         throw err
@@ -18,16 +20,11 @@ async function query(filterOptions = {}) {
 }
 
 function _buildCriteria(params) {
-    const criteria = {};
-    // criteria.capacity = { $gte: params.guestsCount };
-    let regex = new RegExp(params.location, 'i');
-    const or = (regex) ? ([{ country: { $regex: regex } }, { address: { $regex: regex } }]) : '';
-    // const or = (regex) ? ([{ name: { $regex: regex } }, { _id: { $regex: regex } }, { price: { $regex: regex } }]) : '';
-    // const or = (regex) ? [{ country: { $regex: regex } }, { address: { $regex: regex } }] : '';
-    // (or) ? criteria.loc.$or = or : '';
-    console.log(or)
-    criteria.loc = {$or : or};
-    console.log(criteria)
+    let criteria = {};
+    console.log(params);
+    if (params.location) {
+        criteria = { 'loc.address': { $regex: params.location, $options: 'i' } }
+    }
     return criteria;
 }
 
