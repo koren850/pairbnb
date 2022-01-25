@@ -15,9 +15,9 @@ module.exports = {
 
 async function query() {
     try {
+        const criteria = {}
         const collection = await dbService.getCollection('user');
-        const criteria = {};
-        let users = await collection.find({}).toArray();
+        let users = await collection.find(criteria).toArray();
         console.log(users);
         users = users.map(user => {
             delete user.password
@@ -84,6 +84,7 @@ async function update(user) {
 }
 
 async function add(user) {
+    console.log(user);
     try {
         const userToAdd = {
             fullName: user.fullName,

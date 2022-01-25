@@ -4,7 +4,8 @@ const asyncLocalStorage = require('../../services/als.service');
 
 async function query(filterBy = {}) {
     try {
-        const criteria = _buildCriteria(filterBy)
+        const criteria = {} // for now ***********
+        // const criteria = _buildCriteria(filterBy) need to build with our fillter ********************
         const collection = await dbService.getCollection('stay')
         const stays = await collection.find(criteria).toArray();
         // var stays = await collection.aggregate([
@@ -36,13 +37,13 @@ async function query(filterBy = {}) {
         //         $unwind: '$aboutUser'
         //     }
         // ]).toArray()
-        stays = stays.map(stay => {
-            stay.byUser = { _id: stay.byUser._id, fullName: stay.byUser.fullName }
-            stay.aboutUser = { _id: stay.aboutUser._id, fullName: stay.aboutUser.fullName }
-            delete stay.byUserId
-            delete stay.aboutUserId
-            return stay
-        })
+        // stays = stays.map(stay => {
+        //     stay.byUser = { _id: stay.byUser._id, fullName: stay.byUser.fullName }
+        //     stay.aboutUser = { _id: stay.aboutUser._id, fullName: stay.aboutUser.fullName }
+        //     delete stay.byUserId
+        //     delete stay.aboutUserId
+        //     return stay
+        // })
 
         return stays
     } catch (err) {
@@ -51,6 +52,18 @@ async function query(filterBy = {}) {
     }
 
 }
+
+async function getStayById(stayId) {
+    try {
+        const collection = await dbService.getCollection('stay');
+        const stay = await collection.findOne({ _id: ObjectId(stayId) });
+        return stay
+    } catch (err) {
+        logger.error(`while finding user ${stayId}`, err)
+        throw err
+    }
+}
+
 
 async function remove(stayId) {
     try {
@@ -117,7 +130,9 @@ function _buildCriteria(filterBy) {
 module.exports = {
     query,
     remove,
-    add
+    add,
+    getStayById
+
 }
 
 

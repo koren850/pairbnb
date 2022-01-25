@@ -2,9 +2,9 @@ const authService = require('./auth.service')
 const logger = require('../../services/logger.service')
 
 async function login(req, res) {
-    const { email, password,isSocial } = req.body
+    const { email, password, isSocial } = req.body
     try {
-        const user = await authService.login(email, password,isSocial);
+        const user = await authService.login(email, password, isSocial);
         req.session.user = user;
         res.json(user)
     } catch (err) {
@@ -15,12 +15,10 @@ async function login(req, res) {
 
 async function signup(req, res) {
     try {
-        const { email, password, fullName } = req.body
-        // Never log passwords
-        // logger.debug(fullName + ', ' + email + ', ' + password)
-        const account = await authService.signup(email, password,isSocial,imgUrl, fullName)
+        const { email, password, fullName, isSocial, imgUrl } = req.body
+        const account = await authService.signup(email, password, isSocial, imgUrl, fullName)
         logger.debug(`auth.route - new account created: ` + JSON.stringify(account))
-        const user = await authService.login(email, password,isSocial,imgUrl,fullName)
+        const user = await authService.login(email, password, isSocial, imgUrl, fullName)
         req.session.user = user
         res.json(user)
     } catch (err) {
@@ -29,7 +27,7 @@ async function signup(req, res) {
     }
 }
 
-async function logout(req, res){
+async function logout(req, res) {
     try {
         // req.session.destroy()
         req.session.user = null;

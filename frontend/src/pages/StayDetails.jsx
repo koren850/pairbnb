@@ -25,6 +25,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 	useEffect(() => {
 		(async () => {
 			const stayByid = await stayService.getById(params.id);
+			console.log(stayByid);
 			getAvgRating(stayByid);
 			setStay(stayByid);
 			toggleDetailsLayout(true);
