@@ -26,6 +26,17 @@ function _buildCriteria(params) {
         criteria = { 'loc.address': { $regex: params.location, $options: 'i' } }
     }
     return criteria;
+
+
+    // const txtCriteria = { $regex: filterBy.txt, $options: 'i' }
+    // criteria.$or = [{ username: txtCriteria }, { fullname: txtCriteria }]
+    // return criteria
+    //     let regex = (filterBy.content) ? new RegExp(filterBy.content, 'i') : '';
+    //     let criteria = {};
+    // (filterBy.status) ? ((filterBy.status === 'true') ? criteria.inStock=true: criteria.inStock = false) : '';
+    // const or = (regex) ? ([{name:{$regex:regex}},{_id:{$regex:regex}},{price:{$regex:regex}}]) : '';
+    // filterBy.labels ? criteria.labels = {$all:filterBy.labels.split(',')} : '';
+    // (or) ? criteria.$or = or : '';
 }
 
 async function getStayById(stayId) {
