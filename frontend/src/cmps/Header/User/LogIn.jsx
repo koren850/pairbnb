@@ -67,7 +67,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 		setIsSubmitting(true);
 		setTimeout(async () => {
 			try {
-				const user = await signingIn(credentials);
+				await signingIn(credentials);
 				history.push("/");
 			} catch (err) {
 				setIsSubmitting(false);
