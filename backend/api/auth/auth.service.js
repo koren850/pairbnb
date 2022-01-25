@@ -7,15 +7,16 @@ async function login(email, password, isSocial) {
     logger.debug(`auth.service - login with email: ${email}`)
     try {
         const user = await userService.getByEmail(email)
-        console.log(user);
         if (!user) return new Error({ reason: 'User doesn\'t exists', unsolved: 'email' });
-        const match = await bcrypt.compare(password, user.password)
-        if (!match) {
-            if (!isSocial) return new Error({ reason: 'Incorrect user password', unsolved: 'password' });
+        if (!isSocial) {
+            const match = await bcrypt.compare(password, user.password)
+            if (!match) return new Error({ reason: 'Incorrect user password', unsolved: 'password' });
         }
         if (user) {
             delete user.password
             // user._id = user._id.toString() // need ?
+
+            console.log(user);
             return (user);
         }
     } catch (err) {

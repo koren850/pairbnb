@@ -22,19 +22,19 @@ import apiKeys from "../../../api-key.json";
 
 const theme = createTheme({
 	palette: {
-	  primary: {
-		main: "#FF385C"
-	  },
-	  secondary: {
-		main: "#FF385C"
-	  }
-	}
-  });
-  
+		primary: {
+			main: "#FF385C",
+		},
+		secondary: {
+			main: "#FF385C",
+		},
+	},
+});
+
 export function LogIn({ setIsSubmitting, signingIn }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const connectionError = useSelector(state => state.userModule.connectionError);
+	const connectionError = useSelector((state) => state.userModule.connectionError);
 
 	const responseFacebook = (response) => {
 		const credentials = {
@@ -48,17 +48,16 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 			try {
 				await signingIn(credentials);
 				history.push("/");
-			}
-			catch (err) {
+			} catch (err) {
 				setIsSubmitting(false);
-				dispatch(updateInputsErrorInfo(err))
+				dispatch(updateInputsErrorInfo(err));
 				return;
 			}
 		}, 1500);
 	};
-	
+
 	const responseGoogle = (response) => {
-		console.log('google')
+		console.log("google");
 		const credentials = {
 			fullName: response.profileObj.name,
 			email: response.profileObj.email,
@@ -68,12 +67,11 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 		setIsSubmitting(true);
 		setTimeout(async () => {
 			try {
-				await signingIn(credentials);
+				const user = await signingIn(credentials);
 				history.push("/");
-			}
-			catch (err) {
+			} catch (err) {
 				setIsSubmitting(false);
-				dispatch(updateInputsErrorInfo(err))
+				dispatch(updateInputsErrorInfo(err));
 				return;
 			}
 		}, 1500);
@@ -87,16 +85,15 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 			password: data.get("password"),
 		};
 		setIsSubmitting(true);
-		setTimeout( async () => {
+		setTimeout(async () => {
 			try {
-				console.log('before siging')
+				console.log("before siging");
 				await signingIn(credentials);
-				console.log('after siging')
+				console.log("after siging");
 				history.push("/");
-			}
-			catch (err) {
+			} catch (err) {
 				setIsSubmitting(false);
-				dispatch(updateInputsErrorInfo(err))
+				dispatch(updateInputsErrorInfo(err));
 				return;
 			}
 		}, 1500);
@@ -118,12 +115,31 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 					</Typography>
 					<Box component='form' onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
 						<TextField
-							onChange={() => {connectionError.email && dispatch(updateInputsErrorInfo({ reason: '', unsolved:'email' }))}}
-							 required fullWidth name='email' label='E-mail' type='email' id='email' autoComplete='current-email' />
-						<input type='text' value={connectionError.email} readOnly style={{width:'100%', marginInlineStart: '10px', color: 'red', border: 'unset' }} />
-						<TextField onChange={() => {connectionError.password &&  dispatch(updateInputsErrorInfo({ reason: '', unsolved: 'password' }))
-						}}  required fullWidth name='password' label='Password' type='password' id='password' autoComplete='current-password' />
-						<input type='text' value={connectionError.password} readOnly style={{width:'100%', marginInlineStart: '10px', color: 'red', border: 'unset' }} />
+							onChange={() => {
+								connectionError.email && dispatch(updateInputsErrorInfo({ reason: "", unsolved: "email" }));
+							}}
+							required
+							fullWidth
+							name='email'
+							label='E-mail'
+							type='email'
+							id='email'
+							autoComplete='current-email'
+						/>
+						<input type='text' value={connectionError.email} readOnly style={{ width: "100%", marginInlineStart: "10px", color: "red", border: "unset" }} />
+						<TextField
+							onChange={() => {
+								connectionError.password && dispatch(updateInputsErrorInfo({ reason: "", unsolved: "password" }));
+							}}
+							required
+							fullWidth
+							name='password'
+							label='Password'
+							type='password'
+							id='password'
+							autoComplete='current-password'
+						/>
+						<input type='text' value={connectionError.password} readOnly style={{ width: "100%", marginInlineStart: "10px", color: "red", border: "unset" }} />
 						<button style={{ marginBlockStart: "10px", backgroundColor: "transparent", width: "100%", height: "40px", border: "none" }}>
 							<div className='special-btn'>
 								<SpecialBtn size={{ width: "inherit", height: "40px" }} text={"Sign In"} />
