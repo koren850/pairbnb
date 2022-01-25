@@ -33,6 +33,7 @@ async function query() {
 
 async function getById(userId) {
     try {
+        console.log('getUserById')
         const collection = await dbService.getCollection('user');
         const user = await collection.findOne({ _id: ObjectId(userId) });
         delete user.password;
@@ -44,6 +45,7 @@ async function getById(userId) {
 }
 async function getByEmail(email) {
     try {
+        console.log('getUserByEmail')
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ email })
         return user

@@ -3,9 +3,19 @@ const userService = require('../user/user.service')
 const socketService = require('../../services/socket.service')
 const orderService = require('./order.service')
 
+async function getOrder(req, res) {
+    try {
+        const order = await orderService.getById(req.params.id)
+        res.send(order)
+    } catch (err) {
+        logger.error('Failed to get order', err)
+        res.status(500).send({ err: 'Failed to get order' })
+    }
+}
+
 async function getOrders(req, res) {
     try {
-        const orders = await orderService.query(req.query)
+        const orders = await orderService.query()
         res.send(orders)
     } catch (err) {
         logger.error('Cannot get orders', err)
@@ -29,21 +39,7 @@ async function addOrder(req, res) {
         var order = req.body
         order.byUserId = req.session.user._id
         order = await orderService.add(order)
-        // prepare the updated order for sending out
-        order.aboutUser = await userService.getById(order.aboutUserId)
-        // Give the user credit for adding a order
-        var user = await userService.getById(order.byUserId)
-        user.score += 10;
-        user = await userService.update(user)
-        order.byUser = user
-        const fullUser = await userService.getById(user._id)
-
-        // socketService.broadcast({type: 'order-added', data: order, userId: order.byUserId})
-        // socketService.emitToUser({type: 'order-about-you', data: order, userId: order.aboutUserId})
-        // socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
-
         res.send(order)
-
     } catch (err) {
         logger.error('Failed to add order', err)
         res.status(500).send({ err: 'Failed to add order' })
@@ -53,5 +49,6 @@ async function addOrder(req, res) {
 module.exports = {
     getOrders,
     deleteOrder,
-    addOrder
+    addOrder,
+    getOrder
 }

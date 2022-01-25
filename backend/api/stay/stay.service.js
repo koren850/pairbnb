@@ -28,7 +28,7 @@ function _buildCriteria(params) {
     if (params.guestsCount) {
         criteria.capacity = { $gte: +params.guestsCount };
     }
-    return criteria;
+        return criteria;
 }
 
 async function getStayById(stayId) {
