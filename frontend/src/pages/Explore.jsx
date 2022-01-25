@@ -9,52 +9,56 @@ import { StayList } from "../cmps/Explore/StayList.jsx";
 import { Loader } from "../cmps/General/Loader";
 import { useParams } from "react-router-dom";
 
-export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsExplore }) {
-	const [currStays, setCurrStays] = useState(null)
+export function _Explore({ match, loadStays, loadSearchedStays, stays, staysToShow, toggleIsExplore }) {
+	const [currStays, setCurrStays] = useState(null);
 	const [searchLocation, setSearchLocation] = useState(null);
 
 	useEffect(() => {
 		(async () => {
 			toggleIsExplore(true);
 			if (match.params.search) {
-				const { search } = match.params
-				let searchParams = search.split('&')
-				let params = {}
-				searchParams.forEach(param => {
-					let searchObj = param.split('=')
-					params[searchObj[0]] = searchObj[1]
-				})
+				const { search } = match.params;
+				let searchParams = search.split("&");
+				let params = {};
+				searchParams.forEach((param) => {
+					let searchObj = param.split("=");
+					params[searchObj[0]] = searchObj[1];
+				});
 				for (let key in params) {
-				if (params[key] === "null") params[key] = null
-				else if (!isNaN(+params[key])) params[key] = +params[key];
+					if (params[key] === "null") params[key] = null;
+					else if (!isNaN(+params[key])) params[key] = +params[key];
 				}
-				setSearchLocation(params.location)
-				await loadSearchedStays(params)
+				if (!params.location) params.location = null;
+				setSearchLocation(params.location);
+				await loadStays(params);
 				setCurrStays({ stays });
 			} else {
 				await loadStays();
 				setCurrStays({ stays });
 			}
 		})();
-	}, [match.params])
+	}, [match.params]);
 
-	if (!stays) return <Loader />;
+	if (!staysToShow) return <Loader />;
 	return (
 		<main className='main-layout main-container'>
 			<section className='middle-layout'>
 				<SortAmenities />
-				{searchLocation &&
+				{searchLocation && (
 					<div>
-						<div className="sort-stays-seperator"></div>
-						<div className="explore-search-stays">{stays.length} stays in {searchLocation}</div>
-					</div>}
+						<div className='sort-stays-seperator'></div>
+						<div className='explore-search-stays'>
+							{stays.length} stays in {searchLocation}
+						</div>
+					</div>
+				)}
 				{!stays.length ? (
 					<div className='empty-list'>
 						<h2>Nothing comes up here</h2>
 						<h3>Try adjusting some of your filters to explore more places to stay.</h3>
 					</div>
 				) : (
-					<StayList stays={stays} />
+					<StayList staysToShow={staysToShow} />
 				)}
 			</section>
 		</main>
@@ -64,6 +68,7 @@ export function _Explore({ match, loadStays, loadSearchedStays, stays, toggleIsE
 function mapStateToProps({ stayModule }) {
 	return {
 		stays: stayModule.stays,
+		staysToShow: stayModule.staysToShow,
 	};
 }
 const mapDispatchToProps = {

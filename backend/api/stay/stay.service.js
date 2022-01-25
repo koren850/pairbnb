@@ -4,10 +4,11 @@ const asyncLocalStorage = require('../../services/als.service');
 
 async function query(filterOptions = {}) {
     try {
+        console.log(filterOptions);
         // const dudu = (Object.keys(filterOptions).length) ? filterOptions : {};
         // const criteria = (Object.keys(dudu).length) ? _buildCriteria(dudu) : dudu;
         const criteria = _buildCriteria(filterOptions);
-        console.log(criteria);
+        // console.log(criteria);
         const collection = await dbService.getCollection('stay');
         const stays = await collection.find(criteria).toArray();
         // console.log(stays);
@@ -20,23 +21,14 @@ async function query(filterOptions = {}) {
 }
 
 function _buildCriteria(params) {
-    let criteria = {};
-    console.log(params);
+    const criteria = {}
     if (params.location) {
-        criteria = { 'loc.address': { $regex: params.location, $options: 'i' } }
+        criteria['loc.address'] = { $regex: params.location, $options: 'i' }
+    }
+    if (params.guestsCount) {
+        criteria.capacity = { $gte: +params.guestsCount };
     }
     return criteria;
-
-
-    // const txtCriteria = { $regex: filterBy.txt, $options: 'i' }
-    // criteria.$or = [{ username: txtCriteria }, { fullname: txtCriteria }]
-    // return criteria
-    //     let regex = (filterBy.content) ? new RegExp(filterBy.content, 'i') : '';
-    //     let criteria = {};
-    // (filterBy.status) ? ((filterBy.status === 'true') ? criteria.inStock=true: criteria.inStock = false) : '';
-    // const or = (regex) ? ([{name:{$regex:regex}},{_id:{$regex:regex}},{price:{$regex:regex}}]) : '';
-    // filterBy.labels ? criteria.labels = {$all:filterBy.labels.split(',')} : '';
-    // (or) ? criteria.$or = or : '';
 }
 
 async function getStayById(stayId) {
