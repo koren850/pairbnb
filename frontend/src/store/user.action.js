@@ -11,6 +11,7 @@ export function signingUp(user) {
 export function signingIn(user) {
     return async (dispatch) => {
         const currUser = await userService.login(user)
+        console.log(currUser);
         const action = { type: 'SET_USER', user: currUser };
         dispatch(action)
     }
