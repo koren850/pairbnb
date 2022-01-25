@@ -20,13 +20,12 @@ async function query(filterOptions = {}) {
 function _buildCriteria(params) {
     const criteria = {};
     // criteria.capacity = { $gte: params.guestsCount };
-    let regex = new RegExp(params.location, 'i');
+    let regex = new RegExp('');
     const or = (regex) ? ([{ country: { $regex: regex } }, { address: { $regex: regex } }]) : '';
     // const or = (regex) ? ([{ name: { $regex: regex } }, { _id: { $regex: regex } }, { price: { $regex: regex } }]) : '';
     // const or = (regex) ? [{ country: { $regex: regex } }, { address: { $regex: regex } }] : '';
     // (or) ? criteria.loc.$or = or : '';
-    console.log(or)
-    criteria.loc = {$or : or};
+    criteria.loc.$or = or;
     console.log(criteria)
     return criteria;
 }
