@@ -17,6 +17,37 @@
   place-items: center;
 }
 
+.flexible-btn-container {
+  background: $clr2;
+  z-index: 200;
+  width: 412px;
+  border-radius: 10px;
+  height: 100px;
+  padding-block-start: 10px;
+  position: absolute;
+  left: 0;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  top: 107%;
+  & p {
+    margin-inline-start: 40px;
+    font-size: 12px;
+    color: $clr6;
+  }
+  & button {
+    width: 90%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    & ::after {
+      // content: url('../svg/btn-arrow.svg');
+      position: absolute;
+    }
+    & span {
+      width: 100%;
+      display: inline-block;
+    }
+    align-items: flex-start;
+  }
+}
+
 .searchIcon svg {
   font-size: 35px;
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 import { connect } from "react-redux";
-
+import { Link } from "react-router-dom";
 import { setParams } from "../../store/stay.action";
 
 import locationSvg from "../../styles/svg/location.svg";
@@ -37,7 +37,12 @@ function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationIn
             return <li onClick={(ev) => onPlaceClick(ev, value.loc.address)} key={value.loc.country + idx} className="data-item"><img src={locationSvg} /><p>{value.loc.address} , <small>{value.loc.country}</small></p></li>
           })}
         </ul>}
-
+        {((!filteredData.length) && isScreenOpen && (someActive === "location")) && <article className="flexible-btn-container">
+          <p>GO ANYWHERE, ANYTIME</p>
+          <Link to={`/explore`}><button className='hero-btn home-btn'>
+            <span>I'm flexible</span>
+          </button></Link>
+        </article>}
       </div>
     </article>)
 }
