@@ -14,7 +14,10 @@ function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationIn
 
   function handleChange({ target }) {
     const { value } = target;
-    let newFilter = data.filter(item => (item.loc.country.toLowerCase().includes(value.toLowerCase()) || item.loc.address.toLowerCase().includes(value.toLowerCase())));
+    if (data) {
+
+    }
+     let newFilter = data.filter(item => (item.loc.country.toLowerCase().includes(value.toLowerCase()) || item.loc.address.toLowerCase().includes(value.toLowerCase())));
     if (!value) newFilter = [];
     setFilteredData(newFilter);
     setParams({ ...searchParams, location: value })
