@@ -27,3 +27,28 @@
 	padding: 10px;
 	border-radius: 50%;
 }
+
+@media screen and (max-width:1128px) {
+	.search {
+	transform: translateX(0%);
+	}
+}
+
+@media screen and (max-width:920px) {
+	.search {
+		width: 200px;
+	}
+}
+
+@media screen and (max-width:850px) {
+	.search {
+		width: 110px;
+		padding-inline-start: 10px;
+		&::before {
+			content: "Search";
+		}
+		& p {
+			display: none;
+		}
+	}
+}
