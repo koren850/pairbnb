@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import { StayList } from "../cmps/Explore/StayList.jsx"
+import { AddStay } from "../cmps/BackOffice/AddStay.jsx"
 import { loadStays } from "../store/stay.action.js";
 
 
@@ -94,7 +95,7 @@ export function _BackOffice({ stays, loadStays }) {
 				</TabsList>
 				<TabPanel value={0}>First content</TabPanel>
 				<TabPanel value={1}>{hostStays.length ? <StayList fromBackOffice={true} staysToShow={hostStays} /> : <div>Loader</div>}</TabPanel>
-				<TabPanel value={2}>Third content</TabPanel>
+				<TabPanel value={2}><AddStay/></TabPanel>
 			</TabsUnstyled>
 		</div>
 	);
