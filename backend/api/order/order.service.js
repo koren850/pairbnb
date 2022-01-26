@@ -21,30 +21,48 @@ async function query() {
             {
                 $lookup:
                 {
-                        localField: 'stayId',
-                        from: 'stay',
+                    localField: 'stayId',
+                    from: 'stay',
                     foreignField: '_id',
                     as: 'stay'
                 }
             },
             {
-                    $unwind: '$stay'
-                }
-            ]).toArray()
-            console.log(orders.length)
-            orders = orders.map(order => {
-                order.buyer = { _id: order.buyer._id, fullName: order.buyer.fullName };
-                order.stay = { _id: order.stay._id,price : order.stay.price, name: order.stay.name }
-                delete order.buyerId;
-                delete order.aboutUserId;
-                return order
-            })
-            return orders
+                $unwind: '$stay'
+            }
+        ]).toArray()
+        console.log(orders.length)
+        orders = orders.map(order => {
+            order.buyer = { _id: order.buyer._id, fullName: order.buyer.fullName };
+            order.stay = { _id: order.stay._id, price: order.stay.price, name: order.stay.name }
+            delete order.buyerId;
+            delete order.aboutUserId;
+            return order
+        })
+        return orders
     } catch (err) {
         logger.error('cannot find orders', err)
         throw err
     }
-    
+
+}
+
+async function update(order) {
+    try {
+        console.log(order);
+        order._id = ObjectId(order._id)
+        order.hostId = ObjectId(order.hostId)
+        order.stayId = ObjectId(order.stay._id)
+        order.buyerId = ObjectId(order.buyer._id)
+        delete order.buyer
+        delete order.stay
+        const collection = await dbService.getCollection('order')
+        await collection.updateOne({ _id: order._id }, { $set: order })
+        return order;
+    } catch (err) {
+        logger.error(`cannot update user ${order._id}`, err)
+        throw err
+    }
 }
 
 async function getById(orderId) {
@@ -60,7 +78,6 @@ async function getById(orderId) {
 
 async function remove(orderId) {
     try {
-        // const store = asyncLocalStorage.getStore()
         const collection = await dbService.getCollection('order')
         const criteria = { _id: ObjectId(orderId) }
         await collection.deleteOne(criteria)
@@ -77,11 +94,11 @@ async function add(order) {
             hostId: ObjectId(order.hostId),
             buyerId: ObjectId(order.buyerId),
             stayId: ObjectId(order.stayId),
-            totalPrice : order.totalPrice,
-            startDate : order.startDate,
-            endDate : order.endDate,
-            guests : order.guests,
-            status : order.status
+            totalPrice: order.totalPrice,
+            startDate: order.startDate,
+            endDate: order.endDate,
+            guests: order.guests,
+            status: order.status
         }
         const collection = await dbService.getCollection('order')
         await collection.insertOne(orderToAdd)
@@ -115,7 +132,8 @@ module.exports = {
     query,
     remove,
     add,
-    getById
+    getById,
+    update
 }
 
 
