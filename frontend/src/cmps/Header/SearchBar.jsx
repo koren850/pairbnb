@@ -42,9 +42,10 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 
 	function onSearch(ev) {
 		if (someActive !== "guests") ev.stopPropagation();
-		const searchKeys = Object.keys(userProps);
+		const searchKeys = Object.keys(searchParams);
 		let params = "/explore/";
-		searchKeys.forEach((key) => (params += `${key}=${userProps[key]}&`));
+		console.log(searchParams);
+		searchKeys.forEach((key) => (params += `${key}=${searchParams[key]}&`));
 		history.push(params.slice(0, -1));
 	}
 
