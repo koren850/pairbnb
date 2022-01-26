@@ -1,51 +1,60 @@
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import MUIDataTable from "mui-datatables";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import { ThemeProvider } from "@mui/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 
 export function Table() {
-	const columns = [
-		{
-			name: "name",
-			label: "Name",
-			options: {
-				filter: true,
-				sort: true,
-			},
-		},
-		{
-			name: "company",
-			label: "Company",
-			options: {
-				filter: true,
-				sort: false,
-			},
-		},
-		{
-			name: "city",
-			label: "City",
-			options: {
-				filter: true,
-				sort: false,
-			},
-		},
-		{
-			name: "state",
-			label: "State",
-			options: {
-				filter: true,
-				sort: false,
-			},
-		},
-	];
+	const [responsive, setResponsive] = useState("scroll");
+	const [tableBodyHeight, setTableBodyHeight] = useState("");
+	const [tableBodyMaxHeight, setTableBodyMaxHeight] = useState("");
 
-	const data = [
-		{ name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-		{ name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-		{ name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-		{ name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
-	];
+	function update(test) {
+		console.log(test);
+		// setResponsive(test);
+	}
+
+	let theme = createTheme();
+	theme = responsiveFontSizes(theme);
+
+	const columns = ["Name", "Title", "Location"];
 
 	const options = {
-		filterType: "checkbox",
+		filter: true,
+		filterType: "dropdown",
+		responsive,
+		tableBodyHeight,
+		tableBodyMaxHeight,
 	};
-	return <div>koko</div>;
-	// return <MUIDataTable title={"Employee List"} data={data} columns={columns} options={options} />;
+
+	const data = [
+		["Gabby George", "Business Analyst", "Minneapolis"],
+		["Aiden Lloyd", "Business Consultant for an International Company and CEO of Tony's Burger Palace", "Dallas"],
+		["Jaden Collins", "Attorney", "Santa Ana"],
+		["Franky Rees", "Business Analyst", "St. Petersburg"],
+		["Aaren Rose", null, "Toledo"],
+		["Johnny Jones", "Business Analyst", "St. Petersburg"],
+		["Jimmy Johns", "Business Analyst", "Baltimore"],
+		["Jack Jackson", "Business Analyst", "El Paso"],
+		["Joe Jones", "Computer Programmer", "El Paso"],
+		["Jacky Jackson", "Business Consultant", "Baltimore"],
+		["Jo Jo", "Software Developer", "Washington DC"],
+		["Donna Marie", "Business Manager", "Annapolis"],
+	];
+
+	return (
+		<ThemeProvider theme={theme}>
+			<React.Fragment>
+				<FormControl>
+					<InputLabel id='demo-simple-select-label'>Responsive Option</InputLabel>
+				</FormControl>
+				<MUIDataTable title={"ACME Employee list"} data={data} columns={columns} options={options} />
+			</React.Fragment>
+		</ThemeProvider>
+	);
 }
