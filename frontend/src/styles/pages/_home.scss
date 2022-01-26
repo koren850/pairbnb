@@ -17,8 +17,7 @@
 	position: relative;
 	& .hero-title {
 		color: $clr2;
-		font-size: 48px;
-
+		font-size: 2.7vw;
 		grid-row: 2/ 3;
 		grid-column: 1/-1;
 		text-shadow: 2px 2px 4px $clr3;
@@ -48,11 +47,10 @@
 		& p,
 		h1 {
 			position: relative;
-			color: $clr3;
+			color: $clr6;
 			left: 50.5%;
 			transform: translateX(-50%);
 			transition: 0.5s;
-			text-shadow: 2px 2px 4px #0000005e;
 		}
 	}
 	.host {
@@ -71,7 +69,7 @@
 		& h1 {
 			grid-row: 1/2;
 			grid-column: 1/2;
-			font-size: 70px;
+			font-size: 4.5vw;
 			line-height: 1;
 			margin-inline-start: 2vw;
 			margin-top: 1vw;
@@ -101,7 +99,7 @@
 	grid-column: 1/-1;
 	height: 50px;
 	width: 150px;
-	transition: 0.5s;
+	transition: background-color 0.5s;
 	button {
 		background-color: $clr2;
 	}
@@ -122,8 +120,36 @@
 
 .cities-title {
 	margin-block-end: 0;
+	color: $clr6;
 }
 
-@media screen and (max-width:1340px) {
-	
+@media screen and (max-width:1128px) {
+	.home .hero .hero-title {
+		font-size: 4vw;
+	}
+	.cities-title {
+		font-size: 24px;
+	}
+	.home .host h1 {
+		font-size: 5vw;
+	}
+	.popular-cities {
+		margin-bottom: 2vh;
+	}
+}
+
+@media  screen and (max-width:780px) {
+	.home .popular-cities {
+		overflow-x: scroll;
+		overflow-y: hidden;
+		vertical-align: middle;
+		display: flex;
+		& .city-container {
+			height:400px;			
+			width:400px;	
+		}
+		&::-webkit-scrollbar {
+			display: none;
+		  }		
+	}
 }

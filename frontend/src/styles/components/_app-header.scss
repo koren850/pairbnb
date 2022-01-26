@@ -21,7 +21,6 @@
 		}
 		&.search-bar-screen {
 			z-index: -100;
-			// background-color: rgba(0, 255, 0, 0.685);
 		}
 	}
 	& .middle-layout {
@@ -126,4 +125,25 @@
 .hamburger-svg {
 	width: 30px;
 	height: 17px;
+}
+
+@media screen and (min-width:780px) {
+	.active-header {
+		padding-block-end: 180px;
+	}
+}
+
+@media screen and (max-width:780px) {
+	.user-menu,.logo {
+		display: none;
+	}
+	.app-header {
+		height: 100px;
+	}
+	//  .app-header>*:not(.search-bar-container) {
+	// 	display: none;
+	// }
+	.search-bar-container {
+		top: 0;
+	}
 }
