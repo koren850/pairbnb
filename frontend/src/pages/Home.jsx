@@ -44,25 +44,25 @@ export function Home() {
 						<span>Explore</span>
 					</button>
 				</Link>
-			</section>
+				</section>
 			<h1 className='middle-layout cities-title'>Popular cities around the word.</h1>
 			<section className='popular-cities middle-layout'>
-				<article className='city-container'>
+			<Link to={`/explore/location=paris`}><article className='city-container'>
 					<img src={parisImg} alt='City Img' />
 					<h1>Paris</h1>
-				</article>
-				<article className='city-container'>
+				</article></Link>
+				<Link to={`/explore/location=jerusalem`}><article className='city-container'>
 					<img src={jerusalemImg} alt='City Img' />
 					<h1>Jerusalem</h1>
-				</article>
-				<article className='city-container'>
+				</article></Link>
+				<Link to={`/explore/location=dubai`}><article className='city-container'>
 					<img src={dubaiImg} alt='City Img' />
 					<h1>Dubai</h1>
-				</article>
-				<article className='city-container'>
+				</article></Link>
+				<Link to={`/explore/location=las-vegas`}><article className='city-container'>
 					<img src={vegasImg} alt='City Img' />
 					<h1>Las Vegas</h1>
-				</article>
+				</article></Link>
 			</section>
 			<section className='host middle-layout'>
 				<img src={hostImg} alt='Host Img' />
