@@ -8,16 +8,13 @@ import locationSvg from "../../styles/svg/location.svg";
 
 function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput, isScreenOpen, setIsScreenOpen, someActive, setParams, searchParams }) {
   const [filteredData, setFilteredData] = useState([]);
-  const [userCurrSearch, setUserCurrSearch] = useState('');
 
   // const searchParams = useSelector(state => state.stayModule.searchParams.location)
 
   function handleChange({ target }) {
     const { value } = target;
-    if (data) {
-
-    }
-     let newFilter = data.filter(item => (item.loc.country.toLowerCase().includes(value.toLowerCase()) || item.loc.address.toLowerCase().includes(value.toLowerCase())));
+    console.log(data);
+    let newFilter = data.filter(item => (item.loc.country.toLowerCase().includes(value.toLowerCase()) || item.loc.address.toLowerCase().includes(value.toLowerCase())));
     if (!value) newFilter = [];
     setFilteredData(newFilter);
     setParams({ ...searchParams, location: value })
