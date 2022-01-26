@@ -4,7 +4,6 @@ const asyncLocalStorage = require('../../services/als.service');
 
 async function query(filterOptions = {}) {
     try {
-        console.log(filterOptions);
         // const dudu = (Object.keys(filterOptions).length) ? filterOptions : {};
         // const criteria = (Object.keys(dudu).length) ? _buildCriteria(dudu) : dudu;
         const criteria = _buildCriteria(filterOptions);
@@ -21,10 +20,14 @@ async function query(filterOptions = {}) {
 }
 
 function _buildCriteria(params) {
-    const criteria = {}
+    let criteria = {}
     if (params.location) {
-        criteria['loc.address'] = { $regex: params.location, $options: 'i' }
+        criteria = {$or:[
+            {'loc.address':{ $regex: params.location, $options: 'i'}},
+            {'loc.country':{ $regex: params.location, $options: 'i'}}
+        ]}
     }
+    console.log(criteria,'critiria')
     if (params.guestsCount) {
         criteria.capacity = { $gte: +params.guestsCount };
     }
