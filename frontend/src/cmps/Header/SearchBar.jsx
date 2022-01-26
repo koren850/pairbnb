@@ -16,12 +16,8 @@ import searchSvg from "../../styles/svg/search.svg";
 function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen, searchParams, setParams }) {
 	const [locationsData, setLocationsData] = useState(null);
 
-	const [userProps, setUserProps] = useState({ location: "", checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
-
 	const elLocationInput = useRef();
 	const history = useHistory();
-
-	const { checkIn, checkOut } = userProps;
 
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
@@ -50,14 +46,13 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 	}
 
 	function ChooseLocation(location) {
-		setUserProps({ ...userProps, location });
 		setParams({ ...searchParams, location });
 	}
 
 	function ChooseDates(dates) {
 		const checkIn = dates[0] ? new Date(dates[0]).toDateString() : null;
 		const checkOut = dates[1] ? new Date(dates[1]).toDateString() : null;
-		setUserProps({ ...userProps, checkIn, checkOut });
+		setParams({ ...searchParams, checkIn, checkOut });
 	}
 
 	useEffect(() => {
@@ -91,22 +86,22 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 			<hr />
 			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in original " + (someActive === "check-in" ? "active" : "")}>
 				<p>Check in</p>
-				<input className='bar-input' readOnly type='text' placeholder={checkIn ? checkIn : "Add dates"} />
+				<input className='bar-input' readOnly type='text' placeholder={searchParams.checkIn ? searchParams.checkIn : "Add dates"} />
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out original " + (someActive === "check-out" ? "active" : "")}>
 				<p>Check out</p>
-				<input className='bar-input' readOnly type='text' placeholder={checkOut ? checkOut : "Add dates"} />
+				<input className='bar-input' readOnly type='text' placeholder={searchParams.checkOut ? searchParams.checkOut : "Add dates"} />
 			</div>
 			<hr />
 			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests original " + (someActive === "guests" ? "active" : "")}>
 				<p>Guests</p>
-				<div className='header-guests'>{someActive === "guests" && <Guests init={userProps} set={setUserProps} />}</div>
-				<input value={userProps.guestsCount === 1 ? "" : userProps.guestsCount} readOnly className='bar-input' type='text' placeholder='Add guests' />
+				<div className='header-guests'>{someActive === "guests" && <Guests init={searchParams} set={setParams} />}</div>
+				<input value={searchParams.guestsCount === 1 ? "" : searchParams.guestsCount} readOnly className='bar-input' type='text' placeholder='Add guests' />
 				<div className='special-btn search-special-btn'>
 					<SpecialBtn
 						onClick={onSearch}
-						args={userProps}
+						args={searchParams}
 						isActive={someActive}
 						size={{ width: "50px", height: "50px" }}
 						text={<img src={searchSvg} className='search-svg' alt='' />}
