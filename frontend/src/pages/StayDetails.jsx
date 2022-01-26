@@ -130,8 +130,8 @@ function _StayDetails({ toggleDetailsLayout }) {
 					<div>({stay.reviews.length} Reviews)</div>
 				</div>
 				<div className='reviews-container'>
-					{stay.reviews.map((review) => {
-						return <Review review={review} avg={avg} />;
+					{stay.reviews.map((review,idx) => {
+						return <Review key={review+idx} review={review} avg={avg} />;
 					})}
 				</div>
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
