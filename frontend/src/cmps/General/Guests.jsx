@@ -23,8 +23,11 @@ export function Guests({ init, set, ammount = 20 }) {
 		<div onClick={stop} className='guests-checkout'>
 			<div className='guest-add flex'>
 				<div className='guest-type'>
+				<div className="guests-detail-txt-container">
 					<h3>Adults</h3>
-					<div>
+					<p>Ages 13 or above</p>
+				</div>
+					<div className="guest-btn-container">
 						<button style={order.adults < 2 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("adults", -1)}>
 							{minusSvg}
 						</button>
@@ -35,8 +38,11 @@ export function Guests({ init, set, ammount = 20 }) {
 					</div>
 				</div>
 				<div className='guest-type'>
+				<div className="guests-detail-txt-container">
 					<h3>Children</h3>
-					<div>
+					<p>Ages 2–12</p>
+				</div>
+					<div className="guest-btn-container">
 						<button style={order.children < 1 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("children", -1)}>
 							{minusSvg}
 						</button>
@@ -47,8 +53,11 @@ export function Guests({ init, set, ammount = 20 }) {
 					</div>
 				</div>
 				<div className='guest-type'>
+					<div className="guests-detail-txt-container">
 					<h3>Infants</h3>
-					<div>
+					<p>Under 2</p>
+					</div>
+					<div className="guest-btn-container">
 						<button style={order.infants < 1 ? { opacity: "0.2", cursor: "not-allowed" } : {}} onClick={() => handleChange("infants", -1)}>
 							{minusSvg}
 						</button>
