@@ -60,9 +60,10 @@ function _StayDetails({ toggleDetailsLayout }) {
 								{stay.reviews.length} reviews
 							</a>
 							<span className='dot-before-address'>·</span>
-							<span className='stay-location-details'>{stay.loc.address}</span>
-							<span>, </span>
-							<span className='stay-location-country'> {stay.loc.country}</span>
+							<a href='#map' className='stay-location-href'>
+								<span className='stay-location-details'>{stay.loc.address}</span>
+								<span>, </span>
+								<span className='stay-location-country'> {stay.loc.country}</span></a>
 						</div>
 						<div className='flex share-save'>
 							<div>Share</div>
@@ -130,17 +131,17 @@ function _StayDetails({ toggleDetailsLayout }) {
 					<div>({stay.reviews.length} Reviews)</div>
 				</div>
 				<div className='reviews-container'>
-					{stay.reviews.map((review,idx) => {
-						return <Review key={review+idx} review={review} avg={avg} />;
+					{stay.reviews.map((review, idx) => {
+						return <Review key={review + idx} review={review} avg={avg} />;
 					})}
 				</div>
-				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
+				<Map  lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>
 	);
 }
 
-function mapStateToProps({}) {
+function mapStateToProps({ }) {
 	return {};
 }
 const mapDispatchToProps = {

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export function AppFooter() {
 	return (
-		<footer className=' app-footer footer-layout main-layout'>
+		<footer id='footer' className=' app-footer footer-layout main-layout'>
 			<main className="middle-layout">
 				<section className='footer-content'>
 					<ul>

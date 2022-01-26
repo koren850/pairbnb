@@ -10,8 +10,9 @@ import reviewStar from "../../styles/svg/star.svg";
 import greyHeart from "../../styles/svg/grey-heart.svg";
 import pinkHeart from "../../styles/svg/pink-heart.svg";
 
-function _StayPreview({ stay, updateUser }) {
+function _StayPreview({ stay, updateUser, fromBackOffice }) {
 	// Consider moving into stay.service
+	console.log(fromBackOffice )
 	let ammount = 0;
 	const divider = stay.reviews.length;
 	stay.reviews.forEach((review) => (ammount += review.rate));
@@ -47,7 +48,7 @@ function _StayPreview({ stay, updateUser }) {
 
 	return (
 		<div className='stay-preview'>
-			{likedId !== stay._id && (
+			{!fromBackOffice && likedId !== stay._id && (
 				<button
 					onClick={() => {
 						toggleLikedPlace(stay);
@@ -55,7 +56,7 @@ function _StayPreview({ stay, updateUser }) {
 					<img className='stay-preview-heart' src={greyHeart} />
 				</button>
 			)}
-			{likedId === stay._id && (
+			{!fromBackOffice && likedId === stay._id && (
 				<button
 					button
 					onClick={() => {
