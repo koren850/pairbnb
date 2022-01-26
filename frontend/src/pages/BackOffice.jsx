@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import { StayList } from "../cmps/Explore/StayList.jsx"
-import { AddStay } from "../cmps/BackOffice/AddStay.jsx"
+import { StayList } from "../cmps/Explore/StayList.jsx";
+import { AddStay } from "../cmps/BackOffice/AddStay.jsx";
 import { loadStays } from "../store/stay.action.js";
-
+import { Table } from "../cmps/BackOffice/OrderTables";
 
 import { userService } from "../services/user.service";
 import { stayService } from "../services/stay.service";
@@ -77,13 +77,13 @@ const TabsList = styled(TabsListUnstyled)`
 `;
 
 export function _BackOffice({ stays, loadStays }) {
-	const [hostStays, setHostStays] = useState([])
+	const [hostStays, setHostStays] = useState([]);
 	useEffect(async () => {
 		let loggedInUser = userService.getLoggedinUser();
-		let stays = await stayService.getStaysByHostId(loggedInUser._id)
-		console.log(stays)
-		setHostStays([...stays])
-	}, [])
+		let stays = await stayService.getStaysByHostId(loggedInUser._id);
+		console.log(stays);
+		setHostStays([...stays]);
+	}, []);
 
 	return (
 		<div className='main-layout main-container'>
@@ -93,9 +93,13 @@ export function _BackOffice({ stays, loadStays }) {
 					<Tab>MY STAYS</Tab>
 					<Tab>ADD A STAY</Tab>
 				</TabsList>
-				<TabPanel value={0}>First content</TabPanel>
+				<TabPanel value={0}>
+					<Table />
+				</TabPanel>
 				<TabPanel value={1}>{hostStays.length ? <StayList fromBackOffice={true} staysToShow={hostStays} /> : <div>Loader</div>}</TabPanel>
-				<TabPanel value={2}><AddStay/></TabPanel>
+				<TabPanel value={2}>
+					<AddStay />
+				</TabPanel>
 			</TabsUnstyled>
 		</div>
 	);

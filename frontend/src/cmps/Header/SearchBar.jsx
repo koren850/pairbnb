@@ -19,6 +19,17 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 	const elLocationInput = useRef();
 	const history = useHistory();
 
+	useEffect(() => {
+		(async () => {
+			const data = await stayService.query();
+			setLocationsData(data);
+		})();
+		window.addEventListener("scroll", turnOffSome);
+		return () => {
+			window.removeEventListener("scroll", turnOffSome);
+		};
+	}, []);
+
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
@@ -26,7 +37,8 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 			setIsScreenOpen(true);
 			elLocationInput.current.focus();
 		} else elLocationInput.current.blur();
-		elName === "check-in" || elName === "check-out" ? setIsScreenOpen(true) : setIsScreenOpen(false);
+		// elName === "check-in" || elName === "check-out" ? setIsScreenOpen(true) : setIsScreenOpen(false);
+		setIsScreenOpen(elName === "check-in" || elName === "check-out");
 		if (someActive === elName) {
 			setSomeActive(null);
 			setIsScreenOpen(false);
@@ -54,17 +66,6 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 		const checkOut = dates[1] ? new Date(dates[1]).toDateString() : null;
 		setParams({ ...searchParams, checkIn, checkOut });
 	}
-
-	useEffect(() => {
-		(async () => {
-			const data = await stayService.query();
-			setLocationsData(data);
-		})();
-		window.addEventListener("scroll", turnOffSome);
-		return () => {
-			window.removeEventListener("scroll", turnOffSome);
-		};
-	}, []);
 
 	return (
 		<div className={"bar original " + (someActive && "active-search-bar")}>
