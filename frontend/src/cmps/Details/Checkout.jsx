@@ -20,11 +20,12 @@ export function Checkout({ stay, avg }) {
 			buyerId: userService.getLoggedinUser()._id,
 			stayId: stay._id,
 			totalPrice: (getTotalNights() * stay.price * 1.025).toFixed(1),
-			startDate: new Date(order.checkIn),
-			endDate: new Date(order.checkOut),
+			startDate: new Date(order.checkIn).toDateString(),
+			endDate: new Date(order.checkOut).toDateString(),
 			guests: { total: order.guestsCount, adults: order.adults, children: order.children, infants: order.infants },
 			status: "pending",
 		};
+		// console.log(reserved);
 		orderService.save(reserved);
 	}
 

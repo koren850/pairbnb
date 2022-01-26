@@ -32,6 +32,16 @@ async function deleteOrder(req, res) {
         res.status(500).send({ err: 'Failed to delete order' })
     }
 }
+async function updateOrder(req, res) {
+    try {
+        let order = req.body
+        order = await orderService.update(order)
+        res.send(order);
+    } catch (err) {
+        logger.error('Failed to update order', err)
+        res.status(500).send({ err: 'Failed to update order' })
+    }
+}
 
 
 async function addOrder(req, res) {
@@ -50,5 +60,6 @@ module.exports = {
     getOrders,
     deleteOrder,
     addOrder,
-    getOrder
+    getOrder,
+    updateOrder
 }

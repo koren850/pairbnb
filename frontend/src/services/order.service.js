@@ -5,6 +5,7 @@ export const orderService = {
     getById,
     save,
     remove,
+    update
 
 }
 
@@ -14,19 +15,23 @@ async function query() {
 }
 
 
-async function getById(stayId) {
-    const stay = await httpService.get(`order/${stayId}`)
+async function getById(orderId) {
+    const stay = await httpService.get(`order/${orderId}`)
     return stay
 
 }
 
-async function remove(stayId) {
-    return httpService.delete(`order/${stayId}`)
+async function remove(orderId) {
+    return httpService.delete(`order/${orderId}`)
 }
 
 function save(order) {
     return httpService.post(`order`, order)
 }
+function update(order) {
+    return httpService.put(`order`, order)
+}
+
 
 
 // function subscribe(listener) {
