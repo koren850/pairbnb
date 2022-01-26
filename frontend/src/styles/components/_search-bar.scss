@@ -175,3 +175,15 @@ input[type="text"]:focus {
 	transition: opacity 0.5s;
 	opacity: 0;
 }
+
+@media screen and (max-width:1040px) {
+	.bar {
+		width: 750px;
+		.guests {
+			width: 22%;
+		}
+	}
+	.bar {
+		width: 750px;
+	}
+}
