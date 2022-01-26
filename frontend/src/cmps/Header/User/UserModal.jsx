@@ -41,9 +41,11 @@ export function UserModal({ toggleModal, currState }) {
 				</li>
 				<li>
 					{loggUser ? (
-						<span className='user-modal-span'>About</span>
+						<a href="#footer" className="user-modal-about-link">
+							<span className='user-modal-span'>About</span></a>
 					) : (
 						<Link to={"/user/login"}>
+
 							<span className='user-modal-span'>Log in</span>
 						</Link>
 					)}
@@ -54,7 +56,7 @@ export function UserModal({ toggleModal, currState }) {
 						<span className='user-modal-span'>Start hosting</span>
 					</Link>
 				</li>
-				<li onClick={onLogOut}>{loggUser ? <span className='user-modal-span'>Log out</span> : <span className='user-modal-span'>About</span>}</li>
+				<li onClick={onLogOut}>{loggUser ? <span className='user-modal-span'>Log out</span> : <a href="#footer" className="user-modal-about-link"><span className='user-modal-span'>About</span></a>}</li>
 				<li>
 					<span className='user-modal-span'>Help</span>
 				</li>

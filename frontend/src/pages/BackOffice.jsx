@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+
+import { StayList } from "../cmps/Explore/StayList.jsx"
+import { loadStays } from "../store/stay.action.js";
+
+
 import { userService } from "../services/user.service";
+import { stayService } from "../services/stay.service";
 
 import { styled } from "@mui/system";
 import TabsUnstyled from "@mui/base/TabsUnstyled";
@@ -68,22 +75,45 @@ const TabsList = styled(TabsListUnstyled)`
 	align-content: space-between;
 `;
 
-export function BackOffice() {
+export function _BackOffice({ stays, loadStays }) {
+	const [hostStays, setHostStays] = useState([])
+	useEffect(async () => {
+		let loggedInUser = userService.getLoggedinUser();
+		let stays = await stayService.getStaysByHostId(loggedInUser._id)
+		console.log(stays)
+		setHostStays([...stays])
+	}, [])
+
 	return (
 		<div className='main-layout main-container'>
 			<TabsUnstyled className='middle-layout' defaultValue={0}>
 				<TabsList>
 					<Tab>ORDERS</Tab>
-					<Tab>NY STAYS</Tab>
+					<Tab>MY STAYS</Tab>
 					<Tab>ADD A STAY</Tab>
 				</TabsList>
 				<TabPanel value={0}>First content</TabPanel>
-				<TabPanel value={1}>Second content</TabPanel>
+				<TabPanel value={1}>{hostStays.length ? <StayList fromBackOffice={true} staysToShow={hostStays} /> : <div>Loader</div>}</TabPanel>
 				<TabPanel value={2}>Third content</TabPanel>
 			</TabsUnstyled>
 		</div>
 	);
 }
+
+function mapStateToProps({ stayModule }) {
+	return {
+		stays: stayModule.stays,
+		// staysToShow: stayModule.staysToShow,
+	};
+}
+const mapDispatchToProps = {
+	loadStays,
+	// toggleIsExplore,
+	// toggleHeaderIsTop,
+	// toggleHeaderIsActive,
+};
+
+export const BackOffice = connect(mapStateToProps, mapDispatchToProps)(_BackOffice);
 
 // function TabPanel(props) {
 // 	const { children, value, index, ...other } = props;

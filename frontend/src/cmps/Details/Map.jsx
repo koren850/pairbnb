@@ -15,7 +15,7 @@ export function Map({ lat, lng, name, country, address }) {
 	const [center, setCenter] = useState({ lat, lng });
 	const [isInfoWindowOpen, setInfo] = useState(false);
 	return (
-		<section className='map-section'>
+		<section id='map' className='map-section'>
 			<LoadScript googleMapsApiKey={ApiKeys.maps}>
 				<GoogleMap mapContainerStyle={containerStyle} center={center} zoom={15}>
 					<div className='marker'>
