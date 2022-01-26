@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import { Guests } from "../General/Guests";
 import { SpecialBtn } from "../General/SpecialBtn";
 import { DatePicker } from "./DatePicker.jsx";
+
+import { orderService } from "../../services/order.service";
+import { userService } from "../../services/user.service";
+
 import reviewStar from "../../styles/svg/star.svg";
 
 export function Checkout({ stay, avg }) {
@@ -10,7 +14,18 @@ export function Checkout({ stay, avg }) {
 	const [isGuestsActive, toggleGuests] = useState(false);
 
 	function reserveOrder(ev, args) {
-		console.log(args);
+		// console.log(args);
+		const reserved = {
+			hostId: stay.host._id,
+			buyerId: userService.getLoggedinUser()._id,
+			stayId: stay._id,
+			totalPrice: (getTotalNights() * stay.price * 1.025).toFixed(1),
+			startDate: new Date(order.checkIn),
+			endDate: new Date(order.checkOut),
+			guests: { total: order.guestsCount, adults: order.adults, children: order.children, infants: order.infants },
+			status: "pending",
+		};
+		orderService.save(reserved);
 	}
 
 	function onToggleGuests() {
