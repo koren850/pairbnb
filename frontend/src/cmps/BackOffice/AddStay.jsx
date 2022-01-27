@@ -274,7 +274,7 @@ export function AddStay() {
 						)}
 					</div>
 				</div>
-				<label>Chose your assets amenities</label>
+				<label className='amenities-title'>Amenities:</label>
 				<div className='amenities-container'>
 					<FormGroup className='amenities-list'>
 						{amenities.map((amenity, idx) => {
