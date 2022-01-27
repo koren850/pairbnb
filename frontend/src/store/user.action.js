@@ -1,4 +1,5 @@
 import { userService } from "../services/user.service";
+import { openMsg } from "../store/msg.action";
 
 export function signingUp(user) {
     return async (dispatch) => {
@@ -11,9 +12,10 @@ export function signingUp(user) {
 export function signingIn(user) {
     return async (dispatch) => {
         const currUser = await userService.login(user)
-        console.log(currUser);
         const action = { type: 'SET_USER', user: currUser };
         dispatch(action)
+        // dispatch({ type: 'SET_MSG', msg: { txt: `Welcome ${currUser.fullName}`, type: 'success' } })
+
     }
 }
 

@@ -34,7 +34,7 @@ const theme = createTheme({
 export function LogIn({ setIsSubmitting, signingIn }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const connectionError = useSelector( (state) => state.userModule.connectionError);
+	const connectionError = useSelector((state) => state.userModule.connectionError);
 
 	const responseFacebook = (response) => {
 		const credentials = {
@@ -88,17 +88,17 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 		setTimeout(async () => {
 			try {
 				const user = await signingIn(credentials);
-				console.log(user,'user from login')
+				console.log(user, "user from login");
 				history.push("/");
 			} catch (err) {
-				console.log(err)
+				console.log(err);
 				setIsSubmitting(false);
 				dispatch(updateInputsErrorInfo(err));
 				return;
 			}
 		}, 1500);
 	};
-console.log(connectionError)
+	console.log(connectionError);
 	return (
 		<ThemeProvider theme={theme}>
 			<Container component='main' maxWidth='xs'>
