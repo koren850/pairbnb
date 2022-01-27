@@ -1,0 +1,19 @@
+.table-header {
+	flex-direction: row;
+}
+.orders-types {
+	align-items: center;
+	gap: 30px;
+
+	span {
+		display: flex;
+		align-items: center;
+	}
+}
+
+.orders-ball {
+	display: inline-block;
+	height: 1rem;
+	width: 1rem;
+	border-radius: 50%;
+}

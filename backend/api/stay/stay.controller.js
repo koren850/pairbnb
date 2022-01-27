@@ -38,16 +38,17 @@ async function getById(req, res) {
 async function addStay(req, res) {
     try {
         var stay = req.body
+        console.log(stay)
         stay.byUserId = req.session.user._id
         stay = await stayService.add(stay)
         // prepare the updated stay for sending out
-        stay.aboutUser = await userService.getById(stay.aboutUserId)
+        // stay.aboutUser = await userService.getById(stay.aboutUserId)
         // Give the user credit for adding a stay
-        var user = await userService.getById(stay.byUserId)
-        user.score += 10;
-        user = await userService.update(user)
-        stay.byUser = user
-        const fullUser = await userService.getById(user._id)
+        // var user = await userService.getById(stay.byUserId)
+        // user.score += 10;
+        // user = await userService.update(user)
+        // stay.byUser = user
+        // const fullUser = await userService.getById(user._id)
 
         console.log('CTRL SessionId:', req.sessionID);
         // socketService.broadcast({type: 'stay-added', data: stay, userId: stay.byUserId})
