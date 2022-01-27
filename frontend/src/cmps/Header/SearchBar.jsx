@@ -13,7 +13,7 @@ import { SpecialBtn } from "../General/SpecialBtn";
 
 import searchSvg from "../../styles/svg/search.svg";
 
-function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive, isScreenOpen, setIsScreenOpen, searchParams, setParams,isMobileWidth, isTop }) {
+function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive, isScreenOpen, setIsScreenOpen, searchParams, setParams, isMobileWidth, isTop }) {
 	const [locationsData, setLocationsData] = useState(null);
 
 	const elLocationInput = useRef();
@@ -70,8 +70,8 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 	return (
 		<div className={"bar original " + ((searchBarTabs || (!isTop && isMobileWidth)) && "active-search-bar")}>
 			{isScreenOpen && (searchBarTabs === "check-in" || searchBarTabs === "check-out") && <SearchBarDatePicker ChooseDates={ChooseDates} />}
-			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + ((searchBarTabs === "location" && !isMobileWidth) ? "active" : "")}>
-				<p className="location-txt">Location</p>
+			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + (searchBarTabs === "location" && !isMobileWidth ? "active" : "")}>
+				<p className='location-txt'>Location</p>
 				<SearchBarFilterInput
 					// searchParams={searchParams}
 					searchBarTabs={searchBarTabs}
@@ -96,7 +96,11 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 			<hr />
 			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests original " + ((searchBarTabs && !isMobileWidth) === "guests" ? "active" : "")}>
 				<p>Guests</p>
-				<div className='header-guests'>{searchBarTabs === "guests" && <Guests init={searchParams} set={setParams} />}</div>
+				{searchBarTabs === "guests" && (
+					<div className='header-guests'>
+						<Guests init={searchParams} set={setParams} />
+					</div>
+				)}
 				<input value={searchParams.guestsCount === 1 ? "" : searchParams.guestsCount} readOnly className='bar-input' type='text' placeholder='Add guests' />
 				<div className='special-btn search-special-btn'>
 					<SpecialBtn

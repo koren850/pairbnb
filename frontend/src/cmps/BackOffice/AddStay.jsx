@@ -53,7 +53,6 @@ const amenities = [
 	"Hot water",
 	"Hangers",
 	"Fire extinguisher",
-	"Hangers",
 	"First aid kit",
 	"Extra pillows and blankets",
 	"Air conditioning",
