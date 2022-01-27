@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import ReactDOM from "react-dom";
 
+import { Loader } from "../General/Loader";
+
+import { orderService } from "../../services/order.service";
+import { userService } from "../../services/user.service";
+
 import MUIDataTable from "mui-datatables";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -9,11 +14,6 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { ThemeProvider } from "@mui/styles";
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
-
-import { Loader } from "../General/Loader";
-
-import { orderService } from "../../services/order.service";
-import { userService } from "../../services/user.service";
 
 import pendingSvg from "../../styles/svg/pending.svg";
 import approvedSvg from "../../styles/svg/approved.svg";

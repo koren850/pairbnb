@@ -39,8 +39,10 @@ function _StayDetails({ toggleDetailsLayout }) {
 		let ammount = 0;
 		stayToAvg.reviews.forEach((review) => (ammount += review.rate));
 		const divider = stayToAvg.reviews.length;
-		if (((ammount / divider).toFixed(2) * 100) % 10 == 0) return setAvg((ammount / divider).toFixed(1));
-		setAvg((ammount / divider).toFixed(2));
+		let calcAvg = (ammount / divider).toFixed(2);
+		if ((calcAvg * 100) % 10 == 0) return setAvg(calcAvg);
+		if (isNaN(calcAvg)) calcAvg = "";
+		setAvg(calcAvg);
 	}
 
 	if (!stay) return <Loader />;
@@ -63,7 +65,8 @@ function _StayDetails({ toggleDetailsLayout }) {
 							<a href='#map' className='stay-location-href'>
 								<span className='stay-location-details'>{stay.loc.address}</span>
 								<span>, </span>
-								<span className='stay-location-country'> {stay.loc.country}</span></a>
+								<span className='stay-location-country'> {stay.loc.country}</span>
+							</a>
 						</div>
 						<div className='flex share-save'>
 							<div>Share</div>
@@ -135,13 +138,13 @@ function _StayDetails({ toggleDetailsLayout }) {
 						return <Review key={review + idx} review={review} avg={avg} />;
 					})}
 				</div>
-				<Map  lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
+				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>
 	);
 }
 
-function mapStateToProps({ }) {
+function mapStateToProps({}) {
 	return {};
 }
 const mapDispatchToProps = {

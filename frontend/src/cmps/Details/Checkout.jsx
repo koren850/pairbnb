@@ -79,7 +79,7 @@ export function Checkout({ stay, avg }) {
 								<div>
 									${stay.price} X {getTotalNights()} nights
 								</div>
-								<div>${getTotalNights() * stay.price}</div>
+								<div>${(getTotalNights() * stay.price).toFixed()}</div>
 							</div>
 							<div className='flex price-details'>
 								<div>Service fee</div>

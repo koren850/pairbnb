@@ -1,6 +1,9 @@
+import React from "react";
+
 import { stayService } from "../../services/stay.service";
 
-import React from "react";
+import { SpecialBtn } from "../../cmps/General/SpecialBtn";
+
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -89,10 +92,6 @@ export function AddStay() {
 		})
 			.then((res) => res.json())
 			.then((res) => {
-				// const elImg = document.createElement('img');
-				// console.log(res.url)
-				// elImg.src = res.url;
-				// document.body.append(elImg);
 				const newUrls = stayImgs;
 				newUrls[idx] = res.url;
 				setStayImgs([...newUrls]);
@@ -282,7 +281,11 @@ export function AddStay() {
 						})}
 					</FormGroup>
 				</div>
-				<button onClick={addStay}>Add Stay</button>
+				<div style={{ margin: "20px Auto" }} className='special-btn'>
+					<SpecialBtn onClick={addStay} text='Add Stay' size={{ width: "400px", height: "50px" }} />
+				</div>
+
+				{/* <button onClick={addStay}>Add Stay</button> */}
 			</div>
 		</ThemeProvider>
 	);
