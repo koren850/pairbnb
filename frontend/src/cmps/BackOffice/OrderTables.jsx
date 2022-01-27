@@ -15,6 +15,14 @@ import { Loader } from "../General/Loader";
 import { orderService } from "../../services/order.service";
 import { userService } from "../../services/user.service";
 
+import pendingSvg from "../../styles/svg/pending.svg";
+import approvedSvg from "../../styles/svg/approved.svg";
+import declineSvg from "../../styles/svg/declined.svg";
+const pending = <img className='status' src={pendingSvg} />;
+const approved = <img className='status' src={approvedSvg} />;
+const declined = <img className='status' src={declineSvg} />;
+const urls = { Pending: pending, Approved: approved, Declined: declined };
+
 export function Table() {
 	const responsive = "standard";
 
@@ -31,17 +39,17 @@ export function Table() {
 		orders = orders.map((order, idx) => {
 			pendingButtons = (
 				<div style={{ display: "flex", gap: "10px" }}>
-					<button style={{ padding: "8px", color: "green" }} onClick={() => setCurrOrderClick({ order, idx, status: "approved" })}>
-						approved
+					<button style={{ padding: "8px", color: "green" }} onClick={() => setCurrOrderClick({ order, idx, status: "Approved" })}>
+						Approved
 					</button>
-					<button style={{ padding: "8px", color: "red" }} onClick={() => setCurrOrderClick({ order, idx, status: "declined" })}>
-						decline
+					<button style={{ padding: "8px", color: "red" }} onClick={() => setCurrOrderClick({ order, idx, status: "Declined" })}>
+						Decline
 					</button>
 				</div>
 			);
 			approvedButtons = (
-				<button style={{ padding: "8px", margin: "auto" }} onClick={() => setCurrOrderClick({ order, idx, status: "remove" })}>
-					remove
+				<button style={{ padding: "8px", margin: "auto" }} onClick={() => setCurrOrderClick({ order, idx, status: "Remove" })}>
+					Remove
 				</button>
 			);
 			return [
@@ -51,7 +59,8 @@ export function Table() {
 				order.endDate,
 				`$${+order.totalPrice}`,
 				order.status,
-				order.status === "pending" ? pendingButtons : approvedButtons,
+				urls[order.status],
+				order.status === "Pending" ? pendingButtons : approvedButtons,
 			];
 		});
 		setOrders(orders);
@@ -64,7 +73,7 @@ export function Table() {
 	useEffect(async () => {
 		if (!myOrders) return;
 		const newOrder = currOrderClicked.order;
-		if (currOrderClicked.status === "remove") {
+		if (currOrderClicked.status === "Remove") {
 			newOrder.status = currOrderClicked.status;
 			await orderService.remove(newOrder._id);
 		} else {
@@ -74,21 +83,14 @@ export function Table() {
 		loadOrders();
 	}, [currOrderClicked]);
 
-	function decline(id) {
-		console.log("decline", id);
-	}
-	function remove(id) {
-		console.log("remove", id);
-	}
-
 	function getPendingOrders(orders) {
 		console.log(orders);
-		const pending = orders.filter((order) => order[5] === "pending");
+		const pending = orders.filter((order) => order[5] === "Pending");
 		return pending.length;
 	}
 	function getTotalEarning(orders) {
 		let price = 0;
-		const approved = orders.filter((order) => order[5] === "approved");
+		const approved = orders.filter((order) => order[5] === "Approved");
 
 		let prices = approved.forEach((order) => {
 			let currPrice = order[4].replace("$", "");
@@ -108,7 +110,7 @@ export function Table() {
 	let theme = createTheme();
 	theme = responsiveFontSizes(theme);
 
-	const columns = ["Client name", "Stay name", "Check in", "Check out", "Total", "Order status", "Actions"];
+	const columns = ["Client name", "Stay name", "Check in", "Check out", "Total", "Order status", "Status", "Actions"];
 
 	const options = {
 		filter: true,
@@ -150,8 +152,10 @@ export function Table() {
 	);
 
 	return (
-		<ThemeProvider theme={theme}>
-			<MUIDataTable title={tableHeader} data={myOrders} columns={columns} options={options} />
-		</ThemeProvider>
+		<div className='table'>
+			<ThemeProvider theme={theme}>
+				<MUIDataTable title={tableHeader} data={myOrders} columns={columns} options={options} />
+			</ThemeProvider>
+		</div>
 	);
 }

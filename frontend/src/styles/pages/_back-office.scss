@@ -1,3 +1,9 @@
+.table {
+	& * {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	}
+}
+
 .table-header {
 	flex-direction: row;
 }
@@ -16,4 +22,9 @@
 	height: 1rem;
 	width: 1rem;
 	border-radius: 50%;
+}
+
+.status {
+	height: 1.5rem;
+	width: 2.5rem;
 }
