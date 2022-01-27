@@ -1,0 +1,77 @@
+.add-stay-container {
+    margin-top: 50px;
+}
+
+.stay-primary-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+    .stay-name label {
+        font-size: rem(22px);
+    }
+
+    .add-input-box input {
+        padding: 0;
+        width: rem(350px);
+        height: rem(50px);
+        margin-left: 5px;
+    }
+
+    .add-input-number input {
+        padding: 0;
+        width: rem(100px);
+        height: rem(50px);
+        margin-left: 5px;
+    }
+
+    .add-input-dropdown div {
+        padding: 0;
+        width: rem(200px);
+        height: rem(50px);
+    }
+}
+.amenities-container {
+    height: 350px;
+    display: flex;
+}
+
+.add-images-container {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+        "image1 image1 image2 image3"
+        "image1 image1 image4 image5";
+    gap: 10px;
+    height: 500px;
+    // cursor: pointer;
+    button {
+        border: 1px solid;
+        border-radius: 12px;
+    }
+
+    .file-upload {
+        height: 100%;
+        width: 100%;
+        border: none;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .image1 {
+        grid-area: image1;
+    }
+    .image2 {
+        grid-area: image2;
+    }
+    .image3 {
+        grid-area: image3;
+    }
+    .image4 {
+        grid-area: image4;
+    }
+    .image5 {
+        grid-area: image5;
+    }
+}

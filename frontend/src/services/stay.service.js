@@ -98,13 +98,181 @@ async function remove(stayId) {
 }
 
 function save(stay) {
-    if (stay._id) {
-        return storageService.put(STORAGE_KEY, stay)
-    } else {
-        stay.owner = userService.getLoggedinUser()
-        return storageService.post(STORAGE_KEY, stay)
-    }
+    let newStay = getEmptyStay()
+    newStay.name = stay.stayName
+    newStay.type = stay.placeType
+    newStay["type of place"] = stay.spaceType
+    newStay.price = stay.stayPrice
+    newStay.capacity = stay.stayCapacity
+    newStay.summary = stay.stayDescription
+    newStay.loc.address = stay.stayAdress
+    let amenities = getAmenities(stay.stayAmenities)
+    newStay.amenities = amenities
+    let currHost = userService.getLoggedinUser()
+    let { _id, fullName, imgUrl } = currHost
+    let host = { _id, fullName, imgUrl }
+    newStay.host = host
+    console.log(newStay)
 }
+
+function getAmenities(stayAmenities) {
+    let amenities = [{
+
+        "Bathroom": []
+    },
+    {
+        "Bedroom and laundry": []
+    },
+    {
+        "Entertainment": []
+    },
+
+    {
+        "Heating and cooling": []
+    },
+    {
+        "Home safety": []
+    },
+    {
+        "Internet and office": []
+    },
+    {
+        "Kitchen and dining": []
+    },
+    {
+        "Location features": []
+    },
+    {
+        "Outdoor": []
+    },
+    {
+        "Parking and facilities": []
+    },
+    {
+        "Services": []
+    },
+    {
+        "Not included": []
+    }]
+    stayAmenities.forEach(amenity => {
+        switch (amenity) {
+            case "Shampoo":
+                amenities[0].Bathroom.push(amenity)
+                console.log(amenities)
+                break;
+            case "Hot water":
+                amenities[0].Bathroom.push(amenity)
+                break;
+            case "Hair dryer":
+                amenities[0].Bathroom.push(amenity)
+                break;
+            case "Washer":
+                amenities[1]["Bedroom and laundry"].push(amenity)
+                break;
+            case "Essentials":
+                amenities[1]["Bedroom and laundry"].push(amenity)
+                break;
+            case "Hangers":
+                amenities[1]["Bedroom and laundry"].push(amenity)
+                break;
+            case "Bed Linens":
+                amenities[1]["Bedroom and laundry"].push(amenity)
+                break;
+            case "Iron":
+                amenities[1]["Bedroom and laundry"].push(amenity)
+                break;
+            case "Extra pillows and blankets":
+                amenities[1]["Bedroom and laundry"].push(amenity)
+                break;
+            case "Ethernet connection":
+                amenities[2].Entertainment.push(amenity)
+                break;
+            case "TV":
+                amenities[2].Entertainment.push(amenity)
+                break;
+            case "Suitable for events":
+                amenities[2].Entertainment.push(amenity)
+                break;
+            case "Air conditioning":
+                amenities[3]["Heating and cooling"].push(amenity)
+                break;
+            case "Indoor fireplace":
+                amenities[3]["Heating and cooling"].push(amenity)
+                break;
+            case "Heating":
+                amenities[3]["Heating and cooling"].push(amenity)
+                break;
+            case "Fire extinguisher":
+                amenities[4]["Home safety"].push(amenity)
+                break;
+            case "First aid kit":
+                amenities[4]["Home safety"].push(amenity)
+                break;
+            case "Smoke alarm":
+                amenities[4]["Home safety"].push(amenity)
+                break;
+            case "Wifi":
+                amenities[5]["Internet and office"].push(amenity)
+                break;
+            case "Dedicated workspace":
+                console.log(amenities[6])
+                amenities[5]["Internet and office"].push(amenity)
+                break;
+            case "Dishwasher":
+                amenities[6]["Kitchen and dining"].push(amenity)
+                break;
+            case "Coffee maker":
+                amenities[6]["Kitchen and dining"].push(amenity)
+                break;
+            case "Stove":
+                amenities[6]["Kitchen and dining"].push(amenity)
+                break;
+            case "Dishes and silverware":
+                amenities[6]["Kitchen and dining"].push(amenity)
+                break;
+            case "Cooking basics":
+                amenities[6]["Kitchen and dining"].push(amenity)
+                break;
+            case "Refrigerator":
+                amenities[6]["Kitchen and dining"].push(amenity)
+            case "Kitchen":
+                amenities[6]["Kitchen and dining"].push(amenity)
+                break;
+            case "Beach access":
+                amenities[7]["Location features"].push(amenity)
+                break;
+            case "Private entrance":
+                amenities[7]["Location features"].push(amenity)
+                break;
+            case "Patio or balcony":
+                amenities[8].Outdoor.push(amenity)
+                break;
+            case "BBQ grill":
+                amenities[8].Outdoor.push(amenity)
+                break;
+            case "Free parking on premises":
+                amenities[9]["Parking and facilities"].push(amenity)
+                break;
+            case "Pool":
+                amenities[9]["Parking and facilities"].push(amenity)
+                break;
+            case "Pets allowed":
+                amenities[10].Services.push(amenity)
+                break;
+            case "Smoking allowed":
+                amenities[10].Services.push(amenity)
+                break;
+            case "Security cameras":
+                amenities[10].Services.push(amenity)
+                break;
+            case "Long term stays allowed":
+                amenities[10].Services.push(amenity)
+                break;
+        }
+    })
+    return amenities
+}
+
 
 async function getStaysByHostId(hostId) {
     const stays = await query()
@@ -114,6 +282,69 @@ async function getStaysByHostId(hostId) {
     })
     return hostStays
 }
+
+function getEmptyStay() {
+    return {
+        name: "",
+        type: "",
+        "type of place": "",
+        imgUrls: [],
+        price: "",
+        summary: "",
+        host: {},
+        capacity: "",
+        amenities: [{
+
+            "Bathroom": []
+        },
+        {
+            "Bedroom and laundry": []
+        },
+        {
+            "Entertainment": []
+        },
+
+        {
+            "Heating and cooling": []
+        },
+        {
+            "Home safety": []
+        },
+        {
+            "Internet and office": []
+        },
+        {
+            "Kitchen and dining": []
+        },
+        {
+            "Location features": []
+        },
+        {
+            "Outdoor": []
+        },
+        {
+            "Parking and facilities": []
+        },
+        {
+            "Services": []
+        },
+        {
+            "Not included": []
+        }
+        ],
+        "loc": {
+            "country": "New-York",
+            "countryCode": "NY",
+            "address": "Porto, Portugal",
+            "lat": 40.73061,
+            "lng": -73.935242
+        },
+        "reviews": [],
+        "likedByUsers": []
+
+    }
+}
+
 // function subscribe(listener) {
 //     listeners.push(listener)
 // }
