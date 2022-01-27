@@ -14,7 +14,6 @@ export function Checkout({ stay, avg }) {
 	const [isGuestsActive, toggleGuests] = useState(false);
 
 	function reserveOrder(ev, args) {
-		// console.log(args);
 		const reserved = {
 			hostId: stay.host._id,
 			buyerId: userService.getLoggedinUser()._id,
