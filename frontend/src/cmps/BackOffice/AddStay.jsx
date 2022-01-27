@@ -284,8 +284,6 @@ export function AddStay() {
 				<div style={{ margin: "20px Auto" }} className='special-btn'>
 					<SpecialBtn onClick={addStay} text='Add Stay' size={{ width: "400px", height: "50px" }} />
 				</div>
-
-				{/* <button onClick={addStay}>Add Stay</button> */}
 			</div>
 		</ThemeProvider>
 	);
