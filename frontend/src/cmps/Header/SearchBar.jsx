@@ -13,7 +13,7 @@ import { SpecialBtn } from "../General/SpecialBtn";
 
 import searchSvg from "../../styles/svg/search.svg";
 
-function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen, searchParams, setParams,isMobileWidth, isTop }) {
+function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive, isScreenOpen, setIsScreenOpen, searchParams, setParams,isMobileWidth, isTop }) {
 	const [locationsData, setLocationsData] = useState(null);
 
 	const elLocationInput = useRef();
@@ -24,32 +24,32 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 			const data = await stayService.query();
 			setLocationsData(data);
 		})();
-		window.addEventListener("scroll", turnOffSome);
+		window.addEventListener("scroll", handleSearchBarTabs);
 		return () => {
-			window.removeEventListener("scroll", turnOffSome);
+			window.removeEventListener("scroll", handleSearchBarTabs);
 		};
 	}, []);
 
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
-		if (elName === "location" && someActive !== elName) {
+		if (elName === "location" && searchBarTabs !== elName) {
 			setIsScreenOpen(true);
 			elLocationInput.current.focus();
 		} else elLocationInput.current.blur();
 		// elName === "check-in" || elName === "check-out" ? setIsScreenOpen(true) : setIsScreenOpen(false);
 		setIsScreenOpen(elName === "check-in" || elName === "check-out");
-		if (someActive === elName) {
-			setSomeActive(null);
+		if (searchBarTabs === elName) {
+			setSearchBarTabsActive(null);
 			setIsScreenOpen(false);
 		} else {
-			setSomeActive(elName);
+			setSearchBarTabsActive(elName);
 			setIsScreenOpen(true);
 		}
 	}
 
 	function onSearch(ev) {
-		if (someActive !== "guests") ev.stopPropagation();
+		if (searchBarTabs !== "guests") ev.stopPropagation();
 		const searchKeys = Object.keys(searchParams);
 		let params = "/explore/";
 		console.log(searchParams);
@@ -68,13 +68,13 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 	}
 
 	return (
-		<div className={"bar original " + ((someActive || (!isTop && isMobileWidth)) && "active-search-bar")}>
-			{isScreenOpen && (someActive === "check-in" || someActive === "check-out") && <SearchBarDatePicker ChooseDates={ChooseDates} />}
-			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + ((someActive === "location" && !isMobileWidth) ? "active" : "")}>
+		<div className={"bar original " + ((searchBarTabs || (!isTop && isMobileWidth)) && "active-search-bar")}>
+			{isScreenOpen && (searchBarTabs === "check-in" || searchBarTabs === "check-out") && <SearchBarDatePicker ChooseDates={ChooseDates} />}
+			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + ((searchBarTabs === "location" && !isMobileWidth) ? "active" : "")}>
 				<p className="location-txt">Location</p>
 				<SearchBarFilterInput
 					// searchParams={searchParams}
-					someActive={someActive}
+					searchBarTabs={searchBarTabs}
 					setIsScreenOpen={setIsScreenOpen}
 					isScreenOpen={isScreenOpen}
 					elLocationInput={elLocationInput}
@@ -84,25 +84,25 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 				/>
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in original " + (someActive === "check-in" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in original " + (searchBarTabs === "check-in" ? "active" : "")}>
 				<p>Check in</p>
 				<input className='bar-input' readOnly type='text' placeholder={searchParams.checkIn ? searchParams.checkIn : "Add dates"} />
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out original " + (someActive === "check-out" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out original " + (searchBarTabs === "check-out" ? "active" : "")}>
 				<p>Check out</p>
 				<input className='bar-input' readOnly type='text' placeholder={searchParams.checkOut ? searchParams.checkOut : "Add dates"} />
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests original " + ((someActive && !isMobileWidth) === "guests" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests original " + ((searchBarTabs && !isMobileWidth) === "guests" ? "active" : "")}>
 				<p>Guests</p>
-				<div className='header-guests'>{someActive === "guests" && <Guests init={searchParams} set={setParams} />}</div>
+				<div className='header-guests'>{searchBarTabs === "guests" && <Guests init={searchParams} set={setParams} />}</div>
 				<input value={searchParams.guestsCount === 1 ? "" : searchParams.guestsCount} readOnly className='bar-input' type='text' placeholder='Add guests' />
 				<div className='special-btn search-special-btn'>
 					<SpecialBtn
 						onClick={onSearch}
 						args={searchParams}
-						isActive={someActive}
+						isActive={searchBarTabs}
 						size={{ width: "50px", height: "50px" }}
 						text={<img src={searchSvg} className='search-svg' alt='' />}
 					/>

@@ -43,45 +43,41 @@ async function update(user) {
 }
 
 async function login(userCred) {
-    const user = await httpService.post('auth/login', userCred)
-    console.log(user);
-    if (user) return _saveLocalUser(user)
-    // const users = getUsers();
-    // return new Promise((resolve, reject) => {
-    //     const currUser = users.find(user => user.email === userCred.email)
-    //     if (!currUser) reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
-    //     else if (currUser.password !== userCred.password) {
-    //         if (!userCred.isSocial) reject({ reason: 'Incorrect user password', unsolved: 'password' });
-    //     }
-    //     if (currUser) {
-    //         _saveLocalUser(currUser);
-    //         resolve(currUser);
-    //     }
-    //     else reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
-    // })
+    const users = await getUsers();
+    return new Promise( async (resolve, reject) => {
+        const currUser = users.find(user => user.email === userCred.email)
+        if (!currUser) reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
+        else if (currUser.password !== userCred.password) {
+            if (!userCred.isSocial) reject({ reason: 'Incorrect user password', unsolved: 'password' });
+        }
+        if (currUser) {
+            _saveLocalUser(currUser);
+            const user = await httpService.post('auth/login', userCred)
+            if (user)  _saveLocalUser(user)
+            resolve(user);
+        }
+        else reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
+    })
 }
 async function signup(userCred) {
-
-    // const users = getUsers()
-    // return new Promise((resolve, reject) => {
-    //     let currUser = users.find(user => user.email === userCred?.email)
-    //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //     if (currUser === -1) currUser = null;
-    //     else if (currUser) {
-    //         reject({ reason: 'Email already exists', unsolved: 'email' });
-    //         console.log(currUser);
-    //     }
-    //     else if (!emailRegex.test(userCred?.email)) reject({ reason: 'Invalid email pattern : ' + userCred.email, unsolved: 'email' });
-    //     else if (!userCred.isSocial && userCred.password?.length < 5) reject({ reason: 'password should have at list 6 digits / letters', unsolved: 'password' });
-    //     else if (!userCred.imgUrl) userCred.imgUrl = userSvg;
-    //     userCred.likedStays = [];
-    //     _saveLocalUser(userCred);
-    //     localStorage.setItem(STORAGE_KEY, JSON.stringify([...users, userCred]));
-    //     resolve(userCred);
-    // socketService.emit('set-user-socket', user._id);
-    // })
-    const user = await httpService.post('auth/signup', userCred)
-    return _saveLocalUser(user)
+    const users = await getUsers()
+    return new Promise( async (resolve, reject) => {
+        let currUser = users.find(user => user.email === userCred?.email)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (currUser === -1) currUser = null;
+        else if (currUser) {
+            reject({ reason: 'Email already exists', unsolved: 'email' });
+            console.log(currUser);
+        }
+        else if (!emailRegex.test(userCred?.email)) reject({ reason: 'Invalid email pattern : ' + userCred.email, unsolved: 'email' });
+        else if (!userCred.isSocial && userCred.password?.length < 5) reject({ reason: 'password should have at list 6 digits / letters', unsolved: 'password' });
+        userCred.likedStays = [];
+        _saveLocalUser(userCred);
+        const user = await httpService.post('auth/signup', userCred)
+        _saveLocalUser(user)
+        resolve(user);
+        // socketService.emit('set-user-socket', user._id);
+    })
 }
 
 async function logout() {

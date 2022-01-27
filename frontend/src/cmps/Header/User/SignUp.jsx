@@ -173,7 +173,7 @@ export function SignUp({ setIsSubmitting, signingUp }) {
 						/>
 						<Grid container justifyContent='flex-end'>
 							<Grid item>
-								<Link to='/user/login'>Already have an account? Sign in</Link>
+								<Link to='/user/login'>Already have an account? Log in</Link>
 							</Grid>
 						</Grid>
 					</Box>

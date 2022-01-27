@@ -48,6 +48,7 @@ async function getByEmail(email) {
         console.log('getUserByEmail')
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ email })
+        console.log(user,'from back')
         return user
     } catch (err) {
         logger.error(`while finding user ${email}`, err)
