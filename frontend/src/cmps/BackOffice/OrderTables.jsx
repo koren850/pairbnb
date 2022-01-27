@@ -31,16 +31,16 @@ export function Table() {
 		orders = orders.map((order, idx) => {
 			pendingButtons = (
 				<div style={{ display: "flex", gap: "10px" }}>
-					<button style={{ padding: "5px", color: "green" }} onClick={() => setCurrOrderClick({ order, idx, status: "approved" })}>
+					<button style={{ padding: "8px", color: "green" }} onClick={() => setCurrOrderClick({ order, idx, status: "approved" })}>
 						approved
 					</button>
-					<button style={{ padding: "5px", color: "red" }} onClick={() => setCurrOrderClick({ order, idx, status: "declined" })}>
+					<button style={{ padding: "8px", color: "red" }} onClick={() => setCurrOrderClick({ order, idx, status: "declined" })}>
 						decline
 					</button>
 				</div>
 			);
 			approvedButtons = (
-				<button style={{ padding: "5px", margin: "auto", color: "orange" }} onClick={() => setCurrOrderClick({ order, idx, status: "remove" })}>
+				<button style={{ padding: "8px", margin: "auto" }} onClick={() => setCurrOrderClick({ order, idx, status: "remove" })}>
 					remove
 				</button>
 			);
@@ -124,9 +124,6 @@ export function Table() {
 				Hi {loggedinUser.fullName}, your have {getPendingOrders(myOrders)} pending orders
 			</h2>
 			<div>
-				<div>
-					<span>Earning: ${getTotalEarning(myOrders)}</span>
-				</div>
 				<div className='orders-types flex'>
 					<div>Orders:</div>
 					<span>
@@ -144,6 +141,9 @@ export function Table() {
 						<div style={{ backgroundColor: "#fa7b7b" }} className='orders-ball'></div>
 						(Declined)
 					</span>
+				</div>
+				<div>
+					<span>Total earning: ${getTotalEarning(myOrders)}</span>
 				</div>
 			</div>
 		</div>
