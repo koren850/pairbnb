@@ -11,7 +11,6 @@ import greyHeart from "../../styles/svg/grey-heart.svg";
 import pinkHeart from "../../styles/svg/pink-heart.svg";
 
 function _StayPreview({ stay, fromBackOffice }) {
-	// Consider moving into stay.service
 	let ammount = 0;
 	const divider = stay.reviews.length;
 	stay.reviews.forEach((review) => (ammount += review.rate));
@@ -41,9 +40,12 @@ function _StayPreview({ stay, fromBackOffice }) {
 				return currStay._id !== likedStay._id;
 			});
 		} else {
-			loggedinUser.likedStays.push(stay);
+			const miniStay = { _id: stay._id, name: stay.name };
+			loggedinUser.likedStays.push(miniStay);
 		}
-		// const newUser = await userService.update(loggedinUser);
+		const newUser = await userService.update(loggedinUser);
+		setCurrUser({ ...newUser });
+		userService.setLoggedinUser(newUser);
 	}
 
 	return (

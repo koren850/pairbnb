@@ -13,6 +13,7 @@ export const userService = {
     logout,
     signup,
     getLoggedinUser,
+    setLoggedinUser,
     getUsers,
     getById,
     update
@@ -97,6 +98,10 @@ function _saveLocalUser(user) {
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) || 'null')
 }
+function setLoggedinUser(newUser) {
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(newUser))
+}
+
 
 
 
