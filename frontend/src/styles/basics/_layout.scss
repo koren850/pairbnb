@@ -6,7 +6,6 @@
 
 .main-layout {
 	display: grid;
-	// grid-row: 1 / 2;
 	grid-template-columns: 80px 1fr 80px;
 
 	> * {
