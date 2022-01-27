@@ -13,11 +13,22 @@ import { SpecialBtn } from "../General/SpecialBtn";
 
 import searchSvg from "../../styles/svg/search.svg";
 
-function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen, searchParams, setParams }) {
+function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setIsScreenOpen, searchParams, setParams,isMobileWidth, isTop }) {
 	const [locationsData, setLocationsData] = useState(null);
 
 	const elLocationInput = useRef();
 	const history = useHistory();
+
+	useEffect(() => {
+		(async () => {
+			const data = await stayService.query();
+			setLocationsData(data);
+		})();
+		window.addEventListener("scroll", turnOffSome);
+		return () => {
+			window.removeEventListener("scroll", turnOffSome);
+		};
+	}, []);
 
 	function updateSomeActive(elName, ev) {
 		ev.stopPropagation();
@@ -26,7 +37,8 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 			setIsScreenOpen(true);
 			elLocationInput.current.focus();
 		} else elLocationInput.current.blur();
-		elName === "check-in" || elName === "check-out" ? setIsScreenOpen(true) : setIsScreenOpen(false);
+		// elName === "check-in" || elName === "check-out" ? setIsScreenOpen(true) : setIsScreenOpen(false);
+		setIsScreenOpen(elName === "check-in" || elName === "check-out");
 		if (someActive === elName) {
 			setSomeActive(null);
 			setIsScreenOpen(false);
@@ -55,21 +67,10 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 		setParams({ ...searchParams, checkIn, checkOut });
 	}
 
-	useEffect(() => {
-		(async () => {
-			const data = await stayService.query();
-			setLocationsData(data);
-		})();
-		window.addEventListener("scroll", turnOffSome);
-		return () => {
-			window.removeEventListener("scroll", turnOffSome);
-		};
-	}, []);
-
 	return (
-		<div className={"bar original " + (someActive && "active-search-bar")}>
+		<div className={"bar original " + ((someActive || (!isTop && isMobileWidth)) && "active-search-bar")}>
 			{isScreenOpen && (someActive === "check-in" || someActive === "check-out") && <SearchBarDatePicker ChooseDates={ChooseDates} />}
-			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + (someActive === "location" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + ((someActive === "location" && !isMobileWidth) ? "active" : "")}>
 				<p>Location</p>
 				<SearchBarFilterInput
 					// searchParams={searchParams}
@@ -93,7 +94,7 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 				<input className='bar-input' readOnly type='text' placeholder={searchParams.checkOut ? searchParams.checkOut : "Add dates"} />
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests original " + (someActive === "guests" ? "active" : "")}>
+			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests original " + ((someActive && !isMobileWidth) === "guests" ? "active" : "")}>
 				<p>Guests</p>
 				<div className='header-guests'>{someActive === "guests" && <Guests init={searchParams} set={setParams} />}</div>
 				<input value={searchParams.guestsCount === 1 ? "" : searchParams.guestsCount} readOnly className='bar-input' type='text' placeholder='Add guests' />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { userService } from "../../services/user.service.js";
@@ -10,15 +10,15 @@ import reviewStar from "../../styles/svg/star.svg";
 import greyHeart from "../../styles/svg/grey-heart.svg";
 import pinkHeart from "../../styles/svg/pink-heart.svg";
 
-function _StayPreview({ stay, updateUser, fromBackOffice }) {
+function _StayPreview({ stay, fromBackOffice }) {
 	// Consider moving into stay.service
-	console.log(fromBackOffice )
 	let ammount = 0;
 	const divider = stay.reviews.length;
 	stay.reviews.forEach((review) => (ammount += review.rate));
 	const avg = (ammount / divider).toFixed(1);
 
-	let currUser = userService.getLoggedinUser();
+	const [currUser, setCurrUser] = useState(userService.getLoggedinUser());
+
 	let likedPlace;
 	let likedId;
 
@@ -29,7 +29,7 @@ function _StayPreview({ stay, updateUser, fromBackOffice }) {
 		}
 	}
 
-	function toggleLikedPlace(stay) {
+	async function toggleLikedPlace(stay) {
 		let loggedinUser = userService.getLoggedinUser();
 		// USER MSG - ask guest to sign in / up / continue as guest for demo purposes
 		if (!loggedinUser) return console.log("please sign in first");
@@ -43,7 +43,7 @@ function _StayPreview({ stay, updateUser, fromBackOffice }) {
 		} else {
 			loggedinUser.likedStays.push(stay);
 		}
-		updateUser(loggedinUser);
+		// const newUser = await userService.update(loggedinUser);
 	}
 
 	return (
@@ -87,9 +87,10 @@ function _StayPreview({ stay, updateUser, fromBackOffice }) {
 		</div>
 	);
 }
-function mapStateToProps({ userModule }) {
+function mapStateToProps({ userModule, stayModule }) {
 	return {
 		userModule: userModule.user,
+		stays: stayModule.stays,
 	};
 }
 const mapDispatchToProps = {

@@ -22,6 +22,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 	const [isScreenOpen, setIsScreenOpen] = useState(false);
 	const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
 	const [someActive, setSomeActive] = useState(null);
+	const [isMobileWidth, setIsMobileWidth] = useState(false);
 
 	const location = useLocation();
 	const history = useHistory();
@@ -71,6 +72,11 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 		setIsSearchBarOpen(!isSearchBarOpen);
 	}
 
+	function measureClientWindowWidth() {
+		if (window.innerWidth < 780) setIsMobileWidth(true);
+		else setIsMobileWidth(false)
+	}
+
 	useEffect(() => {
 		if (!location.pathname || location.pathname === "/") {
 			toggleHeaderIsActive(false);
@@ -86,9 +92,12 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 			toggleHeaderIsActive(false);
 			toggleHeaderIsTop(false);
 		}
+		measureClientWindowWidth();
 		window.addEventListener("scroll", resetHeaderModes);
+		window.addEventListener('resize', measureClientWindowWidth);
 		return () => {
 			window.removeEventListener("scroll", resetHeaderModes);
+			window.removeEventListener('resize', measureClientWindowWidth);
 			toggleIsExplore(true);
 		};
 	}, []);
@@ -122,12 +131,14 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 				</article>
 			</section>
 			<nav className='middle-layout search-bar-container'>
-				{isActive && (
+				{(isActive || isMobileWidth) && (
 					<SearchBar
 						turnOffSome={turnOffSome}
 						setSomeActive={setSomeActive}
 						someActive={someActive}
 						isScreenOpen={isScreenOpen}
+						isMobileWidth={isMobileWidth}
+						isTop={isTop}
 						setIsScreenOpen={setIsScreenOpen}
 						ToggleIsActive={onToggleIsActive}
 					/>
