@@ -4,7 +4,7 @@
 	.hero {
 		display: grid;
 		grid-template-rows: 4fr auto auto 1fr;
-		// grid-template-columns: 1fr;
+		grid-template-columns: 1fr;
 		justify-content: center;
 		align-items: center;
 		text-align: center;
@@ -123,7 +123,7 @@
 	color: $clr6;
 }
 
-@media screen and (max-width:1128px) {
+@media screen and (max-width: 1128px) {
 	.home .hero .hero-title {
 		font-size: 4vw;
 	}
@@ -138,7 +138,7 @@
 	}
 }
 
-@media  screen and (max-width:780px) {
+@media screen and (max-width: 780px) {
 	.home .cities-title {
 		text-align: center;
 		font-size: 1.5rem;
@@ -149,32 +149,31 @@
 		top: 100%;
 	}
 	.home .popular-cities {
-		overflow-x:scroll;
+		overflow-x: scroll;
 		display: flex;
 		height: 100%;
 		margin-bottom: 7vh;
 		& .city-container {
-			height:400px;			
-			width:400px;	
+			height: 400px;
+			width: 400px;
 			overflow-y: unset;
 			& img {
 				filter: grayscale(0);
 			}
-			
 		}
 		&::-webkit-scrollbar {
 			display: none;
-		  }		
-		 & .cities-title {
+		}
+		& .cities-title {
 			text-align: center;
-			margin:auto
+			margin: auto;
 		}
 	}
 	.home .hero img {
 		height: 70vh;
 		object-fit: cover;
 	}
-	
+
 	.home .host img {
 		height: 40vh;
 		object-fit: cover;
@@ -185,7 +184,7 @@
 	}
 }
 
-@media screen and (max-width:400px) {
+@media screen and (max-width: 400px) {
 	.home .cities-title {
 		font-size: 20px;
 	}
