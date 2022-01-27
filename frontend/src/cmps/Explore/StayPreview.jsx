@@ -31,7 +31,7 @@ function _StayPreview({ stay, fromBackOffice }) {
 
 	async function toggleLikedPlace(stay) {
 		let loggedinUser = userService.getLoggedinUser();
-		// USER MSG - ask guest to sign in / up / continue as guest for demo purposes
+		// USER MSG - ask guest to log in / up / continue as guest for demo purposes
 		if (!loggedinUser) return console.log("please sign in first");
 		let likedStay = loggedinUser.likedStays.find((currStay) => {
 			return currStay._id === stay._id;

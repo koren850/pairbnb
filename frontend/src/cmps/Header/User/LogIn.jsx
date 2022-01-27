@@ -34,7 +34,7 @@ const theme = createTheme({
 export function LogIn({ setIsSubmitting, signingIn }) {
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const connectionError = useSelector((state) => state.userModule.connectionError);
+	const connectionError = useSelector( (state) => state.userModule.connectionError);
 
 	const responseFacebook = (response) => {
 		const credentials = {
@@ -87,7 +87,8 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 		setIsSubmitting(true);
 		setTimeout(async () => {
 			try {
-				await signingIn(credentials);
+				const user = await signingIn(credentials);
+				console.log(user,'user from login')
 				history.push("/");
 			} catch (err) {
 				console.log(err)
@@ -97,7 +98,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 			}
 		}, 1500);
 	};
-
+console.log(connectionError)
 	return (
 		<ThemeProvider theme={theme}>
 			<Container component='main' maxWidth='xs'>
@@ -141,7 +142,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 						<input type='text' value={connectionError.password} readOnly style={{ width: "100%", marginInlineStart: "10px", color: "red", border: "unset" }} />
 						<button style={{ marginBlockStart: "10px", backgroundColor: "transparent", width: "100%", height: "40px", border: "none" }}>
 							<div className='special-btn'>
-								<SpecialBtn size={{ width: "inherit", height: "40px" }} text={"Sign In"} />
+								<SpecialBtn size={{ width: "inherit", height: "40px" }} text={"Log in"} />
 							</div>
 						</button>
 
@@ -157,7 +158,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 									style={{ display: "flex", justifyContent: "center", height: "35px", margin: "10px 0", width: "396px" }}
 									onClick={renderProps.onClick}
 									disabled={renderProps.disabled}>
-									Sign in with Google
+									Log in with Google
 								</GoogleLoginButton>
 							)}
 							cookiePolicy={"single_host_origin"}
@@ -171,7 +172,7 @@ export function LogIn({ setIsSubmitting, signingIn }) {
 									style={{ display: "flex", justifyContent: "center", height: "35px", margin: "10px 0", width: "396px" }}
 									onClick={renderProps.onClick}
 									disabled={renderProps.disabled}>
-									Sign in with Facebook
+									Log in with Facebook
 								</FacebookLoginButton>
 							)}
 							callback={responseFacebook}

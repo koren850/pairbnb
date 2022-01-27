@@ -57,6 +57,7 @@
 		display: grid;
 		grid-template-rows: 1fr auto 1fr auto;
 		grid-template-columns: 1fr;
+		margin-block-end: 30px	;
 		& img {
 			grid-row: 1/5;
 			grid-column: 1/2;

@@ -6,7 +6,7 @@ import { setParams } from "../../store/stay.action";
 
 import locationSvg from "../../styles/svg/location.svg";
 
-function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput, isScreenOpen, setIsScreenOpen, someActive, setParams, searchParams }) {
+function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput, isScreenOpen, setIsScreenOpen, searchBarTabs, setParams, searchParams }) {
   const [filteredData, setFilteredData] = useState([]);
 
   // const searchParams = useSelector(state => state.stayModule.searchParams.location)
@@ -31,13 +31,13 @@ function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationIn
       <div className="search-filter-inputs">
         <input autoComplete="off" ref={elLocationInput} id="location" className="search-input" value={searchParams.location} placeholder={placeholder} onChange={handleChange} type="text" />
         <div className="search-icon"></div>
-        {((filteredData.length !== 0) && isScreenOpen && (someActive === "location")) && <ul className={`data-result 
+        {((filteredData.length !== 0) && isScreenOpen && (searchBarTabs === "location")) && <ul className={`data-result 
       `}>
           {filteredData.map((value, idx) => {
             return <li onClick={(ev) => onPlaceClick(ev, value.loc.address)} key={value.loc.country + idx} className="data-item"><img src={locationSvg} /><p>{value.loc.address} , <small>{value.loc.country}</small></p></li>
           })}
         </ul>}
-        {((!filteredData.length) && isScreenOpen && (someActive === "location")) && <article className="flexible-btn-container">
+        {((!filteredData.length) && isScreenOpen && (searchBarTabs === "location")) && <article className="flexible-btn-container">
           <p>GO ANYWHERE, ANYTIME</p>
           <Link to={`/explore`}><button className='hero-btn home-btn'>
             <span>I'm flexible</span>

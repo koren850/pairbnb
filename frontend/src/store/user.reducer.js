@@ -21,6 +21,7 @@ export function userReducer(state = initialState, action) {
 		case 'UPDATE_INPUTS_ERROR':
 			const { key } = action;
 			newState = { ...state, connectionError: { ...state.connectionError, [key]: action.content } }
+			console.log(state)
 			break;
 		default:
 	}

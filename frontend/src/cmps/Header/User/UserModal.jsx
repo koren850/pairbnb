@@ -9,7 +9,6 @@ export function UserModal({ toggleModal, currState }) {
 	const isActive = useSelector((state) => state.headerModule.headerMode.isActive);
 
 	function toggle(ev) {
-		console.log(ev.target);
 		ev.stopPropagation();
 		toggleModal(!currState);
 	}
@@ -22,7 +21,6 @@ export function UserModal({ toggleModal, currState }) {
 	}, []);
 	function onLogOut() {
 		userService.logout();
-		console.log("logout");
 	}
 
 	return (

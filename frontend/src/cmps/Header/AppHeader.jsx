@@ -21,7 +21,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 	const [userModalState, toggleModal] = useState(false);
 	const [isScreenOpen, setIsScreenOpen] = useState(false);
 	const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
-	const [someActive, setSomeActive] = useState(null);
+	const [searchBarTabs, setSearchBarTabsActive] = useState(null);
 	const [isMobileWidth, setIsMobileWidth] = useState(false);
 
 	const location = useLocation();
@@ -45,7 +45,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 				toggleHeaderIsActive(false);
 				toggleHeaderIsTop(false);
 			} else {
-				setSomeActive(null);
+				setSearchBarTabsActive(null);
 				toggleHeaderIsActive(true);
 				toggleHeaderIsTop(true);
 			}
@@ -55,14 +55,14 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 		}
 	}
 
-	function turnOffSome() {
-		someActive ? setSomeActive(null) : toggleHeaderIsActive(false);
+	function handleSearchBarTabs() {
+		searchBarTabs ? setSearchBarTabsActive(null) : toggleHeaderIsActive(false);
 	}
 
 	function handleSearchModals(ev) {
 		ev.stopPropagation();
 		setIsScreenOpen(!isScreenOpen);
-		turnOffSome();
+		handleSearchBarTabs();
 	}
 
 	function handleCloseSearchBar(ev) {
@@ -133,9 +133,9 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 			<nav className='middle-layout search-bar-container'>
 				{(isActive || isMobileWidth) && (
 					<SearchBar
-						turnOffSome={turnOffSome}
-						setSomeActive={setSomeActive}
-						someActive={someActive}
+						handleSearchBarTabs={handleSearchBarTabs}
+						setSearchBarTabsActive={setSearchBarTabsActive}
+						searchBarTabs={searchBarTabs}
 						isScreenOpen={isScreenOpen}
 						isMobileWidth={isMobileWidth}
 						isTop={isTop}
