@@ -14,7 +14,8 @@ function _StayPreview({ stay, fromBackOffice }) {
 	let ammount = 0;
 	const divider = stay.reviews.length;
 	stay.reviews.forEach((review) => (ammount += review.rate));
-	const avg = (ammount / divider).toFixed(1);
+	let avg = (ammount / divider).toFixed(1);
+	if (isNaN(avg)) avg = "";
 
 	const [currUser, setCurrUser] = useState(userService.getLoggedinUser());
 

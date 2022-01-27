@@ -97,13 +97,13 @@ async function remove(stayId) {
     // return storageService.remove(STORAGE_KEY, stayId)
 }
 
-function save(stay) {
+async function save(stay) {
     let newStay = getEmptyStay()
     newStay.name = stay.stayName
     newStay.type = stay.placeType
     newStay["type of place"] = stay.spaceType
-    newStay.price = stay.stayPrice
-    newStay.capacity = stay.stayCapacity
+    newStay.price = +stay.stayPrice
+    newStay.capacity = +stay.stayCapacity
     newStay.summary = stay.stayDescription
     newStay.loc.address = stay.stayAdress
     let amenities = getAmenities(stay.stayAmenities)
@@ -113,7 +113,8 @@ function save(stay) {
     let host = { _id, fullName, imgUrl }
     newStay.host = host
     newStay.imgUrls = stay.stayImgs
-    // await httpService.post('stay', newStay)
+    const addedStay = await httpService.post('stay', newStay)
+    console.log('stay added', addedStay);
 
 }
 
@@ -336,7 +337,7 @@ function getEmptyStay() {
         ],
         "loc": {
             "country": "Israel",
-            "countryCode": "Il",
+            "countryCode": "IL",
             "address": "",
             "lat": 31.010815229959928,
             "lng": 34.908554101114625
@@ -405,7 +406,7 @@ function getEmptyStay() {
 //             "summary": "Welcome to my city home. It is centrally located in NYC, just steps from Madison Square Garden and Penn Station to get you off to all your favorite destinations. This apartment makes for lovely weekend stay when I'm not in town - close to attractions, restaurants, nightlife and shopping. Thank you for considering. Please reach out with any questions and I will happily answer them.",
 //             "host": {
 //                 "_id": 125,
-//                 "fullname": "michael aharoni",
+//                 "fullName": "michael aharoni",
 //                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg',
 //             },
 //             "capacity": 6,
@@ -462,7 +463,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 126,
-//                         "fullname": "idan gez",
+//                         "fullName": "idan gez",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
 //                     }
 //                 },
@@ -472,7 +473,7 @@ function getEmptyStay() {
 //                     "rate": 4.4,
 //                     "by": {
 //                         "_id": 127,
-//                         "fullname": "tal ekroni",
+//                         "fullName": "tal ekroni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
 //                     }
 //                 },
@@ -482,7 +483,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 126,
-//                         "fullname": "idan gez",
+//                         "fullName": "idan gez",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
 //                     }
 //                 },
@@ -492,7 +493,7 @@ function getEmptyStay() {
 //                     "rate": 4,
 //                     "by": {
 //                         "_id": 124,
-//                         "fullname": "koren aharon",
+//                         "fullName": "koren aharon",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 //                     }
 //                 },
@@ -502,7 +503,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 124,
-//                         "fullname": "koren aharon",
+//                         "fullName": "koren aharon",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 //                     }
 //                 }
@@ -529,7 +530,7 @@ function getEmptyStay() {
 //             "capacity": 4,
 //             "host": {
 //                 "_id": 126,
-//                 "fullname": "idan gez",
+//                 "fullName": "idan gez",
 //                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
 //             },
 //             "loc": {
@@ -616,7 +617,7 @@ function getEmptyStay() {
 //                     "rate": 4.5,
 //                     "by": {
 //                         "_id": 125,
-//                         "fullname": "michael aharoni",
+//                         "fullName": "michael aharoni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 //                     }
 //                 },
@@ -626,7 +627,7 @@ function getEmptyStay() {
 //                     "rate": 4.4,
 //                     "by": {
 //                         "_id": 127,
-//                         "fullname": "tal ekroni",
+//                         "fullName": "tal ekroni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
 //                     }
 //                 },
@@ -636,7 +637,7 @@ function getEmptyStay() {
 //                     "rate": 3.5,
 //                     "by": {
 //                         "_id": 125,
-//                         "fullname": "michael aharoni",
+//                         "fullName": "michael aharoni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 //                     }
 //                 },
@@ -646,7 +647,7 @@ function getEmptyStay() {
 //                     "rate": 4,
 //                     "by": {
 //                         "_id": 124,
-//                         "fullname": "koren aharon",
+//                         "fullName": "koren aharon",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 //                     }
 //                 },
@@ -656,7 +657,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 124,
-//                         "fullname": "koren aharon",
+//                         "fullName": "koren aharon",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 //                     }
 //                 }
@@ -766,7 +767,7 @@ function getEmptyStay() {
 //             ],
 //             "host": {
 //                 "_id": 126,
-//                 "fullname": "idan gez",
+//                 "fullName": "idan gez",
 //                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg',
 //             },
 //             "loc": {
@@ -783,7 +784,7 @@ function getEmptyStay() {
 //                     "rate": 3.5,
 //                     "by": {
 //                         "_id": 125,
-//                         "fullname": "michael aharoni",
+//                         "fullName": "michael aharoni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 //                     }
 //                 },
@@ -793,7 +794,7 @@ function getEmptyStay() {
 //                     "rate": 2.5,
 //                     "by": {
 //                         "_id": 127,
-//                         "fullname": "tal ekroni",
+//                         "fullName": "tal ekroni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
 //                     }
 //                 },
@@ -803,7 +804,7 @@ function getEmptyStay() {
 //                     "rate": 4.5,
 //                     "by": {
 //                         "_id": 125,
-//                         "fullname": "michael aharoni",
+//                         "fullName": "michael aharoni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 //                     }
 //                 },
@@ -813,7 +814,7 @@ function getEmptyStay() {
 //                     "rate": 4,
 //                     "by": {
 //                         "_id": 124,
-//                         "fullname": "koren aharon",
+//                         "fullName": "koren aharon",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 //                     }
 //                 },
@@ -823,7 +824,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 124,
-//                         "fullname": "koren aharon",
+//                         "fullName": "koren aharon",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 //                     }
 //                 }
@@ -852,7 +853,7 @@ function getEmptyStay() {
 //             "summary": "Our Deluxe chalet is a studio chalet - The entire chalet is one open space (except for the bathroom of course…) The chalet has a Living space with T.V, a small basic kitchenette, indoor Jacuzzi and a bathroom with a shower and toilets. From the chalet's balcony you can look over a spectacular view of the Sea of Galilee in all its glory. The Chalet has 1 double bed and 3 sofa beds and fits best for 2 adults and 2 children. We don't recommend it for 2 couples or 5 adults.",
 //             "host": {
 //                 "_id": 124,
-//                 "fullname": "koren aharon",
+//                 "fullName": "koren aharon",
 //                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
 //             },
 //             "capacity": 5,
@@ -947,7 +948,7 @@ function getEmptyStay() {
 //                     "rate": 3.5,
 //                     "by": {
 //                         "_id": 125,
-//                         "fullname": "michael aharoni",
+//                         "fullName": "michael aharoni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 //                     }
 //                 },
@@ -957,7 +958,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 126,
-//                         "fullname": "idan gez",
+//                         "fullName": "idan gez",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
 //                     }
 //                 },
@@ -967,7 +968,7 @@ function getEmptyStay() {
 //                     "rate": 2.5,
 //                     "by": {
 //                         "_id": 127,
-//                         "fullname": "tal ekroni",
+//                         "fullName": "tal ekroni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
 //                     }
 //                 },
@@ -977,7 +978,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 126,
-//                         "fullname": "idan gez",
+//                         "fullName": "idan gez",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
 //                     }
 //                 },
@@ -987,7 +988,7 @@ function getEmptyStay() {
 //                     "rate": 4.5,
 //                     "by": {
 //                         "_id": 125,
-//                         "fullname": "michael aharoni",
+//                         "fullName": "michael aharoni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 //                     }
 //                 },
@@ -1015,7 +1016,7 @@ function getEmptyStay() {
 //             "summary": "If you would like to experience traditional Israeli country life style, our place is ideal. Our place is located in a picturesque farming village which is rich in nature near Golan Heights, Jordan River and the Manara Cliffs. You can enjoy our seasonal citrus fruits and tasty pecan nuts.",
 //             "host": {
 //                 "_id": 124,
-//                 "fullname": "koren aharon",
+//                 "fullName": "koren aharon",
 //                 "imgUrl": 'https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg',
 //             },
 //             "capacity": 7,
@@ -1097,7 +1098,7 @@ function getEmptyStay() {
 //                     "rate": 3.5,
 //                     "by": {
 //                         "_id": 125,
-//                         "fullname": "michael aharoni",
+//                         "fullName": "michael aharoni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 //                     }
 //                 },
@@ -1107,7 +1108,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 126,
-//                         "fullname": "idan gez",
+//                         "fullName": "idan gez",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
 //                     }
 //                 },
@@ -1117,7 +1118,7 @@ function getEmptyStay() {
 //                     "rate": 4.4,
 //                     "by": {
 //                         "_id": 127,
-//                         "fullname": "tal ekroni",
+//                         "fullName": "tal ekroni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642926094/T02BJ4W8H45-U02KBCD8V4N-f8aebf3e2faa-512_douxlg.png"
 //                     }
 //                 },
@@ -1127,7 +1128,7 @@ function getEmptyStay() {
 //                     "rate": 5,
 //                     "by": {
 //                         "_id": 126,
-//                         "fullname": "idan gez",
+//                         "fullName": "idan gez",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
 //                     }
 //                 },
@@ -1137,7 +1138,7 @@ function getEmptyStay() {
 //                     "rate": 4.5,
 //                     "by": {
 //                         "_id": 125,
-//                         "fullname": "michael aharoni",
+//                         "fullName": "michael aharoni",
 //                         "imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 //                     }
 //                 },

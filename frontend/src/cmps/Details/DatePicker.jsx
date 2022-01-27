@@ -45,7 +45,7 @@ export function DatePicker({ order, setOrder }) {
 						<React.Fragment>
 							<TextField className={"start-date"} {...startProps} />
 							<TextField className={"end-date"} {...endProps} />
-							<span>{removeUrl}</span>
+							{/* <span>{removeUrl}</span> */}
 						</React.Fragment>
 					)}
 				/>

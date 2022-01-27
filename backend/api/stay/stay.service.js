@@ -22,16 +22,18 @@ async function query(filterOptions = {}) {
 function _buildCriteria(params) {
     let criteria = {}
     if (params.location) {
-        criteria = {$or:[
-            {'loc.address':{ $regex: params.location, $options: 'i'}},
-            {'loc.country':{ $regex: params.location, $options: 'i'}}
-        ]}
+        criteria = {
+            $or: [
+                { 'loc.address': { $regex: params.location, $options: 'i' } },
+                { 'loc.country': { $regex: params.location, $options: 'i' } }
+            ]
+        }
     }
-    console.log(criteria,'critiria')
+    console.log(criteria, 'critiria')
     if (params.guestsCount) {
         criteria.capacity = { $gte: +params.guestsCount };
     }
-        return criteria;
+    return criteria;
 }
 
 async function getStayById(stayId) {
@@ -64,25 +66,10 @@ async function remove(stayId) {
 
 async function add(stay) {
     try {
-        const stayToAdd = {
-            byUserId: ObjectId(stay.byUserId),
-            aboutUserId: ObjectId(stay.aboutUserId),
-            txt: stay.txt,
-            name: stay.name,
-            type: stay.type,
-            imgUrls: stay.imgUrls,
-            price: stay.price,
-            summary: stay.summary,
-            capacity: stay.capacity,
-            amenities: stay.amenities,
-            host: stay.host,
-            loc: stay.loc,
-            reviews: stay.reviews,
-            likedByUsers: stay.likedByUsers
-        }
+        stay.host._id = ObjectId(stay.host._id)
         const collection = await dbService.getCollection('stay')
-        await collection.insertOne(stayToAdd)
-        return stayToAdd;
+        await collection.insertOne(stay)
+        return stay;
     } catch (err) {
         logger.error('cannot insert stay', err)
         throw err

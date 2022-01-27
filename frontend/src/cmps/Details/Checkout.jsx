@@ -23,7 +23,7 @@ export function Checkout({ stay, avg }) {
 			startDate: new Date(order.checkIn).toDateString(),
 			endDate: new Date(order.checkOut).toDateString(),
 			guests: { total: order.guestsCount, adults: order.adults, children: order.children, infants: order.infants },
-			status: "pending",
+			status: "Pending",
 		};
 		// console.log(reserved);
 		orderService.save(reserved);
@@ -79,7 +79,7 @@ export function Checkout({ stay, avg }) {
 								<div>
 									${stay.price} X {getTotalNights()} nights
 								</div>
-								<div>${getTotalNights() * stay.price}</div>
+								<div>${(getTotalNights() * stay.price).toFixed()}</div>
 							</div>
 							<div className='flex price-details'>
 								<div>Service fee</div>

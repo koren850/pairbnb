@@ -5,7 +5,7 @@
 		"rate": 5,
 		"by": {
 			"_id": 125,
-			"fullname": "michael aharoni",
+			"fullName": "michael aharoni",
 			"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 		}
 	},
@@ -15,7 +15,7 @@
 		"rate": 4,
 		"by": {
 			"_id": 126,
-			"fullname": "idan gez",
+			"fullName": "idan gez",
 			"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
 		}
 	},
@@ -25,7 +25,7 @@
 		"rate": 4.3,
 		"by": {
 			"_id": 126,
-			"fullname": "idan gez",
+			"fullName": "idan gez",
 			"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/idan_pdyaio.jpg"
 		}
 	},
@@ -35,7 +35,7 @@
 		"rate": 4.5,
 		"by": {
 			"_id": 125,
-			"fullname": "michael aharoni",
+			"fullName": "michael aharoni",
 			"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876794/michael_c38spz.jpg"
 		}
 	},
@@ -45,7 +45,7 @@
 		"rate": 4,
 		"by": {
 			"_id": 124,
-			"fullname": "koren aharon",
+			"fullName": "koren aharon",
 			"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 		}
 	},
@@ -55,7 +55,7 @@
 		"rate": 4.4,
 		"by": {
 			"_id": 124,
-			"fullname": "koren aharon",
+			"fullName": "koren aharon",
 			"imgUrl": "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642876792/koren_xp3iwz.jpg"
 		}
 	},
