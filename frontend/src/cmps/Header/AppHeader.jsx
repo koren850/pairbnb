@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import { socketService } from "../../services/socket.service";
 import { userService } from "../../services/user.service";
 import { toggleDetailsLayout, toggleHeaderIsTop, toggleHeaderIsActive, toggleIsExplore } from "../../store/header.action";
 
@@ -78,6 +79,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 	}
 
 	useEffect(() => {
+
 		if (!location.pathname || location.pathname === "/") {
 			toggleHeaderIsActive(false);
 			toggleHeaderIsTop(false);
