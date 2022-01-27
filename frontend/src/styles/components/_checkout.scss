@@ -316,3 +316,26 @@
 	height: 12px;
 	width: 12px;
 }
+
+@media screen and (max-width: 1300px) {
+	.special-btn .order-container {
+		margin-inline-start: 50px;
+		margin-inline-end: 20px;
+	}
+}
+
+@media screen and (max-width: 930px) {
+	.special-btn .order-container {
+		width: 250px;
+	}
+	.order-data .date-picker {
+	}
+}
+
+@media screen and (max-width: 780px) {
+	.special-btn .order-container {
+		width: 100%;
+		margin: 0;
+		margin-bottom: 30px;
+	}
+}

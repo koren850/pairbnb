@@ -164,7 +164,7 @@ input[type="text"]:focus {
     right: 2.5%;
     & img {
       width: 20%;
-      transform: translate(-4%, 0%) rotate(-15deg);
+      transform: translate(0.5px, 2px) rotate(-15deg);
     }
   }
 }
@@ -205,9 +205,10 @@ input[type="text"]:focus {
   .bar {
     margin-block-start: 15px;
     &.active-search-bar .special-btn img {
-      width: 20px;
+      width: 25px;
     }
     .bar div.original.active {
+      margin-left: 15px;
       background-color: $clr3;
     }
     margin-right: 50px;
@@ -239,7 +240,7 @@ input[type="text"]:focus {
     }
     & .special-btn {
       position: fixed;
-      right: 1.5%;
+      right: 2.5%;
       bottom: 50%;
     }
     & .guests.original {
@@ -248,6 +249,9 @@ input[type="text"]:focus {
     & .location-describtion {
       display: none;
     }
+  }
+  .location-txt {
+    visibility: hidden;
   }
 }
 

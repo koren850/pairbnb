@@ -28,3 +28,16 @@
     color: #717171;
 }
 
+@media screen and (max-width:680px) {
+.place-type-filter{
+ left: 0;
+}
+}
+
+@media screen and (max-width:475px) {
+.place-type-filter{
+    position: fixed;
+ left: 5%;
+ top: 18%;
+}
+}

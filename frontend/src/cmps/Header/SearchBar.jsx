@@ -71,7 +71,7 @@ function _SearchBar({ someActive, turnOffSome, setSomeActive, isScreenOpen, setI
 		<div className={"bar original " + ((someActive || (!isTop && isMobileWidth)) && "active-search-bar")}>
 			{isScreenOpen && (someActive === "check-in" || someActive === "check-out") && <SearchBarDatePicker ChooseDates={ChooseDates} />}
 			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + ((someActive === "location" && !isMobileWidth) ? "active" : "")}>
-				<p>Location</p>
+				<p className="location-txt">Location</p>
 				<SearchBarFilterInput
 					// searchParams={searchParams}
 					someActive={someActive}

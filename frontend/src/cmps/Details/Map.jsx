@@ -8,7 +8,7 @@ import ApiKeys from "../../api-key.json";
 import home from "../../styles/svg/home.svg";
 
 const containerStyle = {
-	width: "1120px",
+	width: "100%",
 	height: "400px",
 };
 export function Map({ lat, lng, name, country, address }) {

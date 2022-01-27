@@ -8,7 +8,7 @@ import DateRangePicker from "@mui/lab/DateRangePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import remove from "../../styles/svg/delete-date.svg";
-
+const mode = window.innerWidth < 780 ? 1 : 2;
 const theme = createTheme({
 	palette: {
 		primary: {
@@ -33,6 +33,7 @@ export function DatePicker({ order, setOrder }) {
 			<LocalizationProvider dateAdapter={AdapterDateFns}>
 				<DateRangePicker
 					disablePast
+					calendars={mode}
 					value={[order.checkIn, order.checkOut]}
 					maxDate={getWeeksAfter(order.checkIn, 8)}
 					onChange={(newValue) => {
@@ -44,7 +45,7 @@ export function DatePicker({ order, setOrder }) {
 						<React.Fragment>
 							<TextField className={"start-date"} {...startProps} />
 							<TextField className={"end-date"} {...endProps} />
-							{/* <span>{removeUrl}</span> */}
+							<span>{removeUrl}</span>
 						</React.Fragment>
 					)}
 				/>

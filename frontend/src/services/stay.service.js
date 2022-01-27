@@ -112,7 +112,9 @@ function save(stay) {
     let { _id, fullName, imgUrl } = currHost
     let host = { _id, fullName, imgUrl }
     newStay.host = host
-    console.log(newStay)
+    newStay.imgUrls = stay.stayImgs
+    // await httpService.post('stay', newStay)
+
 }
 
 function getAmenities(stayAmenities) {
@@ -333,11 +335,11 @@ function getEmptyStay() {
         }
         ],
         "loc": {
-            "country": "New-York",
-            "countryCode": "NY",
-            "address": "Porto, Portugal",
-            "lat": 40.73061,
-            "lng": -73.935242
+            "country": "Israel",
+            "countryCode": "Il",
+            "address": "",
+            "lat": 31.010815229959928,
+            "lng": 34.908554101114625
         },
         "reviews": [],
         "likedByUsers": []
