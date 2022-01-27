@@ -88,7 +88,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 						<div className='host-info flex'>
 							<div>
 								<h2>
-									{stay.type} hosted by <span className='host-name'>{stay.host.fullname}</span>
+									{stay.type} hosted by <span className='host-name'>{stay.host.fullName}</span>
 								</h2>
 								<ul className='stay-baths-beds flex'>
 									<div>{stay.capacity} guests</div>
