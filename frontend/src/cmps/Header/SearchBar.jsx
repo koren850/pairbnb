@@ -52,7 +52,7 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 		if (searchBarTabs !== "guests") ev.stopPropagation();
 		const searchKeys = Object.keys(searchParams);
 		let params = "/explore/";
-		console.log(searchParams);
+		searchParams.location = searchParams.location.charAt(0).toUpperCase() + searchParams.location.slice(1);
 		searchKeys.forEach((key) => (params += `${key}=${searchParams[key]}&`));
 		history.push(params.slice(0, -1));
 	}
