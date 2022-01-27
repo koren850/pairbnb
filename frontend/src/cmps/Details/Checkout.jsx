@@ -24,7 +24,6 @@ export function Checkout({ stay, avg }) {
 			guests: { total: order.guestsCount, adults: order.adults, children: order.children, infants: order.infants },
 			status: "Pending",
 		};
-		// console.log(reserved);
 		orderService.save(reserved);
 	}
 
