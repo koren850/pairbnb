@@ -97,23 +97,24 @@ async function remove(stayId) {
     // return storageService.remove(STORAGE_KEY, stayId)
 }
 
-function save(stay) {
+async function save(stay) {
     let newStay = getEmptyStay()
     newStay.name = stay.stayName
     newStay.type = stay.placeType
     newStay["type of place"] = stay.spaceType
-    newStay.price = stay.stayPrice
-    newStay.capacity = stay.stayCapacity
+    newStay.price = +stay.stayPrice
+    newStay.capacity = +stay.stayCapacity
     newStay.summary = stay.stayDescription
     newStay.loc.address = stay.stayAdress
     let amenities = getAmenities(stay.stayAmenities)
     newStay.amenities = amenities
     let currHost = userService.getLoggedinUser()
-    let { _id, fullName, imgUrl } = currHost
-    let host = { _id, fullName, imgUrl }
+    let { _id, fullname, imgUrl } = currHost
+    let host = { _id, fullname, imgUrl }
     newStay.host = host
     newStay.imgUrls = stay.stayImgs
-    // await httpService.post('stay', newStay)
+    const addedStay = await httpService.post('stay', newStay)
+    console.log('stay added', addedStay);
 
 }
 
@@ -336,7 +337,7 @@ function getEmptyStay() {
         ],
         "loc": {
             "country": "Israel",
-            "countryCode": "Il",
+            "countryCode": "IL",
             "address": "",
             "lat": 31.010815229959928,
             "lng": 34.908554101114625

@@ -40,7 +40,7 @@ export function Table() {
 			pendingButtons = (
 				<div style={{ display: "flex", gap: "10px" }}>
 					<button style={{ padding: "8px", color: "green" }} onClick={() => setCurrOrderClick({ order, idx, status: "Approved" })}>
-						Approved
+						Approve
 					</button>
 					<button style={{ padding: "8px", color: "red" }} onClick={() => setCurrOrderClick({ order, idx, status: "Declined" })}>
 						Decline
@@ -91,8 +91,7 @@ export function Table() {
 	function getTotalEarning(orders) {
 		let price = 0;
 		const approved = orders.filter((order) => order[5] === "Approved");
-
-		let prices = approved.forEach((order) => {
+		approved.forEach((order) => {
 			let currPrice = order[4].replace("$", "");
 			price += +currPrice;
 		});
@@ -129,17 +128,17 @@ export function Table() {
 				<div className='orders-types flex'>
 					<div>Orders:</div>
 					<span>
-						{getOrderTypes(myOrders, "approved")}
+						{getOrderTypes(myOrders, "Approved")}
 						<div style={{ backgroundColor: "#9df89d" }} className='orders-ball'></div>
 						(Approved)
 					</span>
 					<span>
-						{getOrderTypes(myOrders, "pending")}
+						{getOrderTypes(myOrders, "Pending")}
 						<div style={{ backgroundColor: "#faf87b" }} className='orders-ball'></div>
 						(Pending)
 					</span>
 					<span>
-						{getOrderTypes(myOrders, "declined")}
+						{getOrderTypes(myOrders, "Declined")}
 						<div style={{ backgroundColor: "#fa7b7b" }} className='orders-ball'></div>
 						(Declined)
 					</span>

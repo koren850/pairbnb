@@ -38,8 +38,7 @@ async function getById(req, res) {
 async function addStay(req, res) {
     try {
         var stay = req.body
-        console.log(stay)
-        stay.byUserId = req.session.user._id
+        // stay.byUserId = req.session.user._id
         stay = await stayService.add(stay)
         // prepare the updated stay for sending out
         // stay.aboutUser = await userService.getById(stay.aboutUserId)
@@ -50,11 +49,11 @@ async function addStay(req, res) {
         // stay.byUser = user
         // const fullUser = await userService.getById(user._id)
 
-        console.log('CTRL SessionId:', req.sessionID);
+        // console.log('CTRL SessionId:', req.sessionID);
         // socketService.broadcast({type: 'stay-added', data: stay, userId: stay.byUserId})
         // socketService.emitToUser({type: 'stay-about-you', data: stay, userId: stay.aboutUserId})
         // socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
-
+        console.log(stay);
         res.send(stay)
 
     } catch (err) {
