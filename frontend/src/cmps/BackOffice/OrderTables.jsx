@@ -82,8 +82,27 @@ export function Table() {
 	}
 
 	function getPendingOrders(orders) {
+		console.log(orders);
 		const pending = orders.filter((order) => order[5] === "pending");
 		return pending.length;
+	}
+	function getTotalEarning(orders) {
+		let price = 0;
+		const approved = orders.filter((order) => order[5] === "approved");
+
+		let prices = approved.forEach((order) => {
+			let currPrice = order[4].replace("$", "");
+			price += +currPrice;
+		});
+		return price.toFixed(1);
+		// return .length;
+	}
+	function getOrderTypes(orders, type) {
+		let ammount = 0;
+		orders.forEach((order) => {
+			if (order[5] === type) ammount++;
+		});
+		return `${ammount}/${orders.length}`;
 	}
 
 	let theme = createTheme();
@@ -98,9 +117,41 @@ export function Table() {
 	};
 
 	if (!myOrders) return <Loader />;
+
+	const tableHeader = (
+		<div className='table-header'>
+			<h2>
+				Hi {loggedinUser.fullName}, your have {getPendingOrders(myOrders)} pending orders
+			</h2>
+			<div>
+				<div>
+					<span>Earning: ${getTotalEarning(myOrders)}</span>
+				</div>
+				<div className='orders-types flex'>
+					<div>Orders:</div>
+					<span>
+						{getOrderTypes(myOrders, "approved")}
+						<div style={{ backgroundColor: "#9df89d" }} className='orders-ball'></div>
+						(Approved)
+					</span>
+					<span>
+						{getOrderTypes(myOrders, "pending")}
+						<div style={{ backgroundColor: "#faf87b" }} className='orders-ball'></div>
+						(Pending)
+					</span>
+					<span>
+						{getOrderTypes(myOrders, "declined")}
+						<div style={{ backgroundColor: "#fa7b7b" }} className='orders-ball'></div>
+						(Declined)
+					</span>
+				</div>
+			</div>
+		</div>
+	);
+
 	return (
 		<ThemeProvider theme={theme}>
-			<MUIDataTable title={`Hi ${loggedinUser.fullName}, your have ${getPendingOrders(myOrders)} pending offers:`} data={myOrders} columns={columns} options={options} />
+			<MUIDataTable title={tableHeader} data={myOrders} columns={columns} options={options} />
 		</ThemeProvider>
 	);
 }
