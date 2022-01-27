@@ -11,6 +11,18 @@ import Box from '@mui/material/Box';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#FF385C",
+        },
+        secondary: {
+            main: "#FF385C",
+        },
+    },
+});
 
 const amenities = [
     'Shampoo',
@@ -52,27 +64,7 @@ const amenities = [
     'Dishes and silverware"',
     'Dishwasher',
 ]
-function uploadImg(ev) {
-    const CLOUD_NAME = 'dqj9g5gso'
-    const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
 
-    const formData = new FormData();
-    formData.append('file', ev.target.files[0])
-    formData.append('upload_preset', 'xj6rycmx');
-
-    return fetch(UPLOAD_URL, {
-        method: 'POST',
-        body: formData
-    })
-        .then(res => res.json())
-        .then(res => {
-            const elImg = document.createElement('img');
-            console.log(res.url)
-            elImg.src = res.url;
-            document.body.append(elImg);
-        })
-        .catch(err => console.error(err))
-}
 export function AddStay() {
     const [stayName, setStayName] = React.useState('');
     const [stayAdress, setStayAdress] = React.useState('');
@@ -82,6 +74,33 @@ export function AddStay() {
     const [spaceType, setSpaceType] = React.useState('');
     const [stayDescription, setStayDescription] = React.useState('');
     const [stayAmenities, setStayAmenities] = React.useState([]);
+    const [stayImgs, setStayImgs] = React.useState([null, null, null, null, null]);
+
+    function uploadImg(ev, idx) {
+        const CLOUD_NAME = 'dqj9g5gso'
+        const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+
+        const formData = new FormData();
+        formData.append('file', ev.target.files[0])
+        formData.append('upload_preset', 'xj6rycmx');
+
+        return fetch(UPLOAD_URL, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(res => {
+                // const elImg = document.createElement('img');
+                // console.log(res.url)
+                // elImg.src = res.url;
+                // document.body.append(elImg);
+                const newUrls = stayImgs
+                newUrls[idx] = res.url
+                setStayImgs([...newUrls])
+                console.log(stayImgs)
+            })
+            .catch(err => console.error(err))
+    }
 
     const handleChangeName = (event) => {
         setStayName(event.target.value);
@@ -120,146 +139,150 @@ export function AddStay() {
     }
 
     function addStay() {
-        let stay = { stayName, stayAdress, stayCapacity, stayPrice, placeType, spaceType, stayDescription, stayAmenities }
+        let stay = { stayName, stayAdress, stayCapacity, stayPrice, placeType, spaceType, stayDescription, stayAmenities, stayImgs }
         stayService.save(stay)
     }
 
 
     return (
-        <div className='add-stay-container main-layout'>
-            <div className='stay-primary-details'>
-                <div className='add-input-box'>
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Required"
-                        defaultValue="Name"
-                        onChange={handleChangeName}
-                        name="name"
-                        label="Name"
-                    />
+        <ThemeProvider theme={theme}>
+            <div className='add-stay-container main-layout'>
+                <div className='stay-primary-details'>
+                    <div className='add-input-box'>
+                        <TextField
+                            required
+                            id="outlined-required"
+                            label="Required"
+                            defaultValue="Name"
+                            onChange={handleChangeName}
+                            name="name"
+                            label="Name"
+                        />
+                    </div>
+                    <div className='add-input-box'>
+                        <TextField
+                            className="add-input-box"
+                            required
+                            id="outlined-required"
+                            label="Required"
+                            defaultValue="Adress"
+                            onChange={handleChangeAdress}
+                            name="adress"
+                            label="Adress"
+                        />
+                    </div>
+                    <div className='add-input-number'>
+                        <TextField
+                            id="outlined-number"
+                            label=""
+                            type="number"
+                            required
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={handleChangePrice}
+                            name="price"
+                            label="Price $/night"
+                            defaultValue="0"
+
+                        />
+                    </div>
+                    <div className='add-input-number'>
+                        <TextField
+                            id="outlined-number"
+                            label=""
+                            type="number"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            onChange={handleChangeCapacity}
+                            name="capacity"
+                            label="Capacity"
+                            defaultValue="1"
+                        />
+
+                    </div>
+                    <div className="add-input-dropdown">
+                        <Box >
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Place Type</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={placeType}
+                                    label="Place-Type"
+                                    name="place-type"
+                                    onChange={handleChangePlaceType}
+                                >
+                                    <MenuItem value={'Duplex'}>Duplex</MenuItem>
+                                    <MenuItem value={'Villa'}>Villa</MenuItem>
+                                    <MenuItem value={'Loft'}>Loft</MenuItem>
+                                    <MenuItem value={'Cabin'}>Cabin</MenuItem>
+                                    <MenuItem value={'Home'}>Home</MenuItem>
+                                    <MenuItem value={'Hotel'}>Hotel room</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </div>
+                    <div className="add-input-dropdown">
+                        <Box style={{ color: "#FF385C" }}
+                        >
+                            <FormControl
+                                fullWidth>
+                                <InputLabel
+                                    id="demo-simple-select-label">Space Type</InputLabel>
+
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={spaceType}
+                                    label="Space-Type"
+                                    name="space-type"
+                                    onChange={handleChangeSpaceType}
+                                >
+                                    <MenuItem value={'Entire Place'}>Entire place</MenuItem>
+                                    <MenuItem value={'Hotel Room'}>Hotel room</MenuItem>
+                                    <MenuItem value={'Private Room'}>Private room</MenuItem>
+                                    <MenuItem value={'Shared Room'}>Shared room</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+                    </div>
+
                 </div>
-                <div className='add-input-box'>
-                    <TextField
-                        className="add-input-box"
-                        required
-                        id="outlined-required"
-                        label="Required"
-                        defaultValue="Adress"
-                        onChange={handleChangeAdress}
-                        name="adress"
-                        label="Adress"
-                    />
+
+                <TextField sx={{ minWidth: 620 }}
+                    id="outlined-multiline-static"
+                    label="Describe your asset"
+                    multiline
+                    rows={4}
+                    defaultValue="Describe your asset..."
+                    onChange={handleChangeDescription}
+                    name="description"
+                />
+
+                <div className="add-images-container">
+                    <img />
+                    <div className="image-upload image1">{stayImgs[0] ? <img src={stayImgs[0]} /> : <div className="file-upload"><label>Upload image</label><input placeholder="Upload image" className="file-upload" onChange={(ev) => uploadImg(ev, 0)} type="file" /></div >}</div>
+                    <div className="image-upload image2">{stayImgs[1] ? <img src={stayImgs[1]} /> : <div className="file-upload"><label>Upload image</label><input placeholder="Upload image" className="file-upload" onChange={(ev) => uploadImg(ev, 1)} type="file" /></div >}</div>
+                    <div className="image-upload image3">{stayImgs[2] ? <img src={stayImgs[2]} /> : <div className="file-upload"><label>Upload image</label><input placeholder="Upload image" className="file-upload" onChange={(ev) => uploadImg(ev, 2)} type="file" /></div >}</div>
+                    <div className="image-upload image4">{stayImgs[3] ? <img src={stayImgs[3]} /> : <div className="file-upload"><label>Upload image</label><input placeholder="Upload image" className="file-upload" onChange={(ev) => uploadImg(ev, 3)} type="file" /></div >}</div>
+                    <div className="image-upload image5">{stayImgs[4] ? <img src={stayImgs[4]} /> : <div className="file-upload"><label>Upload image</label><input placeholder="Upload image" className="file-upload" onChange={(ev) => uploadImg(ev, 4)} type="file" /></div >}</div>
                 </div>
-                <div className='add-input-number'>
-                    <TextField
-                        id="outlined-number"
-                        label=""
-                        type="number"
-                        required
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        onChange={handleChangePrice}
-                        name="price"
-                        label="Price $/night"
-                        defaultValue="0"
+                    <label>Chose your assets amenities</label>
+                <div className="amenities-container">
+                    <FormGroup className="amenities-list">
 
-                    />
+                        {amenities.map((amenity, idx) => {
+                            return <FormControlLabel key={idx} control={<Checkbox style={{ color: "#FF385C" }} />} label={amenity} name={amenity} onChange={handleChangeAmenities} />
+
+                        })}
+
+                    </FormGroup>
                 </div>
-                <div className='add-input-number'>
-                    <TextField
-                        id="outlined-number"
-                        label=""
-                        type="number"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        onChange={handleChangeCapacity}
-                        name="capacity"
-                        label="Capacity"
-                        defaultValue="1"
-                    />
-                </div>
-                <div className="add-input-dropdown">
-                    <Box >
-                        {/* <label>Type of place</label> */}
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Place Type</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={placeType}
-                                label="Place-Type"
-                                name="place-type"
-                                onChange={handleChangePlaceType}
-                            >
-                                <MenuItem value={'Duplex'}>Duplex</MenuItem>
-                                <MenuItem value={'Villa'}>Villa</MenuItem>
-                                <MenuItem value={'Loft'}>Loft</MenuItem>
-                                <MenuItem value={'Cabin'}>Cabin</MenuItem>
-                                <MenuItem value={'Home'}>Home</MenuItem>
-                                <MenuItem value={'Hotel'}>Hotel room</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Box>
-                </div>
-                <div className="add-input-dropdown">
-                    <Box >
-                        {/* <label>Place space type</label> */}
-                        <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Space Type</InputLabel>
+                <button onClick={addStay}>Add Stay</button>
+            </div >
+        </ThemeProvider>
 
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={spaceType}
-                                label="Space-Type"
-                                name="space-type"
-                                onChange={handleChangeSpaceType}
-                            >
-                                <MenuItem value={'Entire Place'}>Entire place</MenuItem>
-                                <MenuItem value={'Hotel Room'}>Hotel room</MenuItem>
-                                <MenuItem value={'Private Room'}>Private room</MenuItem>
-                                <MenuItem value={'Shared Room'}>Shared room</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Box>
-                </div>
-
-            </div>
-
-            {/* <label>Describe your asset</label> */}
-            <TextField sx={{ minWidth: 620 }}
-                id="outlined-multiline-static"
-                label="Describe your asset"
-                multiline
-                rows={4}
-                defaultValue="Describe your asset..."
-                onChange={handleChangeDescription}
-                name="description"
-            />
-
-            <div className="add-images-container">
-                {/* <input type="file"/>  */}
-                <button className="image-upload image1">Upload image <input className="file-upload" onChange={(ev) => uploadImg(ev)} type="file" /></button>
-                <button className="image-upload image2">Upload image <input className="file-upload" onChange={(ev) => uploadImg(ev)} type="file" /></button>
-                <button className="image-upload image3">Upload image <input className="file-upload" onChange={(ev) => uploadImg(ev)} type="file" /></button>
-                <button className="image-upload image4">Upload image <input className="file-upload" onChange={(ev) => uploadImg(ev)} type="file" /></button>
-                <button className="image-upload image5">Upload image <input className="file-upload" onChange={(ev) => uploadImg(ev)} type="file" /></button>
-
-
-            </div>
-            <label>Chose your assets amenities</label>
-            <FormGroup className="amenities-container">
-
-                {amenities.map((amenity, idx) => {
-                    return <FormControlLabel key={idx} control={<Checkbox />} label={amenity} name={amenity} onChange={handleChangeAmenities} />
-
-                })}
-
-            </FormGroup>
-            <button onClick={addStay}>Add Stay</button>
-        </div >
     );
 }
