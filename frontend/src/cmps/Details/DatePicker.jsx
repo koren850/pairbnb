@@ -8,7 +8,7 @@ import DateRangePicker from "@mui/lab/DateRangePicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import remove from "../../styles/svg/delete-date.svg";
-
+const mode = window.innerWidth < 780 ? 1 : 2;
 const theme = createTheme({
 	palette: {
 		primary: {
@@ -30,25 +30,26 @@ export function DatePicker({ order, setOrder }) {
 	}
 	return (
 		<ThemeProvider theme={theme}>
-			<LocalizationProvider dateAdapter={AdapterDateFns}>
-				<DateRangePicker
-					disablePast
-					value={[order.checkIn, order.checkOut]}
-					maxDate={getWeeksAfter(order.checkIn, 8)}
-					onChange={(newValue) => {
-						setOrder({ ...order, checkIn: newValue[0], checkOut: newValue[1] });
-					}}
-					startText='Check-in'
-					endText='Check-out'
-					renderInput={(startProps, endProps) => (
-						<React.Fragment>
-							<TextField className={"start-date"} {...startProps} />
-							<TextField className={"end-date"} {...endProps} />
-							<span>{removeUrl}</span>
-						</React.Fragment>
-					)}
-				/>
-			</LocalizationProvider>
-		</ThemeProvider>
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
+					<DateRangePicker
+						disablePast
+						calendars={mode}
+						value={[order.checkIn, order.checkOut]}
+						maxDate={getWeeksAfter(order.checkIn, 8)}
+						onChange={(newValue) => {
+							setOrder({ ...order, checkIn: newValue[0], checkOut: newValue[1] });
+						}}
+						startText='Check-in'
+						endText='Check-out'
+						renderInput={(startProps, endProps) => (
+							<React.Fragment>
+								<TextField className={"start-date"} {...startProps} />
+								<TextField className={"end-date"} {...endProps} />
+								<span>{removeUrl}</span>
+							</React.Fragment>
+						)}
+					/>
+				</LocalizationProvider>
+			</ThemeProvider>
 	);
 }

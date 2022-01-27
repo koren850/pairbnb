@@ -134,9 +134,10 @@
 }
 
 @media screen and (max-width:780px) {
-	.user-menu,.logo {
+	.short-search-bar .search,.nav-link,.user-menu,.logo {
 		display: none;
 	}
+
 	.app-header {
 		height: 100px;
 	}

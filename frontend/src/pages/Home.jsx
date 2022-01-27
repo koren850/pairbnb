@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import jerusalemImg from "../styles/img/jerusalem.jpg";
 import dubaiImg from "../styles/img/dubai.jpg";
 import vegasImg from "../styles/img/vegas.jpeg";
@@ -11,9 +11,7 @@ import { setParams } from "../store/stay.action";
 
 export function Home() {
 	const dispatch = useDispatch();
-	const startFocusCity = useRef();
-	const [restart, setRestart] = useState(false);
-
+	
 	const heroUrl = "https://res.cloudinary.com/dqj9g5gso/image/upload/v1642610299/imgs/HD_wallpaper__brown_wooden_dock_and_cottages_Maldives_resort_artificial_lights_zxkna8.jpg";
 
 	useEffect(() => {
@@ -31,15 +29,12 @@ export function Home() {
 		dispatch(toggleIsExplore(false));
 		dispatch(toggleHeaderIsActive(true));
 		dispatch(toggleHeaderIsTop(true));
-		(startFocusCity) ? setRestart(true) : startFocusCity.current.scrollIntoView();
 		return () => {
 			dispatch(toggleIsExplore(true));
 			dispatch(toggleHeaderIsActive(false));
 			dispatch(toggleHeaderIsTop(false));
 		};
-	}, [restart]);
-	console.log(startFocusCity)
-	// startFocusCity.current.scrollIntoView();
+	}, []);
 	return (
 		<main className='home main-layout'>
 			<div className='middle-layout'></div>
@@ -61,7 +56,7 @@ export function Home() {
 					</article>
 				</Link>
 				<Link to={`/explore/location=jerusalem`}>
-					<article ref={startFocusCity} className='city-container'>
+					<article className='city-container'>
 						<img src={jerusalemImg} alt='City Img' />
 						<h1>Jerusalem</h1>
 					</article>
