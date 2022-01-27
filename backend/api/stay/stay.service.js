@@ -22,10 +22,12 @@ async function query(filterOptions = {}) {
 function _buildCriteria(params) {
     let criteria = {}
     if (params.location) {
+        const regex = new RegExp( params.location, 'i')
         criteria = {
             $or: [
-                { 'loc.address': { $regex: params.location, $options: 'i' } },
-                { 'loc.country': { $regex: params.location, $options: 'i' } }
+                { 'loc.address': { $regex: regex} },
+                { 'loc.country': { $regex: regex} },
+                { 'name': { $regex: regex} }
             ]
         }
     }

@@ -34,6 +34,7 @@ export function SearchBarDatePicker({ChooseDates}) {
                         <StaticDateRangePicker
                             displayStaticWrapperAs="desktop"
                             value={value}
+                            disableCloseOnSelect={true}
                             onChange={(newValue) => {
                                 setValue(newValue);
                             }}

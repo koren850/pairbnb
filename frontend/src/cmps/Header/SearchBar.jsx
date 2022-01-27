@@ -30,7 +30,7 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 		};
 	}, []);
 
-	function updateSomeActive(elName, ev) {
+	function updateHeaderActiveTab(elName, ev) {
 		ev.stopPropagation();
 		ev.preventDefault();
 		if (elName === "location" && searchBarTabs !== elName) {
@@ -70,7 +70,7 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 	return (
 		<div className={"bar original " + ((searchBarTabs || (!isTop && isMobileWidth)) && "active-search-bar")}>
 			{isScreenOpen && (searchBarTabs === "check-in" || searchBarTabs === "check-out") && <SearchBarDatePicker ChooseDates={ChooseDates} />}
-			<div onClick={(ev) => updateSomeActive("location", ev)} className={"location original " + (searchBarTabs === "location" && !isMobileWidth ? "active" : "")}>
+			<div onClick={(ev) => updateHeaderActiveTab("location", ev)} className={"location original " + (searchBarTabs === "location" && !isMobileWidth ? "active" : "")}>
 				<p className='location-txt'>Location</p>
 				<SearchBarFilterInput
 					// searchParams={searchParams}
@@ -84,17 +84,17 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 				/>
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("check-in", ev)} className={"check-in original " + (searchBarTabs === "check-in" ? "active" : "")}>
+			<div onClick={(ev) => updateHeaderActiveTab("check-in", ev)} className={"check-in original " + (searchBarTabs === "check-in" ? "active" : "")}>
 				<p>Check in</p>
 				<input className='bar-input' readOnly type='text' placeholder={searchParams.checkIn ? searchParams.checkIn : "Add dates"} />
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("check-out", ev)} className={"check-out original " + (searchBarTabs === "check-out" ? "active" : "")}>
+			<div onClick={(ev) => updateHeaderActiveTab("check-out", ev)} className={"check-out original " + (searchBarTabs === "check-out" ? "active" : "")}>
 				<p>Check out</p>
 				<input className='bar-input' readOnly type='text' placeholder={searchParams.checkOut ? searchParams.checkOut : "Add dates"} />
 			</div>
 			<hr />
-			<div onClick={(ev) => updateSomeActive("guests", ev)} className={"guests original " + ((searchBarTabs && !isMobileWidth) === "guests" ? "active" : "")}>
+			<div onClick={(ev) => updateHeaderActiveTab("guests", ev)} className={"guests original " + ((searchBarTabs && !isMobileWidth) === "guests" ? "active" : "")}>
 				<p>Guests</p>
 				{searchBarTabs === "guests" && (
 					<div className='header-guests'>
