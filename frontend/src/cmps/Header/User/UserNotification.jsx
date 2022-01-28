@@ -11,14 +11,11 @@ export function UserNotification() {
     const notificationsAmount = user.notifications?.length;
     
  const handleNewNotification = async (id) => {
-     console.log(0)
         const currUser = await userService.getById(id);
         const updatedNotifications = currUser.notifications;
         updatedNotifications.push('You got new notification');
         const updatedUser = {...currUser, notifications:updatedNotifications};
-        console.log(1)
         await userService.update(updatedUser);
-        console.log(2)
         userService.setLoggedinUser(updatedUser);
         disptach(updateUserNotifications(updatedNotifications))
     }
