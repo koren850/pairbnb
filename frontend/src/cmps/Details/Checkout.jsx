@@ -42,7 +42,7 @@ export function Checkout({ stay, avg }) {
 			guests: { total: order.guestsCount, adults: order.adults, children: order.children, infants: order.infants },
 			status: "Pending",
 		};
-		await orderService.save(reserved);
+		// await orderService.save(reserved);
 		socketService.emit("new-order", stay.host._id);
 	}
 

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userService } from "../../../services/user.service";
 import { socketService } from "../../../services/socket.service";
 import { updateUserNotifications } from "../../../store/user.action";
+import { openMsg } from "../../../store/msg.action";
 
 export function UserNotification() {
 	const disptach = useDispatch();
@@ -17,6 +18,7 @@ export function UserNotification() {
 		await userService.update(updatedUser);
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedNotifications));
+        disptach(openMsg({type: 'SET_MSG', msg: { txt: 'You got new notification', type: 'bnb' } }))
 	};
 
 	async function handleOrderResponse(response) {
@@ -29,6 +31,7 @@ export function UserNotification() {
 		await userService.update(updatedUser);
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedNotifications));
+        disptach(openMsg({type: 'SET_MSG', msg: { txt: 'You got new notification', type: 'bnb' } }))
 	}
 	async function removeNotification(id) {
 		console.log("got here");
