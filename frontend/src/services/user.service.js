@@ -16,7 +16,8 @@ export const userService = {
     setLoggedinUser,
     getUsers,
     getById,
-    update
+    update,
+    updateNotification
 }
 
 function getUsers() {
@@ -38,6 +39,12 @@ function remove(userId) {
 
 async function update(user) {
     user = await httpService.put(`user`, user)
+    return user;
+    // if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
+}
+async function updateNotification(id, notification) {
+    console.log("got dudu");
+    const user = await httpService.put(`user/notification`, { id, notification })
     return user;
     // if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
 }
@@ -76,8 +83,7 @@ async function signup(userCred) {
         }
         else if (!emailRegex.test(userCred?.email)) return reject({ reason: 'Invalid email pattern : ' + userCred.email, unsolved: 'email' });
         else if (!userCred.isSocial && userCred.password?.length < 5) return reject({ reason: 'password should have at list 6 digits / letters', unsolved: 'password' });
-        userCred.likedStays = [];
-        userCred.notifications = [];
+
         _saveLocalUser(userCred);
         const user = await httpService.post('auth/signup', userCred)
         _saveLocalUser(user)

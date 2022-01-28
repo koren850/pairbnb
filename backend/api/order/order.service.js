@@ -32,6 +32,13 @@ async function query() {
             }
         ]).toArray()
         console.log(orders.length)
+        orders = orders.sort((a, b) => {
+            const aId = a._id
+            const bId = b._id
+            if (aId < bId) return 1
+            else if (aId > bId) return -1
+            else return 0
+        })
         orders = orders.map(order => {
             order.buyer = { _id: order.buyer._id, fullName: order.buyer.fullName };
             order.stay = { _id: order.stay._id, price: order.stay.price, name: order.stay.name }
@@ -49,7 +56,6 @@ async function query() {
 
 async function update(order) {
     try {
-        console.log(order);
         order._id = ObjectId(order._id)
         order.hostId = ObjectId(order.hostId)
         order.stayId = ObjectId(order.stay._id)
@@ -57,6 +63,7 @@ async function update(order) {
         delete order.buyer
         delete order.stay
         const collection = await dbService.getCollection('order')
+
         await collection.updateOne({ _id: order._id }, { $set: order })
         return order;
     } catch (err) {
