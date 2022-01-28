@@ -42,8 +42,10 @@ export function UserNotification() {
 	}
 
 	useEffect(() => {
-		console.log(user.notifications);
 		socketService.setup();
+		const loggedUser = userService.getLoggedinUser();
+		console.log(loggedUser);
+		if (loggedUser) socketService.emit("join-room", loggedUser._id);
 		socketService.on("recive-new-order", handleNewNotification);
 		socketService.on("order-response", handleOrderResponse);
 		socketService.on("remove-notifications", removeNotification);
