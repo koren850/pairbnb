@@ -77,6 +77,7 @@ async function signup(userCred) {
         else if (!emailRegex.test(userCred?.email)) return reject({ reason: 'Invalid email pattern : ' + userCred.email, unsolved: 'email' });
         else if (!userCred.isSocial && userCred.password?.length < 5) return reject({ reason: 'password should have at list 6 digits / letters', unsolved: 'password' });
         userCred.likedStays = [];
+        userCred.notifications = [];
         _saveLocalUser(userCred);
         const user = await httpService.post('auth/signup', userCred)
         _saveLocalUser(user)

@@ -40,7 +40,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 		stayToAvg.reviews.forEach((review) => (ammount += review.rate));
 		const divider = stayToAvg.reviews.length;
 		let calcAvg = (ammount / divider).toFixed(2);
-		if ((calcAvg * 100) % 10 == 0) return setAvg(calcAvg);
+		if ((calcAvg * 100) % 10 === 0) return setAvg(calcAvg);
 		if (isNaN(calcAvg)) calcAvg = "";
 		setAvg(calcAvg);
 	}
