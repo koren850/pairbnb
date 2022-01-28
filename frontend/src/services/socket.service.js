@@ -14,9 +14,9 @@ window.socketService = socketService
 
 // var socketIsReady = false;
 
-var socket = null;
 
 function createSocketService() {
+  var socket = null;
   const socketService = {
     setup() {
       socket = io(baseUrl)

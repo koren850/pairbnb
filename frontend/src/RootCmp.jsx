@@ -14,12 +14,15 @@ import { AppFooter } from "./cmps/General/AppFooter";
 import { UserMsg } from "./cmps/General/UserMsg";
 
 export function RootCmp() {
-	useEffect(() => {
-		socketService.setup();
-		socketService.on("recive-new-order", (id) => {
-			console.log("new order recieved");
-		});
-	}, []);
+
+	// useEffect(() => {
+	// 	socketService.setup();
+	// 	socketService.on("recive-new-order", (id) => {
+	// 		console.log("new order recieved");
+	// 	});
+	// }, []);
+
+
 
 	return (
 		<div className='app-layout'>

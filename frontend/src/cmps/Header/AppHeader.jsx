@@ -3,13 +3,13 @@ import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import { socketService } from "../../services/socket.service";
 import { userService } from "../../services/user.service";
 import { toggleDetailsLayout, toggleHeaderIsTop, toggleHeaderIsActive, toggleIsExplore } from "../../store/header.action";
 
 import { Search } from "./Search";
 import { SearchBar } from "./SearchBar";
 import { UserModal } from "./User/UserModal";
+import {UserNotification} from "./User/UserNotification"
 
 import airLogoSvg from "../../styles/svg/air-logo.svg";
 import airTopLogoSvg from "../../styles/svg/air-dark-logo.svg";
@@ -24,17 +24,17 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 	const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
 	const [searchBarTabs, setSearchBarTabsActive] = useState(null);
 	const [isMobileWidth, setIsMobileWidth] = useState(false);
-
+	
 	const location = useLocation();
 	const history = useHistory();
 	const img = getImgToShow();
-
+	
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
 	}
 
 	function getImgToShow() {
-		let currUser = userService.getLoggedinUser();
+		const currUser = userService.getLoggedinUser();
 		return currUser ? (currUser.imgUrl ? currUser.imgUrl : userSvg) : userSvg;
 	}
 
@@ -127,6 +127,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 						Become a Host
 					</Link>
 					<button onClick={() => toggleModal(true)} className='user-menu'>
+						<UserNotification/>
 						<img className='hamburger-svg' src={hamburgerSvg} />
 						<img className='user-svg' src={img} />
 					</button>

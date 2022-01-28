@@ -42,6 +42,7 @@ async function getById(userId) {
         throw err
     }
 }
+
 async function getByEmail(email) {
     try {
         const collection = await dbService.getCollection('user')
@@ -72,7 +73,8 @@ async function update(user) {
             password: user.password,
             imgUrl: user.imgUrl,
             likedStays: user.likedStays,
-            isSocial: user.isSocial
+            isSocial: user.isSocial,
+            notifications: user.notifications
         }
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
@@ -102,7 +104,4 @@ async function add(user) {
         throw err
     }
 }
-
-
-
 

@@ -36,11 +36,18 @@ export function updateInputsErrorInfo(error) {
     }
 }
 
-export function updateUser(user) {
-    console.log(user)
+export function updateUserNotifications(notifications) {
     return async (dispatch) => {
-        userService.update(user)
-        const action = { type: 'UPDATE_USER', user };
+        const action = { type: 'SET_USER_NOTIFICATIONS', notifications};
         dispatch(action)
     }
 }
+
+    export function updateUser(user) {
+        console.log(user)
+        return async (dispatch) => {
+            userService.update(user)
+            const action = { type: 'UPDATE_USER', user };
+            dispatch(action)
+        }
+    }

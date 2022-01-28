@@ -111,6 +111,22 @@
 	height: 40px;
 	width: 80px;
 	padding: 0 6.5px;
+	position: relative;
+.user-notifications-dot {
+	background-color: $clr1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	color: $clr2;
+	right: -2%;
+	top: -10%;
+	border: 1px solid $clr2;
+  }
+  
 	&:hover {
 		box-shadow: 0px 2px 4px $clr5;
 	}
