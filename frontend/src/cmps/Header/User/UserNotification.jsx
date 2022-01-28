@@ -31,6 +31,7 @@ export function UserNotification() {
 		await userService.update(updatedUser);
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedNotifications));
+        disptach(openMsg({type: 'SET_MSG', msg: { txt: 'You got new notification', type: 'bnb' } }))
 	}
 	async function removeNotification(id) {
 		console.log("got here");
