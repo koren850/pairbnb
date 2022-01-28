@@ -31,6 +31,13 @@ function connectSockets(http, session) {
             socket.to(hostId).emit('recive-new-order', hostId);
         })
 
+        socket.on('order-response', response => {
+            console.log('order-response', response);
+
+            socket.to(response.id).emit('order-response', response);
+            socket.to(response.hostId).emit('remove-notifications', response.hostId)
+        })
+
 
         socket.on('unset-user-socket', () => {
             delete socket.userId

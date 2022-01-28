@@ -5,6 +5,7 @@ import { Loader } from "../General/Loader";
 
 import { orderService } from "../../services/order.service";
 import { userService } from "../../services/user.service";
+import { socketService } from "../../services/socket.service";
 
 import MUIDataTable from "mui-datatables";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -79,6 +80,7 @@ export function Table() {
 		} else {
 			newOrder.status = currOrderClicked.status;
 			await orderService.update(newOrder);
+			socketService.emit("order-response", { id: newOrder.buyer._id, hostId: newOrder.hostId, status: newOrder.status });
 		}
 		loadOrders();
 	}, [currOrderClicked]);

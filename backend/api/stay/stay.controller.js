@@ -53,7 +53,6 @@ async function addStay(req, res) {
         // socketService.broadcast({type: 'stay-added', data: stay, userId: stay.byUserId})
         // socketService.emitToUser({type: 'stay-about-you', data: stay, userId: stay.aboutUserId})
         // socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
-        console.log(stay);
         res.send(stay)
 
     } catch (err) {

@@ -64,8 +64,10 @@ async function remove(userId) {
     }
 }
 
+
 async function update(user) {
     try {
+
         const userToSave = {
             _id: ObjectId(user._id), // needed for the returnd obj
             fullName: user.fullName,
@@ -93,7 +95,8 @@ async function add(user) {
             email: user.email,
             password: user.password,
             imgUrl: user.imgUrl,
-            likedStays: user.likedStays,
+            likedStays: [],
+            notifications: [],
             isSocial: user.isSocial
         }
         const collection = await dbService.getCollection('user');
