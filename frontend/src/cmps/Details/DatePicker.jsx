@@ -28,7 +28,6 @@ export function DatePicker({ order, setOrder }) {
 	function getWeeksAfter(date, amount) {
 		return date ? addWeeks(date, amount) : undefined;
 	}
-	
 
 	return (
 		<ThemeProvider theme={theme}>
