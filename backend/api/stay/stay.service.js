@@ -22,16 +22,15 @@ async function query(filterOptions = {}) {
 function _buildCriteria(params) {
     let criteria = {}
     if (params.location) {
-        const regex = new RegExp( params.location, 'i')
+        const regex = new RegExp(params.location, 'i')
         criteria = {
             $or: [
-                { 'loc.address': { $regex: regex} },
-                { 'loc.country': { $regex: regex} },
-                { 'name': { $regex: regex} }
+                { 'loc.address': { $regex: regex } },
+                { 'loc.country': { $regex: regex } },
+                { 'name': { $regex: regex } }
             ]
         }
     }
-    console.log(criteria, 'critiria')
     if (params.guestsCount) {
         criteria.capacity = { $gte: +params.guestsCount };
     }

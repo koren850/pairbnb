@@ -14,58 +14,23 @@ function connectSockets(http, session) {
         socket.on('disconnect', socket => {
             console.log('Someone disconnected')
         })
-        // socket.on('set_user_socket', id => {
-        //     if (socket.userId === id) return;
-        //     if (socket.userId) {
-        //         socket.leave(socket.userId)
-        //     }
-        //     socket.join(topic)
-        //     socket.myTopic = topic
-        // })
-        socket.on('set_user_socket', userId => {
-            socket.userId = userId
-            console.log('the user id in server', socket.userId)
+
+        socket.on('join-room', userId => {
+            console.log('join-room', userId);
+            socket.join(userId)
+            // if (socket.myTopic === userId) return;
+            // if (socket.myTopic) {
+            // socket.leave(socket.myTopic)
+            // }
+            // socket.myTopic = userId
         })
 
-        socket.on('join-host', hostId => {
-            if (socket.myTopic === hostId) return;
-            if (socket.myTopic) {
-                socket.leave(socket.myTopic)
-            }
-            socket.join(hostId)
-            socket.myTopic = hostId
+        socket.on('new-order', hostId => {
+            console.log('new order', hostId);
+            socket.to(hostId).emit('recive-new-order', hostId);
         })
 
 
-        socket.on('like-stay', id => {
-            socket.to(socket.myTopic).emit('like-stay-front', id)
-            // gIo.to(socket.host).emit('like-stay', id)
-
-        })
-
-        socket.on('user-did-like', id => {
-            console.log('user did like');
-            console.log(socket.userId);
-            // emits to all sockets:
-            // gIo.emit('like-all-stays', id)
-            // emits only to sockets in the same room
-            gIo.to(socket.userId).emit('like-all-stays', id)
-        })
-
-        socket.on('user-msg', msg => {
-            console.log('Emitting Chat msg', msg);
-            // emits to all sockets:
-            // gIo.emit('chat addMsg', msg)
-            // emits only to sockets in the same room
-            gIo.to(socket.userId).emit('user-msg', msg)
-        })
-        socket.on('user-watch', userId => {
-            socket.join('watching:' + userId)
-        })
-        socket.on('set-user-socket', userId => {
-            logger.debug(`Setting (${socket.id}) socket.userId = ${userId}`)
-            socket.userId = userId
-        })
         socket.on('unset-user-socket', () => {
             delete socket.userId
         })

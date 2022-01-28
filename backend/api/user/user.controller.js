@@ -24,7 +24,6 @@ async function deleteUser(req, res) {
 async function getUsers(req, res) {
     try {
         const users = await userService.query();
-        console.log(users)
         res.send(users)
     } catch (err) {
         logger.error('Failed to get users', err)

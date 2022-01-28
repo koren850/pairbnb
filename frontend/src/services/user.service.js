@@ -54,9 +54,7 @@ async function login(userCred) {
             _saveLocalUser(currUser);
             const user = await httpService.post('auth/login', userCred)
             if (user) _saveLocalUser(user);
-            socketService.setup();
-            socketService.emit('set_user_socket', user._id)
-            socketService.emit('user-msg', `Welcome ${user.fullName}`)
+            socketService.emit('join-room', user._id)
             resolve(user);
         }
         else reject({ reason: 'User doesn\'t exists', unsolved: 'email' });

@@ -18,7 +18,6 @@ async function query() {
         const criteria = {}
         const collection = await dbService.getCollection('user');
         let users = await collection.find(criteria).toArray();
-        console.log(users);
         users = users.map(user => {
             delete user.password
             user.createdAt = ObjectId(user._id).getTimestamp()
@@ -45,10 +44,8 @@ async function getById(userId) {
 }
 async function getByEmail(email) {
     try {
-        console.log('getUserByEmail')
         const collection = await dbService.getCollection('user')
         const user = await collection.findOne({ email })
-        console.log(user,'from back')
         return user
     } catch (err) {
         logger.error(`while finding user ${email}`, err)
@@ -88,7 +85,6 @@ async function update(user) {
 }
 
 async function add(user) {
-    console.log(user);
     try {
         const userToAdd = {
             fullName: user.fullName,

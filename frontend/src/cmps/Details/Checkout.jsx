@@ -1,22 +1,28 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { Guests } from "../General/Guests";
 import { SpecialBtn } from "../General/SpecialBtn";
 import { DatePicker } from "./DatePicker.jsx";
 
 import { orderService } from "../../services/order.service";
+import { socketService } from "../../services/socket.service";
 import { userService } from "../../services/user.service";
+import { openMsg } from "../../store/msg.action";
 
 import reviewStar from "../../styles/svg/star.svg";
 
 export function Checkout({ stay, avg }) {
 	const [order, setOrder] = useState({ checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const [isGuestsActive, toggleGuests] = useState(false);
+	const dispatch = useDispatch();
 
-	function reserveOrder(ev, args) {
+	async function reserveOrder(ev, args) {
+		const currUser = userService.getLoggedinUser();
+		if (!currUser) return dispatch(openMsg({ txt: "Log in first", type: "bnb" }));
 		const reserved = {
 			hostId: stay.host._id,
-			buyerId: userService.getLoggedinUser()._id,
+			buyerId: currUser._id,
 			stayId: stay._id,
 			totalPrice: (getTotalNights() * stay.price * 1.025).toFixed(1),
 			startDate: new Date(order.checkIn).toDateString(),
@@ -24,7 +30,8 @@ export function Checkout({ stay, avg }) {
 			guests: { total: order.guestsCount, adults: order.adults, children: order.children, infants: order.infants },
 			status: "Pending",
 		};
-		orderService.save(reserved);
+		// await orderService.save(reserved);
+		socketService.emit("new-order", stay.host._id);
 	}
 
 	function onToggleGuests() {

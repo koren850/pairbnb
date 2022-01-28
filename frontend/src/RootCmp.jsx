@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router";
+
+import { socketService } from "./services/socket.service";
 
 import { Home } from "./pages/Home";
 import { Explore } from "./pages/Explore";
@@ -12,6 +14,13 @@ import { AppFooter } from "./cmps/General/AppFooter";
 import { UserMsg } from "./cmps/General/UserMsg";
 
 export function RootCmp() {
+	useEffect(() => {
+		socketService.setup();
+		socketService.on("recive-new-order", (id) => {
+			console.log("new order recieved");
+		});
+	}, []);
+
 	return (
 		<div className='app-layout'>
 			<AppHeader />

@@ -7,20 +7,21 @@ function _UserMsg({ closeMsg, msg }) {
 	let timeoutId;
 
 	useEffect(() => {
-		if (timeoutId) clearTimeout(timeoutId);
-		timeoutId = setTimeout(() => {
-			console.log("dudu");
-			closeMsg();
-		}, 2000);
 		return () => clearTimeout(timeoutId);
 	}, []);
 
 	const msgClass = msg.type || "";
 	if (!msg.txt) return <React.Fragment></React.Fragment>;
+
+	if (timeoutId) clearTimeout(timeoutId);
+	timeoutId = setTimeout(() => {
+		closeMsg();
+	}, 2000);
+
 	return (
 		<div className={"user-msg " + msgClass}>
 			<p>{msg.txt}</p>
-			<button onClick={closeMsg}>&times;</button>
+			<button onClick={closeMsg}>x</button>
 		</div>
 	);
 }
