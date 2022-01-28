@@ -155,11 +155,16 @@
 		height: 100%;
 		margin-bottom: 7vh;
 		& .city-container {
+			overflow-y: unset;
 			height: 400px;
 			width: 400px;
-			overflow-y: unset;
 			& img {
+				height: 400px;
+				width: 400px;
 				filter: grayscale(0);
+			}
+			& h1 {
+				width: 100%;
 			}
 		}
 		&::-webkit-scrollbar {

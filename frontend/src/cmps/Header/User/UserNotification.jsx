@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userService } from "../../../services/user.service";
 import { socketService } from "../../../services/socket.service";
-import { updateUserNotifications } from "../../../store/user.action"
+import { updateUserNotifications } from "../../../store/user.action";
+import { openMsg } from "../../../store/msg.action";
 
 export function UserNotification() {
     const disptach = useDispatch()
-    const user = useSelector(state => state.userModule.user)
+    const msg = useSelector(state => state.msgModule.msg);
+    const user = useSelector(state => state.userModule.user);
     const notificationsAmount = user.notifications?.length;
     
  const handleNewNotification = async (id) => {
@@ -18,6 +20,7 @@ export function UserNotification() {
         await userService.update(updatedUser);
         userService.setLoggedinUser(updatedUser);
         disptach(updateUserNotifications(updatedNotifications))
+        disptach(openMsg({type: 'SET_MSG', msg: { txt: 'You got new notification', type: 'bnb' } }))
     }
     
     useEffect(() => {
