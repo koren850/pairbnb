@@ -7,6 +7,7 @@ import { Loader } from "../cmps/General/Loader";
 import { Checkout } from "../cmps/Details/Checkout";
 import { Amenities } from "../cmps/Details/Amenities";
 import { Review } from "../cmps/Details/Review";
+import { AddReview } from "../cmps/Details/AddReview";
 
 import { stayService } from "../services/stay.service";
 import { toggleDetailsLayout } from "../store/header.action";
@@ -138,6 +139,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 						return <Review key={review + idx} review={review} avg={avg} />;
 					})}
 				</div>
+				<AddReview />
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>

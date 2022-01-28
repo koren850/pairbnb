@@ -43,7 +43,7 @@ async function update(user) {
     // if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
 }
 async function updateNotification(id, notification) {
-    console.log("got dudu");
+
     const user = await httpService.put(`user/notification`, { id, notification })
     return user;
     // if (getLoggedinUser()._id === user._id) _saveLocalUser(user)
