@@ -17,16 +17,29 @@ function connectSockets(http, session) {
 
         socket.on('join-room', userId => {
             console.log('join-room', userId);
+            if (socket.userRoom === userId) return;
+            if (socket.userRoom) {
+                socket.leave(socket.userRoom)
+            }
             socket.join(userId)
-            // if (socket.myTopic === userId) return;
-            // if (socket.myTopic) {
-            // socket.leave(socket.myTopic)
-            // }
-            // socket.myTopic = userId
+            socket.userRoom = userId
         })
+
+        // socket.on('join toy-room', toyId => {
+        //     console.log('joining room!', toyId)
+        //     if (socket.toyRoom === toyId) return;
+        //     if (socket.toyRoom) {
+        //         socket.leave(socket.toyRoom)
+        //         console.log('I already have a room.')
+        //     }
+        //     socket.join(toyId)
+        //     socket.toyRoom = toyId
+        // })
+
 
         socket.on('new-order', hostId => {
             console.log('new order', hostId);
+
             socket.to(hostId).emit('recive-new-order', hostId);
         })
 

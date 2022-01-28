@@ -7,10 +7,11 @@ async function login(email, password, isSocial) {
     logger.debug(`auth.service - login with email: ${email}`)
     try {
         const user = await userService.getByEmail(email)
-        if (!user) return new Error({ reason: 'User doesn\'t exists', unsolved: 'email' });
+        if (!user) throw { reason: 'User doesn\'t exists', unsolved: 'email' };
         if (!isSocial) {
             const match = await bcrypt.compare(password, user.password)
-            if (!match) return new Error({ reason: 'Incorrect user password', unsolved: 'password' });
+            console.log('match', match);
+            if (!match) throw new Error;
         }
         if (user) {
             delete user.password
@@ -19,7 +20,7 @@ async function login(email, password, isSocial) {
             return (user);
         }
     } catch (err) {
-        if (err) return err;
+        throw err;
     }
 }
 
