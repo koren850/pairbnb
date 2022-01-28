@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Guests } from "../General/Guests";
 import { SpecialBtn } from "../General/SpecialBtn";
 import { DatePicker } from "./DatePicker.jsx";
+import { Loader } from "../General/Loader";
 
 import { orderService } from "../../services/order.service";
 import { socketService } from "../../services/socket.service";
@@ -15,7 +16,18 @@ import reviewStar from "../../styles/svg/star.svg";
 export function Checkout({ stay, avg }) {
 	const [order, setOrder] = useState({ checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 });
 	const [isGuestsActive, toggleGuests] = useState(false);
+	const [btnMode, setIsDeley] = useState({ loader: false, reserve: false, btnTxt: "Check availability" });
 	const dispatch = useDispatch();
+
+	function setDeley() {
+		if (!order.checkIn || !order.checkOut) return dispatch(openMsg({ txt: "Pick Dates", type: "bnb" }));
+		if (btnMode.reserve) return reserveOrder();
+		setIsDeley({ ...btnMode, loader: true });
+		setTimeout(() => {
+			setIsDeley({ loader: false, reserve: true, btnTxt: "Reserve" });
+			dispatch(openMsg({ txt: "Dates available", type: "bnb" }));
+		}, 2000);
+	}
 
 	async function reserveOrder(ev, args) {
 		const currUser = userService.getLoggedinUser();
@@ -71,11 +83,17 @@ export function Checkout({ stay, avg }) {
 						</div>
 					</div>
 				</div>
-				<SpecialBtn
-					args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalNights() * stay.price }}
-					onClick={reserveOrder}
-					text='Check availability'
-				/>
+				{!btnMode.loader ? (
+					<SpecialBtn
+						args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalNights() * stay.price }}
+						onClick={setDeley}
+						text={btnMode.btnTxt}
+					/>
+				) : (
+					<div className='checkout-loader'>
+						<Loader />
+					</div>
+				)}
 				{isGuestsActive && <Guests init={order} ammount={stay.capacity} set={setOrder} />}
 				{order.checkIn && order.checkOut && (
 					<div className='price-container'>

@@ -317,6 +317,15 @@
 	width: 12px;
 }
 
+.checkout-loader {
+	div {
+		display: flex;
+		justify-content: center;
+		gap: 5px;
+		margin: 10px 0;
+	}
+}
+
 @media screen and (max-width: 1300px) {
 	.special-btn .order-container {
 		margin-inline-start: 50px;
