@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { userService } from "../../services/user.service.js";
 import { updateUser } from "../../store/user.action.js";
 import { socketService } from "../../services/socket.service";
+import { openMsg } from "../../store/msg.action";
 
 import ImageCarousel from "./ImageCarousel.jsx";
 
@@ -12,6 +14,7 @@ import greyHeart from "../../styles/svg/grey-heart.svg";
 import pinkHeart from "../../styles/svg/pink-heart.svg";
 
 function _StayPreview({ stay, fromBackOffice }) {
+	const dispatch = useDispatch();
 	let ammount = 0;
 	const divider = stay.reviews.length;
 	stay.reviews.forEach((review) => (ammount += review.rate));
@@ -45,7 +48,7 @@ function _StayPreview({ stay, fromBackOffice }) {
 	async function toggleLikedPlace(stay) {
 		let loggedinUser = userService.getLoggedinUser();
 		// USER MSG - ask guest to log in / up / continue as guest for demo purposes
-		if (!loggedinUser) return console.log("please sign in first");
+		if (!loggedinUser) return dispatch(openMsg({ txt: "Log in first", type: "bnb" }));
 		let likedStay = loggedinUser.likedStays.find((currStay) => {
 			return currStay._id === stay._id;
 		});
@@ -58,6 +61,7 @@ function _StayPreview({ stay, fromBackOffice }) {
 			loggedinUser.likedStays.push(miniStay);
 		}
 		const newUser = await userService.update(loggedinUser);
+		dispatch(openMsg({ txt: "Stay liked", type: "bnb" }));
 		setCurrUser({ ...newUser });
 		userService.setLoggedinUser(newUser);
 	}
