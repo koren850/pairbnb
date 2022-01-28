@@ -1,5 +1,7 @@
 import { userService } from "../services/user.service";
+import { socketService } from '../services/socket.service'
 import { openMsg } from "../store/msg.action";
+
 
 export function signingUp(user) {
     return async (dispatch) => {
@@ -15,7 +17,6 @@ export function signingIn(user) {
         const action = { type: 'SET_USER', user: currUser };
         dispatch(action)
         // dispatch({ type: 'SET_MSG', msg: { txt: `Welcome ${currUser.fullName}`, type: 'success' } })
-
     }
 }
 
@@ -31,6 +32,7 @@ export function updateInputsErrorInfo(error) {
     return async (dispatch) => {
         const action = { type: 'UPDATE_INPUTS_ERROR', key: error.unsolved, content: error.reason };
         dispatch(action)
+
     }
 }
 

@@ -44,7 +44,7 @@ async function update(user) {
 
 async function login(userCred) {
     const users = await getUsers();
-    return new Promise( async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         const currUser = users.find(user => user.email === userCred.email)
         if (!currUser) reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
         else if (currUser.password !== userCred.password) {
@@ -53,8 +53,10 @@ async function login(userCred) {
         if (currUser) {
             _saveLocalUser(currUser);
             const user = await httpService.post('auth/login', userCred)
-            if (user)  _saveLocalUser(user);
+            if (user) _saveLocalUser(user);
             socketService.setup();
+            socketService.emit('set_user_socket', user._id)
+            socketService.emit('user-msg', `Welcome ${user.fullName}`)
             resolve(user);
         }
         else reject({ reason: 'User doesn\'t exists', unsolved: 'email' });
@@ -62,7 +64,7 @@ async function login(userCred) {
 }
 async function signup(userCred) {
     const users = await getUsers()
-    return new Promise( async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let currUser = users.find(user => user.email === userCred?.email)
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (currUser === -1) currUser = null;

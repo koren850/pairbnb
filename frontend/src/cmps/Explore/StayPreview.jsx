@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { userService } from "../../services/user.service.js";
 import { updateUser } from "../../store/user.action.js";
+import { socketService } from "../../services/socket.service";
 
 import ImageCarousel from "./ImageCarousel.jsx";
 
@@ -19,6 +20,13 @@ function _StayPreview({ stay, fromBackOffice }) {
 
 	const [currUser, setCurrUser] = useState(userService.getLoggedinUser());
 
+	useEffect(() => {
+		socketService.emit("join-host", stay.host._id);
+		// socketService.on("user-did-like", () => console.log("did like"));
+		// socketService.on("like-all-stays", (hostId) => likestays(hostId));
+		socketService.on("like-stay-front", (hostId) => likestays(hostId));
+	}, []);
+
 	let likedPlace;
 	let likedId;
 
@@ -29,8 +37,14 @@ function _StayPreview({ stay, fromBackOffice }) {
 		}
 	}
 
+	function likestays(id) {
+		console.log(id);
+		// console.log("liked all stays");
+	}
+
 	async function toggleLikedPlace(stay) {
 		let loggedinUser = userService.getLoggedinUser();
+		socketService.emit("like-stay", stay.host._id);
 		// USER MSG - ask guest to log in / up / continue as guest for demo purposes
 		if (!loggedinUser) return console.log("please sign in first");
 		let likedStay = loggedinUser.likedStays.find((currStay) => {
