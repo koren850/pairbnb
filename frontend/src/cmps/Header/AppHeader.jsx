@@ -10,7 +10,6 @@ import { Search } from "./Search";
 import { SearchBar } from "./SearchBar";
 import { UserModal } from "./User/UserModal";
 import {UserNotification} from "./User/UserNotification"
-
 import airLogoSvg from "../../styles/svg/air-logo.svg";
 import airTopLogoSvg from "../../styles/svg/air-dark-logo.svg";
 import userSvg from "../../styles/svg/user.svg";
@@ -18,7 +17,7 @@ import hamburgerSvg from "../../styles/svg/hamburger.svg";
 
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
 	const { headerLayoutSmall, isTop, isActive, isExplore } = headerMode;
-
+	const userIsHost = userService.getLoggedinUser()?.isHost || false;
 	const [userModalState, toggleModal] = useState(false);
 	const [isScreenOpen, setIsScreenOpen] = useState(false);
 	const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
@@ -78,6 +77,12 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 		else setIsMobileWidth(false)
 	}
 
+	const onHandleUserModal = () => {
+		toggleHeaderIsActive(false);
+		toggleHeaderIsTop(false);
+		toggleModal(true);
+	}
+
 	useEffect(() => {
 
 		if (!location.pathname || location.pathname === "/") {
@@ -111,7 +116,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 			}`}>
 			<div onClick={handleSearchModals} className={isScreenOpen ? "screen screen-open full-layout" : "screen full-layout"}></div>
 			<div onClick={handleCloseSearchBar} className={isSearchBarOpen ? "screen screen-open search-bar-screen full-layout" : "search-bar-screen  screen full-layout"}></div>
-			{userModalState && <UserModal currState={userModalState} toggleModal={toggleModal} />}
+			{userModalState && <UserModal currState={userModalState} resetHeaderModes={resetHeaderModes} toggleModal={toggleModal} />}
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
 					<span className='logo'>
@@ -124,9 +129,9 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 				<article className='nav-link'>
 					<Link to={`/explore`}> Explore</Link>
 					<Link className='become' to={`/host`}>
-						Become a Host
+						{userIsHost ? 'My Stays' : 'Become a Host'}
 					</Link>
-					<button onClick={() => toggleModal(true)} className='user-menu'>
+					<button onClick={onHandleUserModal} className='user-menu'>
 						<UserNotification/>
 						<img className='hamburger-svg' src={hamburgerSvg} />
 						<img className='user-svg' src={img} />

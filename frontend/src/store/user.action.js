@@ -44,7 +44,6 @@ export function updateUserNotifications(notifications) {
 }
 
     export function updateUser(user) {
-        console.log(user)
         return async (dispatch) => {
             userService.update(user)
             const action = { type: 'UPDATE_USER', user };

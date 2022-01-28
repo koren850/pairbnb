@@ -76,7 +76,8 @@ async function update(user) {
             imgUrl: user.imgUrl,
             likedStays: user.likedStays,
             isSocial: user.isSocial,
-            notifications: user.notifications
+            notifications: user.notifications,
+            isHost: user.isHost
         }
         const collection = await dbService.getCollection('user')
         await collection.updateOne({ _id: userToSave._id }, { $set: userToSave })
@@ -97,7 +98,8 @@ async function add(user) {
             imgUrl: user.imgUrl,
             likedStays: [],
             notifications: [],
-            isSocial: user.isSocial
+            isSocial: user.isSocial,
+            isHost: false
         }
         const collection = await dbService.getCollection('user');
         await collection.insertOne(userToAdd);

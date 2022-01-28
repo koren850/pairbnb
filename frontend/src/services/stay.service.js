@@ -113,7 +113,8 @@ async function save(stay) {
     let host = { _id, fullName, imgUrl }
     newStay.host = host
     newStay.imgUrls = stay.stayImgs
-    const addedStay = await httpService.post('stay', newStay)
+    const addedStay = await httpService.post('stay', newStay);
+    await httpService.put('user',{...currHost, isHost:true});
     console.log('stay added', addedStay);
 
 }

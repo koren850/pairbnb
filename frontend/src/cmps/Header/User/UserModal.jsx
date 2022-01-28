@@ -1,16 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { updateUserNotifications, updateUser } from "../../../store/user.action";
 
 import { userService } from "../../../services/user.service";
+import { useDispatch } from "react-redux";
 
-export function UserModal({ toggleModal, currState }) {
+export function UserModal({ toggleModal, currState,resetHeaderModes }) {
 	const [loggUser, setLoggUser] = useState(userService.getLoggedinUser());
 	const isActive = useSelector((state) => state.headerModule.headerMode.isActive);
+	const user = useSelector((state) => state.userModule.user);
+	const notificationsAmount = user.notifications?.length;
+	const dispatch = useDispatch();
+	const history = useHistory();
 
 	function toggle(ev) {
 		ev.stopPropagation();
+		resetHeaderModes();
 		toggleModal(!currState);
+	}
+
+	const resetUserNotifications = async () => {
+		const currUser = await userService.getById(loggUser?._id);
+		const updatedUser = { ...currUser, notifications: [] };
+		await userService.update(updatedUser);
+		userService.setLoggedinUser(updatedUser);
+		dispatch(updateUserNotifications([]));
 	}
 
 	useEffect(() => {
@@ -21,15 +36,19 @@ export function UserModal({ toggleModal, currState }) {
 	}, []);
 	function onLogOut() {
 		userService.logout();
+		userService.setLoggedinUser(null);
+		dispatch(updateUser({}))
+		history.push('/');
 	}
 
 	return (
 		<nav className={`user-modal-container ${isActive && "active-modal"} ${currState && "open"}`}>
 			<ul>
-				<li>
+				<li onClick={resetUserNotifications}>
 					{loggUser ? (
 						<Link to={"/host"}>
 							<span className='user-modal-span'>Statistics & Dashboard</span>
+							{notificationsAmount ? <div className='user-notifications-dot'>{notificationsAmount}</div> : <React.Fragment></React.Fragment>}
 						</Link>
 					) : (
 						<Link to={"/user/signup"}>

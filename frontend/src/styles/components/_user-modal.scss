@@ -11,7 +11,7 @@
   height: 240px;
   width: 240px;
   border-radius: 20px;
-  right: -2.5%;
+  right: 2%;
   transform: translate(-50%, -50%);
   & ul {
     height: 100%;
@@ -48,4 +48,24 @@
     border-width: 0.1px;
     opacity: 30%;
   }
+  .user-notifications-dot {
+    background-color: $clr1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    padding-inline-end: 2px;
+    padding-block-end: 2px;
+    border-radius: 50%;
+    color: $clr2;
+    right: 8%;
+    top: 6%;
+    border: 1px solid $clr3;
+    }
+}
+
+.detail-layout .user-modal-container {
+left: 73.1%;
 }

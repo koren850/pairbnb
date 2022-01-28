@@ -35,8 +35,10 @@ async function signup(email, password, isSocial, imgUrl, fullName) {
         else if (!isSocial && password?.length < 5) return new Error({ reason: 'password should have at list 6 digits / letters', unsolved: 'password' });
         console.log('hello');
         likedStays = [];
+        notifications = [];
+        isHost = false;
         const hash = (isSocial) ? '(User from social have no password).' : await bcrypt.hash(password, saltRounds);
-        return userService.add({ fullName, email, password: hash, imgUrl, likedStays, isSocial })
+        return userService.add({ fullName, email, password: hash,isHost, imgUrl,notifications, likedStays, isSocial })
     } catch (err) {
         return err;
     }

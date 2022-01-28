@@ -14,6 +14,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { userService } from "../../services/user.service";
 
 const theme = createTheme({
 	palette: {
@@ -138,6 +139,8 @@ export function AddStay() {
 	function addStay() {
 		let stay = { stayName, stayAdress, stayCapacity, stayPrice, placeType, spaceType, stayDescription, stayAmenities, stayImgs };
 		stayService.save(stay);
+		const user = userService.getLoggedinUser();
+		userService.setLoggedinUser({...user, isHost:true})
 	}
 
 	return (

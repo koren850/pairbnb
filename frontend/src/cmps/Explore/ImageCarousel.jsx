@@ -10,7 +10,8 @@ export default function ImageCarousel({ stay }) {
     const history = useHistory()
 
     function onClickItem(stayId) {
-        history.push(`/details/${stayId}`)
+		window.scrollTo(0, 0);
+        history.push(`/details/${stayId}`);   
     }
 
     return (
