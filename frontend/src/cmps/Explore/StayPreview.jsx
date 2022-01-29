@@ -60,7 +60,10 @@ function _StayPreview({ stay, fromBackOffice }) {
 			const miniStay = { _id: stay._id, name: stay.name };
 			loggedinUser.likedStays.push(miniStay);
 		}
-		const newUser = await userService.update(loggedinUser);
+		const userTosave = await userService.getById(loggedinUser._id);
+		userTosave.likedStay = loggedinUser.likedStay;
+		const newUser = await userService.update(userTosave);
+		delete newUser.password;
 		dispatch(openMsg({ txt: likedStay ? "Stay unliked" : "Stay liked", type: "bnb" }));
 		setCurrUser({ ...newUser });
 		userService.setLoggedinUser(newUser);

@@ -58,7 +58,6 @@ async function query() {
             delete order.buyerId;
             delete order.stayId;
             delete order.hostId;
-
             return order
         })
         return orders
@@ -72,11 +71,12 @@ async function query() {
 async function update(order) {
     try {
         order._id = ObjectId(order._id)
-        order.hostId = ObjectId(order.hostId)
+        order.hostId = ObjectId(order.host._id)
         order.stayId = ObjectId(order.stay._id)
         order.buyerId = ObjectId(order.buyer._id)
         delete order.buyer
         delete order.stay
+        delete order.host
         const collection = await dbService.getCollection('order')
         await collection.updateOne({ _id: order._id }, { $set: order })
         return order;

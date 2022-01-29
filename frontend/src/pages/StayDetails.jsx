@@ -59,7 +59,10 @@ function _StayDetails({ toggleDetailsLayout }) {
 			const miniStay = { _id: stay._id, name: stay.name };
 			loggedinUser.likedStays.push(miniStay);
 		}
-		const newUser = await userService.update(loggedinUser);
+		const userToSave = await userService.getById(loggedinUser._id);
+		userToSave.likedStay = loggedinUser.likedStay;
+		const newUser = await userService.update(userToSave);
+		delete newUser.password;
 		dispatch(openMsg({ txt: likedStay ? "Stay unliked" : "Stay liked", type: "bnb" }));
 		setCurrUser({ ...newUser });
 		userService.setLoggedinUser(newUser);
