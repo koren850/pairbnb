@@ -59,10 +59,10 @@
 	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr 1fr;
 	align-items: center;
+	margin-bottom: 20px;
 
 	.bar-container {
 		display: flex;
-		justify-content: center;
 		align-items: center;
 	}
 
@@ -127,6 +127,43 @@
 				font-weight: 600;
 				margin-inline-start: 10px;
 			}
+		}
+	}
+}
+
+@media screen and (max-width: 930px) {
+	.rating-bars-container {
+		grid-template-rows: 1fr 1fr;
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media screen and (max-width: 780px) {
+	.rating-bars-container {
+		grid-template-rows: 1fr;
+		grid-template-columns: 1fr;
+		.bar-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
+
+@media screen and (max-width: 820px) {
+	.review-stats {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media screen and (max-width: 520px) {
+	.amenitie-item {
+		display: flex;
+		align-items: center;
+		line-height: 1;
+		font-size: 1rem !important;
+		.amenitie {
+			transform: unset;
 		}
 	}
 }

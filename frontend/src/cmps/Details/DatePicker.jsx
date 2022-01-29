@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import addWeeks from "date-fns/addWeeks";
 import TextField from "@mui/material/TextField";
@@ -21,8 +22,9 @@ const theme = createTheme({
 });
 
 export function DatePicker({ order, setOrder }) {
+	const dispatch = useDispatch();
 	const removeUrl = (
-		<img onClick={() => setOrder({ ...order, checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 })} className='clear-dates' src={remove} />
+		<img onClick={() => dispatch(setOrder({ ...order, checkIn: null, checkOut: null, guestsCount: 1, adults: 1, children: 0, infants: 0 }))} className='clear-dates' src={remove} />
 	);
 
 	function getWeeksAfter(date, amount) {
@@ -38,7 +40,7 @@ export function DatePicker({ order, setOrder }) {
 					value={[order.checkIn, order.checkOut]}
 					maxDate={getWeeksAfter(order.checkIn, 8)}
 					onChange={(newValue) => {
-						setOrder({ ...order, checkIn: newValue[0], checkOut: newValue[1] });
+						dispatch(setOrder({ ...order, checkIn: newValue[0], checkOut: newValue[1] }));
 					}}
 					startText='Check-in'
 					endText='Check-out'
