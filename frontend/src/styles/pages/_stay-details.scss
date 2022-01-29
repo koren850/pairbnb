@@ -272,6 +272,38 @@
 }
 
 @media screen and (max-width: 480px) {
+	.stay-name-details {
+		text-align: center;
+	}
+	.info-start {
+		flex-direction: column;
+		& > div {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 5px;
+		}
+		.dot-before-reviews,
+		.dot-before-address {
+			display: none;
+		}
+		.reviews-count-details {
+			margin-inline-start: 3px;
+			margin-inline-end: 10px;
+		}
+		.heart-details {
+			margin-inline-start: 10px !important;
+		}
+	}
+	.details-mobile-carousel {
+		height: 35vh;
+		img {
+			height: 100%;
+			border-radius: 12px;
+			object-fit: cover;
+			margin-bottom: 10px;
+		}
+	}
 	.css-1ozefeb {
 		left: 0px !important;
 	}

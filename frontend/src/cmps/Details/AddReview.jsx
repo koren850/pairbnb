@@ -74,7 +74,7 @@ export function AddReview({ stay, set }) {
 			<div className='rating-bars-container'>{types.map((type, idx) => RatingBar(type, idx, rating, setRating))}</div>
 			<div className='type-area'>
 				<ThemeProvider theme={theme}>
-					<TextField fullHeight fullWidth label='Share your exprience with this stay' color='secondary' multiline rows={3} value={value} onChange={handleChange} />
+					<TextField fullWidth label='Share your exprience with this stay' color='secondary' multiline rows={3} value={value} onChange={handleChange} />
 				</ThemeProvider>
 			</div>
 			<div className='add-review-btn'>

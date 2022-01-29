@@ -9,6 +9,7 @@ import { Amenities } from "../cmps/Details/Amenities";
 import { Review } from "../cmps/Details/Review";
 import { AddReview } from "../cmps/Details/AddReview";
 import { ReviewStats } from "../cmps/Details/ReviewsStats.jsx";
+import ImageCarousel from "../cmps/Explore/ImageCarousel";
 
 import { stayService } from "../services/stay.service";
 import { userService } from "../services/user.service";
@@ -77,6 +78,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 		stayToAvg.reviews.forEach((review) => (ammount += review.rate.avg));
 		const divider = stayToAvg.reviews.length;
 		let calcAvg = (ammount / divider).toFixed(1);
+
 		if ((calcAvg * 100) % 10 === 0) return setAvg(calcAvg);
 		if (isNaN(calcAvg)) calcAvg = "";
 		setAvg(calcAvg);
@@ -122,13 +124,19 @@ function _StayDetails({ toggleDetailsLayout }) {
 					</div>
 				</div>
 
-				<div className='details-img-container'>
-					<img className='main-img' src={stay.imgUrls[0]} alt='' />
-					<img className='small-img' src={stay.imgUrls[1]} alt='' />
-					<img className='small-img corner-top' src={stay.imgUrls[2]} alt='' />
-					<img className='small-img' src={stay.imgUrls[3]} alt='' />
-					<img className='small-img corner-bottom' src={stay.imgUrls[4]} alt='' />
-				</div>
+				{window.innerWidth > 780 ? (
+					<div className='details-img-container'>
+						<img className='main-img' src={stay.imgUrls[0]} alt='' />
+						<img className='small-img' src={stay.imgUrls[1]} alt='' />
+						<img className='small-img corner-top' src={stay.imgUrls[2]} alt='' />
+						<img className='small-img' src={stay.imgUrls[3]} alt='' />
+						<img className='small-img corner-bottom' src={stay.imgUrls[4]} alt='' />
+					</div>
+				) : (
+					<div className='details-mobile-carousel'>
+						<ImageCarousel stay={stay} />
+					</div>
+				)}
 				<div className='stay-info-container'>
 					<div className='stay-info'>
 						<div className='host-info flex'>
