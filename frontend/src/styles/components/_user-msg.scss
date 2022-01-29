@@ -10,7 +10,7 @@
 	font-family: inherit;
 	position: fixed;
 	bottom: 3%;
-	right: 3%;
+	right: 7.9%;
 	min-width: 150px;
 	height: 40px;
 	background-color: #1c1919;
@@ -36,6 +36,10 @@
 	&.bnb {
 		background-color: $clr1;
 	}
+}
+
+.detail-layout .user-msg {
+right: 21.2%;
 }
 
 @keyframes append-animate {
