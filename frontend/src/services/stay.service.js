@@ -56,7 +56,7 @@ function sortStays(stays, filterBy, stayType, stayPrice) {
         const types = Object.keys(stayType).filter(key => stayType[key]);
         let filteredStays = []
         stays.forEach(stay => {
-            let currStay = types.some(type => stay["type of place"] === type)
+            let currStay = types.some(type => stay["type of place"].toLowerCase() === type.toLowerCase())
             if (currStay) filteredStays.push(stay);
         })
         return filteredStays
@@ -79,7 +79,7 @@ function sortStays(stays, filterBy, stayType, stayPrice) {
         const filterAndTypeStays = []
         const types = Object.keys(stayType).filter(key => stayType[key]);
         filteredStays.forEach(stay => {
-            let currStay = types.some(type => stay["type of place"] === type)
+            let currStay = types.some(type => stay["type of place"].toLowerCase() === type.toLowerCase())
             if (currStay) filterAndTypeStays.push(stay);
         })
         return filterAndTypeStays

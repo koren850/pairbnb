@@ -22,7 +22,6 @@ export function UserNotification() {
 	};
 
 	async function handleOrderResponse(response) {
-		console.log(response);
 		const id = response.id;
 		const currUser = await userService.getById(id);
 		const updatedNotifications = currUser.notifications;
@@ -34,7 +33,6 @@ export function UserNotification() {
 		disptach(openMsg({ txt: "You got new notification. ", type: "bnb" }));
 	}
 	async function removeNotification(id) {
-		console.log("got here");
 		const currUser = await userService.getById(id);
 		const updatedNotifications = currUser.notifications;
 		updatedNotifications.pop();

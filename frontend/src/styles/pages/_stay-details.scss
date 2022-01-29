@@ -38,6 +38,11 @@
 	justify-content: space-between;
 
 	.share-save {
+		& > * {
+			& > * {
+				cursor: pointer;
+			}
+		}
 		margin-inline-end: 2px;
 		text-decoration: underline;
 		line-height: 1;

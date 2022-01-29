@@ -14,6 +14,7 @@ import airLogoSvg from "../../styles/svg/air-logo.svg";
 import airTopLogoSvg from "../../styles/svg/air-dark-logo.svg";
 import userSvg from "../../styles/svg/user.svg";
 import hamburgerSvg from "../../styles/svg/hamburger.svg";
+import { UserMsg } from "../../cmps/General/UserMsg";
 
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
 	const { headerLayoutSmall, isTop, isActive, isExplore } = headerMode;
@@ -152,6 +153,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 					/>
 				)}
 			</nav>
+			<UserMsg />
 		</header>
 	);
 }

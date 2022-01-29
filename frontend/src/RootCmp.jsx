@@ -11,7 +11,6 @@ import { BackOffice } from "./pages/BackOffice";
 
 import { AppHeader } from "./cmps/Header/AppHeader";
 import { AppFooter } from "./cmps/General/AppFooter";
-import { UserMsg } from "./cmps/General/UserMsg";
 
 export function RootCmp() {
 	// useEffect(() => {
@@ -34,7 +33,6 @@ export function RootCmp() {
 				</Switch>
 			</main>
 			<AppFooter />
-			<UserMsg />
 		</div>
 	);
 }
