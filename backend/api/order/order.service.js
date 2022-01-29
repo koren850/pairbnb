@@ -29,6 +29,18 @@ async function query() {
             },
             {
                 $unwind: '$stay'
+            },
+            {
+                $lookup:
+                {
+                    localField: 'hostId',
+                    from: 'user',
+                    foreignField: '_id',
+                    as: 'host'
+                }
+            },
+            {
+                $unwind: '$host'
             }
         ]).toArray()
         console.log(orders.length)
@@ -42,8 +54,11 @@ async function query() {
         orders = orders.map(order => {
             order.buyer = { _id: order.buyer._id, fullName: order.buyer.fullName };
             order.stay = { _id: order.stay._id, price: order.stay.price, name: order.stay.name }
+            order.host = { _id: order.host._id, name: order.host.fullName }
             delete order.buyerId;
-            delete order.aboutUserId;
+            delete order.stayId;
+            delete order.hostId;
+
             return order
         })
         return orders
@@ -63,7 +78,6 @@ async function update(order) {
         delete order.buyer
         delete order.stay
         const collection = await dbService.getCollection('order')
-
         await collection.updateOne({ _id: order._id }, { $set: order })
         return order;
     } catch (err) {

@@ -24,7 +24,7 @@ const approved = <img className='status' src={approvedSvg} />;
 const declined = <img className='status' src={declineSvg} />;
 const urls = { Pending: pending, Approved: approved, Declined: declined };
 
-export function Table() {
+export function HostTable() {
 	const responsive = "standard";
 
 	const [myOrders, setOrders] = useState(null);
@@ -36,7 +36,7 @@ export function Table() {
 
 	async function loadOrders() {
 		const allOrders = await orderService.query();
-		let orders = allOrders.filter((order) => order.hostId === loggedinUser._id);
+		let orders = allOrders.filter((order) => order.host._id === loggedinUser._id);
 		orders = orders.map((order, idx) => {
 			pendingButtons = (
 				<div style={{ display: "flex", gap: "10px" }}>
@@ -147,6 +147,106 @@ export function Table() {
 				</div>
 				<div>
 					<span>Total earning: ${getTotalEarning(myOrders)}</span>
+				</div>
+			</div>
+		</div>
+	);
+
+	return (
+		<div className='table'>
+			<ThemeProvider theme={theme}>
+				<MUIDataTable title={tableHeader} data={myOrders} columns={columns} options={options} />
+			</ThemeProvider>
+		</div>
+	);
+}
+
+export function UserTable() {
+	const responsive = "standard";
+	const [myOrders, setOrders] = useState(null);
+	const [currOrderClicked, setCurrOrderClick] = useState(null);
+	const [loggedinUser] = useState(userService.getLoggedinUser());
+
+	async function loadOrders() {
+		const allOrders = await orderService.query();
+		let orders = allOrders.filter((order) => order.buyer._id === loggedinUser._id);
+		console.log(orders);
+		orders = orders.map((order, idx) => {
+			return [order.stay.name, order.host.name, order.startDate, order.endDate, `$${+order.totalPrice}`, order.status, urls[order.status]];
+		});
+
+		setOrders(orders);
+	}
+
+	useEffect(() => {
+		loadOrders();
+	}, []);
+
+	useEffect(async () => {
+		if (!myOrders) return;
+		const newOrder = currOrderClicked.order;
+		if (currOrderClicked.status === "Remove") {
+			newOrder.status = currOrderClicked.status;
+			await orderService.remove(newOrder._id);
+		} else {
+			newOrder.status = currOrderClicked.status;
+			await orderService.update(newOrder);
+			socketService.emit("order-response", { id: newOrder.buyer._id, hostId: newOrder.hostId, status: newOrder.status });
+		}
+		loadOrders();
+	}, [currOrderClicked]);
+
+	function getPendingOrders(orders) {
+		const pending = orders.filter((order) => order[4] === "Pending");
+
+		return pending.length;
+	}
+
+	function getOrderTypes(orders, type) {
+		let ammount = 0;
+		orders.forEach((order) => {
+			if (order[4] === type) ammount++;
+		});
+		return `${ammount}/${orders.length}`;
+	}
+
+	let theme = createTheme();
+	theme = responsiveFontSizes(theme);
+
+	const columns = ["Stay name", "Host name", "Check in", "Check out", "Total", "Order status", "Status"];
+
+	const options = {
+		filter: true,
+		filterType: "dropdown",
+		responsive,
+	};
+
+	if (!myOrders) return <Loader />;
+
+	const tableHeader = (
+		<div className='table-header'>
+			<h2>
+				Hi {loggedinUser.fullName}, your have {getPendingOrders(myOrders)} pending trips
+			</h2>
+			{getPendingOrders(myOrders) > 0 && <h2>Our hosts will respond to your pending orders soon</h2>}
+			<div>
+				<div className='orders-types flex'>
+					<div>Orders:</div>
+					<span>
+						{getOrderTypes(myOrders, "Approved")}
+						<div style={{ backgroundColor: "#9df89d" }} className='orders-ball'></div>
+						(Approved)
+					</span>
+					<span>
+						{getOrderTypes(myOrders, "Pending")}
+						<div style={{ backgroundColor: "#faf87b" }} className='orders-ball'></div>
+						(Pending)
+					</span>
+					<span>
+						{getOrderTypes(myOrders, "Declined")}
+						<div style={{ backgroundColor: "#fa7b7b" }} className='orders-ball'></div>
+						(Declined)
+					</span>
 				</div>
 			</div>
 		</div>
