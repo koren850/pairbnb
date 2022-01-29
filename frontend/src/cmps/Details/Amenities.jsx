@@ -103,7 +103,7 @@ export function Amenities({ amenities }) {
 					return (
 						<li className='amenitie-item' key={amenitie}>
 							<img className='amenitie' src={urls[fixAmenitie(amenitie)]} />
-							{amenitie}
+							<span>{amenitie}</span>
 						</li>
 					);
 				})}
