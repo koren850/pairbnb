@@ -6,19 +6,13 @@ import { updateUserNotifications, updateUser } from "../../../store/user.action"
 import { userService } from "../../../services/user.service";
 import { useDispatch } from "react-redux";
 
-export function UserModal({ toggleModal, currState, resetHeaderModes }) {
+export function UserModal({ handleUserModal }) {
 	const [loggUser, setLoggUser] = useState(userService.getLoggedinUser());
 	const isActive = useSelector((state) => state.headerModule.headerMode.isActive);
 	const user = useSelector((state) => state.userModule.user);
 	const notificationsAmount = user.notifications?.length;
 	const dispatch = useDispatch();
 	const history = useHistory();
-
-	function toggle(ev) {
-		ev.stopPropagation();
-		resetHeaderModes();
-		toggleModal(!currState);
-	}
 
 	const resetUserNotifications = async () => {
 		const currUser = await userService.getById(loggUser?._id);
@@ -29,12 +23,6 @@ export function UserModal({ toggleModal, currState, resetHeaderModes }) {
 		dispatch(updateUserNotifications([]));
 	};
 
-	useEffect(() => {
-		window.addEventListener("click", toggle);
-		return () => {
-			window.removeEventListener("click", toggle);
-		};
-	}, []);
 	function onLogOut() {
 		userService.logout();
 		userService.setLoggedinUser(null);
@@ -43,7 +31,7 @@ export function UserModal({ toggleModal, currState, resetHeaderModes }) {
 	}
 
 	return (
-		<nav className={`user-modal-container ${isActive && "active-modal"} ${currState && "open"}`}>
+		<nav className={`user-modal-container ${isActive && "active-modal"} "open"`} onClick={handleUserModal}>
 			<ul>
 				<li onClick={resetUserNotifications}>
 					{loggUser ? (
