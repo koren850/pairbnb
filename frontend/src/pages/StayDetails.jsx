@@ -185,7 +185,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 					})}
 				</div>
 				<h1 className='add-review-header'>Add a review about this stay</h1>
-				<AddReview stay={stay} />
+				<AddReview stay={stay} set={setStay} />
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>

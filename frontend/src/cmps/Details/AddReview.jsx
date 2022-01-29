@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Rating from "@mui/material/Rating";
+import { useDispatch, useSelector } from "react-redux";
 
 import { utilService } from "../../services/util.service";
 import { userService } from "../../services/user.service";
 import { stayService } from "../../services/stay.service";
+import { openMsg } from "../../store/msg.action";
 
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
@@ -15,7 +17,8 @@ import userSvg from "../../styles/svg/user.svg";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-export function AddReview({ stay }) {
+export function AddReview({ stay, set }) {
+	const dispatch = useDispatch();
 	const [value, setValue] = React.useState("");
 	const [rating, setRating] = React.useState([5, 5, 5, 5, 5, 5]);
 	const types = ["Cleanliness:", "Communication:", "Check-in:", "Accuracy:", "Location:", "Value:"];
@@ -39,6 +42,9 @@ export function AddReview({ stay }) {
 		newReview.by = user;
 		newStay.reviews.unshift(newReview);
 		const updatedStay = await stayService.update(newStay);
+
+		set({ ...newStay });
+		dispatch(openMsg({ txt: "Review added", type: "bnb" }));
 		console.log(updatedStay);
 	}
 

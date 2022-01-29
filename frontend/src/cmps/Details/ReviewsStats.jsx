@@ -1,6 +1,5 @@
 export function ReviewStats({ reviews }) {
 	const stats = { Accuracy: 0, Checkin: 0, Cleanliness: 0, Communication: 0, Location: 0, Value: 0 };
-
 	reviews.forEach((review) => {
 		stats.Accuracy += review.rate.accuracy;
 		stats.Checkin += review.rate.checkin;
