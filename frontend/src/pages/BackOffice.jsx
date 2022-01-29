@@ -15,6 +15,7 @@ import TabsListUnstyled from "@mui/base/TabsListUnstyled";
 import TabPanelUnstyled from "@mui/base/TabPanelUnstyled";
 import { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
 import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const colors = {
 	bnb: "#FF385C",
@@ -79,7 +80,9 @@ const TabsList = styled(TabsListUnstyled)`
 export function _BackOffice({ stays, loadStays }) {
 	const [hostStays, setHostStays] = useState([]);
 	const [likedStays, setLikedStays] = useState([]);
+	const history = useHistory();
 	let loggedInUser = userService.getLoggedinUser();
+
 	useEffect(async () => {
 		let stays = await stayService.query();
 		let currUserLikesStays = [];
@@ -95,6 +98,7 @@ export function _BackOffice({ stays, loadStays }) {
 		}
 	}, []);
 
+	if (!loggedInUser) return <React.Fragment> {history.push("/")}</React.Fragment>;
 	return (
 		<div className='main-layout main-container'>
 			<TabsUnstyled className='middle-layout' defaultValue={0}>

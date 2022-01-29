@@ -129,7 +129,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 				{!isActive && <Search isSearchBarOpen={isSearchBarOpen} setIsSearchBarOpen={setIsSearchBarOpen} onToggleIsActive={onToggleIsActive} />}
 				<article className='nav-link'>
 					<Link to={`/explore`}> Explore</Link>
-					<Link className='become' to={`/host`}>
+					<Link className='become' to={userIsHost ? "/host" : "/"}>
 						{userIsHost ? "My Stays" : "Become a Host"}
 					</Link>
 					<button onClick={onHandleUserModal} className='user-menu'>
