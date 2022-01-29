@@ -25,13 +25,13 @@ export function Checkout({ stay, avg }) {
 		setIsDeley({ ...btnMode, loader: true });
 		setTimeout(() => {
 			setIsDeley({ loader: false, reserve: true, btnTxt: "Reserve" });
-			dispatch(openMsg({ txt: "Dates available", type: "bnb" }));
+			dispatch(openMsg({ txt: "Dates available.  ", type: "bnb" }));
 		}, 2000);
 	}
 
 	async function reserveOrder(ev, args) {
 		const currUser = userService.getLoggedinUser();
-		if (!currUser) return dispatch(openMsg({ txt: "Log in first", type: "bnb" }));
+		if (!currUser) return dispatch(openMsg({ txt: "Log in first. ", type: "bnb" }));
 		const reserved = {
 			hostId: stay.host._id,
 			buyerId: currUser._id,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { connect, useDispatch } from "react-redux";
+import { useParams, useRouteMatch } from "react-router-dom/cjs/react-router-dom.min";
 
 import { Map } from "../cmps/Details/Map";
 import { Loader } from "../cmps/General/Loader";
@@ -8,20 +8,29 @@ import { Checkout } from "../cmps/Details/Checkout";
 import { Amenities } from "../cmps/Details/Amenities";
 import { Review } from "../cmps/Details/Review";
 import { AddReview } from "../cmps/Details/AddReview";
+import { ReviewStats } from "../cmps/Details/ReviewsStats.jsx";
 
 import { stayService } from "../services/stay.service";
+import { userService } from "../services/user.service";
 import { toggleDetailsLayout } from "../store/header.action";
 
 import reviewStar from "../styles/svg/star.svg";
 import home from "../styles/svg/entirehome.svg";
 import clean from "../styles/svg/clean.svg";
 import checkin from "../styles/svg/checkin.svg";
-import greyHeart from "../styles/svg/grey-heart.svg";
+import greyHeart from "../styles/svg/detail-heart.svg";
+import pinkHeart from "../styles/svg/pink-heart.svg"
+import uploadSvg from "../styles/svg/upload.svg";
+import { openMsg } from "../store/msg.action";
 
 function _StayDetails({ toggleDetailsLayout }) {
 	const params = useParams();
 	const [stay, setStay] = useState(null);
 	const [avg, setAvg] = useState(0);
+	const [currUser, setCurrUser] = useState(userService.getLoggedinUser());
+	const isUserLikeCurrStay = currUser?.likedStays?.some(currStay => currStay._id === stay?._id);
+	console.log(isUserLikeCurrStay);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		(async () => {
@@ -35,6 +44,31 @@ function _StayDetails({ toggleDetailsLayout }) {
 			toggleDetailsLayout(false);
 		};
 	}, []);
+
+	async function onToggleLikedPlace(stay) {
+		let loggedinUser = userService.getLoggedinUser();
+		if (!loggedinUser) return dispatch(openMsg({ txt: "Log in first", type: "bnb" }));
+		let likedStay = loggedinUser.likedStays.find((currStay) => {
+			return currStay._id === stay._id;
+		});
+		if (likedStay) {
+			loggedinUser.likedStays = loggedinUser.likedStays.filter((currStay) => {
+				return currStay._id !== likedStay._id;
+			});
+		} else {
+			const miniStay = { _id: stay._id, name: stay.name };
+			loggedinUser.likedStays.push(miniStay);
+		}
+		const newUser = await userService.update(loggedinUser);
+		dispatch(openMsg({ txt: likedStay ? "Stay unliked" : "Stay liked", type: "bnb" }));
+		setCurrUser({ ...newUser });
+		userService.setLoggedinUser(newUser);
+	}
+
+	function onCopyUrlToClipboard() {
+		navigator.clipboard.writeText(window.location.href);
+		dispatch(openMsg({ txt: "Link Copied to clipboard    ", type: "bnb" }));
+	}
 
 	function getAvgRating(stayToAvg) {
 		let ammount = 0;
@@ -70,9 +104,15 @@ function _StayDetails({ toggleDetailsLayout }) {
 							</a>
 						</div>
 						<div className='flex share-save'>
+						<div onClick={onCopyUrlToClipboard} className='flex detail-btn'>
+							<img className='heart-details' src={uploadSvg} />
 							<div>Share</div>
-							<img className='heart-details' src={greyHeart} />
+						</div>
+						<div onClick={()=>{onToggleLikedPlace(stay)}} className='flex detail-btn'>
+					{isUserLikeCurrStay	? <img className='heart-details' src={pinkHeart} />
+						 :	<img className='heart-details' src={greyHeart} />}
 							<div>Save</div>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -134,12 +174,15 @@ function _StayDetails({ toggleDetailsLayout }) {
 					<span>{avg}</span>
 					<div>({stay.reviews.length} Reviews)</div>
 				</div>
+
+				{stay.reviews.length > 0 && <ReviewStats reviews={stay.reviews} />}
 				<div className='reviews-container'>
 					{stay.reviews.map((review, idx) => {
 						return <Review key={review + idx} review={review} avg={avg} />;
 					})}
 				</div>
-				<AddReview />
+				<h1 className='add-review-header'>Add a review about this stay</h1>
+				<AddReview stay={stay} />
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>

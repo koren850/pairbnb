@@ -61,7 +61,7 @@ function _StayPreview({ stay, fromBackOffice }) {
 			loggedinUser.likedStays.push(miniStay);
 		}
 		const newUser = await userService.update(loggedinUser);
-		dispatch(openMsg({ txt: "Stay liked", type: "bnb" }));
+		dispatch(openMsg({ txt: likedStay ? "Stay unliked" : "Stay liked", type: "bnb" }));
 		setCurrUser({ ...newUser });
 		userService.setLoggedinUser(newUser);
 	}

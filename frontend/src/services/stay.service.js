@@ -11,6 +11,7 @@ export const stayService = {
     getById,
     save,
     remove,
+    update,
     sortStays,
     getStaysByHostId
     // searchStays,
@@ -92,6 +93,12 @@ async function getById(stayId) {
     // return storageService.get(STORAGE_KEY, stayId)
 }
 
+async function update(stay) {
+    const updatedStay = await httpService.put(`stay/`, stay)
+    return updatedStay
+}
+
+
 async function remove(stayId) {
     return httpService.delete(`stay/${stayId}`)
     // return storageService.remove(STORAGE_KEY, stayId)
@@ -114,7 +121,7 @@ async function save(stay) {
     newStay.host = host
     newStay.imgUrls = stay.stayImgs
     const addedStay = await httpService.post('stay', newStay);
-    await httpService.put('user',{...currHost, isHost:true});
+    await httpService.put('user', { ...currHost, isHost: true });
     console.log('stay added', addedStay);
 
 }
