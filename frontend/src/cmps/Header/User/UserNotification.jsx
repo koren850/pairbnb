@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userService } from "../../../services/user.service";
 import { socketService } from "../../../services/socket.service";
@@ -9,10 +9,10 @@ export function UserNotification() {
 	const disptach = useDispatch();
 	const user = useSelector((state) => state.userModule.user);
 	const notificationsAmount = user.notifications?.length;
+	const loggedUser = userService.getLoggedinUser();
 
 	useEffect(() => {
 		socketService.setup();
-		const loggedUser = userService.getLoggedinUser();
 		if (loggedUser) socketService.emit("join-room", loggedUser._id);
 		socketService.on("recive-new-order", handleNewNotification);
 		socketService.on("response-to-guest", handleNewNotification);
@@ -21,9 +21,10 @@ export function UserNotification() {
 			socketService.off("response-to-guest", handleNewNotification);
 		};
 	}, []);
+
 	async function handleNewNotification(response) {
 		const currUser = await userService.getById(response.id);
-		if (response.action === "unshift") currUser.notifications.unshift(response.action);
+		currUser.notifications.unshift(response.msg);
 		const updatedUser = await userService.update(currUser);
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedUser.notifications));
