@@ -22,6 +22,7 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 	useEffect(() => {
 		(async () => {
 			const data = await stayService.query();
+			data.unshift({ loc: { country: "Israel", address: "Ramat Hagolan" } });
 			setLocationsData(data);
 		})();
 		window.addEventListener("scroll", handleSearchBarTabs);
