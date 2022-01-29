@@ -35,7 +35,7 @@ export function AddReview({ stay }) {
 		const newReview = {};
 		newReview.id = utilService.makeId(10);
 		newReview.txt = value;
-		newReview.rate = { cleanliness: rating[0], communication: rating[1], checkin: rating[2], accuracy: rating[3], location: rating[4], value: rating[5] };
+		newReview.rate = { cleanliness: rating[0], communication: rating[1], checkin: rating[2], accuracy: rating[3], location: rating[4], value: rating[5], avg };
 		newReview.by = user;
 		newStay.reviews.unshift(newReview);
 		const updatedStay = await stayService.update(newStay);

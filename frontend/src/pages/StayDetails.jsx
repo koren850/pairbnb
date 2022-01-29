@@ -19,7 +19,7 @@ import home from "../styles/svg/entirehome.svg";
 import clean from "../styles/svg/clean.svg";
 import checkin from "../styles/svg/checkin.svg";
 import greyHeart from "../styles/svg/detail-heart.svg";
-import pinkHeart from "../styles/svg/pink-heart.svg"
+import pinkHeart from "../styles/svg/pink-heart.svg";
 import uploadSvg from "../styles/svg/upload.svg";
 import { openMsg } from "../store/msg.action";
 
@@ -28,7 +28,7 @@ function _StayDetails({ toggleDetailsLayout }) {
 	const [stay, setStay] = useState(null);
 	const [avg, setAvg] = useState(0);
 	const [currUser, setCurrUser] = useState(userService.getLoggedinUser());
-	const isUserLikeCurrStay = currUser?.likedStays?.some(currStay => currStay._id === stay?._id);
+	const isUserLikeCurrStay = currUser?.likedStays?.some((currStay) => currStay._id === stay?._id);
 	console.log(isUserLikeCurrStay);
 	const dispatch = useDispatch();
 
@@ -72,9 +72,9 @@ function _StayDetails({ toggleDetailsLayout }) {
 
 	function getAvgRating(stayToAvg) {
 		let ammount = 0;
-		stayToAvg.reviews.forEach((review) => (ammount += review.rate));
+		stayToAvg.reviews.forEach((review) => (ammount += review.rate.avg));
 		const divider = stayToAvg.reviews.length;
-		let calcAvg = (ammount / divider).toFixed(2);
+		let calcAvg = (ammount / divider).toFixed(1);
 		if ((calcAvg * 100) % 10 === 0) return setAvg(calcAvg);
 		if (isNaN(calcAvg)) calcAvg = "";
 		setAvg(calcAvg);
@@ -104,15 +104,18 @@ function _StayDetails({ toggleDetailsLayout }) {
 							</a>
 						</div>
 						<div className='flex share-save'>
-						<div onClick={onCopyUrlToClipboard} className='flex detail-btn'>
-							<img className='heart-details' src={uploadSvg} />
-							<div>Share</div>
-						</div>
-						<div onClick={()=>{onToggleLikedPlace(stay)}} className='flex detail-btn'>
-					{isUserLikeCurrStay	? <img className='heart-details' src={pinkHeart} />
-						 :	<img className='heart-details' src={greyHeart} />}
-							<div>Save</div>
-						</div>
+							<div onClick={onCopyUrlToClipboard} className='flex detail-btn'>
+								<img className='heart-details' src={uploadSvg} />
+								<div>Share</div>
+							</div>
+							<div
+								onClick={() => {
+									onToggleLikedPlace(stay);
+								}}
+								className='flex detail-btn'>
+								{isUserLikeCurrStay ? <img className='heart-details' src={pinkHeart} /> : <img className='heart-details' src={greyHeart} />}
+								<div>Save</div>
+							</div>
 						</div>
 					</div>
 				</div>

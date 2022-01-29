@@ -17,7 +17,7 @@ function _StayPreview({ stay, fromBackOffice }) {
 	const dispatch = useDispatch();
 	let ammount = 0;
 	const divider = stay.reviews.length;
-	stay.reviews.forEach((review) => (ammount += review.rate));
+	stay.reviews.forEach((review) => (ammount += review.rate.avg));
 	let avg = (ammount / divider).toFixed(1);
 	if (isNaN(avg)) avg = "";
 
