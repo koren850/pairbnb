@@ -36,7 +36,10 @@ export function HostTable() {
 
 	async function loadOrders() {
 		const allOrders = await orderService.query();
+		console.log(allOrders);
+		console.log(loggedinUser);
 		let orders = allOrders.filter((order) => order.host._id === loggedinUser._id);
+		console.log(orders);
 		orders = orders.map((order, idx) => {
 			pendingButtons = (
 				<div style={{ display: "flex", gap: "10px" }}>
@@ -74,11 +77,13 @@ export function HostTable() {
 	useEffect(async () => {
 		if (!myOrders) return;
 		const newOrder = currOrderClicked.order;
+		console.log(newOrder);
 		if (currOrderClicked.status === "Remove") {
 			newOrder.status = currOrderClicked.status;
 			await orderService.remove(newOrder._id);
 		} else {
 			newOrder.status = currOrderClicked.status;
+			console.log("new order before update", newOrder);
 			await orderService.update(newOrder);
 			socketService.emit("order-response", { id: newOrder.buyer._id, hostId: newOrder.hostId, status: newOrder.status });
 		}
@@ -170,7 +175,6 @@ export function UserTable() {
 	async function loadOrders() {
 		const allOrders = await orderService.query();
 		let orders = allOrders.filter((order) => order.buyer._id === loggedinUser._id);
-		console.log(orders);
 		orders = orders.map((order, idx) => {
 			return [order.stay.name, order.host.name, order.startDate, order.endDate, `$${+order.totalPrice}`, order.status, urls[order.status]];
 		});

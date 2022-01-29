@@ -29,13 +29,13 @@ export function Checkout({ stay, avg }) {
 		setIsDeley({ ...btnMode, loader: true });
 		setTimeout(() => {
 			setIsDeley({ loader: false, reserve: true, btnTxt: "Reserve" });
-			dispatch(openMsg({ txt: "Dates are available    ", type: "bnb" }));
+			dispatch(openMsg({ txt: "Dates are available", type: "bnb" }));
 		}, 1000);
 	}
 
 	async function reserveOrder(ev, args) {
 		const currUser = userService.getLoggedinUser();
-		if (!currUser) return dispatch(openMsg({ txt: "Log in first. ", type: "bnb" }));
+		if (!currUser) return dispatch(openMsg({ txt: "Log in first", type: "bnb" }));
 		const reserved = {
 			hostId: stay.host._id,
 			buyerId: currUser._id,
@@ -50,10 +50,12 @@ export function Checkout({ stay, avg }) {
 			setIsDeley({ ...btnMode, loader: true });
 			await orderService.save(reserved);
 			socketService.emit("new-order", stay.host._id);
-			currUser.notifications.push("your order has been recived in our system");
-			userService.update(currUser);
-			userService.setLoggedinUser(currUser);
-			dispatch(updateUserNotifications(currUser.notifications));
+			const userTosave = await userService.getById(currUser._id);
+			userTosave.notifications.push("your order has been recived in our system");
+			const newUser = await userService.update(userTosave);
+			delete newUser.password;
+			userService.setLoggedinUser(newUser);
+			dispatch(updateUserNotifications(newUser.notifications));
 			setIsDeley({ ...btnMode, loader: "done" });
 		} catch (err) {
 			dispatch(openMsg({ txt: "Order Failed try again later", type: "bnb" }));
