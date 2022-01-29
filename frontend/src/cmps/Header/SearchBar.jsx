@@ -31,8 +31,8 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 	}, []);
 
 	function updateHeaderActiveTab(elName, ev) {
-		ev.stopPropagation();
-		ev.preventDefault();
+		ev?.stopPropagation();
+		ev?.preventDefault();
 		if (elName === "location" && searchBarTabs !== elName) {
 			setIsScreenOpen(true);
 			elLocationInput.current.focus();
@@ -69,12 +69,12 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 
 	return (
 		<div className={"bar original " + ((searchBarTabs || (!isTop && isMobileWidth)) && "active-search-bar")}>
-			{isScreenOpen && (searchBarTabs === "check-in" || searchBarTabs === "check-out") && <SearchBarDatePicker ChooseDates={ChooseDates} />}
+			{isScreenOpen && (searchBarTabs === "check-in" || searchBarTabs === "check-out") && <SearchBarDatePicker searchBarTabs={searchBarTabs} updateHeaderActiveTab={updateHeaderActiveTab} ChooseDates={ChooseDates} />}
 			<div onClick={(ev) => updateHeaderActiveTab("location", ev)} className={"location original " + (searchBarTabs === "location" && !isMobileWidth ? "active" : "")}>
 				<p className='location-txt'>Location</p>
 				<SearchBarFilterInput
-					// searchParams={searchParams}
 					searchBarTabs={searchBarTabs}
+					updateHeaderActiveTab={updateHeaderActiveTab}
 					setIsScreenOpen={setIsScreenOpen}
 					isScreenOpen={isScreenOpen}
 					elLocationInput={elLocationInput}
@@ -94,7 +94,7 @@ function _SearchBar({ searchBarTabs, handleSearchBarTabs, setSearchBarTabsActive
 				<input className='bar-input' readOnly type='text' placeholder={searchParams.checkOut ? searchParams.checkOut : "Add dates"} />
 			</div>
 			<hr />
-			<div onClick={(ev) => updateHeaderActiveTab("guests", ev)} className={"guests original " + ((searchBarTabs && !isMobileWidth) === "guests" ? "active" : "")}>
+			<div onClick={(ev) => updateHeaderActiveTab("guests", ev)} className={"guests original " + ((searchBarTabs === "guests" && !isMobileWidth) ? "active" : "")}>
 				<p>Guests</p>
 				{searchBarTabs === "guests" && (
 					<div className='header-guests'>

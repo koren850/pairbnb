@@ -36,9 +36,22 @@
 		opacity: 1;
 		padding: 0px 10px 10px 10px;
 		.guest-btn-container {
-			width: 40%;
+			width: 100px;
 		}
 	}
+}
+
+.bar .guest-type {
+	div {
+		position: relative;
+		top: -5px;
+		width: 42%;
+	} 
+}
+
+.bar 
+.header-guests {
+	top: 30%;
 }
 
 .location {
