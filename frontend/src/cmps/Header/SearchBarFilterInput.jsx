@@ -6,7 +6,7 @@ import { setParams } from "../../store/stay.action";
 
 import locationSvg from "../../styles/svg/location.svg";
 
-function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput, isScreenOpen, setIsScreenOpen, searchBarTabs, setParams, searchParams }) {
+function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationInput, isScreenOpen, setIsScreenOpen, searchBarTabs,updateHeaderActiveTab, setParams, searchParams }) {
 	const [filteredData, setFilteredData] = useState([]);
 
 	// const searchParams = useSelector(state => state.stayModule.searchParams.location)
@@ -24,6 +24,7 @@ function _SearchBarFilterInput({ placeholder, data, ChooseLocation, elLocationIn
 		setIsScreenOpen(false);
 		setParams({ ...searchParams, location });
 		ChooseLocation(location);
+		updateHeaderActiveTab("check-in");
 	}
 
 	return (
