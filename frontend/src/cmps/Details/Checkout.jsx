@@ -11,6 +11,7 @@ import { socketService } from "../../services/socket.service";
 import { userService } from "../../services/user.service";
 import { openMsg } from "../../store/msg.action";
 import { setParams } from "../../store/stay.action";
+import { updateUserNotifications } from "../../store/user.action";
 
 import reviewStar from "../../styles/svg/star.svg";
 import { differenceInSeconds } from "date-fns";
@@ -28,8 +29,8 @@ export function Checkout({ stay, avg }) {
 		setIsDeley({ ...btnMode, loader: true });
 		setTimeout(() => {
 			setIsDeley({ loader: false, reserve: true, btnTxt: "Reserve" });
-			dispatch(openMsg({ txt: "Dates available.  ", type: "bnb" }));
-		}, 2000);
+			dispatch(openMsg({ txt: "Dates are available    ", type: "bnb" }));
+		}, 1000);
 	}
 
 	async function reserveOrder(ev, args) {
@@ -45,8 +46,23 @@ export function Checkout({ stay, avg }) {
 			guests: { total: order.guestsCount, adults: order.adults, children: order.children, infants: order.infants },
 			status: "Pending",
 		};
-		await orderService.save(reserved);
-		socketService.emit("new-order", stay.host._id);
+		try {
+			setIsDeley({ ...btnMode, loader: true });
+			await orderService.save(reserved);
+			socketService.emit("new-order", stay.host._id);
+			currUser.notifications.push("your order has been recived in our system");
+			userService.update(currUser);
+			userService.setLoggedinUser(currUser);
+			dispatch(updateUserNotifications(currUser.notifications));
+			setIsDeley({ ...btnMode, loader: "done" });
+		} catch (err) {
+			dispatch(openMsg({ txt: "Order Failed try again later", type: "bnb" }));
+			setIsDeley({ ...btnMode, loader: false });
+		}
+	}
+
+	function onUpdateGuets(parms) {
+		dispatch(setParams(parms));
 	}
 
 	function onToggleGuests() {
@@ -86,18 +102,22 @@ export function Checkout({ stay, avg }) {
 						</div>
 					</div>
 				</div>
-				{!btnMode.loader ? (
-					<SpecialBtn
-						args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalNights() * stay.price }}
-						onClick={setDeley}
-						text={btnMode.btnTxt}
-					/>
+				{!btnMode.loader || btnMode.loader === "done" ? (
+					btnMode.loader === "done" ? (
+						<button className='after-reserver-btn'>Reserved!</button>
+					) : (
+						<SpecialBtn
+							args={{ checkIn: order.checkIn, checkOut: order.checkOut, guestCount: order.guestsCount, price: getTotalNights() * stay.price }}
+							onClick={setDeley}
+							text={btnMode.btnTxt}
+						/>
+					)
 				) : (
 					<div className='checkout-loader'>
 						<Loader />
 					</div>
 				)}
-				{isGuestsActive && <Guests init={order} ammount={stay.capacity} set={setParams} />}
+				{isGuestsActive && <Guests init={order} ammount={stay.capacity} set={onUpdateGuets} />}
 				{order.checkIn && order.checkOut && (
 					<div className='price-container'>
 						<div>

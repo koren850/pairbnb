@@ -197,7 +197,8 @@ export function UserTable() {
 	}, [currOrderClicked]);
 
 	function getPendingOrders(orders) {
-		const pending = orders.filter((order) => order[4] === "Pending");
+		console.log(orders);
+		const pending = orders.filter((order) => order[5] === "Pending");
 
 		return pending.length;
 	}
@@ -205,7 +206,7 @@ export function UserTable() {
 	function getOrderTypes(orders, type) {
 		let ammount = 0;
 		orders.forEach((order) => {
-			if (order[4] === type) ammount++;
+			if (order[5] === type) ammount++;
 		});
 		return `${ammount}/${orders.length}`;
 	}
@@ -225,13 +226,13 @@ export function UserTable() {
 
 	const tableHeader = (
 		<div className='table-header'>
-			<h2>
+			<h3>
 				Hi {loggedinUser.fullName}, your have {getPendingOrders(myOrders)} pending trips
-			</h2>
-			{getPendingOrders(myOrders) > 0 && <h2>Our hosts will respond to your pending orders soon</h2>}
+			</h3>
+			{getPendingOrders(myOrders) > 0 && <p>Our hosts will respond to your pending trips soon</p>}
 			<div>
 				<div className='orders-types flex'>
-					<div>Orders:</div>
+					<div>Trips::</div>
 					<span>
 						{getOrderTypes(myOrders, "Approved")}
 						<div style={{ backgroundColor: "#9df89d" }} className='orders-ball'></div>
