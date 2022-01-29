@@ -15,22 +15,19 @@
 	height: 40px;
 	background-color: #1c1919;
 	border-radius: 6px;
+	p {
+		line-height: 1;
+	}
 
 	button {
 		border: 0;
-		background-color: transparent;
-		color: whitesmoke;
-		font-size: 1.25rem;
-		border-radius: 2px;
-		margin: 0px 2px 3px 0px;
-
 		&:hover {
 			cursor: pointer;
 		}
 	}
 
 	&.success {
-		background-color: green;
+		background-color: #9df89d;
 	}
 
 	&.bnb {
@@ -38,8 +35,13 @@
 	}
 }
 
+.close-user-msg {
+	height: 20px;
+	margin-top: 3px;
+}
+
 .detail-layout .user-msg {
-right: 21.2%;
+	right: 21.2%;
 }
 
 @keyframes append-animate {
