@@ -85,7 +85,7 @@ export function HostTable() {
 			newOrder.status = currOrderClicked.status;
 			console.log("new order before update", newOrder);
 			await orderService.update(newOrder);
-			socketService.emit("order-response", { id: newOrder.buyer._id, hostId: newOrder.hostId, status: newOrder.status });
+			socketService.emit("host-response", { id: newOrder.buyer._id, hostId: newOrder.hostId, status: newOrder.status });
 		}
 		loadOrders();
 	}, [currOrderClicked]);
@@ -195,7 +195,7 @@ export function UserTable() {
 		} else {
 			newOrder.status = currOrderClicked.status;
 			await orderService.update(newOrder);
-			socketService.emit("order-response", { id: newOrder.buyer._id, hostId: newOrder.hostId, status: newOrder.status });
+			socketService.emit("host-response", { id: newOrder.buyer._id, hostId: newOrder.hostId, status: newOrder.status });
 		}
 		loadOrders();
 	}, [currOrderClicked]);

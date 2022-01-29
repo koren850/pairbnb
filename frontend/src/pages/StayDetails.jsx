@@ -62,7 +62,6 @@ function _StayDetails({ toggleDetailsLayout }) {
 		const userToSave = await userService.getById(loggedinUser._id);
 		userToSave.likedStay = loggedinUser.likedStay;
 		const newUser = await userService.update(userToSave);
-		delete newUser.password;
 		dispatch(openMsg({ txt: likedStay ? "Stay unliked" : "Stay liked", type: "bnb" }));
 		setCurrUser({ ...newUser });
 		userService.setLoggedinUser(newUser);

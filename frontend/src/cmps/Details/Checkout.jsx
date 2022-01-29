@@ -53,7 +53,6 @@ export function Checkout({ stay, avg }) {
 			const userTosave = await userService.getById(currUser._id);
 			userTosave.notifications.push("your order has been recived in our system");
 			const newUser = await userService.update(userTosave);
-			delete newUser.password;
 			userService.setLoggedinUser(newUser);
 			dispatch(updateUserNotifications(newUser.notifications));
 			setIsDeley({ ...btnMode, loader: "done" });

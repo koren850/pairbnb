@@ -26,16 +26,12 @@ function connectSockets(http, session) {
         })
 
         socket.on('new-order', hostId => {
-            console.log('new order', hostId);
-
-            socket.to(hostId).emit('recive-new-order', hostId);
+            const response = { id: hostId, msg: 'You got new order', }
+            socket.to(hostId).emit('recive-new-order', response);
         })
-
-        socket.on('order-response', response => {
-            console.log('order-response', response);
-
-            socket.to(response.id).emit('order-response', response);
-            socket.to(response.hostId).emit('remove-notifications', response.hostId)
+        socket.on('host-response', response => {
+            response.msg = `Your order has been ${response.status}`
+            socket.to(response.id).emit('response-to-guest', response);
         })
 
 

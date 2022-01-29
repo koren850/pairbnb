@@ -24,7 +24,6 @@ export function UserModal({ toggleModal, currState, resetHeaderModes }) {
 		const currUser = await userService.getById(loggUser?._id);
 		const updatedUser = { ...currUser, notifications: [] };
 		const newUser = await userService.update(updatedUser);
-		delete newUser.password;
 		userService.setLoggedinUser(newUser);
 		dispatch(updateUserNotifications([]));
 	};

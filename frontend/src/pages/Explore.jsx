@@ -14,6 +14,7 @@ export function _Explore({ match, loadStays, stays, staysToShow, toggleIsExplore
 	const [searchLocation, setSearchLocation] = useState(null);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		(async () => {
 			toggleIsExplore(true);
 			if (match.params.search) {
