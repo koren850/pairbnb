@@ -18,7 +18,7 @@ export function UserNotification() {
 		await userService.update(updatedUser);
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedNotifications));
-        disptach(openMsg({txt: 'You got new notification. ', type: 'bnb' }))
+		disptach(openMsg({ txt: "You got new notification. ", type: "bnb" }));
 	};
 
 	async function handleOrderResponse(response) {
@@ -31,7 +31,7 @@ export function UserNotification() {
 		await userService.update(updatedUser);
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedNotifications));
-        disptach(openMsg({txt: 'You got new notification. ', type: 'bnb' }))
+		disptach(openMsg({ txt: "You got new notification. ", type: "bnb" }));
 	}
 	async function removeNotification(id) {
 		console.log("got here");
@@ -47,7 +47,6 @@ export function UserNotification() {
 	useEffect(() => {
 		socketService.setup();
 		const loggedUser = userService.getLoggedinUser();
-		console.log(loggedUser);
 		if (loggedUser) socketService.emit("join-room", loggedUser._id);
 		socketService.on("recive-new-order", handleNewNotification);
 		socketService.on("order-response", handleOrderResponse);

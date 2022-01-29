@@ -9,7 +9,7 @@ import { toggleDetailsLayout, toggleHeaderIsTop, toggleHeaderIsActive, toggleIsE
 import { Search } from "./Search";
 import { SearchBar } from "./SearchBar";
 import { UserModal } from "./User/UserModal";
-import {UserNotification} from "./User/UserNotification"
+import { UserNotification } from "./User/UserNotification";
 import airLogoSvg from "../../styles/svg/air-logo.svg";
 import airTopLogoSvg from "../../styles/svg/air-dark-logo.svg";
 import userSvg from "../../styles/svg/user.svg";
@@ -23,11 +23,11 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 	const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
 	const [searchBarTabs, setSearchBarTabsActive] = useState(null);
 	const [isMobileWidth, setIsMobileWidth] = useState(false);
-	
+
 	const location = useLocation();
 	const history = useHistory();
 	const img = getImgToShow();
-	
+
 	function onToggleIsActive() {
 		toggleHeaderIsActive(!isActive);
 	}
@@ -74,17 +74,17 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 
 	function measureClientWindowWidth() {
 		if (window.innerWidth < 780) setIsMobileWidth(true);
-		else setIsMobileWidth(false)
+		else setIsMobileWidth(false);
 	}
 
 	const onHandleUserModal = () => {
+		console.log("click on user");
 		toggleHeaderIsActive(false);
 		toggleHeaderIsTop(false);
 		toggleModal(true);
-	}
+	};
 
 	useEffect(() => {
-
 		if (!location.pathname || location.pathname === "/") {
 			toggleHeaderIsActive(false);
 			toggleHeaderIsTop(false);
@@ -101,10 +101,10 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 		}
 		measureClientWindowWidth();
 		window.addEventListener("scroll", resetHeaderModes);
-		window.addEventListener('resize', measureClientWindowWidth);
+		window.addEventListener("resize", measureClientWindowWidth);
 		return () => {
 			window.removeEventListener("scroll", resetHeaderModes);
-			window.removeEventListener('resize', measureClientWindowWidth);
+			window.removeEventListener("resize", measureClientWindowWidth);
 			toggleIsExplore(true);
 		};
 	}, []);
@@ -129,10 +129,10 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 				<article className='nav-link'>
 					<Link to={`/explore`}> Explore</Link>
 					<Link className='become' to={`/host`}>
-						{userIsHost ? 'My Stays' : 'Become a Host'}
+						{userIsHost ? "My Stays" : "Become a Host"}
 					</Link>
 					<button onClick={onHandleUserModal} className='user-menu'>
-						<UserNotification/>
+						<UserNotification />
 						<img className='hamburger-svg' src={hamburgerSvg} />
 						<img className='user-svg' src={img} />
 					</button>

@@ -8,6 +8,7 @@ import { Checkout } from "../cmps/Details/Checkout";
 import { Amenities } from "../cmps/Details/Amenities";
 import { Review } from "../cmps/Details/Review";
 import { AddReview } from "../cmps/Details/AddReview";
+import { ReviewStats } from "../cmps/Details/ReviewsStats.jsx";
 
 import { stayService } from "../services/stay.service";
 import { toggleDetailsLayout } from "../store/header.action";
@@ -134,12 +135,15 @@ function _StayDetails({ toggleDetailsLayout }) {
 					<span>{avg}</span>
 					<div>({stay.reviews.length} Reviews)</div>
 				</div>
+
+				{stay.reviews.length > 0 && <ReviewStats reviews={stay.reviews} />}
 				<div className='reviews-container'>
 					{stay.reviews.map((review, idx) => {
 						return <Review key={review + idx} review={review} avg={avg} />;
 					})}
 				</div>
-				<AddReview />
+				<h1 className='add-review-header'>Add a review about this stay</h1>
+				<AddReview stay={stay} />
 				<Map lat={stay.loc.lat} lng={stay.loc.lng} name={stay.name} country={stay.loc.country} address={stay.loc.address} />
 			</div>
 		</main>

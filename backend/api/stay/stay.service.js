@@ -49,6 +49,17 @@ async function getStayById(stayId) {
 }
 
 
+async function update(stay) {
+    try {
+        stay._id = ObjectId(stay._id)
+        const collection = await dbService.getCollection('stay')
+        await collection.updateOne({ _id: stay._id }, { $set: stay })
+        return stay
+    } catch (err) {
+        logger.error(`cannot remove stay ${stayId}`, err)
+        throw err
+    }
+}
 async function remove(stayId) {
     try {
         const store = asyncLocalStorage.getStore()
@@ -80,6 +91,7 @@ async function add(stay) {
 module.exports = {
     query,
     remove,
+    update,
     add,
     getStayById
 

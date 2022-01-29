@@ -48,6 +48,12 @@
 	}
 }
 
+.add-review-header {
+	text-align: center;
+	font-size: rem(30px);
+	font-weight: 600;
+}
+
 .rating-bars-container {
 	display: grid;
 	grid-template-rows: 1fr 1fr;
@@ -68,9 +74,59 @@
 	.MuiRating-sizeMedium {
 		height: 100%;
 	}
+}
 
-	.type-area {
-		width: 100%;
-		height: 20vh;
+.add-review-btn {
+	margin: 10px auto;
+	text-align: center;
+}
+
+.review-stats {
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr;
+	align-items: center;
+	column-gap: 80px;
+	margin-bottom: 30px;
+
+	.rating-container {
+		line-height: 1;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
+		margin-inline-end: 20px;
+
+		.stat-container {
+			display: flex;
+
+			justify-content: center;
+			align-items: center;
+			.stat-bar-container {
+				width: 120px;
+				position: relative;
+				border-top-left-radius: 10px;
+				border-top-right-radius: 10px;
+				border-bottom-left-radius: 10px;
+				border-bottom-right-radius: 10px;
+				height: 0.25rem;
+				background-color: lighten($clr6, 70);
+				.stat-value {
+					border-top-left-radius: 10px;
+					border-top-right-radius: 10px;
+					border-bottom-left-radius: 10px;
+					border-bottom-right-radius: 10px;
+					position: absolute;
+					height: 100%;
+					background-color: $clr6;
+				}
+			}
+			span {
+				width: 40px;
+				font-size: rem(12px);
+				font-weight: 600;
+				margin-inline-start: 10px;
+			}
+		}
 	}
 }

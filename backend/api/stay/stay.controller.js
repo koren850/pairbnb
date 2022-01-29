@@ -15,6 +15,20 @@ async function getStays(req, res) {
 }
 
 
+async function updateStay(req, res) {
+    try {
+        let stay = req.body
+        console.log(stay);
+        stay = await stayService.update(stay)
+        res.send(stay)
+    } catch (err) {
+        logger.error('Failed to Updatee stay', err)
+        res.status(500).send({ err: 'Failed to delete stay' })
+    }
+}
+
+
+
 async function deleteStay(req, res) {
     try {
         await stayService.remove(req.params.id)
@@ -66,6 +80,7 @@ module.exports = {
     getStays,
     deleteStay,
     addStay,
-    getById
+    getById,
+    updateStay
 
 }
