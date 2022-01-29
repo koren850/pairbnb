@@ -16,6 +16,7 @@ export function UserNotification() {
 		updatedNotifications.push("You got new notification");
 		const updatedUser = { ...currUser, notifications: updatedNotifications };
 		await userService.update(updatedUser);
+		delete updatedUser.password;
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedNotifications));
 		disptach(openMsg({ txt: "You got new notification. ", type: "bnb" }));
@@ -28,6 +29,7 @@ export function UserNotification() {
 		updatedNotifications.push(response.status);
 		const updatedUser = { ...currUser, notifications: updatedNotifications };
 		await userService.update(updatedUser);
+		delete updatedUser.password;
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedNotifications));
 		disptach(openMsg({ txt: "You got new notification. ", type: "bnb" }));
@@ -38,6 +40,7 @@ export function UserNotification() {
 		updatedNotifications.pop();
 		const updatedUser = { ...currUser, notifications: updatedNotifications };
 		await userService.update(updatedUser);
+		delete updatedUser.password;
 		userService.setLoggedinUser(updatedUser);
 		disptach(updateUserNotifications(updatedNotifications));
 	}
