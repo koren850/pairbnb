@@ -19,9 +19,10 @@ import { UserMsg } from "../../cmps/General/UserMsg";
 function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, toggleHeaderIsActive, headerMode }) {
 	const { headerLayoutSmall, isTop, isActive, isExplore } = headerMode;
 	const userIsHost = userService.getLoggedinUser()?.isHost || false;
-	const [userModalState, toggleModal] = useState(false);
+	// const [userModalState, toggleModal] = useState(false);
 	const [isScreenOpen, setIsScreenOpen] = useState(false);
 	const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
+	const [isUserModalScreenOpen, setIsUserModalScreenOpen] = useState(false);
 	const [searchBarTabs, setSearchBarTabsActive] = useState(null);
 	const [isMobileWidth, setIsMobileWidth] = useState(false);
 
@@ -39,6 +40,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 	}
 
 	function resetHeaderModes() {
+		setIsUserModalScreenOpen(false)
 		if (history.location.pathname !== "/") return toggleIsExplore(true);
 		if (isExplore) return;
 		if (window.scrollY <= 1) {
@@ -78,12 +80,11 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 		else setIsMobileWidth(false);
 	}
 
-	const onHandleUserModal = () => {
-		console.log("click on user");
-		toggleHeaderIsActive(false);
-		toggleHeaderIsTop(false);
-		toggleModal(true);
-	};
+	function handleUserModal() {
+		setIsUserModalScreenOpen(!isUserModalScreenOpen);
+		toggleHeaderIsActive((isUserModalScreenOpen && !isExplore));
+		toggleHeaderIsTop((isUserModalScreenOpen && !isExplore));
+	}
 
 	useEffect(() => {
 		if (!location.pathname || location.pathname === "/") {
@@ -112,12 +113,12 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 
 	return (
 		<header
-			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isTop ? "top-header" : ""} header-layout ${
-				headerLayoutSmall ? "detail-layout" : "main-layout"
-			}`}>
+			className={`app-header column ${isExplore ? "explore-header" : ""} ${isActive ? "active-header" : ""} ${isTop ? "top-header" : ""} header-layout ${headerLayoutSmall ? "detail-layout" : "main-layout"
+				}`}>
 			<div onClick={handleSearchModals} className={isScreenOpen ? "screen screen-open full-layout" : "screen full-layout"}></div>
 			<div onClick={handleCloseSearchBar} className={isSearchBarOpen ? "screen screen-open search-bar-screen full-layout" : "search-bar-screen  screen full-layout"}></div>
-			{userModalState && <UserModal currState={userModalState} resetHeaderModes={resetHeaderModes} toggleModal={toggleModal} />}
+			<div onClick={handleUserModal} className={isUserModalScreenOpen ? "screen screen-open user-modal-screen full-layout" : "screen user-modal-screen full-layout"}></div>
+			{isUserModalScreenOpen && <UserModal handleUserModal={handleUserModal}  resetHeaderModes={resetHeaderModes}  />}
 			<section className='short-search-bar middle-layout'>
 				<Link to={`/`}>
 					<span className='logo'>
@@ -132,7 +133,7 @@ function _AppHeader({ toggleDetailsLayout, toggleHeaderIsTop, toggleIsExplore, t
 					<Link className='become' to={userIsHost ? "/host" : "/"}>
 						{userIsHost ? "My Stays" : "Become a Host"}
 					</Link>
-					<button onClick={onHandleUserModal} className='user-menu'>
+					<button onClick={handleUserModal} className='user-menu'>
 						<UserNotification />
 						<img className='hamburger-svg' src={hamburgerSvg} />
 						<img className='user-svg' src={img} />
